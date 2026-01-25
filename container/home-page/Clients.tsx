@@ -5,6 +5,7 @@ import { useState } from "react";
 import { clientsItem } from "@/constants";
 import { Button, Ratings } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
+import { FadeUp } from "@/animation";
 
 export default function Clients() {
 	const [activeAccordion, setActiveAccordion] = useState(clientsItem[0].id);
@@ -14,9 +15,11 @@ export default function Clients() {
 
 	return (
 		<section className="w-full padding-y">
-			<h1 className="sub-heading padding-x font-medium font-NeueMontreal text-secondry pb-[50px]">
-				Clients’ reviews
-			</h1>
+			<FadeUp delay={0.1} duration={0.8}>
+				<h1 className="sub-heading padding-x font-medium font-NeueMontreal text-secondry pb-[50px]">
+					Clients' reviews
+				</h1>
+			</FadeUp>
 			{clientsItem.map((item) => (
 				<div
 					key={item.id}
@@ -121,9 +124,9 @@ export default function Clients() {
 					</div>
 				</div>
 			))}
-			<div className="padding-x pt-[80px]">
+			<FadeUp delay={0.8} duration={0.8} className="padding-x pt-[80px]">
 				<Ratings />
-			</div>
+			</FadeUp>
 		</section>
 	);
 }

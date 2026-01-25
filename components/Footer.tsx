@@ -75,16 +75,17 @@ export default function Footer() {
 								))}
 							</div>
 						</div>
-						<div className="pt-[50px] flex gap-x-[20px]">
-							<h1 className="paragraph font-medium font-NeueMontreal text-secondry">
-								E:
-							</h1>
-							<LinkHover
-								title="hello@ochi.design"
-								href="/"
-								className="before:h-[1px] after:h-[1px] paragraph font-medium before:bottom-[-3px] after:bottom-[-3px]"
-							/>
-						</div>
+						<div className="pt-[50px] flex items-center gap-x-[10px]">
+  <h1 className="paragraph font-medium font-NeueMontreal text-secondry whitespace-nowrap">
+    Email:
+  </h1>
+  <LinkHover
+    title="info@budgetndiyo.org"
+    href="mailto:info@budgetndiyo.org"
+    className="before:h-[1px] after:h-[1px] paragraph font-medium before:bottom-[-3px] after:bottom-[-3px]"
+  />
+</div>
+
 					</div>
 				</div>
 			</div>
@@ -102,20 +103,21 @@ export default function Footer() {
 				<div className="w-1/2 h-full flex gap-[10px] justify-between items-end sm:w-full xm:w-full sm:flex-col xm:flex-col sm:items-start xm:items-start">
 					<div className="flex sm:flex-col xm:flex-col gap-[10px]">
 						<h1 className="paragraph font-medium font-NeueMontreal text-secondry opacity-40">
-							© ochi design 2024.
+							© Budget Ndio Story 2026.
 						</h1>
-						<LinkHover
+						{/* <LinkHover
 							title="Legal Terms"
 							href="/"
 							className="before:h-[1px] after:h-[1px] paragraph font-medium text-secondry opacity-40 before:bottom-[-3px] after:bottom-[-3px]"
-						/>
+						/> */}
 					</div>
 					<div>
 						<LinkHover
-							title="Website by Zain"
+							title="Terms & conditions"
 							href="/"
 							className="before:h-[1px] after:h-[1px] paragraph font-medium text-secondry opacity-40 before:bottom-[-3px] after:bottom-[-3px]"
 						/>
+
 					</div>
 				</div>
 			</div>
