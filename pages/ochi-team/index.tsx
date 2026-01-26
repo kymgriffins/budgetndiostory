@@ -1,14 +1,16 @@
 "use client";
-import {
-	Heroabout,
-	Aboutabout,
-	Team,
-	Partners,
-	Insights,
-	Principles,
-} from "@/container";
-import { useEffect } from "react";
 import { Curve, Ready } from "@/components";
+import {
+	Aboutabout,
+	Heroabout,
+	Partners,
+	Principles,
+	Team,
+	Insights,
+	FAQ
+} from "@/container";
+import Faq from "@/container/contact-page/Faq";
+import { useEffect } from "react";
 
 export default function About() {
 	useEffect(() => {
@@ -25,8 +27,12 @@ export default function About() {
 				<Team />
 				<Principles />
 				<Partners />
-				<Insights />
+				<br />
+				<br />
+				<br />
+				{/* <Insights /> */}
 				<Ready />
+				<Faq/>
 			</Curve>
 		</>
 	);

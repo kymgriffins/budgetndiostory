@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
 import { Curve, Marquee, Ready } from "@/components";
-import { About, Clients, Hero, Projects, VideoHome } from "@/container";
-
+import { About, Clients, Hero, Projects, VideoHome, Heroabout, Aboutabout, Team, Principles, Partners } from "@/container";
+import Faq from "@/container/contact-page/Faq";
 export default function Home() {
 	useEffect(() => {
 		(async () => {
@@ -23,8 +23,19 @@ export default function Home() {
 				</div>
 				<About />
 				<VideoHome />
-				<Projects />
-				<Clients />
+				{/* <Projects /> */}
+				<Heroabout />
+								<Aboutabout />
+								<Team />
+								{/* <Principles /> */}
+								{/* <Partners /> */}
+								<br />
+								<br />
+								<br />
+								{/* <Insights /> */}
+
+				{/* <Clients /> */}
+				<Faq/>
 				<Ready />
 			</Curve>
 		</>

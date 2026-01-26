@@ -1,32 +1,37 @@
-import { capaybilities1, capaybilities2, capaybilities3, capaybilities4, client01, client02, client03, client04, client05, client06, client07, client08, client09, insights1, insights2, insights3, latest1, latest2, nestle, officevibe, phase1, phase2, phase3, phase4, phase5, planetly, project1, project2, project3, project4, project5, project6, project7, project8, project9, publication1, publication2, publication3 } from "@/public";
+import { capaybilities1, capaybilities2, capaybilities3, capaybilities4, client01, client02, client03, client04, client05, client06, client07, client08, insights1, insights2, insights3, latest1, latest2, nestle, officevibe, phase1, phase2, phase3, phase4, phase5, planetly, project1, project2, project3, project4, project5, project6, project7, project8, project9, publication1, publication2, publication3 } from "@/public";
 
 // Navbar
 export const navbarItems = [
-   {
-      id: 1,
-      title: "Services",
-      href: "/services",
-   },
-   {
-      id: 2,
-      title: "Our work",
-      href: "/presentation",
-   },
+   // {
+   //    id: 1,
+   //    title: "Services",
+   //    href: "/services",
+   // },
+   // {
+   //    id: 2,
+   //    title: "Our work",
+   //    href: "/presentation",
+   // },
    {
       id: 3,
       title: "About us",
       href: "/ochi-team",
    },
-   {
-      id: 4,
-      title: "Insights",
-      href: "/insights",
-   },
+   // {
+   //    id: 4,
+   //    title: "Insights",
+   //    href: "/insights",
+   // },
    {
       id: 5,
       title: "Contact us",
       href: "/contact",
    },
+   // {
+   //    id: 6,
+   //    title: "Case",
+   //    href: "/case",
+   // },
 ];
 
 // Footer
@@ -55,31 +60,31 @@ export const footerItems = [
 ];
 
 export const footernavbarItems = [
-   {
-      id: 1,
-      title: "Home",
-      href: "/",
-   },
-   {
-      id: 2,
-      title: "Services",
-      href: "services",
-   },
-   {
-      id: 3,
-      title: "Our work",
-      href: "presentation",
-   },
+   // {
+   //    id: 1,
+   //    title: "Home",
+   //    href: "/",
+   // },
+   // {
+   //    id: 2,
+   //    title: "Services",
+   //    href: "services",
+   // },
+   // {
+   //    id: 3,
+   //    title: "Our work",
+   //    href: "presentation",
+   // },
    {
       id: 4,
       title: "About us",
       href: "ochi-team",
    },
-   {
-      id: 5,
-      title: "Insights",
-      href: "insights",
-   },
+   // {
+   //    id: 5,
+   //    title: "Insights",
+   //    href: "insights",
+   // },
    {
       id: 6,
       title: "Contact us",
@@ -89,132 +94,132 @@ export const footernavbarItems = [
 
 
 export const clientsItem = [
-  {
-    id: 1,
-    website: "Kenya Ministry of Finance",
-    href: "https://www.treasury.go.ke",
-    title: "Services:",
-    name: "Budget Analysis Team",
-    src: client01,
-    review:
-      "Budget Ndio helped us break down complex national and county budgets into simple, youth-friendly presentations. Their visuals and storytelling made it easy for the public to understand revenue and expenditure priorities.",
-    links: [
-      { id: 1, title: "county budget guide", href: "/services" },
-      { id: 2, title: "youth engagement deck", href: "/services" },
-    ],
-  },
-  {
-    id: 2,
-    website: "Nairobi County Government",
-    href: "https://nairobi.go.ke",
-    title: "Services:",
-    name: "Public Participation Unit",
-    src: client02,
-    review:
-      "We collaborated to create presentations that educate Nairobi residents on how public funds are allocated and spent. The team ensured even young audiences could grasp key budget concepts.",
-    links: [
-      { id: 1, title: "interactive budget", href: "/services" },
-      { id: 2, title: "policy review deck", href: "/services" },
-      { id: 3, title: "county spending guide", href: "/services" },
-    ],
-  },
-  {
-    id: 3,
-    website: "Kenya Youth Budget Forum",
-    href: "https://www.kybf.or.ke",
-    title: "Services:",
-    name: "Forum Coordinators",
-    src: client03,
-    review:
-      "Budget Ndio designed workshops and decks that help youth understand national and county budgets. The presentations were engaging, visually appealing, and very informative.",
-    links: [
-      { id: 1, title: "national budget deck", href: "/services" },
-      { id: 2, title: "interactive learning", href: "/services" },
-    ],
-  },
-  {
-    id: 4,
-    website: "Kenya Revenue Authority",
-    href: "https://kra.go.ke",
-    title: "Services:",
-    name: "Public Awareness Team",
-    src: client04,
-    review:
-      "The team transformed tax and budget data into clear, educational content for the public. This increased awareness of revenue sources and expenditure priorities among citizens.",
-    links: [
-      { id: 1, title: "tax & budget overview", href: "/services" },
-      { id: 2, title: "youth engagement deck", href: "/services" },
-    ],
-  },
-  {
-    id: 5,
-    website: "County Governments Association of Kenya",
-    href: "https://cgakenya.org",
-    title: "Services:",
-    name: "CGA Knowledge Team",
-    src: client05,
-    review:
-      "We created county-level budget visualization tools that make allocations, projects, and public spending understandable for all stakeholders, especially young people.",
-    links: [
-      { id: 1, title: "county allocations deck", href: "/services" },
-      { id: 2, title: "public education tools", href: "/services" },
-    ],
-  },
-  {
-    id: 6,
-    website: "Parliament of Kenya",
-    href: "http://www.parliament.go.ke",
-    title: "Services:",
-    name: "Legislative Research Team",
-    src: client06,
-    review:
-      "Budget Ndio produced clear visual briefs to explain national and county budget proposals to citizens, NGOs, and youth organizations. Engagement and comprehension improved greatly.",
-    links: [
-      { id: 1, title: "budget briefing deck", href: "/services" },
-    ],
-  },
-  {
-    id: 7,
-    website: "Kenya Institute for Public Policy Research and Analysis (KIPPRA)",
-    href: "https://www.kippra.or.ke",
-    title: "Services:",
-    name: "Research Team",
-    src: client07,
-    review:
-      "We helped transform policy and budget research into easy-to-understand presentations, making policy recommendations more accessible to young people and civic groups.",
-    links: [
-      { id: 1, title: "policy deck", href: "/services" },
-      { id: 2, title: "youth budget guide", href: "/services" },
-    ],
-  },
-  {
-    id: 8,
-    website: "National Treasury Innovation Hub",
-    href: "#",
-    title: "Services:",
-    name: "Innovation Team",
-    src: client08,
-    review:
-      "Budget Ndio created engaging visual tools to make national budget data interactive and educational, bridging the knowledge gap for students and youth organizations.",
-    links: [
-      { id: 1, title: "interactive visual deck", href: "/services" },
-      { id: 2, title: "public education toolkit", href: "/services" },
-    ],
-  },
-  {
-    id: 9,
-    website: "Youth Civic Engagement Initiative",
-    href: "#",
-    title: "Services:",
-    name: "David Otieno",
-    src: client09,
-    review:
-      "They helped us create decks and materials that simplify budget and civic data for youth forums, workshops, and schools. The content was accessible and impactful.",
-    links: [
-      { id: 1, title: "youth engagement deck", href: "/services" },
-      { id: 2, title: "budget literacy workshop", href: "/services" },
-    ],
-  },
+   {
+      id: 1,
+      website: "Kenya Ministry of Finance",
+      href: "https://www.treasury.go.ke",
+      title: "Services:",
+      name: "Budget Analysis Team",
+      src: client01,
+      review:
+         "Budget Ndio helped us break down complex national and county budgets into simple, youth-friendly presentations. Their visuals and storytelling made it easy for the public to understand revenue and expenditure priorities.",
+      links: [
+         { id: 1, title: "county budget guide", href: "/services" },
+         { id: 2, title: "youth engagement deck", href: "/services" },
+      ],
+   },
+   {
+      id: 2,
+      website: "Nairobi County Government",
+      href: "https://nairobi.go.ke",
+      title: "Services:",
+      name: "Public Participation Unit",
+      src: client02,
+      review:
+         "We collaborated to create presentations that educate Nairobi residents on how public funds are allocated and spent. The team ensured even young audiences could grasp key budget concepts.",
+      links: [
+         { id: 1, title: "interactive budget", href: "/services" },
+         { id: 2, title: "policy review deck", href: "/services" },
+         { id: 3, title: "county spending guide", href: "/services" },
+      ],
+   },
+   {
+      id: 3,
+      website: "Kenya Youth Budget Forum",
+      href: "https://www.kybf.or.ke",
+      title: "Services:",
+      name: "Forum Coordinators",
+      src: client03,
+      review:
+         "Budget Ndio designed workshops and decks that help youth understand national and county budgets. The presentations were engaging, visually appealing, and very informative.",
+      links: [
+         { id: 1, title: "national budget deck", href: "/services" },
+         { id: 2, title: "interactive learning", href: "/services" },
+      ],
+   },
+   {
+      id: 4,
+      website: "Kenya Revenue Authority",
+      href: "https://kra.go.ke",
+      title: "Services:",
+      name: "Public Awareness Team",
+      src: client04,
+      review:
+         "The team transformed tax and budget data into clear, educational content for the public. This increased awareness of revenue sources and expenditure priorities among citizens.",
+      links: [
+         { id: 1, title: "tax & budget overview", href: "/services" },
+         { id: 2, title: "youth engagement deck", href: "/services" },
+      ],
+   },
+   //   {
+   //     id: 5,
+   //     website: "County Governments Association of Kenya",
+   //     href: "https://cgakenya.org",
+   //     title: "Services:",
+   //     name: "CGA Knowledge Team",
+   //     src: client05,
+   //     review:
+   //       "We created county-level budget visualization tools that make allocations, projects, and public spending understandable for all stakeholders, especially young people.",
+   //     links: [
+   //       { id: 1, title: "county allocations deck", href: "/services" },
+   //       { id: 2, title: "public education tools", href: "/services" },
+   //     ],
+   //   },
+   //   {
+   //     id: 6,
+   //     website: "Parliament of Kenya",
+   //     href: "http://www.parliament.go.ke",
+   //     title: "Services:",
+   //     name: "Legislative Research Team",
+   //     src: client06,
+   //     review:
+   //       "Budget Ndio produced clear visual briefs to explain national and county budget proposals to citizens, NGOs, and youth organizations. Engagement and comprehension improved greatly.",
+   //     links: [
+   //       { id: 1, title: "budget briefing deck", href: "/services" },
+   //     ],
+   //   },
+   //   {
+   //     id: 7,
+   //     website: "Kenya Institute for Public Policy Research and Analysis (KIPPRA)",
+   //     href: "https://www.kippra.or.ke",
+   //     title: "Services:",
+   //     name: "Research Team",
+   //     src: client07,
+   //     review:
+   //       "We helped transform policy and budget research into easy-to-understand presentations, making policy recommendations more accessible to young people and civic groups.",
+   //     links: [
+   //       { id: 1, title: "policy deck", href: "/services" },
+   //       { id: 2, title: "youth budget guide", href: "/services" },
+   //     ],
+   //   },
+   //   {
+   //     id: 8,
+   //     website: "National Treasury Innovation Hub",
+   //     href: "#",
+   //     title: "Services:",
+   //     name: "Innovation Team",
+   //     src: client08,
+   //     review:
+   //       "Budget Ndio created engaging visual tools to make national budget data interactive and educational, bridging the knowledge gap for students and youth organizations.",
+   //     links: [
+   //       { id: 1, title: "interactive visual deck", href: "/services" },
+   //       { id: 2, title: "public education toolkit", href: "/services" },
+   //     ],
+   //   },
+   //   {
+   //     id: 9,
+   //     website: "Youth Civic Engagement Initiative",
+   //     href: "#",
+   //     title: "Services:",
+   //     name: "David Otieno",
+   //     src: client09,
+   //     review:
+   //       "They helped us create decks and materials that simplify budget and civic data for youth forums, workshops, and schools. The content was accessible and impactful.",
+   //     links: [
+   //       { id: 1, title: "youth engagement deck", href: "/services" },
+   //       { id: 2, title: "budget literacy workshop", href: "/services" },
+   //     ],
+   //   },
 ];
 
 
@@ -309,163 +314,163 @@ export const projectItem = [
 // services page
 
 export const serviceProcessItems = [
-  {
-    id: 1,
-    phase: "01. Phase",
-    name: "Discovery",
-    src: phase1,
-    review: "We start by understanding the budget topic, your audience, and the story to tell. We explore what matters most to youth and communities, gathering insights and examples to make the budget relatable.",
-    button: "read"
-  },
-  {
-    id: 2,
-    phase: "02. Phase",
-    name: "Story Mapping",
-    src: phase2,
-    review: "We craft a narrative from the budget data, turning numbers into human stories. We decide which voices, examples, and stories will engage youth and explain how public money affects their lives.",
-    button: "read"
-  },
-  {
-    id: 3,
-    phase: "03. Phase",
-    name: "Creative Design",
-    src: phase3,
-    review: "We design visuals, infographics, short videos, and interactive elements to bring the stories to life. The focus is on clarity, curiosity, and cultural resonance — so youth can understand and share.",
-    button: "read"
-  },
-  {
-    id: 4,
-    phase: "04. Phase",
-    name: "Feedback & Co-Creation",
-    src: phase4,
-    review: "We present drafts to youth representatives, community members, and experts to ensure the story is relatable, accurate, and impactful. Feedback is incorporated before finalization.",
-    button: "read"
-  },
-  {
-    id: 5,
-    phase: "05. Phase",
-    name: "Launch & Engagement",
-    src: phase5,
-    review: "We publish the content across digital channels — website, social media, podcasts, and WhatsApp. The goal is to spark curiosity, conversations, and participation among Kenyan youth.",
-    button: "read"
-  },
+   {
+      id: 1,
+      phase: "01. Phase",
+      name: "Discovery",
+      src: phase1,
+      review: "We start by understanding the budget topic, your audience, and the story to tell. We explore what matters most to youth and communities, gathering insights and examples to make the budget relatable.",
+      button: "read"
+   },
+   {
+      id: 2,
+      phase: "02. Phase",
+      name: "Story Mapping",
+      src: phase2,
+      review: "We craft a narrative from the budget data, turning numbers into human stories. We decide which voices, examples, and stories will engage youth and explain how public money affects their lives.",
+      button: "read"
+   },
+   {
+      id: 3,
+      phase: "03. Phase",
+      name: "Creative Design",
+      src: phase3,
+      review: "We design visuals, infographics, short videos, and interactive elements to bring the stories to life. The focus is on clarity, curiosity, and cultural resonance — so youth can understand and share.",
+      button: "read"
+   },
+   {
+      id: 4,
+      phase: "04. Phase",
+      name: "Feedback & Co-Creation",
+      src: phase4,
+      review: "We present drafts to youth representatives, community members, and experts to ensure the story is relatable, accurate, and impactful. Feedback is incorporated before finalization.",
+      button: "read"
+   },
+   {
+      id: 5,
+      phase: "05. Phase",
+      name: "Launch & Engagement",
+      src: phase5,
+      review: "We publish the content across digital channels — website, social media, podcasts, and WhatsApp. The goal is to spark curiosity, conversations, and participation among Kenyan youth.",
+      button: "read"
+   },
 ];
 
 
 
 
 export const serviceClientsItem = [
-  {
-    id: 1,
-    website: "Kenya Ministry of Finance",
-    href: "https://www.treasury.go.ke",
-    title: "Services:",
-    name: "Budget Analysts Team",
-    src: client01,
-    review:
-      "Budget Ndio helped us break down complex county budget allocations into clear, youth-friendly presentations. The visuals and flow made it easy for the public to understand revenue and expenditure priorities.",
-    links: [
-      { id: 1, title: "county budget guide", href: "/services" },
-      { id: 2, title: "youth engagement deck", href: "/services" },
-    ],
-  },
-  {
-    id: 2,
-    website: "Nairobi County Government",
-    href: "https://nairobi.go.ke",
-    title: "Services:",
-    name: "Public Participation Unit",
-    src: client02,
-    review:
-      "We collaborated to create presentations that educate Nairobi residents on how public funds are spent. The team’s approach ensured that even young audiences could grasp key budget concepts.",
-    links: [
-      { id: 1, title: "interactive budget", href: "/services" },
-      { id: 2, title: "policy review deck", href: "/services" },
-    ],
-  },
-  {
-    id: 3,
-    website: "Kenya Youth Budget Forum",
-    href: "https://www.kybf.or.ke",
-    title: "Services:",
-    name: "Forum Coordinators",
-    src: client03,
-    review:
-      "Budget Ndio designed workshops and decks that help youth understand national and county budgets. The presentations were engaging, visually appealing, and very informative.",
-    links: [
-      { id: 1, title: "national budget deck", href: "/services" },
-      { id: 2, title: "interactive learning", href: "/services" },
-    ],
-  },
-  {
-    id: 4,
-    website: "Kenya Revenue Authority",
-    href: "https://kra.go.ke",
-    title: "Services:",
-    name: "Public Awareness Team",
-    src: client04,
-    review:
-      "The team transformed tax and budget data into clear, educational content for the public. This increased awareness of revenue sources and expenditure priorities among citizens.",
-    links: [
-      { id: 1, title: "tax & budget overview", href: "/services" },
-      { id: 2, title: "youth engagement deck", href: "/services" },
-    ],
-  },
-  {
-    id: 5,
-    website: "County Governments Association of Kenya",
-    href: "https://cgakenya.org",
-    title: "Services:",
-    name: "CGA Knowledge Team",
-    src: client05,
-    review:
-      "We created county-level budget visualization tools that make allocations, projects, and public spending understandable for all stakeholders, especially young people.",
-    links: [
-      { id: 1, title: "county allocations deck", href: "/services" },
-      { id: 2, title: "public education tools", href: "/services" },
-    ],
-  },
-  {
-    id: 6,
-    website: "Parliament of Kenya",
-    href: "http://www.parliament.go.ke",
-    title: "Services:",
-    name: "Legislative Research Team",
-    src: client06,
-    review:
-      "Budget Ndio produced clear visual briefs to explain national and county budget proposals to citizens, NGOs, and youth organizations. Engagement and comprehension improved greatly.",
-    links: [
-      { id: 1, title: "budget briefing deck", href: "/services" },
-    ],
-  },
-  {
-    id: 7,
-    website: "Kenya Institute for Public Policy Research and Analysis (KIPPRA)",
-    href: "https://www.kippra.or.ke",
-    title: "Services:",
-    name: "Research Team",
-    src: client07,
-    review:
-      "We helped transform policy and budget research into easy-to-understand presentations, making policy recommendations more accessible to young people and civic groups.",
-    links: [
-      { id: 1, title: "policy deck", href: "/services" },
-      { id: 2, title: "youth budget guide", href: "/services" },
-    ],
-  },
-  {
-    id: 8,
-    website: "National Treasury Innovation Hub",
-    href: "#",
-    title: "Services:",
-    name: "Innovation Team",
-    src: client08,
-    review:
-      "Budget Ndio created engaging visual tools to make national budget data interactive and educational, bridging the knowledge gap for students and youth organizations.",
-    links: [
-      { id: 1, title: "interactive visual deck", href: "/services" },
-      { id: 2, title: "public education toolkit", href: "/services" },
-    ],
-  },
+   {
+      id: 1,
+      website: "Kenya Ministry of Finance",
+      href: "https://www.treasury.go.ke",
+      title: "Services:",
+      name: "Budget Analysts Team",
+      src: client01,
+      review:
+         "Budget Ndio helped us break down complex county budget allocations into clear, youth-friendly presentations. The visuals and flow made it easy for the public to understand revenue and expenditure priorities.",
+      links: [
+         { id: 1, title: "county budget guide", href: "/services" },
+         { id: 2, title: "youth engagement deck", href: "/services" },
+      ],
+   },
+   {
+      id: 2,
+      website: "Nairobi County Government",
+      href: "https://nairobi.go.ke",
+      title: "Services:",
+      name: "Public Participation Unit",
+      src: client02,
+      review:
+         "We collaborated to create presentations that educate Nairobi residents on how public funds are spent. The team’s approach ensured that even young audiences could grasp key budget concepts.",
+      links: [
+         { id: 1, title: "interactive budget", href: "/services" },
+         { id: 2, title: "policy review deck", href: "/services" },
+      ],
+   },
+   {
+      id: 3,
+      website: "Kenya Youth Budget Forum",
+      href: "https://www.kybf.or.ke",
+      title: "Services:",
+      name: "Forum Coordinators",
+      src: client03,
+      review:
+         "Budget Ndio designed workshops and decks that help youth understand national and county budgets. The presentations were engaging, visually appealing, and very informative.",
+      links: [
+         { id: 1, title: "national budget deck", href: "/services" },
+         { id: 2, title: "interactive learning", href: "/services" },
+      ],
+   },
+   {
+      id: 4,
+      website: "Kenya Revenue Authority",
+      href: "https://kra.go.ke",
+      title: "Services:",
+      name: "Public Awareness Team",
+      src: client04,
+      review:
+         "The team transformed tax and budget data into clear, educational content for the public. This increased awareness of revenue sources and expenditure priorities among citizens.",
+      links: [
+         { id: 1, title: "tax & budget overview", href: "/services" },
+         { id: 2, title: "youth engagement deck", href: "/services" },
+      ],
+   },
+   {
+      id: 5,
+      website: "County Governments Association of Kenya",
+      href: "https://cgakenya.org",
+      title: "Services:",
+      name: "CGA Knowledge Team",
+      src: client05,
+      review:
+         "We created county-level budget visualization tools that make allocations, projects, and public spending understandable for all stakeholders, especially young people.",
+      links: [
+         { id: 1, title: "county allocations deck", href: "/services" },
+         { id: 2, title: "public education tools", href: "/services" },
+      ],
+   },
+   {
+      id: 6,
+      website: "Parliament of Kenya",
+      href: "http://www.parliament.go.ke",
+      title: "Services:",
+      name: "Legislative Research Team",
+      src: client06,
+      review:
+         "Budget Ndio produced clear visual briefs to explain national and county budget proposals to citizens, NGOs, and youth organizations. Engagement and comprehension improved greatly.",
+      links: [
+         { id: 1, title: "budget briefing deck", href: "/services" },
+      ],
+   },
+   {
+      id: 7,
+      website: "Kenya Institute for Public Policy Research and Analysis (KIPPRA)",
+      href: "https://www.kippra.or.ke",
+      title: "Services:",
+      name: "Research Team",
+      src: client07,
+      review:
+         "We helped transform policy and budget research into easy-to-understand presentations, making policy recommendations more accessible to young people and civic groups.",
+      links: [
+         { id: 1, title: "policy deck", href: "/services" },
+         { id: 2, title: "youth budget guide", href: "/services" },
+      ],
+   },
+   {
+      id: 8,
+      website: "National Treasury Innovation Hub",
+      href: "#",
+      title: "Services:",
+      name: "Innovation Team",
+      src: client08,
+      review:
+         "Budget Ndio created engaging visual tools to make national budget data interactive and educational, bridging the knowledge gap for students and youth organizations.",
+      links: [
+         { id: 1, title: "interactive visual deck", href: "/services" },
+         { id: 2, title: "public education toolkit", href: "/services" },
+      ],
+   },
 ];
 
 export const serviceCapaybilitiesItem = [
@@ -1043,7 +1048,7 @@ export const FaqItems = [
       id: 3,
       question: "How can I start learning about budgets and finances?",
       title: "Learning Resources",
-      description: "Budget Ndiyo provides easy-to-understand guides, interactive tools, and youth-friendly content to make learning about budgets simple and engaging.",
+      description: "Budget Ndio Story provides easy-to-understand guides, interactive tools, and youth-friendly content to make learning about budgets simple and engaging.",
       links: [
          {
             id: 1,
@@ -1074,7 +1079,7 @@ export const FaqItems = [
    },
    {
       id: 5,
-      question: "Does Budget Ndiyo cover county-specific budgets?",
+      question: "Does Budget Ndio Story cover county-specific budgets?",
       title: "Local Focus",
       description: "Absolutely. We provide detailed insights on county budgets, highlighting local priorities, allocations, and expenditure trends.",
       links: [
@@ -1095,7 +1100,7 @@ export const FaqItems = [
       id: 6,
       question: "Why is bridging the budget education gap important?",
       title: "Financial Inclusion",
-      description: "Many youth are excluded from understanding budgets and financial decisions that affect them. Budget Ndiyo aims to bridge this gap, making budget education accessible, simple, and actionable.",
+      description: "Many youth are excluded from understanding budgets and financial decisions that affect them.     Budget Ndio Story aims to bridge this gap, making budget education accessible, simple, and actionable.",
       links: [
          {
             id: 1,

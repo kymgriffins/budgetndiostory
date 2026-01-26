@@ -17,7 +17,7 @@ export default function Clients() {
 		<section className="w-full padding-y">
 			<FadeUp delay={0.1} duration={0.8}>
 				<h1 className="sub-heading padding-x font-medium font-NeueMontreal text-secondry pb-[50px]">
-					Clients' reviews
+					Budget Lifecycle
 				</h1>
 			</FadeUp>
 			{clientsItem.map((item) => (
@@ -124,9 +124,9 @@ export default function Clients() {
 					</div>
 				</div>
 			))}
-			<FadeUp delay={0.8} duration={0.8} className="padding-x pt-[80px]">
+			{/* <FadeUp delay={0.8} duration={0.8} className="padding-x pt-[80px]">
 				<Ratings />
-			</FadeUp>
+			</FadeUp> */}
 		</section>
 	);
 }

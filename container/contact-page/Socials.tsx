@@ -8,8 +8,8 @@ import { Eyes } from "@/components";
 
 export default function Socials() {
 	const [rotate, setRotate] = useState(0);
-	// Phrases matching the Budget Ndiyo story vibe
-	const phrase = ["Budget", "Ndiyo", "Smart", "Save"];
+	// Phrases matching the Budget Ndio Story vibe
+	const phrase = ["Budget", "Ndio", "Story"];
 
 	useEffect(() => {
 		window.addEventListener("mousemove", (e) => {

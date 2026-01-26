@@ -6,7 +6,7 @@ export default function About() {
 		<section className="w-full padding-y">
 			<div className="w-full flex flex-col">
 				<h2 className="sub-heading padding-x font-medium font-NeueMontreal text-secondry pb-[50px]">
-					Compony
+					Company
 				</h2>
 				<div className="w-full border-t border-[#21212155] pt-[20px]">
 					<div className="w-full flex sm:flex-col xm:flex-col justify-between gap-[15px] padding-x">

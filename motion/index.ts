@@ -83,6 +83,24 @@ export const text = {
     }
 };
 
+export const transitionText = {
+    initial: {
+        opacity: 0,
+        y: 20
+    },
+    enter: {
+        opacity: 0,
+        y: -100,
+        transition: { duration: 0.75, delay: 0.35, ease: [0.76, 0, 0.24, 1] }
+    },
+    exit: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, delay: 0.4, ease: [0.33, 1, 0.68, 1] }
+    }
+};
+
+
 export const curve = (initialPath: string, targetPath: string) => {
     return {
         initial: {

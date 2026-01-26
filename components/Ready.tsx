@@ -23,7 +23,7 @@ export default function Ready() {
     >
       <div className="w-full h-full flex justify-center gap-[50px] items-center flex-col">
         <div className="flex flex-col gap-[10px]">
-          <h1 className="text-[290px] leading-[230px] lg:text-[220px] lg:leading-[170px] md:text-[180px] md:leading-[140px] sm:text-[120px] sm:leading-[90px] xm:text-[80px] xm:leading-[60px] tracking-[-2.5px] text-center font-bold font-FoundersGrotesk text-secondry uppercase pointer-events-none">
+          <h1 className="text-white text-[290px] leading-[230px] lg:text-[220px] lg:leading-[170px] md:text-[180px] md:leading-[140px] sm:text-[120px] sm:leading-[90px] xm:text-[80px] xm:leading-[60px] tracking-[-2.5px] text-center font-bold font-FoundersGrotesk text-secondry uppercase pointer-events-none">
             <TextMask>{phrase}</TextMask>
           </h1>
         </div>
@@ -48,7 +48,7 @@ export default function Ready() {
                   <p className="z-10 px-[10px] ml-[15px] py-[6px] group-hover:text-white text-black">
                     contact us
                   </p>
-                  <div className="bg-black group-hover:bg-white text-black p-[10px] rounded-full scale-[0.3] mr-[10px] group-hover:scale-[0.9] transition-all z-10 transform duration-[0.3s] ease-[.215,.61,.355,1]">
+                  <div className="bg-black group-hover:bg-white text-white p-[10px] rounded-full scale-[0.3] mr-[10px] group-hover:scale-[0.9] transition-all z-10 transform duration-[0.3s] ease-[.215,.61,.355,1]">
                     <ArrowUpRight
                       strokeWidth={1.5}
                       size={30}
