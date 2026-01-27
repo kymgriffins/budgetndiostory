@@ -1,11 +1,9 @@
 "use client";
+import { FadeUp } from "@/animation";
 import { Eyes } from "@/components";
-import { ochiside } from "@/public";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { FadeUp } from "@/animation";
 
 export default function Hero() {
   return (
@@ -55,28 +53,25 @@ export default function Hero() {
                   <div className="w-[50%] flex flex-col gap-y-[40px] sm:w-full xm:w-full">
                     <div className="flex flex-col gap-y-[20px]">
                       <p className="paragraph font-NeueMontreal text-secondry">
-                        In Kenya, the budget decides how we live,
-                        learn, move, and survive.
-                        But most youth never see it, hear it,
-                        or understand it.
-                        We exist to turn the budget into
-                        stories people can actually relate to.
+                        In Kenya, the budget decides how we live, learn, move,
+                        and survive. But most youth never see it, hear it, or
+                        understand it. We exist to turn the budget into stories
+                        people can actually relate to.
                       </p>
                     </div>
                     <div className="flex flex-col gap-y-[20px]">
                       <p className="paragraph font-NeueMontreal text-secondry">
-                        We believe the budget is not numbers.
-                        The budget is people.
-                        So we explain it through real voices,
-                        real places, and real experiences —
-                        using stories, visuals, audio, and film.
+                        We believe the budget is not numbers. The budget is
+                        people. So we explain it through real voices, real
+                        places, and real experiences — using stories, visuals,
+                        audio, and film.
                       </p>
                     </div>
                   </div>
                   <div className="flex w-fit h-fit gap-[5px] group">
                     <div className="rounded-[50px] border border-[#21212199] group-hover:bg-secondry py-[3px] px-[12px] cursor-pointer">
                       <Link
-                        href="/case"
+                        href="/services"
                         className="paragraph font-NeueMontreal text-secondry uppercase group-hover:text-background transition-all duration-200 ease-in"
                       >
                         Our Work
@@ -100,7 +95,8 @@ export default function Hero() {
       <FadeUp delay={0.8} duration={0.8} className="padding-x">
         <h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
           Budget Ndio Story
-          <br className="sm:hidden xm:hidden" /> The Past, The Present and The Future.
+          <br className="sm:hidden xm:hidden" /> The Past, The Present and The
+          Future.
         </h1>
       </FadeUp>
     </section>
