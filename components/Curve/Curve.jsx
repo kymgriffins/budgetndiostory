@@ -1,17 +1,17 @@
 "use client";
-import { curve, text, translate } from "@/motion";
+import { curve, text, translate, slideUp } from "@/motion";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const routes = {
-  "/": "Budget Ndio Story",
-  "/services": "Budget Ndio Story",
-  "/presentation": "Budget Ndio Story",
-  "/ochi-team": "Budget Ndio Story",
-  "/insights": "Budget Ndio Story",
-  "/contact": "Budget Ndio Story",
-  "/case": "Budget Ndio Story",
+  "/": "BUDGET NDIO STORY",
+  "/services": "BUDGET NDIO STORY",
+  "/presentation": "BUDGET NDIO STORY",
+  "/ochi-team": "BUDGET NDIO STORY",
+  "/insights": "BUDGET NDIO STORY",
+  "/contact": "BUDGET NDIO STORY",
+  "/case": "BUDGET NDIO STORY",
 };
 
 const anim = (variants) => {
@@ -58,35 +58,25 @@ export default function Curve({ children, backgroundColor }) {
         {routes[router.route]}
       </motion.p>
       {dimensions.width != null && <SVG {...dimensions} />}
-      {children}
+      <motion.div {...anim(slideUp)}>
+        {children}
+      </motion.div>
     </div>
   );
 }
 
 const SVG = ({ height, width }) => {
-  const initialPath = `
-        M0 300
-        Q${width / 2} 0 ${width} 300
-        L${width} ${height + 300}
-        Q${width / 2} ${height + 600} 0 ${height + 300}
-        L0 0
-    `;
+  const initialPath = `M0 0 L${width} 0 L${width} ${height} L0 ${height} L0 0`;
 
-  const targetPath = `
-        M0 300
-        Q${width / 2} 0 ${width} 300
-        L${width} ${height}
-        L0 ${height}
-        L0 0
-    `;
+  const targetPath = `M0 0 L${width} 0 L${width} ${height} L0 ${height} L0 0`;
 
   return (
-    <motion.svg
-      className="fixed h w-full pointer-events-none
+      <motion.svg
+        className="fixed h w-full pointer-events-none
 				 left-0 top-0 z-50"
-      {...anim(translate)}
-    >
-      <motion.path {...anim(curve(initialPath, targetPath))} />
-    </motion.svg>
+        {...anim(translate)}
+      >
+        <motion.path fill="black" {...anim(curve(initialPath, targetPath))} />
+      </motion.svg>
   );
 };

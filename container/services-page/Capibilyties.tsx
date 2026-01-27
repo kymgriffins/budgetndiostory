@@ -26,7 +26,7 @@ export default function Capibilyties() {
 					</h1>
 				</div>
 			</FadeUp>
-			{/* <FadeUp delay={0.2} duration={0.8}>
+			<FadeUp delay={0.2} duration={0.8}>
 				<div className="w-full flex sm:flex-col xm:flex-col justify-between py-[20px] padding-x border-t border-[#21212155] sm:gap-[15px] xm:gap-[15px]">
 					<div className="w-[10%] sm:w-full xm:w-full">
 						<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
@@ -111,7 +111,7 @@ export default function Capibilyties() {
 						</div>
 					</FadeUp>
 				</div>
-			</FadeUp> */}
+			</FadeUp>
 		</div>
 	);
 }

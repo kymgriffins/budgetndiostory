@@ -26,7 +26,7 @@ export default function Process() {
 							? "border-y border-[#21212155]"
 							: "border-b border-[#21212155]"
 					}`}>
-					<div className="w-full flex items-center justify-between py-[10px] padding-x">
+					<div className="w-full flex items-center justify-between py-[10px] padding-x sm:flex-col xm:flex-col sm:gap-[10px] xm:gap-[10px]">
 						<div className="w-[50%] sm:w-full xm:w-full">
 							<h3 className="paragraph font-normal font-NeueMontreal text-secondry">
 								{item.phase}
