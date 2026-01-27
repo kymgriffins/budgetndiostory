@@ -15,9 +15,9 @@ export default function About() {
         <div className="pl-[50px] sm:px-[20px] xm:px-[20px]">
           <h2 className="sub-heading font-medium font-NeueMontreal text-white">
             Budget Ndio Story empowers youth to understand
-            <br className="sm:hidden xm:hidden" /> how
+            <br className="sm:hidden xm:hidden" />
             <span className="sub-heading font-medium font-NeueMontreal link-flash cursor-pointer">
-              government and county budgets
+             how government and county budgets
             </span>
             &nbsp;work, make informed decisions,{" "}
             <br className="sm:hidden xm:hidden" />

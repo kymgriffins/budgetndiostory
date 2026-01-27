@@ -15,7 +15,7 @@ export const navbarItems = [
    {
       id: 3,
       title: "About us",
-      href: "/ochi-team",
+      href: "/budgetndiostory",
    },
    // {
    //    id: 4,
@@ -78,7 +78,7 @@ export const footernavbarItems = [
    {
       id: 4,
       title: "About us",
-      href: "ochi-team",
+      href: "budgetndiostory",
    },
    // {
    //    id: 5,

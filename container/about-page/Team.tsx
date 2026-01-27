@@ -1,8 +1,6 @@
 "use client";
-import { Marquee } from "@/components";
-import { logo } from "@/public";
-import Image from "next/image";
 import { FadeUp } from "@/animation";
+import { Marquee } from "@/components";
 
 export default function Team() {
   return (
@@ -38,7 +36,7 @@ export default function Team() {
                   </div>
                   <div>
                     <h1 className="heading font-bold font-FoundersGrotesk text-secondry">
-                      1 / 2
+                      1 /  {"\u221E"}
                     </h1>
                   </div>
                 </div>
@@ -52,7 +50,35 @@ export default function Team() {
                   </div>
                   <div>
                     <h1 className="heading font-bold font-FoundersGrotesk text-secondry">
-                      2 / 2
+                      2 /  {"\u221E"}
+                    </h1>
+                  </div>
+                </div>
+              </FadeUp>
+              <FadeUp delay={0.5} duration={0.8}>
+                <div className="flex justify-between items-end sm:flex-col xm:flex-col sm:items-start xm:items-start">
+                  <div>
+                    <h1 className="heading font-bold font-FoundersGrotesk text-secondry">
+                      JULIUS <br /> MWAI
+                    </h1>
+                  </div>
+                  <div>
+                    <h1 className="heading font-bold font-FoundersGrotesk text-secondry">
+                      3 /  {"\u221E"}
+                    </h1>
+                  </div>
+                </div>
+              </FadeUp>
+              <FadeUp delay={0.5} duration={0.8}>
+                <div className="flex justify-between items-end sm:flex-col xm:flex-col sm:items-start xm:items-start">
+                  <div>
+                    <h1 className="heading font-bold font-FoundersGrotesk text-secondry">
+                      BRIAN <br /> KOMEN
+                    </h1>
+                  </div>
+                  <div>
+                    <h1 className="heading font-bold font-FoundersGrotesk text-secondry">
+                      4 /  {"\u221E"}
                     </h1>
                   </div>
                 </div>

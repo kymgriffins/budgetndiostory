@@ -45,7 +45,7 @@ export default function Ready() {
                 href="/contact"
               >
                 <Rounded className="py-[6px]" backgroundColor="#212121">
-                  <p className="z-10 px-[10px] ml-[15px] py-[6px] group-hover:text-white text-black">
+                  <p className="z-10 px-[10px] ml-[15px] py-[6px] group-hover:text-white text-white">
                     contact us
                   </p>
                   <div className="bg-black group-hover:bg-white text-white p-[10px] rounded-full scale-[0.3] mr-[10px] group-hover:scale-[0.9] transition-all z-10 transform duration-[0.3s] ease-[.215,.61,.355,1]">
