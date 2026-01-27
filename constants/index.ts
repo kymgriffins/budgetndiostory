@@ -622,67 +622,67 @@ export const expectationsItems = [
   {
     id: 1,
     title1: "01",
-    subTitle1: "Comunication",
+    subTitle1: "Youth-Centric Approach",
     btn: "read",
     para1:
-      "The relationship with the clients is our top priority. We put extra effort into keeping mutual respect, honesty, and clarity in the conversation. For each client, we develop a project view site in Notion to track milestones and see the thinking behind steps. You always know what and when we do, as you feel confident in the results we bring.",
+      "Our work starts and ends with young people. We prioritize youth voices in every project, ensuring that budget stories are told from their perspective and resonate with their experiences. This approach builds trust and makes complex information accessible and relevant.",
   },
   {
     id: 2,
     title1: "04",
-    subTitle1: "One point of contact",
+    subTitle1: "Data-Driven Storytelling",
     btn: "read",
     para1:
-      "Every project is led by Ihor, the agency's founder and creative director. He ensures the whole project flows from start to finish. He puts together the right creative team for your specific project. You will always have this direct contact person available to speak your business language. He takes care of translating your business goals into the language of design for the team.",
+      "We combine accurate budget data with compelling narratives. Every presentation is grounded in verified information, transformed into engaging stories that educate while maintaining credibility. Our team ensures facts are presented clearly and impactfully.",
   },
   {
     id: 3,
     title1: "02",
-    subTitle1: "Ukrainian Business",
+    subTitle1: "Community Engagement",
     btn: "read",
     para1:
-      "We are a Ukrainian-born business working mainly with international clients. And as Ukrainians, we offer an unshakable workforce that's proven it can handle anything. The international arena was our focus from the start. And each working day, we showed up as genuine innovators and Ukraine ambassadors. Part of our mission is to promote our homeland by doing the most incredible work we can, each project at a time.",
+      "We are deeply rooted in Kenyan communities, working closely with local organizations, youth groups, and government partners. This connection allows us to create content that reflects real community needs and fosters meaningful civic participation.",
   },
   {
     id: 4,
     title1: "05",
-    subTitle1: "Constantly Improving",
+    subTitle1: "Transparent Communication",
     btn: "read",
     para1:
-      "We are passionate about creating industry-shifting presentations. And as the world around us, we constantly evolve and improve. Our growth is fueled by an innovative ecosystem designed for each team member to grow. We provide them with frequent pieces for training both on design craft and personal development. We are constantly looking for new ways to support our creatives and our community as for our clients.",
+      "We believe in open and honest collaboration. Throughout each project, we provide clear updates, welcome feedback, and ensure our clients understand the process. This transparency builds strong partnerships and delivers better results.",
   },
   {
     id: 5,
     title1: "03",
-    subTitle1: "Holistic Approach",
+    subTitle1: "Holistic Process",
     btn: "read",
     para1:
-      "We simply ask lots of questions to understand your goals, business, and niche you operate. Our discovery process is essential as it informs our decisions throughout the project. Once we firmly define the goal, it is incredible to move towards that goal. That's why so much of our work is discovery, research, and asking good questions. The answers we get and the data we find go into the foundation of project success.",
+      "We take a comprehensive approach to budget education, from initial research to final delivery and ongoing engagement. This ensures that our work not only informs but also inspires action and creates lasting impact in communities.",
   },
   {
     id: 6,
     title1: "06",
-    subTitle1: "Limited Amount of Client",
+    subTitle1: "Continuous Learning",
     btn: "read",
     para1:
-      "We believe it is vital to dedicate sole focus and undivided attention to each project. To add as much value as possible, we serve a limited amount of clients per month. We have a rule that we follow to choosing projects: our client understands the value of the presentation as a communication tool. We believe in their products or ideas. Together, we work to create positive change.",
+      "Budget landscapes evolve, and so do we. We stay updated on the latest budget policies, educational methods, and youth engagement strategies. This commitment to learning allows us to continuously improve and adapt our approach.",
   },
 ];
 
 export const achiveItems = [
   {
     id: 1,
-    title1: ["100+"],
-    title2: ["$280+"],
-    subTitle1: "Clients from 17 Countries",
-    subTitle2: "Millions raised for our clients",
+    title1: ["50,000+"],
+    title2: ["200+"],
+    subTitle1: "Youth educated on budgets",
+    subTitle2: "Presentations created",
   },
   {
     id: 2,
-    title1: ["90%"],
-    title2: ["98%"],
-    subTitle1: "Of our clients come back",
-    subTitle2: "Net Promoting Score",
+    title1: ["15"],
+    title2: ["95%"],
+    subTitle1: "Counties covered",
+    subTitle2: "Youth engagement rate",
   },
 ];
 
@@ -1155,5 +1155,46 @@ export const FaqItems = [
       },
     ],
     button: "read",
+  },
+];
+
+// edustories constants
+
+export const edustoriesItems = [
+  {
+    id: 1,
+    title: "The Hidden Story of County Budgets",
+    description: "Explore how county governments allocate funds and the real impact on local communities.",
+    videoSrc: "/homevideo.mp4", // Placeholder, use actual video
+  },
+  {
+    id: 2,
+    title: "Youth Voices in Budget Decisions",
+    description: "Hear from young Kenyans on how budget policies affect their future and dreams.",
+    videoSrc: "/workizvideo.mp4", // Placeholder
+  },
+  {
+    id: 3,
+    title: "From Taxes to Transformation",
+    description: "A cinematic journey showing how your tax shillings build schools, roads, and hope.",
+    videoSrc: "/homevideo.mp4", // Placeholder
+  },
+  {
+    id: 4,
+    title: "Budget Myths Busted",
+    description: "Debunking common misconceptions about government spending and public finance.",
+    videoSrc: "/workizvideo.mp4", // Placeholder
+  },
+  {
+    id: 5,
+    title: "The Power of Public Participation",
+    description: "See how community involvement shapes budget priorities and local development.",
+    videoSrc: "/homevideo.mp4", // Placeholder
+  },
+  {
+    id: 6,
+    title: "Future Leaders on Finance",
+    description: "Young innovators share their visions for transparent and impactful budgeting.",
+    videoSrc: "/workizvideo.mp4", // Placeholder
   },
 ];

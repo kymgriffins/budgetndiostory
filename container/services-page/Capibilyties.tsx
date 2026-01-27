@@ -16,12 +16,12 @@ export default function Capibilyties() {
 						<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
 							Let's be honest.
 						</span>
-						&nbsp;There are really no excuses to have a bad presentation anymore.
-						No one has time for poorly communicated ideas. Focus on what you do
-						best <span className="sm:hidden xm:hidden">—</span>
-						growing your business, while we do our best at
+						&nbsp;Budget information doesn't have to be boring or confusing.
+						We turn complex financial data into engaging stories that youth
+						can understand and act on, empowering communities to participate
+						in civic life.
 						<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-							&nbsp;making your presentations awesome.
+							&nbsp;Making budgets accessible for everyone.
 						</span>
 					</h1>
 				</div>
