@@ -52,7 +52,7 @@ export default function Curve({ children, backgroundColor }) {
 				 left-0 top-0 z-50 bg-black"
       />
       <motion.p
-        className="absolute left-1/2 top-[40%] text-white text-[50px] z-[60] -translate-x-1/2 text-center"
+        className="absolute left-1/2 top-[40%] text-white text-[50px] z-[60] -translate-x-1/2 text-center font-FoundersGrotesk"
         {...anim(text)}
       >
         {routes[router.route]}
@@ -76,7 +76,7 @@ const SVG = ({ height, width }) => {
         M0 300
         Q${width / 2} 0 ${width} 300
         L${width} ${height}
-        Q${width / 2} ${height} 0 ${height}
+        L0 ${height}
         L0 0
     `;
 
