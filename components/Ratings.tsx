@@ -34,7 +34,7 @@ export default function Ratings() {
 					<div className="absolute left-[25px] bottom-[35px] w-fit rounded-[50px] border border-white cursor-pointer">
 						<Link
 							className="xl:text-[18px] xl:leading-[18px] text-[14px] leading-[14px] font-NeueMontreal text-white uppercase tracking-wider"
-							href="/services">
+							href="/">
 							<Rounded
 								backgroundColor="#fff"
 								className="">
@@ -55,7 +55,7 @@ export default function Ratings() {
 					<div className="absolute left-[25px] bottom-[35px] w-fit rounded-[50px] border border-white cursor-pointer">
 						<Link
 							className="xl:text-[18px] xl:leading-[18px] text-[14px] leading-[14px] font-NeueMontreal text-white uppercase tracking-wider"
-							href="/services">
+							href="/">
 							<Rounded
 								backgroundColor="#fff"
 								className="">
