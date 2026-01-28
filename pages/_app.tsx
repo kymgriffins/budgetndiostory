@@ -15,12 +15,16 @@ export default function App({
 	return (
 		<>
 			<Navbar />
-			<AnimatePresence mode="wait">
-				<Component
-					key={router.route}
-					{...pageProps}
-				/>
-			</AnimatePresence>
+			{isLanding ? (
+				<Component key={router.route} {...pageProps} />
+			) : (
+				<AnimatePresence mode="wait">
+					<Component
+						key={router.route}
+						{...pageProps}
+					/>
+				</AnimatePresence>
+			)}
 			{!isLanding && <Footer />}
 		</>
 	);
