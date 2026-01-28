@@ -18,12 +18,12 @@ export default function App({
 			{isLanding ? (
 				<Component key={router.route} {...pageProps} />
 			) : (
-				<AnimatePresence mode="wait">
-					<Component
-						key={router.route}
-						{...pageProps}
-					/>
-				</AnimatePresence>
+			<AnimatePresence mode="wait">
+				<Component
+					key={router.route}
+					{...pageProps}
+				/>
+			</AnimatePresence>
 			)}
 			{!isLanding && <Footer />}
 		</>
