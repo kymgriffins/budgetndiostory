@@ -102,27 +102,27 @@ export const footernavbarItems = [
   {
     id: 2,
     title: "Services",
-    href: "services",
+    href: "/services",
   },
   // {
   //    id: 3,
   //    title: "Our work",
-  //    href: "presentation",
+  //    href: "/presentation",
   // },
   {
     id: 4,
     title: "About us",
-    href: "budgetndiostory",
+    href: "/budgetndiostory",
   },
   // {
   //    id: 5,
   //    title: "Insights",
-  //    href: "insights",
+  //    href: "/insights",
   // },
   {
     id: 6,
     title: "Contact us",
-    href: "contact",
+    href: "/contact",
   },
 ];
 
@@ -703,17 +703,17 @@ export const presentationProjectItem = [
       {
         id: 2,
         title: "copywriting",
-        href: "services",
+        href: "/services",
       },
       {
         id: 3,
         title: "sales deck",
-        href: "services",
+        href: "/services",
       },
       {
         id: 4,
         title: "slides design",
-        href: "services",
+        href: "/services",
       },
     ],
   },
@@ -731,12 +731,12 @@ export const presentationProjectItem = [
       {
         id: 2,
         title: "design research",
-        href: "services",
+        href: "/services",
       },
       {
         id: 3,
         title: "investor deck",
-        href: "services",
+        href: "/services",
       },
     ],
   },
@@ -828,7 +828,7 @@ export const presentationProjectItem = [
       {
         id: 2,
         title: "compony presentation",
-        href: "services",
+        href: "/services",
       },
     ],
   },

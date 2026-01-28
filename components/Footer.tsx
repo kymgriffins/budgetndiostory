@@ -8,16 +8,16 @@ export default function Footer() {
   const phrase = ["Budget Ndio", "Story"];
   const phrase1 = ["Ganji Ndio Inabonga"];
   return (
-    <footer className="w-full min-h-screen padding-x z-30 relative pt-[40px] bg-background flex flex-col justify-between rounded-t-[20px] mt-[-20px]">
-      <div className="w-full flex justify-between sm:flex-col xm:flex-col">
-        <div className="flex flex-col justify-between sm:w-full xm:w-full w-1/2">
-          <h1 className="text-[150px] leading-[115px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
+    <footer className="w-full min-h-screen padding-x z-30 relative pt-[40px] bg-background flex flex-col justify-between rounded-t-[20px] mt-[-20px] overflow-x-hidden">
+      <div className="w-full flex justify-between sm:flex-col xm:flex-col gap-[20px] sm:gap-[10px] xm:gap-[10px]">
+        <div className="flex flex-col justify-between sm:w-full xm:w-full w-1/2 overflow-hidden">
+          <h1 className="text-[150px] leading-[115px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase break-words">
             <TextMask>{phrase}</TextMask>
           </h1>
         </div>
-        <div className="h-full flex flex-col justify-between sm:w-full xm:w-full w-1/2">
-          <div>
-            <h1 className="text-[150px] leading-[115px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
+        <div className="h-full flex flex-col justify-between sm:w-full xm:w-full w-1/2 overflow-hidden">
+          <div className="overflow-hidden">
+            <h1 className="text-[150px] leading-[115px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase break-words">
               <TextMask>{phrase1}</TextMask>
             </h1>
             <div className="pt-[50px]">
@@ -33,7 +33,7 @@ export default function Footer() {
                 />
               ))}
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between sm:flex-col xm:flex-col gap-[10px]">
               <div className="pt-[50px]">
                 <h1 className="paragraph font-medium font-NeueMontreal text-secondry pb-[20px]">
                   L:
@@ -88,15 +88,15 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-full pt-[40px] pb-[30px] flex justify-between sm:flex-col xm:flex-col sm:gap-[20px] xm:gap-[20px]">
+      <div className="w-full pt-[40px] pb-[30px] flex justify-between sm:flex-col xm:flex-col sm:gap-[20px] xm:gap-[20px] overflow-hidden">
         <div className="w-1/2 sm:w-full xm:w-full">
           <Link href={"/"}>
             <Image src={logo} alt="ochi logo" width={70} height={70} />
           </Link>
         </div>
-        <div className="w-1/2 h-full flex gap-[10px] justify-between items-end sm:w-full xm:w-full sm:flex-col xm:flex-col sm:items-start xm:items-start">
-          <div className="flex sm:flex-col xm:flex-col gap-[10px]">
-            <h1 className="paragraph font-medium font-NeueMontreal text-secondry opacity-40">
+        <div className="w-1/2 h-full flex gap-[10px] justify-between items-end sm:w-full xm:w-full sm:flex-col xm:flex-col sm:items-start xm:items-start overflow-hidden">
+          <div className="flex sm:flex-col xm:flex-col gap-[10px] break-words">
+            <h1 className="paragraph font-medium font-NeueMontreal text-secondry opacity-40 break-words">
               © Budget Ndio Story 2026.
             </h1>
             {/* <LinkHover

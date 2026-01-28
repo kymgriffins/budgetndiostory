@@ -4,6 +4,7 @@
 
 html {
 	overflow-x: hidden;
+	word-break: break-word;
 }
 
 body::-webkit-scrollbar {
@@ -13,6 +14,8 @@ body::-webkit-scrollbar {
 body {
 	box-sizing: border-box;
 	background-color: #f1f1f1;
+	word-break: break-word;
+	overflow-x: hidden;
 }
 
 @font-face {
@@ -36,19 +39,19 @@ body {
 		@apply mt-[170px] lg:mt-[80px] md:mt-[60px] sm:mt-[40px] xm:mt-[40px] mb-[130px] lg:mb-[80px] md:mb-[60px] sm:mb-[40px] xm:mb-[40px];
 	}
 	.heading {
-		@apply text-[150px] leading-[100px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[50px] xm:text-[64px] xm:leading-[45px];
+		@apply text-[150px] leading-[100px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[50px] xm:text-[64px] xm:leading-[45px] break-words overflow-x-hidden;
 	}
 	.sub-heading {
-		@apply text-[55px] leading-[55px] lg:text-[52px] lg:leading-[52px] md:text-[52px] md:leading-[52px] sm:text-[40px] sm:leading-[40px] xm:text-[31px] xm:leading-[31px];
+		@apply text-[55px] leading-[55px] lg:text-[52px] lg:leading-[52px] md:text-[52px] md:leading-[52px] sm:text-[40px] sm:leading-[40px] xm:text-[31px] xm:leading-[31px] break-words overflow-x-hidden;
 	}
 	.paragraph {
-		@apply text-[18px] leading-[26px] lg:text-[16px] lg:leading-[24px] md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px] xm:text-[16px] xm:leading-[24px];
+		@apply text-[18px] leading-[26px] lg:text-[16px] lg:leading-[24px] md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px] xm:text-[16px] xm:leading-[24px] break-words overflow-x-hidden;
 	}
 	.sub-paragraph {
-		@apply xl:text-[21px] xl:leading-[31px] text-[16px] leading-[24px];
+		@apply xl:text-[21px] xl:leading-[31px] text-[16px] leading-[24px] break-words overflow-x-hidden;
 	}
 	.small-text {
-		@apply xl:text-[16px] xl:leading-[24px] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[22px];
+		@apply xl:text-[16px] xl:leading-[24px] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[22px] break-words overflow-x-hidden;
 	}
 }
 
