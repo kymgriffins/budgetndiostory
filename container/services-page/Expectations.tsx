@@ -33,7 +33,7 @@ export default function Expectations() {
             <div className="w-[50%] sm:w-full xm:w-full flex flex-wrap gap-[20px]">
               {expectationsItems.map((item, index) => (
                 <div
-                  className="w-[345px] flex justify-between gap-x-[20px] sm:flex-col xm:flex-col gap-[20px]"
+                  className="w-[345px] sm:w-full xm:w-full flex justify-between gap-x-[20px] sm:flex-col xm:flex-col gap-[20px]"
                   key={item.id}
                   style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                 >

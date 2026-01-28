@@ -21,7 +21,7 @@ export default function Archive() {
 							<div
 								className="w-full flex justify-between gap-[20px] sm:flex-col xm:flex-col"
 								key={item.id}>
-								<div className="bg-[#E1E1E1] w-full flex flex-col gap-y-[150px] rounded-[20px] px-[30px] py-[20px]">
+								<div className="bg-[#E1E1E1] w-full flex flex-col gap-y-[150px] lg:gap-y-[120px] md:gap-y-[100px] sm:gap-y-[80px] xm:gap-y-[60px] rounded-[20px] px-[30px] py-[20px]">
 									<div className="flex gap-x-[10px] items-center pb-[10px]">
 										<h1 className="sub-heading font-normal font-NeueMontreal">
 											<TextMask>{item.title1}</TextMask>
@@ -33,7 +33,7 @@ export default function Archive() {
 										</button>
 									</div>
 								</div>
-								<div className="bg-[#E1E1E1] w-full flex flex-col gap-y-[150px] rounded-[20px] px-[30px] py-[20px]">
+								<div className="bg-[#E1E1E1] w-full flex flex-col gap-y-[150px] lg:gap-y-[120px] md:gap-y-[100px] sm:gap-y-[80px] xm:gap-y-[60px] rounded-[20px] px-[30px] py-[20px]">
 									<div className="flex gap-x-[10px] items-center pb-[10px]">
 										<h1 className="sub-heading font-normal font-NeueMontreal">
 											<TextMask>{item.title2}</TextMask>
