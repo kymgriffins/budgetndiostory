@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { Curve } from "@/components";
-import { Heroworkiz as WorkizHero, Aboutworkiz as About, Chelenge, Credit, Result, VideoWorkiz as Video, Works, BlogCMS } from "@/container";
+import { Heroworkiz as WorkizHero, Aboutworkiz as About, Chelenge, Credit, Result, VideoWorkiz as Video, Works, BlogArticles } from "@/container";
 
 export default function Workiz() {
 	useEffect(() => {
@@ -21,7 +21,7 @@ export default function Workiz() {
 				<Video />
 				<Result />
 				<Credit />
-				<BlogCMS />
+				<BlogArticles />
 			</Curve>
 		</>
 	);

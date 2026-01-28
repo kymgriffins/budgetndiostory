@@ -34,7 +34,7 @@ export default function Hero() {
 				</div>
 				<div className="w-full pb-[15px]">
 					<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
-						Fill the form below:
+						Tell us about your vision for youth budget literacy:
 					</h3>
 				</div>
 			</div>

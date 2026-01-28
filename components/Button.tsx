@@ -4,11 +4,11 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Button({ href, title }: TButtonProps) {
 	return (
-		<div className="flex flex-col pb-[10px] w-fit">
+		<div className="flex flex-col pb-[10px] w-fit overflow-hidden">
 			<div className="flex items-center gap-[5px] group">
 				<div className="rounded-[50px] border border-[#21212199] group-hover:bg-secondry  py-[3px] px-[12px] cursor-pointer">
 					<Link
-						className="small-text font-NeueMontreal text-secondry uppercase group-hover:text-background transition-all duration-300 ease-in-out"
+						className="small-text font-NeueMontreal text-secondry uppercase group-hover:text-background transition-all duration-300 ease-in-out break-words"
 						href={href}>
 						{title}
 					</Link>

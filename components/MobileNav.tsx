@@ -23,7 +23,7 @@ export default function MobileNav() {
 				</Link>
 				<HiOutlineMenuAlt4
 					onClick={() => setToggle(true)}
-					className="text-3xl cursor-pointer text-black"
+					className="text-3xl cursor-pointer text-black hover:opacity-70 transition-opacity duration-300"
 				/>
 			</div>
 			<AnimatePresence mode="wait">
@@ -45,7 +45,7 @@ export default function MobileNav() {
 							</Link>
 							<IoMdClose
 								onClick={() => setToggle(false)}
-								className="text-3xl cursor-pointer text-background"
+								className="text-3xl cursor-pointer text-background hover:opacity-70 transition-opacity duration-300"
 							/>
 						</div>
 						<ul className="h-full w-full flex justify-center text-left flex-col gap-[10px] padding-x">
@@ -53,8 +53,8 @@ export default function MobileNav() {
 								<Link
 									href={item.href}
 									key={item.id}
-									onClick={(toggle) => setToggle(!toggle)}
-									className="text-[80px] leading-[67px] font-FoundersGrotesk uppercase font-bold tracking-[-.9] text-background">
+									onClick={() => setToggle(false)}
+									className="text-[80px] leading-[67px] font-FoundersGrotesk uppercase font-bold tracking-[-.9] text-background hover:opacity-80 transition-opacity duration-300 break-words">
 									{item.title}
 								</Link>
 							))}

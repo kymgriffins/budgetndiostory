@@ -18,15 +18,9 @@ export default function Hero() {
           <FadeUp delay={0.2} duration={0.8}>
             <div className="w-full border-t border-[#21212155]">
               <p className="w-[80%] sm:w-full xm:w-full sub-heading font-normal padding-x font-NeueMontreal text-secondry padding-y">
-                We create&nbsp;
-                <span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-                  clear&nbsp;
-                </span>
-                and&nbsp;
-                <span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-                  impactful&nbsp;
-                </span>
-                presentations that educate youth, inspire civic participation, and make budget information accessible.
+                We create budget literacy solutions tailored for youth and
+                citizens, empowering them to understand and engage with
+                government budgets and governance processes.
               </p>
             </div>
           </FadeUp>
@@ -47,7 +41,9 @@ export default function Hero() {
                         Goal defines it all
                       </p>
                       <p className="paragraph font-NeueMontreal text-secondry">
-                        What do you want citizens or youth to learn? <br className="sm:hidden xm:hidden" /> Understanding the purpose of your presentation ensures clarity and impact.
+                        What do you want citizens or youth to learn?{" "}
+                        <br className="sm:hidden xm:hidden" /> Understanding the
+                        purpose of your presentation ensures clarity and impact.
                       </p>
                     </div>
                     <div className="flex flex-col gap-[20px]">
@@ -55,7 +51,11 @@ export default function Hero() {
                         Audience is the hero
                       </p>
                       <p className="paragraph font-NeueMontreal text-secondry">
-                        Who is your audience? Youth groups, students, or community members? <br className="sm:hidden xm:hidden" /> Knowing them allows us to tailor content they care about and engage with.
+                        Who is your audience? Youth groups, students, or
+                        community members?{" "}
+                        <br className="sm:hidden xm:hidden" /> Knowing them
+                        allows us to tailor content they care about and engage
+                        with.
                       </p>
                     </div>
                   </div>
@@ -67,7 +67,10 @@ export default function Hero() {
                         Context makes a difference
                       </p>
                       <p className="paragraph font-NeueMontreal text-secondry">
-                        Is this for a school workshop, youth forum, or online briefing? <br className="sm:hidden xm:hidden" /> We adapt content and design to the environment and audience to maximize comprehension and engagement.
+                        Is this for a school workshop, youth forum, or online
+                        briefing? <br className="sm:hidden xm:hidden" /> We
+                        adapt content and design to the environment and audience
+                        to maximize comprehension and engagement.
                       </p>
                     </div>
                   </div>

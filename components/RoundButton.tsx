@@ -17,13 +17,13 @@ export default function RoundButton({
 }) {
 	return (
 		<Link
-			className="small-text uppercase font-normal font-NeueMontreal"
+			className="small-text uppercase font-normal font-NeueMontreal break-words"
 			href={href}>
 			<Rounded
 				className="py-[6px]"
 				backgroundColor={bgcolor}>
 				<p
-					className="z-10 px-[10px] ml-[15px] py-[6px]"
+					className="z-10 px-[10px] ml-[15px] py-[6px] break-words"
 					style={style}>
 					{title}
 				</p>

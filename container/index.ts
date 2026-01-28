@@ -44,4 +44,4 @@ export { default as Chelenge } from './workiz-page/Chelenge';
 export { default as Result } from './workiz-page/Result';
 export { default as Credit } from './workiz-page/Credit';
 export { default as VideoWorkiz } from './workiz-page/Video';
-export { default as BlogCMS } from './workiz-page/BlogCMS';
+export { default as BlogArticles } from './workiz-page/BlogArticles';
