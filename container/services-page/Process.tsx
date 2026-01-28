@@ -27,18 +27,18 @@ export default function Process() {
               : "border-b border-[#21212155]"
           }`}
         >
-          <div className="w-full flex items-center justify-between py-[10px] padding-x gap-[10px] sm:flex-col xm:flex-col">
-            <div className="flex-1 sm:w-full xm:w-full">
+          <div className="w-full flex items-center justify-between py-[10px] padding-x gap-[10px] smOnly:flex-col xm:flex-col">
+            <div className="flex-1 smOnly:w-full xm:w-full">
               <h3 className="paragraph font-normal font-NeueMontreal text-secondry">
                 {item.phase}
               </h3>
             </div>
-            <div className="flex-1 sm:w-full xm:w-full">
+            <div className="flex-1 smOnly:w-full xm:w-full">
               <h3 className="paragraph font-normal font-NeueMontreal text-secondry">
                 {item.name}
               </h3>
             </div>
-            <div className="flex-shrink-0 flex items-end justify-end sm:w-full xm:w-full">
+            <div className="flex-shrink-0 flex items-end justify-end smOnly:w-full xm:w-full">
               <button
                 className={`paragraph font-normal font-NeueMontreal uppercase transition-all duration-200 ease-in-out ${
                   activeAccordion === item.id
@@ -52,10 +52,10 @@ export default function Process() {
             </div>
           </div>
           <div
-            className={`w-full flex justify-between padding-x gap-[10px] sm:flex-col xm:flex-col`}
+            className={`w-full flex justify-between padding-x gap-[10px] smOnly:flex-col xm:flex-col`}
           >
-            <div className="hidden sm:hidden xm:hidden" />
-            <div className="flex-1 sm:w-full xm:w-full">
+            <div className="hidden smOnly:hidden xm:hidden" />
+            <div className="flex-1 smOnly:w-full xm:w-full">
               <AnimatePresence>
                 {activeAccordion === item.id && (
                   <motion.div
@@ -85,7 +85,7 @@ export default function Process() {
                 )}
               </AnimatePresence>
             </div>
-            <div className="flex-shrink-0 sm:hidden xm:hidden" />
+            <div className="flex-shrink-0 smOnly:hidden xm:hidden" />
           </div>
         </div>
       ))}

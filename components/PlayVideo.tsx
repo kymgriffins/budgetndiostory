@@ -62,7 +62,7 @@ export default function PlayVideo({ videosrc }: { videosrc: string }) {
 					}`}
 					style={{ y: mq }}>
 					<div
-						className="w-[200px] h-[200px] sm:w-[150px] sm:h-[150px] xm:w-[100px] xm:h-[100px] bg-white rounded-full flex items-center justify-center cursor-pointer"
+						className="w-[200px] h-[200px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[100px] xm:h-[100px] bg-white rounded-full flex items-center justify-center cursor-pointer"
 						onClick={togglePlay}>
 						<div className="relative w-full h-full">
 							<Image
@@ -79,7 +79,7 @@ export default function PlayVideo({ videosrc }: { videosrc: string }) {
 						</div>
 					</div>
 					<div
-						className="w-[200px] sm:w-[150px] sm:h-[150px] xm:w-[100px] xm:h-[100px] bg-white rounded-full flex items-center justify-center cursor-pointer"
+						className="w-[200px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[100px] xm:h-[100px] bg-white rounded-full flex items-center justify-center cursor-pointer"
 						onClick={togglePlay}>
 						<div className="relative w-full h-full">
 							<Image

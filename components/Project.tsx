@@ -12,7 +12,7 @@ export default function Project({ item }: { item: any }) {
 		<section className="w-full bg-marquee rounded-t-[20px]">
 			<div className="w-full flex justify-between gap-y-[50px] padding-x pb-[50px] flex-wrap">
 				<div
-					className="w-[49%]"
+					className="w-[49%] smOnly:w-full xm:w-full"
 					key={item.id}>
 					<div className="flex gap-x-[10px] items-center pb-[10px]">
 						<span className="w-[10px] h-[10px] rounded-full bg-white" />
@@ -33,7 +33,7 @@ export default function Project({ item }: { item: any }) {
 						</div>
 						<div
 							style={{ left: item.id % 2 == 0 ? "-15%" : "90%" }}
-							className="absolute w-fit flex top-[40%] transform translate-x-[-30%] overflow-hidden z-10 group-hover:opacity-100 opacity-0 transition duration-500 ease-[.4,0,.2,1]">
+							className="absolute w-fit flex top-[40%] transform translate-x-[-30%] overflow-hidden z-10 group-hover:opacity-100 opacity-0 transition duration-500 ease-[.4,0,.2,1] smOnly:hidden xm:hidden">
 							{item.title.split("").map((item: any, i: number) => (
 								<motion.span
 									initial={{ y: "100%" }}

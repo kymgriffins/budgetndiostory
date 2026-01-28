@@ -9,15 +9,15 @@ export default function Footer() {
   const phrase1 = ["Ganji Ndio Inabonga"];
   return (
     <footer className="w-full min-h-screen padding-x z-30 relative pt-[40px] bg-background flex flex-col justify-between rounded-t-[20px] mt-[-20px]">
-      <div className="w-full flex justify-between sm:flex-col xm:flex-col">
-        <div className="flex flex-col justify-between sm:w-full xm:w-full w-1/2">
-          <h1 className="text-[150px] leading-[115px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
+      <div className="w-full flex justify-between smOnly:flex-col xm:flex-col">
+        <div className="flex flex-col justify-between smOnly:w-full xm:w-full w-1/2">
+          <h1 className="text-[150px] leading-[115px] lgOnly:text-[130px] lgOnly:leading-[98px] mdOnly:text-[100px] mdOnly:leading-[75px] smOnly:text-[74px] smOnly:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
             <TextMask>{phrase}</TextMask>
           </h1>
         </div>
-        <div className="h-full flex flex-col justify-between sm:w-full xm:w-full w-1/2">
+        <div className="h-full flex flex-col justify-between smOnly:w-full xm:w-full w-1/2">
           <div>
-            <h1 className="text-[150px] leading-[115px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
+            <h1 className="text-[150px] leading-[115px] lgOnly:text-[130px] lgOnly:leading-[98px] mdOnly:text-[100px] mdOnly:leading-[75px] smOnly:text-[74px] smOnly:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
               <TextMask>{phrase1}</TextMask>
             </h1>
             <div className="pt-[50px]">
@@ -88,14 +88,14 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-full pt-[40px] pb-[30px] flex justify-between sm:flex-col xm:flex-col sm:gap-[20px] xm:gap-[20px]">
-        <div className="w-1/2 sm:w-full xm:w-full">
+      <div className="w-full pt-[40px] pb-[30px] flex justify-between smOnly:flex-col xm:flex-col smOnly:gap-[20px] xm:gap-[20px]">
+        <div className="w-1/2 smOnly:w-full xm:w-full">
           <Link href={"/"}>
             <Image src={logo} alt="ochi logo" width={70} height={70} />
           </Link>
         </div>
-        <div className="w-1/2 h-full flex gap-[10px] justify-between items-end sm:w-full xm:w-full sm:flex-col xm:flex-col sm:items-start xm:items-start">
-          <div className="flex sm:flex-col xm:flex-col gap-[10px]">
+        <div className="w-1/2 h-full flex gap-[10px] justify-between items-end smOnly:w-full xm:w-full smOnly:flex-col xm:flex-col smOnly:items-start xm:items-start">
+          <div className="flex smOnly:flex-col xm:flex-col gap-[10px]">
             <h1 className="paragraph font-medium font-NeueMontreal text-secondry opacity-40">
               © Budget Ndio Story 2026.
             </h1>

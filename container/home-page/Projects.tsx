@@ -14,7 +14,7 @@ export default function Projects() {
 			</FadeUp>
 			<div className="w-full flex justify-between gap-y-[50px] padding-x padding-y flex-wrap">
 				{projectItem.map((item, index) => (
-					<FadeUp key={item.id} delay={0.2 + (index * 0.1)} duration={0.8} className="w-[49%] sm:w-full xm:w-full">
+					<FadeUp key={item.id} delay={0.2 + (index * 0.1)} duration={0.8} className="w-[49%] smOnly:w-full xm:w-full">
 						<div className="flex gap-[10px] items-center pb-[10px]">
 							<span className="w-[10px] h-[10px] rounded-full bg-secondry" />
 							<h1 className="small-text uppercase font-medium font-NeueMontreal text-secondry">

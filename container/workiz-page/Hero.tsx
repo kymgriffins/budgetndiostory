@@ -21,13 +21,13 @@ export default function Hero() {
 											duration: 1,
 											delay: 1.5,
 										}}
-										className="leading-[130px]">
+										className="leading-[130px] lgOnly:leading-[98px] mdOnly:leading-[75px] smOnly:leading-[50px] xm:leading-[45px]">
 										<Image
 											width={120}
 											height={50}
 											src={workizhero}
 											alt="img"
-											className="w-auto h-[95px] lg:w-auto lg:h-auto md:w-[100px] md:h-[63px] sm:w-[74px] sm:h-[45px] xm:w-[64px] xm:h-[40px] object-cover xl:mt-[15px] mt-[10px] rounded-[10px]"
+											className="w-auto h-[95px] lgOnly:w-auto lgOnly:h-auto mdOnly:w-[100px] mdOnly:h-[63px] smOnly:w-[74px] smOnly:h-[45px] xm:w-[64px] xm:h-[40px] object-cover xlOnly:mt-[15px] mt-[10px] rounded-[10px]"
 										/>
 									</motion.span>
 									<h1 className="heading tracking-[-1.3px] text-[#212121] font-semibold font-FoundersGrotesk uppercase">
@@ -38,14 +38,14 @@ export default function Hero() {
 						</div>
 					</div>
 					<div className="w-full border-t border-[#21212155] pt-[20px] ">
-						<div className="w-full flex justify-between sm:gap-[25px] xm:gap-[25px] padding-x sm:flex-col xm:flex-col">
-							<div className="w-[50%] sm:w-full xm:w-full">
+						<div className="w-full flex justify-between smOnly:gap-[25px] xm:gap-[25px] padding-x smOnly:flex-col xm:flex-col">
+							<div className="w-[50%] smOnly:w-full xm:w-full">
 								<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
 									Description:
 								</h3>
 							</div>
-							<div className="w-[50%] sm:w-full xm:w-full sm:flex-col xm:flex-col flex gap-[20px]">
-								<div className="w-[50%] sm:w-full xm:w-full flex flex-col gap-y-[40px]">
+							<div className="w-[50%] smOnly:w-full xm:w-full smOnly:flex-col xm:flex-col flex gap-[20px]">
+								<div className="w-[50%] smOnly:w-full xm:w-full flex flex-col gap-y-[40px]">
 									<p className="paragraph font-NeueMontreal text-secondry">
 										Onboarding, internal and sales <br />
 										presentations for software startup.
@@ -95,7 +95,7 @@ export default function Hero() {
 					</div>
 				</div>
 			</div>
-			<div className="w-full pt-[100px] lg:pt-[80px] md:pt-[60px] sm:pt-[40px] xm:pt-[40px]">
+			<div className="w-full pt-[100px] lgOnly:pt-[80px] mdOnly:pt-[60px] smOnly:pt-[40px] xm:pt-[40px]">
 				<BackgroundImg src={workiz} />
 			</div>
 		</section>

@@ -11,17 +11,17 @@ export default function Principles() {
         <div>
           <h1 className="sub-heading padding-x font-medium font-NeueMontreal text-secondry">
             We've built long-lasting partnerships
-            <br className="sm:hidden xm:hidden" /> with the most ambitious brands
-            <br className="sm:hidden xm:hidden" />
+            <br className="smOnly:hidden xm:hidden" /> with the most ambitious brands
+            <br className="smOnly:hidden xm:hidden" />
             across the globe:
           </h1>
         </div>
       </FadeUp>
       <div className="w-full border-t border-[#21212155] mt-[50px]">
-        <div className="flex justify-between gap-[20px] sm:flex-col xm:flex-col pt-[50px]">
+        <div className="flex justify-between gap-[20px] smOnly:flex-col xm:flex-col pt-[50px]">
           {aboutPartberItems.map((item, index) => (
             <FadeUp key={item.id} delay={0.2 + index * 0.1} duration={0.8}>
-              <div className="w-[440px] sm:w-[380px] xm:w-[350px] padding-x py-[30px] shrink-0">
+              <div className="w-[440px] smOnly:w-[380px] xm:w-[350px] padding-x py-[30px] shrink-0">
                 <div className="w-full h-full flex flex-col gap-[50px]">
                   <div>
                     <Image

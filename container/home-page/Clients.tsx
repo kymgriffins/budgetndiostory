@@ -30,14 +30,14 @@ export default function Clients() {
 					}`}>
 					<div className="w-full flex items-center justify-between py-[10px] padding-x">
 						<div className="w-[50%] flex items-center">
-							<div className="w-[40%] sm:w-auto xm:w-auto">
+							<div className="w-[40%] smOnly:w-auto xm:w-auto">
 								<Link
 									href={item.href}
 									className="small-text font-normal font-NeueMontreal text-secondry link-flash">
 									{item.website}
 								</Link>
 							</div>
-							<div className="w-auto sm:hidden xm:hidden">
+							<div className="w-auto smOnly:hidden xm:hidden">
 								<motion.h3
 									className={`small-text font-normal font-NeueMontreal text-secondry ${
 										activeAccordion === item.id ? "opacity-100" : "opacity-0"
@@ -47,12 +47,12 @@ export default function Clients() {
 							</div>
 						</div>
 						<div className="w-[50%] flex items-center justify-between">
-							<div className="w-[40%] sm:w-auto xm:w-auto">
+							<div className="w-[40%] smOnly:w-auto xm:w-auto">
 								<h3 className="small-text font-normal font-NeueMontreal text-secondry">
 									{item.name}
 								</h3>
 							</div>
-							<div className="w-[10%] sm:w-auto xm:w-auto flex items-end justify-end">
+							<div className="w-[10%] smOnly:w-auto xm:w-auto flex items-end justify-end">
 								<button
 									className={`small-text font-normal font-NeueMontreal uppercase transition-all duration-200 ease-in-out ${
 										activeAccordion === item.id
@@ -67,9 +67,9 @@ export default function Clients() {
 					</div>
 
 					<div
-						className={`w-full flex justify-between padding-x  sm:flex-col xm:flex-col`}>
-						<div className="w-[20%] sm:w-auto xm:w-auto" />
-						<div className="w-[30%] sm:w-auto xm:w-auto sm:flex xm:flex flex-wrap gap-x-[5px] sm:pt-[10px] xm:pt-[10px]">
+						className={`w-full flex justify-between padding-x  smOnly:flex-col xm:flex-col`}>
+						<div className="w-[20%] smOnly:w-auto xm:w-auto" />
+						<div className="w-[30%] smOnly:w-auto xm:w-auto smOnly:flex xm:flex flex-wrap gap-x-[5px] smOnly:pt-[10px] xm:pt-[10px]">
 							{item.links.map((link) => (
 								<AnimatePresence key={link.id}>
 									{activeAccordion === item.id && (
@@ -91,7 +91,7 @@ export default function Clients() {
 								</AnimatePresence>
 							))}
 						</div>
-						<div className="w-[40%] sm:w-auto xm:w-auto">
+						<div className="w-[40%] smOnly:w-auto xm:w-auto">
 							<AnimatePresence>
 								{activeAccordion === item.id && (
 									<motion.div
@@ -120,7 +120,7 @@ export default function Clients() {
 								)}
 							</AnimatePresence>
 						</div>
-						<div className="w-[10%] sm:w-auto xm:w-auto" />
+						<div className="w-[10%] smOnly:w-auto xm:w-auto" />
 					</div>
 				</div>
 			))}

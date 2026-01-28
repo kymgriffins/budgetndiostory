@@ -30,7 +30,7 @@ export default function Hero() {
                         height={50}
                         src={ochiside}
                         alt="img"
-                        className="w-auto h-[95px] lg:w-auto lg:h-auto md:w-[100px] md:h-[63px] sm:w-[74px] sm:h-[45px] xm:w-[64px] xm:h-[40px] object-cover xl:mt-[15px] mt-[10px] rounded-[10px]"
+                        className="w-auto h-[95px] lgOnly:w-auto lgOnly:h-auto mdOnly:w-[100px] mdOnly:h-[63px] smOnly:w-[74px] smOnly:h-[45px] xm:w-[64px] xm:h-[40px] object-cover xlOnly:mt-[15px] mt-[10px] rounded-[10px]"
                       /> */}
                     </motion.span>
                     <h1 className="heading tracking-[-1.3px] text-[#212121] font-semibold font-FoundersGrotesk uppercase">
@@ -43,14 +43,14 @@ export default function Hero() {
           </FadeUp>
           <FadeUp delay={0.3} duration={0.8}>
             <div className="w-full border-t border-[#21212155] pt-[20px]">
-              <div className="w-full flex justify-between padding-x sm:flex-col xm:flex-col gap-[20px]">
-                <div className="w-[10%] sm:w-full xm:w-full">
+              <div className="w-full flex justify-between padding-x smOnly:flex-col xm:flex-col gap-[20px]">
+                <div className="w-[10%] smOnly:w-full xm:w-full">
                   <h3 className="paragraph font-medium text-secondry font-NeueMontreal">
                     About us:
                   </h3>
                 </div>
-                <div className="w-[48%] flex justify-between sm:w-full xm:w-full sm:flex-col xm:flex-col gap-[20px]">
-                  <div className="w-[50%] flex flex-col gap-y-[40px] sm:w-full xm:w-full">
+                <div className="w-[48%] flex justify-between smOnly:w-full xm:w-full smOnly:flex-col xm:flex-col gap-[20px]">
+                  <div className="w-[50%] flex flex-col gap-y-[40px] smOnly:w-full xm:w-full">
                     <div className="flex flex-col gap-y-[20px]">
                       <p className="paragraph font-NeueMontreal text-secondry">
                         In Kenya, the budget decides how we live, learn, move,
@@ -77,7 +77,7 @@ export default function Hero() {
                         Our Work
                       </Link>
                     </div>
-                    <div className="w-[35px] flex items-center justify-center h-[35px] border border-[#21212199] rounded-[50px] p-[12px] group-hover:bg-secondry transition-all duration-200 ease-in cursor-pointer sm:hidden xm:hidden">
+                    <div className="w-[35px] flex items-center justify-center h-[35px] border border-[#21212199] rounded-[50px] p-[12px] group-hover:bg-secondry transition-all duration-200 ease-in cursor-pointer smOnly:hidden xm:hidden">
                       <p className="paragraph font-normal text-secondry group-hover:text-background">
                         <ArrowUpRight strokeWidth={1.25} />
                       </p>
@@ -90,12 +90,12 @@ export default function Hero() {
         </div>
       </div>
       <FadeUp delay={0.6} duration={0.8} className="padding-y">
-        <Eyes className="w-[300px] h-[300px] md:w-[200px] md:h-[200px] sm:w-[150px] sm:h-[150px] xm:w-[150px] xm:h-[150px] sm:flex-col xm:flex-col" />
+        <Eyes className="w-[300px] h-[300px] mdOnly:w-[200px] mdOnly:h-[200px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[150px] xm:h-[150px] smOnly:flex-col xm:flex-col" />
       </FadeUp>
       <FadeUp delay={0.8} duration={0.8} className="padding-x">
         <h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
           Budget Ndio Story
-          <br className="sm:hidden xm:hidden" /> The Past, The Present and The
+          <br className="smOnly:hidden xm:hidden" /> The Past, The Present and The
           Future.
         </h1>
       </FadeUp>

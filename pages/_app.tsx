@@ -11,6 +11,7 @@ export default function App({
 	pageProps: any;
 	router: any;
 }) {
+	const isLanding = router?.route === "/landing";
 	return (
 		<>
 			<Navbar />
@@ -20,7 +21,7 @@ export default function App({
 					{...pageProps}
 				/>
 			</AnimatePresence>
-			<Footer />
+			{!isLanding && <Footer />}
 		</>
 	);
 }

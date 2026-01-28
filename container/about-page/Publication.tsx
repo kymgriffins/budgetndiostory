@@ -7,7 +7,7 @@ export default function Publication() {
 	return (
 		<section className="w-full bg-marquee padding-y rounded-t-[20px] mb-[100px]">
 			<div className="w-full padding-x py-[30px]">
-				<div className="w-full flex justify-between gap-[20px] flex-wrap sm:flex-col xm:flex-col">
+				<div className="w-full flex justify-between gap-[20px] flex-wrap smOnly:flex-col xm:flex-col">
 					<FadeUp delay={0.1} duration={0.8}>
 						<div>
 							<h3 className="paragraph font-medium text-white font-NeueMontreal">
@@ -16,7 +16,7 @@ export default function Publication() {
 						</div>
 					</FadeUp>
 					<FadeUp delay={0.2} duration={0.8}>
-						<div className="flex gap-[20px] sm:flex-col xm:flex-col">
+						<div className="flex gap-[20px] smOnly:flex-col xm:flex-col">
 							{insightsPublicationItems.map((item) => (
 								<div
 									className="w-full flex justify-between gap-[10px]"

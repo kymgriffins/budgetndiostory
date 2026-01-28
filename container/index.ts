@@ -45,3 +45,8 @@ export { default as Result } from './workiz-page/Result';
 export { default as Credit } from './workiz-page/Credit';
 export { default as VideoWorkiz } from './workiz-page/Video';
 export { default as BlogCMS } from './workiz-page/BlogCMS';
+
+// edustories page
+export { default as Heroedustories } from "./edustories-page/Hero";
+export { default as Storiesedustories } from "./edustories-page/Stories";
+export { default as BudgetWorksedustories } from "./edustories-page/BudgetWorks";
