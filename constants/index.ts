@@ -38,8 +38,8 @@ import {
 export const navbarItems = [
   // {
   //   id: 1,
-  //   title: "Services",
-  //   href: "/services",
+  //   title: "Home",
+  //   href: "/",
   // },
   // {
   //    id: 2,
@@ -94,11 +94,11 @@ export const footerItems = [
 ];
 
 export const footernavbarItems = [
-  // {
-  //    id: 1,
-  //    title: "Home",
-  //    href: "/",
-  // },
+  {
+     id: 1,
+     title: "Home",
+     href: "/",
+  },
   // {
   //   id: 2,
   //   title: "Services",
