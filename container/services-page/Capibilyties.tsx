@@ -1,32 +1,29 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
-import { Button } from "@/components";
-import { serviceCapaybilitiesItem } from "@/constants";
 import { FadeUp } from "@/animation";
+import { useState } from "react";
 
 export default function Capibilyties() {
-	const [hovered, setHovered] = useState(false);
-	const [hovered1, setHovered1] = useState(false);
-	return (
-		<div className="w-full bg-about padding-y rounded-t-[20px]">
-			<FadeUp delay={0.1} duration={0.8}>
-				<div className="w-[82%] sm:w-full xm:w-full padding-x mb-[70px]">
-					<h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
-						<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-							Let's be honest.
-						</span>
-						&nbsp;There are really no excuses to have a bad presentation anymore.
-						No one has time for poorly communicated ideas. Focus on what you do
-						best <span className="sm:hidden xm:hidden">—</span>
-						growing your business, while we do our best at
-						<span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
-							&nbsp;making your presentations awesome.
-						</span>
-					</h1>
-				</div>
-			</FadeUp>
-			{/* <FadeUp delay={0.2} duration={0.8}>
+  const [hovered, setHovered] = useState(false);
+  const [hovered1, setHovered1] = useState(false);
+  return (
+    <div className="w-full bg-about padding-y rounded-t-[20px]">
+      <FadeUp delay={0.1} duration={0.8}>
+        <div className="w-full sm:w-full xm:w-full padding-x mb-[70px] sm:mb-[50px] xm:mb-[50px]">
+          <h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
+            <span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
+              Let's be honest.
+            </span>
+            &nbsp;There are really no excuses to have a bad presentation
+            anymore. No one has time for poorly communicated ideas. Focus on
+            what you do best <span className="sm:hidden xm:hidden">—</span>
+            growing your business, while we do our best at
+            <span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
+              &nbsp;making your presentations awesome.
+            </span>
+          </h1>
+        </div>
+      </FadeUp>
+      {/* <FadeUp delay={0.2} duration={0.8}>
 				<div className="w-full flex sm:flex-col xm:flex-col justify-between py-[20px] padding-x border-t border-[#21212155] sm:gap-[15px] xm:gap-[15px]">
 					<div className="w-[10%] sm:w-full xm:w-full">
 						<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
@@ -112,6 +109,6 @@ export default function Capibilyties() {
 					</FadeUp>
 				</div>
 			</FadeUp> */}
-		</div>
-	);
+    </div>
+  );
 }
