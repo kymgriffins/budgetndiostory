@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const routes = {
-  "/": "Budget Ndio Story",
-  "/services": "Budget Ndio Story",
-  "/presentation": "Budget Ndio Story",
-  "/ochi-team": "Budget Ndio Story",
-  "/insights": "Budget Ndio Story",
-  "/contact": "Budget Ndio Story",
-  "/case": "Budget Ndio Story",
+  "/": "BUDGET NDIO STORY",
+  "/services": "BUDGET NDIO STORY",
+  "/presentation": "BUDGET NDIO STORY",
+  "/ochi-team": "BUDGET NDIO STORY",
+  "/insights": "BUDGET NDIO STORY",
+  "/contact": "BUDGET NDIO STORY",
+  "/case": "BUDGET NDIO STORY",
 };
 
 const anim = (variants) => {
