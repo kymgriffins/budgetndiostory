@@ -18,10 +18,10 @@ export default function Hero() {
           <FadeUp delay={0.2} duration={0.8}>
             <div className="w-full border-t border-[#21212155]">
               <p className="w-full text-[55px] leading-[55px] lg:text-[52px] lg:leading-[52px] md:text-[48px] md:leading-[48px] sm:text-[28px] sm:leading-[35px] xm:text-[20px] xm:leading-[28px] font-normal padding-x font-NeueMontreal text-secondry padding-y">
-  We create clear presentations that help young people understand budgets,
-  participate in civic processes, and access public finance information.
-</p>
-
+                We create clear presentations that help young people understand
+                budgets, participate in civic processes, and access public
+                finance information.
+              </p>
             </div>
           </FadeUp>
           <div className="w-full flex border-t border-[#21212155] py-[20px] flex-col">
