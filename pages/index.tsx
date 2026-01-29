@@ -157,6 +157,8 @@ export default function Home() {
 				<meta name="theme-color" content="#f1f1f1" />
 			</Head>
 
+			<Navbar />
+
 			<div
 				ref={scrollerRef}
 				data-scroll-container
@@ -207,7 +209,7 @@ export default function Home() {
 												Explore stories
 											</Link>
 											<Link
-												href="/report"
+												href="/contact"
 												className="px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 transition">
 												Report a finding
 											</Link>

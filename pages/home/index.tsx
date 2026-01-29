@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -155,6 +156,8 @@ export default function Home() {
 					content="Track. Verify. Act. Stories, reports and multimedia that make public budgets clear and accountable." />
 				<meta name="theme-color" content="#f1f1f1" />
 			</Head>
+
+			<Navbar />
 
 			<div
 				ref={scrollerRef}

@@ -34,12 +34,12 @@ import {
   publication3,
 } from "@/public";
 
-// Navbar
+// Navbar - Universal Navigation
 export const navbarItems = [
   {
     id: 1,
     title: "Home",
-    href: "/home",
+    href: "/",
   },
   {
     id: 2,
@@ -63,6 +63,11 @@ export const navbarItems = [
   },
   {
     id: 6,
+    title: "About",
+    href: "/about",
+  },
+  {
+    id: 7,
     title: "Contact",
     href: "/contact",
   },
@@ -101,31 +106,16 @@ export const footernavbarItems = [
   },
   {
      id: 2,
-     title: "EduStories",
-     href: "/edustories",
+     title: "Podcasts",
+     href: "/podcasts",
   },
-  // {
-  //   id: 2,
-  //   title: "Services",
-  //   href: "services",
-  // },
-  // {
-  //    id: 3,
-  //    title: "Our work",
-  //    href: "presentation",
-  // },
-  // {
-  //   id: 4,
-  //   title: "About us",
-  //   href: "budgetndiostory",
-  // },
-  // {
-  //    id: 5,
-  //    title: "Insights",
-  //    href: "insights",
-  // },
   {
-    id: 6,
+     id: 3,
+     title: "Shorts",
+     href: "/shorts",
+  },
+  {
+    id: 4,
     title: "Contact us",
     href: "contact",
   },
