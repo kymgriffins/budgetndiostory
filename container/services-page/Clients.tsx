@@ -32,9 +32,9 @@ export default function Clients() {
           style={{ animationDelay: `${0.2 + index * 0.1}s` }}
         >
           <FadeUp delay={0.2 + index * 0.1} duration={0.8}>
-            <div className="w-full flex items-center justify-between py-[10px] padding-x gap-[10px] sm:flex-col xm:flex-col">
-              <div className="flex-1 flex items-center sm:w-full xm:w-full">
-                <div className="flex-1 sm:w-full xm:w-full">
+            <div className="w-full flex items-center justify-between py-[10px] padding-x gap-[10px] smOnly:flex-col xm:flex-col">
+              <div className="flex-1 flex items-center smOnly:w-full xm:w-full">
+                <div className="flex-1 smOnly:w-full xm:w-full">
                   <Link
                     href={item.href}
                     className="small-text font-normal font-NeueMontreal text-secondry link-flash"
@@ -42,7 +42,7 @@ export default function Clients() {
                     {item.website}
                   </Link>
                 </div>
-                <div className="hidden sm:hidden xm:hidden">
+                <div className="hidden smOnly:hidden xm:hidden">
                   <motion.h3
                     className={`small-text font-normal font-NeueMontreal text-secondry ${
                       activeAccordion === item.id ? "opacity-100" : "opacity-0"
@@ -52,13 +52,13 @@ export default function Clients() {
                   </motion.h3>
                 </div>
               </div>
-              <div className="flex-1 flex justify-between items-center sm:w-full xm:w-full">
-                <div className="flex-1 sm:w-full xm:w-full">
+              <div className="flex-1 flex justify-between items-center smOnly:w-full xm:w-full">
+                <div className="flex-1 smOnly:w-full xm:w-full">
                   <h3 className="small-text font-normal font-NeueMontreal text-secondry">
                     {item.name}
                   </h3>
                 </div>
-                <div className="flex-shrink-0 flex items-end justify-end sm:w-full xm:w-full">
+                <div className="flex-shrink-0 flex items-end justify-end smOnly:w-full xm:w-full">
                   <button
                     className={`small-text font-normal font-NeueMontreal uppercase transition-all duration-200 ease-in-out ${
                       activeAccordion === item.id
@@ -74,10 +74,10 @@ export default function Clients() {
             </div>
 
             <div
-              className={`w-full flex justify-between padding-x gap-[10px] sm:flex-col xm:flex-col`}
+              className={`w-full flex justify-between padding-x gap-[10px] smOnly:flex-col xm:flex-col`}
             >
-              <div className="hidden sm:hidden xm:hidden" />
-              <div className="flex-1 flex flex-wrap gap-x-[5px] sm:w-full xm:w-full sm:pt-[10px] xm:pt-[10px]">
+              <div className="hidden smOnly:hidden xm:hidden" />
+              <div className="flex-1 flex flex-wrap gap-x-[5px] smOnly:w-full xm:w-full smOnly:pt-[10px] xm:pt-[10px]">
                 {item.links.map((link) => (
                   <AnimatePresence key={link.id}>
                     {activeAccordion === item.id && (
@@ -100,7 +100,7 @@ export default function Clients() {
                   </AnimatePresence>
                 ))}
               </div>
-              <div className="flex-1 sm:w-full xm:w-full">
+              <div className="flex-1 smOnly:w-full xm:w-full">
                 <AnimatePresence>
                   {activeAccordion === item.id && (
                     <motion.div
@@ -113,7 +113,7 @@ export default function Clients() {
                       }}
                     >
                       <div className="flex flex-col gap-[20px] py-[30px]">
-                        <div className="w-[130px] h-[130px] sm:w-[100px] sm:h-[100px] xm:w-[100px] xm:h-[100px]">
+                        <div className="w-[130px] h-[130px] smOnly:w-[100px] smOnly:h-[100px] xm:w-[100px] xm:h-[100px]">
                           <Image
                             src={item.src}
                             alt="clientImg"
@@ -130,7 +130,7 @@ export default function Clients() {
                   )}
                 </AnimatePresence>
               </div>
-              <div className="hidden sm:hidden xm:hidden" />
+              <div className="hidden smOnly:hidden xm:hidden" />
             </div>
           </FadeUp>
         </div>

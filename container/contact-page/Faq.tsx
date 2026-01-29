@@ -23,13 +23,13 @@ export default function Faq() {
 							? "border-y border-[#21212155]"
 							: "border-b border-[#21212155]"
 					}`}>
-					<div className="w-full flex items-center justify-between sm:gap-[15px] xm:gap-[15px] py-[10px] padding-x">
-						<div className="w-[50%] sm:w-full xm:w-full">
+					<div className="w-full flex items-center justify-between smOnly:gap-[15px] xm:gap-[15px] py-[10px] padding-x">
+						<div className="w-[50%] smOnly:w-full xm:w-full">
 							<h1 className="paragraph font-normal font-NeueMontreal text-secondry">
 								{item.question}
 							</h1>
 						</div>
-						<div className="w-[50%] sm:w-full xm:w-full flex items-center justify-between">
+						<div className="w-[50%] smOnly:w-full xm:w-full flex items-center justify-between">
 							<div>
 								<h3 className="paragraph font-normal font-NeueMontreal text-secondry">
 									{item.title}
@@ -49,8 +49,8 @@ export default function Faq() {
 						</div>
 					</div>
 					<div className="w-full flex justify-between padding-x">
-						<div className="w-[50%] sm:hidden xm:hidden" />
-						<div className="w-[50%] sm:w-full xm:w-full">
+						<div className="w-[50%] smOnly:hidden xm:hidden" />
+						<div className="w-[50%] smOnly:w-full xm:w-full">
 							<AnimatePresence>
 								{activeAccordion === item.id && (
 									<motion.div
@@ -70,7 +70,7 @@ export default function Faq() {
 											{item.links.map((link) => (
 												<div
 													key={link.id}
-													className="flex pt-[20px] sm:flex-col xm:flex-col sm:gap-[20px] xm:gap-[20px] justify-between gap-[80px]">
+													className="flex pt-[20px] smOnly:flex-col xm:flex-col smOnly:gap-[20px] xm:gap-[20px] justify-between gap-[80px]">
 													<span className="paragraph tracking-wider font-normal font-NeueMontreal text-secondry">
 														{link.title}
 													</span>

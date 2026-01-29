@@ -41,6 +41,11 @@ export const navbarItems = [
     title: "Home",
     href: "/",
   },
+  {
+    id: 2,
+    title: "EduStories",
+    href: "/edustories",
+  },
   // {
   //    id: 2,
   //    title: "Our work",
@@ -98,6 +103,11 @@ export const footernavbarItems = [
      id: 1,
      title: "Home",
      href: "/",
+  },
+  {
+     id: 2,
+     title: "EduStories",
+     href: "/edustories",
   },
   // {
   //   id: 2,

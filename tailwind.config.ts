@@ -27,6 +27,11 @@ const config: Config = {
       md: { min: "769px", max: "1024px" },
       lg: { min: "1025px", max: "1490px" },
       xl: { min: "1491px" },
+      // Aliases used throughout the codebase (e.g. mdOnly:px-..., smOnly:..., etc.)
+      smOnly: { min: "401px", max: "768px" },
+      mdOnly: { min: "769px", max: "1024px" },
+      lgOnly: { min: "1025px", max: "1490px" },
+      xlOnly: { min: "1491px" },
     },
   },
   plugins: [],

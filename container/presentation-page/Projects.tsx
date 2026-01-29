@@ -25,14 +25,14 @@ export default function Projects() {
 				<div>
 					<h2 className="sub-heading font-normal padding-x font-NeueMontreal text-secondry">
 						Purpose driven, strategy-led presentations
-						<br className="sm:hidden xm:hidden" />
+						<br className="smOnly:hidden xm:hidden" />
 						that people care about.
 					</h2>
 				</div>
 				<div className="w-full flex justify-between gap-y-[50px] padding-x padding-y flex-wrap">
 					{presentationProjectItem.map((item) => (
 						<div
-							className="w-[49%] sm:w-full xm:w-full"
+							className="w-[49%] smOnly:w-full xm:w-full"
 							key={item.id}>
 							<div className="flex gap-x-[10px] items-center pb-[10px]">
 								<span className="w-[10px] h-[10px] rounded-full bg-secondry" />

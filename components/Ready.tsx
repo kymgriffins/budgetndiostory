@@ -18,12 +18,12 @@ export default function Ready() {
 
   return (
     <section
-      className="w-full relative z-30 min-h-screen sm:h-screen xm:h-screen bg-about padding-y rounded-t-[20px] mt-[-20px]"
+      className="w-full relative z-30 min-h-screen smOnly:h-screen xm:h-screen bg-about padding-y rounded-t-[20px] mt-[-20px]"
       ref={container}
     >
       <div className="w-full h-full flex justify-center gap-[50px] items-center flex-col">
         <div className="flex flex-col gap-[10px]">
-          <h1 className="text-white text-[290px] leading-[230px] lg:text-[220px] lg:leading-[170px] md:text-[180px] md:leading-[140px] sm:text-[120px] sm:leading-[90px] xm:text-[80px] xm:leading-[60px] tracking-[-2.5px] text-center font-bold font-FoundersGrotesk text-secondry uppercase pointer-events-none">
+          <h1 className="text-white text-[290px] leading-[230px] lgOnly:text-[220px] lgOnly:leading-[170px] mdOnly:text-[180px] mdOnly:leading-[140px] smOnly:text-[120px] smOnly:leading-[90px] xm:text-[80px] xm:leading-[60px] tracking-[-2.5px] text-center font-bold font-FoundersGrotesk text-secondry uppercase pointer-events-none">
             <TextMask>{phrase}</TextMask>
           </h1>
         </div>
@@ -41,7 +41,7 @@ export default function Ready() {
             <p className="text-[20px] font-NeueMontreal text-secondry">OR</p>
             <div className="flex items-center justify-between bg-transparent cursor-pointer rounded-full group border border-[#212121]">
               <Link
-                className="xl:text-[18px] xl:leading-[28px] text-[14px] leading-[24px] uppercase font-normal font-NeueMontreal"
+                className="xlOnly:text-[18px] xlOnly:leading-[28px] text-[14px] leading-[24px] uppercase font-normal font-NeueMontreal"
                 href="/contact"
               >
                 <Rounded className="py-[6px]" backgroundColor="#212121">
@@ -65,7 +65,7 @@ export default function Ready() {
         className="w-full absolute top-[50%] transform translate-y-[-50%] gap-[30px] flex items-center justify-center"
         style={{ y: mq }}
       >
-        <Eyes className="w-[200px] h-[200px] md:w-[170px] md:h-[170px] sm:w-[150px] sm:h-[150px] xm:w-[150px] xm:h-[150px] sm:flex-col xm:flex-col" />
+        <Eyes className="w-[200px] h-[200px] mdOnly:w-[170px] mdOnly:h-[170px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[150px] xm:h-[150px] smOnly:flex-col xm:flex-col" />
       </motion.div>
     </section>
   );

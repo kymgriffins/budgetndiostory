@@ -12,15 +12,15 @@ export default function About() {
   return (
     <section className="w-full bg-about padding-y rounded-t-[20px] z-20 relative mt-[-15px]">
       <FadeUp delay={0.1} duration={0.8}>
-        <div className="pl-[50px] sm:px-[20px] xm:px-[20px]">
+        <div className="pl-[50px] smOnly:px-[20px] xm:px-[20px]">
           <h2 className="sub-heading font-medium font-NeueMontreal text-white">
             Budget Ndio Story empowers youth to understand
-            <br className="sm:hidden xm:hidden" />
+            <br className="smOnly:hidden xm:hidden" />
             <span className="sub-heading font-medium font-NeueMontreal link-flash cursor-pointer">
              how government and county budgets
             </span>
             &nbsp;work, make informed decisions,{" "}
-            <br className="sm:hidden xm:hidden" />
+            <br className="smOnly:hidden xm:hidden" />
             <span className="sub-heading font-medium font-NeueMontreal link-flash cursor-pointer">
               engage in civic processes,
             </span>
@@ -33,15 +33,15 @@ export default function About() {
       </FadeUp>
       <FadeUp delay={0.2} duration={0.8}>
         <div className="w-full border-y border-[#21212155] my-[50px] py-[20px]">
-          <div className="padding-x pb-[50px] w-full flex sm:flex-col xm:flex-col gap-[30px] justify-between">
-            <div className="w-[50%] sm:w-full xm:w-full">
+          <div className="padding-x pb-[50px] w-full flex smOnly:flex-col xm:flex-col gap-[30px] justify-between">
+            <div className="w-[50%] smOnly:w-full xm:w-full">
               <h3 className="sub-paragraph font-medium text-white font-NeueMontreal">
                 What you can expect?
               </h3>
             </div>
-            <div className="w-[50%] sm:w-full xm:w-full">
-              <div className="w-full flex gap-[30px] h-full items-end sm:items-start sm:flex-col xm:items-start xm:flex-col">
-                <div className="w-[40%] sm:w-[60%] xm:w-[60%]">
+            <div className="w-[50%] smOnly:w-full xm:w-full">
+              <div className="w-full flex gap-[30px] h-full items-end smOnly:items-start smOnly:flex-col xm:items-start xm:flex-col">
+                <div className="w-[40%] smOnly:w-[60%] xm:w-[60%]">
                   <p className="sub-paragraph font-medium font-NeueMontreal text-white tracking-wide">
                     We create engaging educational content to help young people
                     understand budgets, how public funds are allocated, and how
@@ -54,7 +54,7 @@ export default function About() {
                     accessible and fun.
                   </p>
                 </div>
-                {/* <div className="w-[60%] flex justify-end flex-col sm:w-full xm:w-full">
+                {/* <div className="w-[60%] flex justify-end flex-col smOnly:w-full xm:w-full">
                   <h1 className="sub-paragraph font-medium font-NeueMontreal text-secondry pb-[20px]">
                     Resources:
                   </h1>
@@ -74,7 +74,7 @@ export default function About() {
           </div>
         </div>
       </FadeUp>
-      {/* <div className="w-full flex justify-between padding-x sm:flex-col xm:flex-col gap-[30px]">
+      {/* <div className="w-full flex justify-between padding-x smOnly:flex-col xm:flex-col gap-[30px]">
         <FadeUp delay={0.3} duration={0.8} className="flex flex-col gap-[30px]">
           <Heading title="Our approach:" />
           <div
@@ -93,7 +93,7 @@ export default function About() {
         </FadeUp>
         <ScaleIn delay={0.4}>
           <HoverScale scale={hovered ? 0.96 : 1}>
-            <div className="w-[50%] sm:w-full xm:w-full transition transform duration-[1.5s] ease-[.215,.61,.355,1] rounded-[15px] overflow-hidden">
+            <div className="w-[50%] smOnly:w-full xm:w-full transition transform duration-[1.5s] ease-[.215,.61,.355,1] rounded-[15px] overflow-hidden">
               <Image
                 src={aboutImg}
                 alt="about-img"

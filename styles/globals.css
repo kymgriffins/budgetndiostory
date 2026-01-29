@@ -27,28 +27,28 @@ body {
 
 @layer utilities {
 	.padding-x {
-		@apply px-[50px] md:px-[30px] sm:px-[20px] xm:px-[20px];
+		@apply px-[50px] mdOnly:px-[30px] smOnly:px-[20px] xm:px-[20px];
 	}
 	.padding-y {
-		@apply py-[100px] lg:py-[80px] md:py-[60px] sm:py-[40px] xm:py-[40px];
+		@apply py-[100px] lgOnly:py-[80px] mdOnly:py-[60px] smOnly:py-[40px] xm:py-[40px];
 	}
 	.margin {
-		@apply mt-[170px] lg:mt-[80px] md:mt-[60px] sm:mt-[40px] xm:mt-[40px] mb-[130px] lg:mb-[80px] md:mb-[60px] sm:mb-[40px] xm:mb-[40px];
+		@apply mt-[170px] lgOnly:mt-[80px] mdOnly:mt-[60px] smOnly:mt-[40px] xm:mt-[40px] mb-[130px] lgOnly:mb-[80px] mdOnly:mb-[60px] smOnly:mb-[40px] xm:mb-[40px];
 	}
 	.heading {
-		@apply text-[150px] leading-[100px] lg:text-[130px] lg:leading-[98px] md:text-[100px] md:leading-[75px] sm:text-[74px] sm:leading-[50px] xm:text-[64px] xm:leading-[45px];
+		@apply text-[150px] leading-[100px] lgOnly:text-[130px] lgOnly:leading-[98px] mdOnly:text-[100px] mdOnly:leading-[75px] smOnly:text-[74px] smOnly:leading-[50px] xm:text-[64px] xm:leading-[45px];
 	}
 	.sub-heading {
-		@apply text-[55px] leading-[55px] lg:text-[52px] lg:leading-[52px] md:text-[52px] md:leading-[52px] sm:text-[40px] sm:leading-[40px] xm:text-[31px] xm:leading-[31px];
+		@apply text-[55px] leading-[55px] lgOnly:text-[52px] lgOnly:leading-[52px] mdOnly:text-[52px] mdOnly:leading-[52px] smOnly:text-[40px] smOnly:leading-[40px] xm:text-[31px] xm:leading-[31px];
 	}
 	.paragraph {
-		@apply text-[18px] leading-[26px] lg:text-[16px] lg:leading-[24px] md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px] xm:text-[16px] xm:leading-[24px];
+		@apply text-[18px] leading-[26px] lgOnly:text-[16px] lgOnly:leading-[24px] mdOnly:text-[16px] mdOnly:leading-[24px] smOnly:text-[16px] smOnly:leading-[24px] xm:text-[16px] xm:leading-[24px];
 	}
 	.sub-paragraph {
-		@apply xl:text-[21px] xl:leading-[31px] text-[16px] leading-[24px];
+		@apply xlOnly:text-[21px] xlOnly:leading-[31px] text-[16px] leading-[24px];
 	}
 	.small-text {
-		@apply xl:text-[16px] xl:leading-[24px] lg:text-[16px] lg:leading-[24px] text-[14px] leading-[22px];
+		@apply xlOnly:text-[16px] xlOnly:leading-[24px] lgOnly:text-[16px] lgOnly:leading-[24px] text-[14px] leading-[22px];
 	}
 }
 

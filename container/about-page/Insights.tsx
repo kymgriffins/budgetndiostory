@@ -6,7 +6,7 @@ import { FadeUp } from "@/animation";
 
 export default function Insights() {
 	return (
-		<section className="w-full pb-[100px] lg:pb-[80px] md:pb-[60px] sm:pb-[40px] xm:pb-[40px] bg-background">
+		<section className="w-full pb-[100px] lgOnly:pb-[80px] mdOnly:pb-[60px] smOnly:pb-[40px] xm:pb-[40px] bg-background">
 			<div className="w-full flex flex-col justify-between">
 				<div className="w-full flex flex-col">
 					<FadeUp delay={0.1} duration={0.8}>
@@ -17,16 +17,16 @@ export default function Insights() {
 						</div>
 					</FadeUp>
 					<div className="w-full border-t border-[#21212155] pt-[20px]">
-						<div className="w-full flex sm:flex-col xm:flex-col sm:gap-[20px] xm:gap-[20px] padding-x">
+						<div className="w-full flex smOnly:flex-col xm:flex-col smOnly:gap-[20px] xm:gap-[20px] padding-x">
 							<FadeUp delay={0.2} duration={0.8}>
-								<div className="w-[50%] sm:w-full xm:w-full sm:flex-col xm:flex-col">
+								<div className="w-[50%] smOnly:w-full xm:w-full smOnly:flex-col xm:flex-col">
 									<h3 className="text-[20px] leading-[30px] font-medium text-secondry font-NeueMontreal">
 										Latest story:
 									</h3>
 								</div>
 							</FadeUp>
 							<FadeUp delay={0.3} duration={0.8}>
-								<div className="w-[50%] sm:w-full xm:w-full sm:flex-col xm:flex-col">
+								<div className="w-[50%] smOnly:w-full xm:w-full smOnly:flex-col xm:flex-col">
 									{latestItemss.map((item) => (
 										<div
 											key={item.id}

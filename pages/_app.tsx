@@ -11,16 +11,21 @@ export default function App({
 	pageProps: any;
 	router: any;
 }) {
+	const isLanding = router?.route === "/landing";
 	return (
 		<>
 			<Navbar />
+			{isLanding ? (
+				<Component key={router.route} {...pageProps} />
+			) : (
 			<AnimatePresence mode="wait">
 				<Component
 					key={router.route}
 					{...pageProps}
 				/>
 			</AnimatePresence>
-			<Footer />
+			)}
+			{!isLanding && <Footer />}
 		</>
 	);
 }

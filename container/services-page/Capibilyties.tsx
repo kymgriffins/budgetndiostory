@@ -8,24 +8,24 @@ export default function Capibilyties() {
   return (
     <div className="w-full bg-about padding-y rounded-t-[20px]">
       <FadeUp delay={0.1} duration={0.8}>
-        <div className="w-full sm:w-full xm:w-full padding-x mb-[70px] sm:mb-[50px] xm:mb-[50px]">
+        <div className="w-full smOnly:w-full xm:w-full padding-x mb-[70px] smOnly:mb-[50px] xm:mb-[50px]">
           <h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
-            <span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
+            <span className="xlOnly:link-flash lgOnly:link-flash mdOnly:link-flash cursor-pointer">
               Let's be honest.
             </span>
             &nbsp;There are really no excuses to have a bad presentation
             anymore. No one has time for poorly communicated ideas. Focus on
-            what you do best <span className="sm:hidden xm:hidden">—</span>
+            what you do best <span className="smOnly:hidden xm:hidden">—</span>
             growing your business, while we do our best at
-            <span className="xl:link-flash lg:link-flash md:link-flash cursor-pointer">
+            <span className="xlOnly:link-flash lgOnly:link-flash mdOnly:link-flash cursor-pointer">
               &nbsp;making your presentations awesome.
             </span>
           </h1>
         </div>
       </FadeUp>
       {/* <FadeUp delay={0.2} duration={0.8}>
-				<div className="w-full flex sm:flex-col xm:flex-col justify-between py-[20px] padding-x border-t border-[#21212155] sm:gap-[15px] xm:gap-[15px]">
-					<div className="w-[10%] sm:w-full xm:w-full">
+				<div className="w-full flex smOnly:flex-col xm:flex-col justify-between py-[20px] padding-x border-t border-[#21212155] smOnly:gap-[15px] xm:gap-[15px]">
+					<div className="w-[10%] smOnly:w-full xm:w-full">
 						<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
 							Our Capabilities:
 						</h3>
@@ -34,10 +34,10 @@ export default function Capibilyties() {
 						<div className="w-[90%] flex flex-col gap-y-[30px]">
 							{serviceCapaybilitiesItem.map((item, index) => (
 								<div
-									className="w-full flex sm:flex-col xm:flex-col justify-between sm:gap-[15px] xm:gap-[15px]"
+									className="w-full flex smOnly:flex-col xm:flex-col justify-between smOnly:gap-[15px] xm:gap-[15px]"
 									key={item.id}
 									style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
-									<div className="w-[40%] flex justify-end mr-[150px] sm:hidden xm:hidden">
+									<div className="w-[40%] flex justify-end mr-[150px] smOnly:hidden xm:hidden">
 										{hovered && item.id === 1 ? (
 											<Image
 												src={item.src1}
@@ -59,7 +59,7 @@ export default function Capibilyties() {
 											)
 										)}
 									</div>
-									<div className="w-[25%] sm:w-full xm:w-full">
+									<div className="w-[25%] smOnly:w-full xm:w-full">
 										<div className="flex gap-x-[10px] flex-col">
 											<div className="flex items-center gap-x-[10px] pb-[20px]">
 												<span className="w-[12px] h-[12px] rounded-full bg-secondry" />
@@ -81,7 +81,7 @@ export default function Capibilyties() {
 											))}
 										</div>
 									</div>
-									<div className="w-[25%] sm:w-full xm:w-full">
+									<div className="w-[25%] smOnly:w-full xm:w-full">
 										<div className="flex gap-x-[10px] flex-col">
 											<div className="flex items-center gap-x-[10px] pb-[20px]">
 												<span className="w-[12px] h-[12px] rounded-full bg-secondry" />

@@ -38,13 +38,13 @@ export default function Hero() {
 						</div>
 					</div>
 					<div className="w-full border-t border-[#21212155] pt-[20px]">
-						<div className="w-full flex justify-between padding-x sm:flex-col xm:flex-col gap-[20px]">
-							<div className="w-[50%] sm:w-full xm:w-full">
+						<div className="w-full flex justify-between padding-x smOnly:flex-col xm:flex-col gap-[20px]">
+							<div className="w-[50%] smOnly:w-full xm:w-full">
 								<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
 									Latest insights:
 								</h3>
 							</div>
-							<div className="w-[50%] sm:w-full xm:w-full flex flex-wrap items-center gap-[10px]">
+							<div className="w-[50%] smOnly:w-full xm:w-full flex flex-wrap items-center gap-[10px]">
 								{str.map((item, i) => (
 									<div key={i}>
 										{item.id === 1 ? (
@@ -72,7 +72,7 @@ export default function Hero() {
 						</div>
 					</div>
 					<div className="w-full padding-x">
-						<div className="w-[50%] sm:w-full xm:w-full flex gap-[20px] padding-y sm:flex-col xm:flex-col gap-y-[20px]">
+						<div className="w-[50%] smOnly:w-full xm:w-full flex gap-[20px] padding-y smOnly:flex-col xm:flex-col gap-y-[20px]">
 							{latestItemss.map((item) => (
 								<div
 									key={item.id}
@@ -82,7 +82,7 @@ export default function Hero() {
 											<Image
 												src={item.src}
 												alt="img"
-												className="sm:w-full xm:w-full hover:scale-[1.09] group-hover:scale-[1.09] transform duration-[1s] ease-[.4,0,.2,1]"
+												className="smOnly:w-full xm:w-full hover:scale-[1.09] group-hover:scale-[1.09] transform duration-[1s] ease-[.4,0,.2,1]"
 											/>
 										</div>
 										<div className="flex gap-y-[10px] absolute left-[25px] top-[-100px] group-hover:top-[20px] flex-col">

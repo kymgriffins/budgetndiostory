@@ -12,6 +12,10 @@ const routes = {
   "/insights": "BUDGET NDIO STORY",
   "/contact": "BUDGET NDIO STORY",
   "/case": "BUDGET NDIO STORY",
+  "/edustories": "BUDGET NDIO STORY",
+  "/edustories/[id]": "BUDGET NDIO STORY",
+  "/edu": "BUDGET NDIO STORY",
+  "/edu/[id]": "BUDGET NDIO STORY",
 };
 
 const anim = (variants) => {

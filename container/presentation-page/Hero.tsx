@@ -13,7 +13,7 @@ export default function Hero() {
 					</h1>
 				</div>
 			</div>
-			<Eyes className="w-[300px] h-[300px] md:w-[200px] md:h-[200px] sm:w-[150px] sm:h-[150px] xm:w-[150px] xm:h-[150px] sm:flex-col xm:flex-col" />
+			<Eyes className="w-[300px] h-[300px] mdOnly:w-[200px] mdOnly:h-[200px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[150px] xm:h-[150px] smOnly:flex-col xm:flex-col" />
 		</section>
 	);
 }

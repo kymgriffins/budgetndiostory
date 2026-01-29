@@ -9,20 +9,20 @@ export default function About() {
 					Company
 				</h2>
 				<div className="w-full border-t border-[#21212155] pt-[20px]">
-					<div className="w-full flex sm:flex-col xm:flex-col justify-between gap-[15px] padding-x">
-						<div className="w-1/2 sm:w-full xm:w-full">
+					<div className="w-full flex smOnly:flex-col xm:flex-col justify-between gap-[15px] padding-x">
+						<div className="w-1/2 smOnly:w-full xm:w-full">
 							<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
 								About:
 							</h3>
 						</div>
-						<div className="w-1/2 sm:w-full xm:w-full flex justify-between gap-[10px] sm:flex-col xm:flex-col">
+						<div className="w-1/2 smOnly:w-full xm:w-full flex justify-between gap-[10px] smOnly:flex-col xm:flex-col">
 							<div>
 								<p className="paragraph font-NeueMontreal text-secondry">
 									Built by home service professionals on a
-									<br className="sm:hidden xm:hidden" /> mission to make your
-									“work easy,” <br className="sm:hidden xm:hidden" />
+									<br className="smOnly:hidden xm:hidden" /> mission to make your
+									“work easy,” <br className="smOnly:hidden xm:hidden" />
 									Workiz empowers service businesses to get more
-									<br className="sm:hidden xm:hidden" /> jobs done, work easier,
+									<br className="smOnly:hidden xm:hidden" /> jobs done, work easier,
 									and grow smarter.
 								</p>
 							</div>
@@ -48,7 +48,7 @@ export default function About() {
 					</div>
 				</div>
 			</div>
-			<div className="w-full padding-x pt-[100px] lg:pt-[80px] md:pt-[60px] sm:pt-[40px] xm:pt-[40px]">
+			<div className="w-full padding-x pt-[100px] lgOnly:pt-[80px] mdOnly:pt-[60px] smOnly:pt-[40px] xm:pt-[40px]">
 				<BackgroundImg src={welcome} />
 			</div>
 		</section>
