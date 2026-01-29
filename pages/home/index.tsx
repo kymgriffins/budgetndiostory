@@ -201,7 +201,7 @@ export default function Home() {
 											data-hero="cta"
 											className="mt-[22px] flex items-center gap-[12px] flex-wrap">
 											<Link
-												href="/edustories"
+												href="/stories"
 												className="px-[18px] py-[12px] rounded-full bg-[#212121] text-[#f1f1f1] paragraph font-NeueMontreal hover:opacity-90 transition">
 												Explore stories
 											</Link>

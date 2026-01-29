@@ -222,10 +222,10 @@ export default function Home() {
 											data-animate="fade-up"
 											className="mt-[20px] flex gap-[10px] flex-wrap">
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
-												Mobile-first
+													National 
 											</span>
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
-												Evidence-first
+												County 
 											</span>
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
 												Civic action
@@ -469,9 +469,7 @@ export default function Home() {
 											</Link>
 										</div>
 									</div>
-									<p className="mt-[16px] small-text font-NeueMontreal text-[#212121]/55">
-										Note: this landing page is the new home page at /.
-									</p>
+									
 								</div>
 							</div>
 						</section>
