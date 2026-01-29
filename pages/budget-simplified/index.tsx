@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import LandingFooter from "@/components/LandingFooter";
 
 export default function BudgetSimplified() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -363,9 +364,10 @@ export default function BudgetSimplified() {
 								</div>
 							</div>
 						</section>
-					</main>
-				</div>
+				</main>
+				<LandingFooter />
 			</div>
-		</>
+		</div>
+	</>
 	);
 }

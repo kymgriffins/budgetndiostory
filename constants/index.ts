@@ -34,7 +34,7 @@ import {
   publication3,
 } from "@/public";
 
-// Navbar
+// Navbar - Universal Navigation
 export const navbarItems = [
   {
     id: 1,
@@ -43,34 +43,34 @@ export const navbarItems = [
   },
   {
     id: 2,
-    title: "EduStories",
-    href: "/edustories",
+    title: "Stories",
+    href: "/stories",
   },
-  // {
-  //    id: 2,
-  //    title: "Our work",
-  //    href: "/presentation",
-  // },
-  // {
-  //   id: 3,
-  //   title: "About us",
-  //   href: "/budgetndiostory",
-  // },
-  // {
-  //    id: 4,
-  //    title: "Insights",
-  //    href: "/insights",
-  // },
+  {
+    id: 3,
+    title: "Tracker",
+    href: "/tracker",
+  },
+  {
+    id: 4,
+    title: "Podcasts",
+    href: "/podcasts",
+  },
   {
     id: 5,
-    title: "Contact us",
-    href: "/contact",
+    title: "Shorts",
+    href: "/shorts",
   },
   // {
-  //    id: 6,
-  //    title: "Case",
-  //    href: "/case",
+  //   id: 6,
+  //   title: "About",
+  //   href: "/about",
   // },
+  {
+    id: 7,
+    title: "Contact",
+    href: "/contact",
+  },
 ];
 
 // Footer
@@ -106,31 +106,16 @@ export const footernavbarItems = [
   },
   {
      id: 2,
-     title: "EduStories",
-     href: "/edustories",
+     title: "Podcasts",
+     href: "/podcasts",
   },
-  // {
-  //   id: 2,
-  //   title: "Services",
-  //   href: "services",
-  // },
-  // {
-  //    id: 3,
-  //    title: "Our work",
-  //    href: "presentation",
-  // },
-  // {
-  //   id: 4,
-  //   title: "About us",
-  //   href: "budgetndiostory",
-  // },
-  // {
-  //    id: 5,
-  //    title: "Insights",
-  //    href: "insights",
-  // },
   {
-    id: 6,
+     id: 3,
+     title: "Shorts",
+     href: "/shorts",
+  },
+  {
+    id: 4,
     title: "Contact us",
     href: "contact",
   },

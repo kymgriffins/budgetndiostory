@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -102,307 +103,346 @@ export default function Home() {
 							);
 						}
 					);
-				});
 
-				return () => {
-					cancelled = true;
-					ctx?.revert?.();
-					loco?.destroy?.();
-					ScrollTrigger?.getAll?.().forEach?.((t: any) => t.kill?.());
-				};
-			} catch (err) {
-				console.error(err);
+					// Stagger feature cards (matches landing behavior)
+					(gsap.utils.toArray("[data-animate='cards']") as HTMLElement[]).forEach(
+						(wrap) => {
+							const cards = wrap.querySelectorAll<HTMLElement>("[data-animate='card']");
+							if (!cards.length) return;
+							gsap.fromTo(
+								cards,
+								{ y: 30, opacity: 0 },
+								{
+									y: 0,
+									opacity: 1,
+									duration: 0.7,
+									ease: "power3.out",
+									stagger: 0.08,
+									scrollTrigger: { trigger: wrap, start: "top 80%" },
+								}
+							);
+						}
+					);
+				}, el);
+
+				ScrollTrigger.refresh();
+				loco?.resize?.();
+			} catch {
+				// no-op: page still renders without smooth scroll
 			}
 		})();
 
 		return () => {
 			cancelled = true;
+			try {
+				ctx?.revert?.();
+				loco?.destroy?.();
+			} catch {
+				// no-op
+			}
 		};
 	}, []);
 
 	return (
 		<>
 			<Head>
-				<title>Budget Ndio Story - The Kenyan Budget, Told as a Story</title>
+				<title>Budget Ndio Story — The Kenyan Budget, Told Clearly</title>
 				<meta
 					name="description"
-					content="Budget Ndio Story breaks down Kenya's national and county budgets through storytelling for youth. Watch stories, listen to podcasts, and understand where your money goes."
-				/>
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/favicon.ico" />
+					content="Budget Ndio Story translates national and county budgets into short, verifiable stories that help citizens understand where public money goes and how to act." />
+				<meta property="og:title" content="Budget Ndio Story — Civic Budget Stories" />
+				<meta
+					property="og:description"
+					content="Track. Verify. Act. Stories, reports and multimedia that make public budgets clear and accountable." />
+				<meta name="theme-color" content="#f1f1f1" />
 			</Head>
 
-			<div ref={scrollerRef} className="h-screen overflow-hidden">
-				<div ref={contentRef}>
-					<main className="w-full">
-						{/* HERO WITH BACKGROUND VIDEO */}
-						<section className="padding-x padding-y min-h-screen flex flex-col justify-center relative">
-							{/* Background Video */}
-							<div className="absolute inset-0 -z-10 overflow-hidden rounded-[28px] mdOnly:rounded-[18px] smOnly:rounded-[12px] xm:rounded-[12px]">
-								<video
-									autoPlay
-									muted
-									loop
-									className="w-full h-full object-cover"
-									poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect fill='%23212121' width='1920' height='1080'/%3E%3C/svg%3E"
-								>
-									<source src="https://videos.pexels.com/video-files/5064626/5064626-sd_640_360_30fps.mp4" type="video/mp4" />
-								</video>
-								{/* Dark Overlay */}
-								<div className="absolute inset-0 bg-black/50" />
-							</div>
+			<Navbar />
 
-							<div className="relative z-10 max-w-[1200px] mx-auto w-full">
-								<div data-hero="sub" className="inline-block mb-[20px]">
-									<span className="px-[14px] py-[8px] rounded-full bg-white/15 border border-white/25 small-text font-NeueMontreal text-[#f1f1f1]">
-										🎬 A story everyone should know
-									</span>
-								</div>
+			<div
+				ref={scrollerRef}
+				data-scroll-container
+				className="relative h-screen overflow-y-auto overflow-x-hidden bg-[#f1f1f1] text-[#212121]"
+				style={{ position: "relative" }}>
+				<div ref={contentRef} data-scroll-content>
+					{/* Spacer for fixed navbar height (desktop + mobile nav are both 8vh) */}
+					<div className="h-[8vh]" />
 
-								<h1 data-hero="title" className="heading font-FoundersGrotesk text-[#f1f1f1] uppercase leading-[1.2] max-w-[800px]">
-									The Kenyan Budget, Told as a Story
-								</h1>
+					<a
+						href="#landing-content"
+						className="sr-only focus:not-sr-only focus:fixed focus:top-[10px] focus:left-[10px] focus:z-[100] focus:bg-[#212121] focus:text-[#f1f1f1] focus:px-[14px] focus:py-[10px] focus:rounded-full">
+						Skip to content
+					</a>
 
-								<p data-hero="sub" className="mt-[24px] sub-heading font-NeueMontreal text-[#f1f1f1]/80 max-w-[600px]">
-									Where public money comes from, how it's spent, and why it matters—through stories, not spreadsheets.
-								</p>
+					<main id="landing-content">
+						{/* HERO */}
+						<section className="padding-x pt-[36px] smOnly:pt-[28px] xm:pt-[22px]">
+							<div className="max-w-[1200px] mx-auto">
+								<div className="grid grid-cols-2 gap-[28px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1 items-start">
+									<div>
+										<p
+											data-hero="sub"
+											className="text-[12px] tracking-[0.18em] uppercase font-NeueMontreal text-[#212121]/70">
+											The Kenyan Budget, Told as a Story
+										</p>
+										<h1
+											data-hero="title"
+											className="font-FoundersGrotesk uppercase text-[#111] tracking-[-0.03em] mt-[12px] leading-[0.88] text-[clamp(52px,10vw,160px)]">
+											The Kenyan Budget.
+											<br />
+											Explained in Stories.
+										</h1>
+										<p
+											data-animate="fade-up"
+											className="mt-[16px] font-NeueMontreal text-[#212121]/75 text-[clamp(16px,2.1vw,22px)] leading-[1.45] max-w-[62ch]">
+											Budget Ndio Story turns budgets into clear, local narratives—videos, field reports,
+											podcasts and photo essays that show what was budgeted, what exists on the ground,
+											and who benefits. Evidence-first, youth-focused, and built for civic action.
+										</p>
 
-								<div data-hero="cta" className="mt-[32px] flex items-center gap-[12px] flex-wrap">
-									<Link
-										href="#featured-story"
-										className="px-[18px] py-[12px] rounded-full bg-white text-[#212121] paragraph font-NeueMontreal hover:opacity-90 transition">
-										Watch the Story
-									</Link>
-									<Link
-										href="/stories"
-										className="px-[18px] py-[12px] rounded-full border border-white/40 text-white paragraph font-NeueMontreal hover:bg-white/10 transition">
-										Explore Stories
-									</Link>
-									<Link
-										href="/podcasts"
-										className="px-[18px] py-[12px] rounded-full border border-white/40 text-white paragraph font-NeueMontreal hover:bg-white/10 transition">
-										Listen to Podcast
-									</Link>
-								</div>
+										<div
+											data-hero="cta"
+											className="mt-[22px] flex items-center gap-[12px] flex-wrap">
+											<Link
+												href="/stories"
+												className="px-[18px] py-[12px] rounded-full bg-[#212121] text-[#f1f1f1] paragraph font-NeueMontreal hover:opacity-90 transition">
+												Explore stories
+											</Link>
+											<Link
+												href="/participate"
+												className="px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 transition">
+												Report a finding
+											</Link>
+											<Link
+												href="/contact"
+												className="px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 transition">
+												Get involved
+											</Link>
+										</div>
 
-								<div data-hero="sub" className="mt-[20px] flex gap-[10px] flex-wrap">
-									<span className="px-[12px] py-[8px] rounded-full bg-white/15 border border-white/20 small-text font-NeueMontreal text-white/70">
-										📊 Budget simplified
-									</span>
-									<span className="px-[12px] py-[8px] rounded-full bg-white/15 border border-white/20 small-text font-NeueMontreal text-white/70">
-										🎙️ Youth-focused
-									</span>
-									<span className="px-[12px] py-[8px] rounded-full bg-white/15 border border-white/20 small-text font-NeueMontreal text-white/70">
-										🇰🇪 Your budget, your story
-									</span>
+										<div
+											data-animate="fade-up"
+											className="mt-[20px] flex gap-[10px] flex-wrap">
+											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
+												National Budgets
+											</span>
+											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
+												County Budgets
+											</span>
+											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
+												Personal Budgets
+											</span>
+										</div>
+									</div>
+
+									<div className="w-full">
+										<div
+											data-animate="fade-up"
+											className="rounded-[28px] overflow-hidden bg-[#111] border border-black/10 shadow-[0_25px_80px_rgba(0,0,0,0.12)]">
+											<div className="p-[22px] smOnly:p-[18px] xm:p-[16px]">
+												<p className="font-NeueMontreal text-[#f1f1f1]/90 text-[16px] leading-[1.5]">
+													"Hii budget ni yako. If you don't understand it, someone else will decide your future."
+												</p>
+												<div className="mt-[16px] grid grid-cols-3 gap-[10px] smOnly:grid-cols-2 xm:grid-cols-2">
+													<div className="rounded-[16px] bg-white/10 border border-white/10 p-[12px]">
+														<p className="small-text font-NeueMontreal text-[#f1f1f1]/60">Budgeted</p>
+														<p className="paragraph font-NeueMontreal text-[#f1f1f1]">What was promised</p>
+													</div>
+													<div className="rounded-[16px] bg-white/10 border border-white/10 p-[12px]">
+														<p className="small-text font-NeueMontreal text-[#f1f1f1]/60">Reality</p>
+														<p className="paragraph font-NeueMontreal text-[#f1f1f1]">What exists</p>
+													</div>
+													<div className="rounded-[16px] bg-white/10 border border-white/10 p-[12px]">
+														<p className="small-text font-NeueMontreal text-[#f1f1f1]/60">Action</p>
+														<p className="paragraph font-NeueMontreal text-[#f1f1f1]">What you can do</p>
+													</div>
+												</div>
+											</div>
+											<div className="h-[240px] smOnly:h-[200px] xm:h-[180px] bg-gradient-to-br from-[#00ff85]/20 via-[#f1f1f1]/5 to-[#ff2f55]/15" />
+										</div>
+
+
+									</div>
 								</div>
 							</div>
 						</section>
 
-						{/* FEATURED STORY OF THE WEEK */}
-						<section id="featured-story" className="padding-x padding-y">
+						{/* QUICK SNAPSHOT */}
+						<section className="padding-x pt-[30px]">
 							<div className="max-w-[1200px] mx-auto">
-								<div data-animate="fade-up" className="flex items-end justify-between gap-[16px] flex-wrap mb-[22px]">
-									<h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-										This Week's Story
-									</h2>
-									<p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[60ch]">
-										A deep dive into how budget allocation impacts real communities in Kenya.
-									</p>
-								</div>
-
-								<div
-									data-animate="fade-up"
-									className="rounded-[28px] overflow-hidden bg-gradient-to-br from-white via-white to-white/70 border border-black/5 shadow-[0_25px_80px_rgba(0,0,0,0.12)]">
-									<div className="grid grid-cols-2 gap-[0px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1">
-										{/* Video */}
-										<div className="h-[400px] smOnly:h-[280px] xm:h-[280px] bg-gradient-to-br from-[#212121]/10 to-[#212121]/5 relative overflow-hidden flex items-center justify-center">
-											<div className="text-center text-[#212121]/40">
-												<p className="paragraph font-NeueMontreal">📹 Featured Documentary</p>
-											</div>
-										</div>
-
-										{/* Content */}
-										<div className="p-[32px] smOnly:p-[22px] xm:p-[22px] flex flex-col justify-between">
-											<div>
-												<p className="small-text font-NeueMontreal text-[#212121]/60 uppercase tracking-wide">Featured Documentary</p>
-												<h3 className="heading font-FoundersGrotesk text-[#111] uppercase mt-[14px]">
-													This Road Never Got Built: A Budget Story
-												</h3>
-												<p className="mt-[16px] paragraph font-NeueMontreal text-[#212121]/70">
-													Ksh 150M was allocated for a county road in 2022. Three years later, locals still wait. We tracked what happened to the money, who knew what, and what it means for your budget.
+										<div
+											data-animate="cards"
+											className="grid grid-cols-4 gap-[12px] mdOnly:grid-cols-2 smOnly:grid-cols-2 xm:grid-cols-2">
+											<div data-animate="card" className="rounded-[22px] bg-white/80 border border-black/5 p-[16px]">
+												<p className="small-text font-NeueMontreal text-[#212121]/60">Featured</p>
+												<p className="text-[22px] leading-[1.2] font-NeueMontreal text-[#111] mt-[6px]">
+													Story of the week
 												</p>
 											</div>
-
-											<div className="mt-[24px] flex items-center gap-[16px]">
-												<Link
-													href="/stories/road-story"
-													className="px-[18px] py-[12px] rounded-full bg-[#212121] text-white paragraph font-NeueMontreal hover:opacity-90 transition">
-													Read Story
-												</Link>
-												<Link
-													href="/stories/road-story"
-													className="px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 transition">
-													Watch Documentary
-												</Link>
+											<div data-animate="card" className="rounded-[22px] bg-white/80 border border-black/5 p-[16px]">
+												<p className="small-text font-NeueMontreal text-[#212121]/60">Snapshot</p>
+												<p className="text-[22px] leading-[1.2] font-NeueMontreal text-[#111] mt-[6px]">
+													Budget line highlights
+												</p>
+											</div>
+											<div data-animate="card" className="rounded-[22px] bg-white/80 border border-black/5 p-[16px]">
+												<p className="small-text font-NeueMontreal text-[#212121]/60">Formats</p>
+												<p className="text-[22px] leading-[1.2] font-NeueMontreal text-[#111] mt-[6px]">
+													Field reports • Video • Audio
+												</p>
+											</div>
+											<div data-animate="card" className="rounded-[22px] bg-[#212121] text-[#f1f1f1] border border-black/10 p-[16px]">
+												<p className="small-text font-NeueMontreal text-[#f1f1f1]/60">Participation</p>
+												<p className="text-[22px] leading-[1.2] font-NeueMontreal mt-[6px]">
+													Reports • Polls
+												</p>
 											</div>
 										</div>
-									</div>
-								</div>
 							</div>
 						</section>
 
-						{/* QUICK BUDGET SNAPSHOT */}
+						{/* STORIES FROM THE GROUND */}
 						<section className="padding-x padding-y">
 							<div className="max-w-[1200px] mx-auto">
-								<div data-animate="fade-up" className="flex items-end justify-between gap-[16px] flex-wrap mb-[22px]">
+								<div data-animate="fade-up" className="flex items-end justify-between gap-[16px] flex-wrap">
 									<h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-										Budget Snapshot
+										Stories from the ground
 									</h2>
 									<p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[60ch]">
-										Where your tax money goes—visual, not numbers-heavy.
-									</p>
-								</div>
-
-								<div data-animate="fade-up" className="grid grid-cols-4 gap-[14px] mdOnly:grid-cols-2 smOnly:grid-cols-1 xm:grid-cols-1">
-									<div className="rounded-[26px] overflow-hidden bg-white border border-black/5 p-[18px]">
-										<p className="small-text font-NeueMontreal text-[#212121]/60">Health</p>
-										<p className="heading font-FoundersGrotesk text-[#111] mt-[8px]">14%</p>
-										<div className="h-[80px] bg-gradient-to-br from-[#ff6b6b]/20 to-[#ff6b6b]/5 rounded-[12px] mt-[12px]" />
-									</div>
-									<div className="rounded-[26px] overflow-hidden bg-white border border-black/5 p-[18px]">
-										<p className="small-text font-NeueMontreal text-[#212121]/60">Education</p>
-										<p className="heading font-FoundersGrotesk text-[#111] mt-[8px]">18%</p>
-										<div className="h-[80px] bg-gradient-to-br from-[#4ecdc4]/20 to-[#4ecdc4]/5 rounded-[12px] mt-[12px]" />
-									</div>
-									<div className="rounded-[26px] overflow-hidden bg-white border border-black/5 p-[18px]">
-										<p className="small-text font-NeueMontreal text-[#212121]/60">Roads & Infrastructure</p>
-										<p className="heading font-FoundersGrotesk text-[#111] mt-[8px]">22%</p>
-										<div className="h-[80px] bg-gradient-to-br from-[#ffd93d]/20 to-[#ffd93d]/5 rounded-[12px] mt-[12px]" />
-									</div>
-									<div className="rounded-[26px] overflow-hidden bg-white border border-black/5 p-[18px]">
-										<p className="small-text font-NeueMontreal text-[#212121]/60">Youth Programs</p>
-										<p className="heading font-FoundersGrotesk text-[#111] mt-[8px]">6%</p>
-										<div className="h-[80px] bg-gradient-to-br from-[#ff85b5]/20 to-[#ff85b5]/5 rounded-[12px] mt-[12px]" />
-									</div>
-								</div>
-							</div>
-						</section>
-
-						{/* CTA SECTION - EXPLORE CONTENT TYPES */}
-						<section className="padding-x padding-y">
-							<div className="max-w-[1200px] mx-auto">
-								<div data-animate="fade-up" className="flex items-end justify-between gap-[16px] flex-wrap mb-[22px]">
-									<h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-										Choose Your Way to Learn
-									</h2>
-									<p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[60ch]">
-										Budget Ndio Story comes in the format you prefer.
+										Real reports and short features that answer: What was budgeted? What exists? Who benefits?
 									</p>
 								</div>
 
 								<div
 									data-animate="cards"
-									className="grid grid-cols-3 gap-[14px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1">
-									<Link
-										href="/stories"
-										className="rounded-[26px] overflow-hidden bg-white border border-black/5 p-[18px] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition group cursor-pointer"
-									>
-										<p className="small-text font-NeueMontreal text-[#212121]/60">From the Ground</p>
-										<p className="paragraph font-NeueMontreal mt-[8px] group-hover:text-[#212121]">Stories & Documentaries</p>
-										<div className="h-[180px] bg-gradient-to-br from-[#00ff85]/15 via-black/0 to-black/10 rounded-[12px] mt-[12px]" />
-										<p className="mt-[12px] small-text font-NeueMontreal text-[#212121]/50">Real people, real impact</p>
-									</Link>
-									<Link
-										href="/podcasts"
-										className="rounded-[26px] overflow-hidden bg-white border border-black/5 p-[18px] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition group cursor-pointer"
-									>
-										<p className="small-text font-NeueMontreal text-[#212121]/60">Listen</p>
-										<p className="paragraph font-NeueMontreal mt-[8px] group-hover:text-[#212121]">Podcasts & Audio Stories</p>
-										<div className="h-[180px] bg-gradient-to-br from-[#ff85b5]/15 via-black/0 to-black/10 rounded-[12px] mt-[12px]" />
-										<p className="mt-[12px] small-text font-NeueMontreal text-[#212121]/50">While commuting, working, studying</p>
-									</Link>
-									<Link
-										href="/shorts"
-										className="rounded-[26px] overflow-hidden bg-white border border-black/5 p-[18px] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition group cursor-pointer"
-									>
-										<p className="small-text font-NeueMontreal text-[#212121]/60">Quick Hits</p>
-										<p className="paragraph font-NeueMontreal mt-[8px] group-hover:text-[#212121]">Skits & Short Videos</p>
-										<div className="h-[180px] bg-gradient-to-br from-[#ffd93d]/15 via-black/0 to-black/10 rounded-[12px] mt-[12px]" />
-										<p className="mt-[12px] small-text font-NeueMontreal text-[#212121]/50">Funny, sharp, shareable</p>
-									</Link>
-								</div>
-							</div>
-						</section>
-
-						{/* TRACKER CTA */}
-						<section className="padding-x padding-y">
-							<div className="max-w-[1200px] mx-auto">
-								<div
-									data-animate="fade-up"
-									className="rounded-[32px] bg-[#111] text-white border border-white/10 p-[26px] smOnly:p-[18px] xm:p-[18px]">
-									<div className="flex items-end justify-between gap-[16px] flex-wrap">
-										<div>
-											<h3 className="sub-heading font-FoundersGrotesk uppercase">
-												See Where the Money Went
-											</h3>
-											<p className="paragraph font-NeueMontreal text-white/70 mt-[10px] max-w-[62ch]">
-												Browse interactive maps, track budget sectors, and see what's allocated, in progress, completed, or stalled.
-											</p>
-										</div>
-										<Link
-											href="/tracker"
-											className="px-[18px] py-[12px] rounded-full bg-white text-[#111] paragraph font-NeueMontreal hover:opacity-90 transition flex-shrink-0">
-											Open Tracker
-										</Link>
+									className="mt-[26px] grid grid-cols-3 gap-[16px] mdOnly:grid-cols-2 smOnly:grid-cols-1 xm:grid-cols-1">
+									<div data-animate="card" className="rounded-[24px] bg-white/80 border border-black/5 p-[20px]">
+										<p className="small-text font-NeueMontreal text-[#212121]/60">Report 01</p>
+										<p className="text-[22px] font-NeueMontreal text-[#111] mt-[10px]">This road was budgeted for Ksh 5M</p>
+										<p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[10px]">
+											Field verification from the county shows partial completion and missing signboards.
+										</p>
+									</div>
+									<div data-animate="card" className="rounded-[24px] bg-white/80 border border-black/5 p-[20px]">
+										<p className="small-text font-NeueMontreal text-[#212121]/60">Report 02</p>
+										<p className="text-[22px] font-NeueMontreal text-[#111] mt-[10px]">Clinic supplies: where did they go?</p>
+										<p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[10px]">
+											A short investigation into procurement and delivery timelines at the county level.
+										</p>
+									</div>
+									<div data-animate="card" className="rounded-[24px] bg-white/80 border border-black/5 p-[20px]">
+										<p className="small-text font-NeueMontreal text-[#212121]/60">Report 03</p>
+										<p className="text-[22px] font-NeueMontreal text-[#111] mt-[10px]">Who benefits?</p>
+										<p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[10px]">
+											Spotlights on contractors, beneficiaries, and discrepancies in budget allocations.
+										</p>
+									</div>
+									<div data-animate="card" className="rounded-[24px] bg-white/80 border border-black/5 p-[20px]">
+										<p className="small-text font-NeueMontreal text-[#212121]/60">Report 04</p>
+										<p className="text-[22px] font-NeueMontreal text-[#111] mt-[10px]">Community voices</p>
+										<p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[10px]">
+											First-hand accounts from residents about local projects and their impact.
+										</p>
+									</div>
+									<div data-animate="card" className="rounded-[24px] bg-[#111] text-[#f1f1f1] border border-black/10 p-[20px]">
+										<p className="small-text font-NeueMontreal text-[#f1f1f1]/60">Report 05</p>
+										<p className="text-[22px] font-NeueMontreal mt-[10px]">Data snapshots</p>
+										<p className="paragraph font-NeueMontreal text-[#f1f1f1]/70 mt-[10px]">
+											Visual summaries of budgets and spending for quick civic review.
+										</p>
+									</div>
+									<div data-animate="card" className="rounded-[24px] bg-[#212121] text-[#f1f1f1] border border-black/10 p-[20px]">
+										<p className="small-text font-NeueMontreal text-[#f1f1f1]/60">Report 06</p>
+										<p className="text-[22px] font-NeueMontreal mt-[10px]">Call to action</p>
+										<p className="paragraph font-NeueMontreal text-[#f1f1f1]/70 mt-[10px]">
+											Share evidence, sign petitions, or contact your county reps—small steps towards accountability.
+										</p>
 									</div>
 								</div>
 							</div>
 						</section>
 
-						{/* PARTICIPATION CTA */}
+						{/* HOW IT WORKS */}
+						<section className="padding-x pb-[30px]">
+							<div className="max-w-[1200px] mx-auto">
+								<div data-animate="fade-up" className="rounded-[30px] bg-white/70 border border-black/5 p-[22px] smOnly:p-[18px] xm:p-[16px]">
+									<div className="flex items-end justify-between gap-[16px] flex-wrap">
+										<h3 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
+											How it works
+										</h3>
+										<p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[58ch]">
+											A simple process that turns complex public budgets into civic action.
+										</p>
+									</div>
+
+									<div data-animate="cards" className="mt-[18px] grid grid-cols-3 gap-[14px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1">
+										<div data-animate="card" className="rounded-[22px] bg-white border border-black/5 p-[18px]">
+											<p className="small-text font-NeueMontreal text-[#212121]/60">Step 01</p>
+											<p className="paragraph font-NeueMontreal mt-[10px]">Identify the line</p>
+											<p className="small-text font-NeueMontreal text-[#212121]/65 mt-[8px]">
+												Find the budget line, allocation and expected outputs.
+											</p>
+										</div>
+										<div data-animate="card" className="rounded-[22px] bg-white border border-black/5 p-[18px]">
+											<p className="small-text font-NeueMontreal text-[#212121]/60">Step 02</p>
+											<p className="paragraph font-NeueMontreal mt-[10px]">Verify on the ground</p>
+											<p className="small-text font-NeueMontreal text-[#212121]/65 mt-[8px]">
+												Field reports, photos and community input confirm whether work was done.
+											</p>
+										</div>
+										<div data-animate="card" className="rounded-[22px] bg-white border border-black/5 p-[18px]">
+											<p className="small-text font-NeueMontreal text-[#212121]/60">Step 03</p>
+											<p className="paragraph font-NeueMontreal mt-[10px]">Act & amplify</p>
+											<p className="small-text font-NeueMontreal text-[#212121]/65 mt-[8px]">
+												Share findings, contact officials, or start a community campaign for accountability.
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						{/* PREVIEW STRIP */}
 						<section className="padding-x padding-y">
 							<div className="max-w-[1200px] mx-auto">
-								<div data-animate="fade-up" className="flex items-end justify-between gap-[16px] flex-wrap mb-[22px]">
+								<div data-animate="fade-up" className="flex items-end justify-between gap-[16px] flex-wrap">
 									<h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-										Your Voice Matters
+										Explore the Platform
 									</h2>
 									<p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[60ch]">
-										This is not performative. Tell us what you want funded in your community.
+										See how we turn budget documents into stories, trackers, and actionable insights.
 									</p>
 								</div>
 
 								<div
-									data-animate="fade-up"
-									className="rounded-[28px] bg-gradient-to-br from-white via-white to-white/70 border border-black/5 p-[26px] smOnly:p-[18px] xm:p-[18px]">
-									<div className="grid grid-cols-2 gap-[20px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1">
-										<div>
-											<p className="small-text font-NeueMontreal text-[#212121]/60 uppercase tracking-wide">Share Your Opinion</p>
-											<h3 className="heading font-FoundersGrotesk text-[#111] uppercase mt-[12px]">
-												What Should Be Funded Next?
-											</h3>
-											<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
-												Answer quick polls, submit voice notes, or comment on stories. Your input shapes what we investigate next.
-											</p>
-											<Link
-												href="/participate"
-												className="mt-[16px] inline-block px-[18px] py-[12px] rounded-full bg-[#212121] text-white paragraph font-NeueMontreal hover:opacity-90 transition">
-												Participate Now
-											</Link>
+									data-animate="cards"
+									className="mt-[22px] grid grid-cols-3 gap-[14px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1">
+									<div data-animate="card" className="rounded-[26px] overflow-hidden bg-white border border-black/5">
+										<div className="p-[18px]">
+											<p className="small-text font-NeueMontreal text-[#212121]/60">Budget Tracker</p>
+											<p className="paragraph font-NeueMontreal mt-[8px]">See allocations by sector</p>
 										</div>
-										<div className="rounded-[16px] bg-gradient-to-br from-[#00ff85]/10 to-[#00ff85]/5 border border-[#00ff85]/20 p-[20px] flex flex-col justify-center">
-											<p className="heading font-FoundersGrotesk text-[#212121]">42K</p>
-											<p className="small-text font-NeueMontreal text-[#212121]/60">youth voices heard</p>
-											<p className="mt-[8px] paragraph font-NeueMontreal text-[#212121]/70">
-												From polls, comments, and submissions in the last 3 months.
-											</p>
+										<div className="h-[220px] bg-gradient-to-br from-black/5 via-black/0 to-black/10" />
+									</div>
+									<div data-animate="card" className="rounded-[26px] overflow-hidden bg-white border border-black/5">
+										<div className="p-[18px]">
+											<p className="small-text font-NeueMontreal text-[#212121]/60">Story Archives</p>
+											<p className="paragraph font-NeueMontreal mt-[8px]">Video, audio & field reports</p>
 										</div>
+										<div className="h-[220px] bg-gradient-to-br from-[#00ff85]/15 via-black/0 to-black/10" />
+									</div>
+									<div data-animate="card" className="rounded-[26px] overflow-hidden bg-[#111] border border-black/10">
+										<div className="p-[18px]">
+											<p className="small-text font-NeueMontreal text-[#f1f1f1]/60">Participation Hub</p>
+											<p className="paragraph font-NeueMontreal mt-[8px] text-[#f1f1f1]">Report findings, vote on investigations</p>
+										</div>
+										<div className="h-[220px] bg-gradient-to-br from-[#ff2f55]/20 via-[#f1f1f1]/5 to-[#00ff85]/10" />
 									</div>
 								</div>
 							</div>
 						</section>
 
-						{/* FOOTER CTA */}
+						{/* BIG CTA */}
 						<section className="padding-x pb-[80px] smOnly:pb-[60px] xm:pb-[60px]">
 							<div className="max-w-[1200px] mx-auto">
 								<div
@@ -411,28 +451,105 @@ export default function Home() {
 									<div className="flex items-end justify-between gap-[16px] flex-wrap">
 										<div>
 											<h3 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-												Learn More About the Budget
+												Start Following Your County
 											</h3>
 											<p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[10px] max-w-[62ch]">
-												Understanding Kenya's budget is understanding your country's future. Let's break it down together.
+												Explore budget stories, track public spending in your area, and join the conversation
+												on where tax money goes and who benefits.
 											</p>
 										</div>
 										<div className="flex items-center gap-[12px] flex-wrap">
 											<Link
-												href="/budget-simplified"
-												className="px-[18px] py-[12px] rounded-full bg-[#212121] text-white paragraph font-NeueMontreal hover:opacity-90 transition">
-												Budget 101
+												href="/stories"
+												className="px-[18px] py-[12px] rounded-full bg-[#212121] text-[#f1f1f1] paragraph font-NeueMontreal hover:opacity-90 transition">
+												Explore stories
 											</Link>
 											<Link
-												href="/about"
+												href="/participate"
 												className="px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 transition">
-												About Us
+												How budgets work
 											</Link>
 										</div>
 									</div>
+
 								</div>
 							</div>
 						</section>
+
+						{/* LANDING-ONLY FOOTER (adapted for Home) */}
+						{/* <footer className="padding-x pb-[70px] smOnly:pb-[55px] xm:pb-[55px]">
+							<div className="max-w-[1200px] mx-auto">
+								<div className="rounded-[28px] bg-[#111] text-[#f1f1f1] border border-black/10 p-[22px] smOnly:p-[18px] xm:p-[18px]">
+									<div className="flex items-start justify-between gap-[18px] flex-wrap">
+										<div className="min-w-[240px]">
+											<p className="text-[14px] tracking-[0.14em] uppercase font-NeueMontreal text-[#f1f1f1]/70">
+												Budget Ndio Story
+											</p>
+												<p className="mt-[10px] small-text font-NeueMontreal text-[#f1f1f1]/70 max-w-[44ch]">
+													Stories, not spreadsheets. Evidence, not promises. Built by Kenyans, for Kenyans.
+												</p>
+										</div>
+
+										<div className="grid grid-cols-3 gap-[18px] smOnly:grid-cols-2 xm:grid-cols-2">
+											<div>
+													<p className="small-text font-NeueMontreal text-[#f1f1f1]/60 uppercase tracking-wide">
+													Stories
+												</p>
+												<div className="mt-[10px] flex flex-col gap-[8px]">
+													<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text:white" href="/edustories">
+														Stories
+													</Link>
+													<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text:white" href="/budget-simplified">
+														Budget Tracker
+													</Link>
+													<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text:white" href="/podcasts">
+														Podcasts
+													</Link>
+												</div>
+											</div>
+											<div>
+													<p className="small-text font-NeueMontreal text-[#f1f1f1]/60 uppercase tracking-wide">
+													How It Works
+												</p>
+												<div className="mt-[10px] flex flex-col gap-[8px]">
+													<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text:white" href="/presentation">
+														How it works
+													</Link>
+													<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text:white" href="/contact">
+														Contact
+													</Link>
+													<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text:white" href="/">
+														Home
+													</Link>
+												</div>
+											</div>
+											<div>
+													<p className="small-text font-NeueMontreal text-[#f1f1f1]/60 uppercase tracking-wide">
+													Engage
+												</p>
+												<div className="mt-[10px] flex flex-col gap-[8px]">
+													<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text:white" href="/participate">
+														Submit a Report
+													</Link>
+													<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text:white" href="/presentation">
+														How It Works
+													</Link>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-[18px] pt-[14px] border-t border-white/10 flex items-center justify-between gap-[12px] flex-wrap">
+										<p className="small-text font-NeueMontreal text-[#f1f1f1]/55">
+											© {new Date().getFullYear()} Budget Ndio Story. Home page footer.
+										</p>
+										<p className="small-text font-NeueMontreal text-[#f1f1f1]/55">
+											Made for every screen size.
+										</p>
+									</div>
+								</div>
+							</div>
+						</footer> */}
 					</main>
 				</div>
 			</div>
