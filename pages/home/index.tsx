@@ -206,12 +206,12 @@ export default function Home() {
 												Explore stories
 											</Link>
 											<Link
-												href="/report"
+												href="/participate"
 												className="px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 transition">
 												Report a finding
 											</Link>
 											<Link
-												href="/participate"
+												href="/contact"
 												className="px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 transition">
 												Get involved
 											</Link>
@@ -221,13 +221,13 @@ export default function Home() {
 											data-animate="fade-up"
 											className="mt-[20px] flex gap-[10px] flex-wrap">
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
-												Mobile-first
+												National Budgets
 											</span>
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
-												Evidence-first
+												County Budgets
 											</span>
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
-												Civic action
+												Personal Budgets
 											</span>
 										</div>
 									</div>
@@ -457,12 +457,12 @@ export default function Home() {
 										</div>
 										<div className="flex items-center gap-[12px] flex-wrap">
 											<Link
-												href="/edustories"
+												href="/stories"
 												className="px-[18px] py-[12px] rounded-full bg-[#212121] text-[#f1f1f1] paragraph font-NeueMontreal hover:opacity-90 transition">
 												Explore stories
 											</Link>
 											<Link
-												href="/presentation"
+												href="/participate"
 												className="px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 transition">
 												How budgets work
 											</Link>
