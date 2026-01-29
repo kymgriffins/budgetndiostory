@@ -198,7 +198,7 @@ export default function Tracker() {
 									</span>
 								</div>
 
-								<h1 data-hero="title" className="heading font-FoundersGrotesk text-[#111] uppercase leading-[1.2] max-w-[800px]">
+								<h1 data-hero="title" className="sub-heading font-FoundersGrotesk text-[#111] uppercase leading-[1.2] max-w-[800px]">
 									See Where the Money Went
 								</h1>
 
@@ -222,22 +222,22 @@ export default function Tracker() {
 								<div data-animate="fade-up" className="grid grid-cols-4 gap-[14px] mdOnly:grid-cols-2 smOnly:grid-cols-2 xm:grid-cols-1">
 									<div className="rounded-[20px] bg-blue-50 border border-blue-200 p-[18px]">
 										<p className="text-[28px]">🟦</p>
-										<p className="mt-[10px] heading font-FoundersGrotesk text-blue-700">Allocated</p>
+										<p className="mt-[10px] sub-heading font-FoundersGrotesk text-blue-700">Allocated</p>
 										<p className="mt-[6px] small-text font-NeueMontreal text-blue-600">Budget approved, not yet started</p>
 									</div>
 									<div className="rounded-[20px] bg-yellow-50 border border-yellow-200 p-[18px]">
 										<p className="text-[28px]">🟨</p>
-										<p className="mt-[10px] heading font-FoundersGrotesk text-yellow-700">In Progress</p>
+										<p className="mt-[10px] sub-heading font-FoundersGrotesk text-yellow-700">In Progress</p>
 										<p className="mt-[6px] small-text font-NeueMontreal text-yellow-600">Currently being implemented</p>
 									</div>
 									<div className="rounded-[20px] bg-green-50 border border-green-200 p-[18px]">
 										<p className="text-[28px]">🟩</p>
-										<p className="mt-[10px] heading font-FoundersGrotesk text-green-700">Completed</p>
+										<p className="mt-[10px] sub-heading font-FoundersGrotesk text-green-700">Completed</p>
 										<p className="mt-[6px] small-text font-NeueMontreal text-green-600">Project finished and delivered</p>
 									</div>
 									<div className="rounded-[20px] bg-red-50 border border-red-200 p-[18px]">
 										<p className="text-[28px]">🟥</p>
-										<p className="mt-[10px] heading font-FoundersGrotesk text-red-700">Stalled</p>
+										<p className="mt-[10px] sub-heading font-FoundersGrotesk text-red-700">Stalled</p>
 										<p className="mt-[6px] small-text font-NeueMontreal text-red-600">Budget delayed or stuck</p>
 									</div>
 								</div>
@@ -267,7 +267,7 @@ export default function Tracker() {
 													<div className="text-[40px]">{project.icon}</div>
 													<span className="text-[24px]">{colors.badge}</span>
 												</div>
-												<h3 className={`heading font-FoundersGrotesk ${colors.text}`}>
+												<h3 className={`sub-heading font-FoundersGrotesk ${colors.text}`}>
 													{project.name}
 												</h3>
 												<p className={`mt-[10px] paragraph font-NeueMontreal ${colors.text}`}>
