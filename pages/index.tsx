@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import LandingFooter from "@/components/LandingFooter";
 
+
 export default function Home() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);
 	const contentRef = useRef<HTMLDivElement | null>(null);
@@ -157,7 +158,7 @@ export default function Home() {
 				<meta name="theme-color" content="#f1f1f1" />
 			</Head>
 
-			<Navbar />
+			
 
 			<div
 				ref={scrollerRef}
@@ -224,10 +225,10 @@ export default function Home() {
 											data-animate="fade-up"
 											className="mt-[20px] flex gap-[10px] flex-wrap">
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
-													National 
+													National
 											</span>
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
-												County 
+												County
 											</span>
 											<span className="px-[12px] py-[8px] rounded-full bg-white/70 border border-black/5 small-text font-NeueMontreal text-[#212121]/70">
 												Civic action
@@ -261,7 +262,7 @@ export default function Home() {
 											<div className="h-[240px] smOnly:h-[200px] xm:h-[180px] bg-gradient-to-br from-[#00ff85]/20 via-[#f1f1f1]/5 to-[#ff2f55]/15" />
 										</div>
 
-                                        
+
 									</div>
 								</div>
 							</div>
@@ -471,7 +472,7 @@ export default function Home() {
 											</Link>
 										</div>
 									</div>
-									
+
 								</div>
 							</div>
 						</section>

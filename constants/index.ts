@@ -61,11 +61,11 @@ export const navbarItems = [
     title: "Shorts",
     href: "/shorts",
   },
-  {
-    id: 6,
-    title: "About",
-    href: "/about",
-  },
+  // {
+  //   id: 6,
+  //   title: "About",
+  //   href: "/about",
+  // },
   {
     id: 7,
     title: "Contact",
