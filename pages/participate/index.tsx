@@ -138,7 +138,7 @@ export default function Participate() {
 									</span>
 								</div>
 
-								<h1 data-hero="title" className="heading font-FoundersGrotesk text-[#111] uppercase leading-[1.2] max-w-[800px]">
+								<h1 data-hero="title" className="sub-heading font-FoundersGrotesk text-[#111] uppercase leading-[1.2] max-w-[800px]">
 									Participate: Shape the Narrative
 								</h1>
 
@@ -166,21 +166,21 @@ export default function Participate() {
 							<div className="max-w-[1200px] mx-auto">
 								<div data-animate="fade-up" className="grid grid-cols-3 gap-[14px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1">
 									<div className="rounded-[26px] bg-white border border-black/5 p-[22px]">
-										<p className="heading font-FoundersGrotesk text-[#111]">42K</p>
+										<p className="sub-heading font-FoundersGrotesk text-[#111]">42K</p>
 										<p className="small-text font-NeueMontreal text-[#212121]/60 mt-[8px]">Youth voices heard</p>
 										<p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[12px]">
 											From polls, comments, and submissions in the last 3 months.
 										</p>
 									</div>
 									<div className="rounded-[26px] bg-white border border-black/5 p-[22px]">
-										<p className="heading font-FoundersGrotesk text-[#111]">18</p>
+										<p className="sub-heading font-FoundersGrotesk text-[#111]">18</p>
 										<p className="small-text font-NeueMontreal text-[#212121]/60 mt-[8px]">Investigations launched</p>
 										<p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[12px]">
 											Based on questions and requests from our community.
 										</p>
 									</div>
 									<div className="rounded-[26px] bg-white border border-black/5 p-[22px]">
-										<p className="heading font-FoundersGrotesk text-[#111]">7</p>
+										<p className="sub-heading font-FoundersGrotesk text-[#111]">7</p>
 										<p className="small-text font-NeueMontreal text-[#212121]/60 mt-[8px]">Stories published</p>
 										<p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[12px]">
 											Directly from community feedback and participation.
@@ -210,7 +210,7 @@ export default function Participate() {
 										<div className="text-[48px] mb-[12px] group-hover:scale-110 transition">
 											📊
 										</div>
-										<h3 className="heading font-FoundersGrotesk text-[#111]">Quick Polls</h3>
+										<h3 className="sub-heading font-FoundersGrotesk text-[#111]">Quick Polls</h3>
 										<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
 											"What should your county fund next?" Quick questions, instant results. See what other youth think.
 										</p>
@@ -226,7 +226,7 @@ export default function Participate() {
 										<div className="text-[48px] mb-[12px] group-hover:scale-110 transition">
 											🎙️
 										</div>
-										<h3 className="heading font-FoundersGrotesk text-[#111]">Voice Notes</h3>
+										<h3 className="sub-heading font-FoundersGrotesk text-[#111]">Voice Notes</h3>
 										<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
 											Record your story, opinion, or question. Send via WhatsApp or upload directly. We listen to every one.
 										</p>
@@ -242,7 +242,7 @@ export default function Participate() {
 										<div className="text-[48px] mb-[12px] group-hover:scale-110 transition">
 											💬
 										</div>
-										<h3 className="heading font-FoundersGrotesk text-[#111]">Comment on Stories</h3>
+										<h3 className="sub-heading font-FoundersGrotesk text-[#111]">Comment on Stories</h3>
 										<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
 											Read a story? Add your thoughts. Know more about what happened? Share it. Questions? Ask them here.
 										</p>
@@ -258,7 +258,7 @@ export default function Participate() {
 										<div className="text-[48px] mb-[12px] group-hover:scale-110 transition">
 											📝
 										</div>
-										<h3 className="heading font-FoundersGrotesk text-[#111]">Submit a Story</h3>
+										<h3 className="sub-heading font-FoundersGrotesk text-[#111]">Submit a Story</h3>
 										<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
 											Know about a budget promise that fell through? A successful project? A controversial decision? Tell us.
 										</p>
@@ -281,25 +281,25 @@ export default function Participate() {
 
 								<div className="grid grid-cols-2 gap-[20px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1">
 									<div className="rounded-[26px] bg-gradient-to-br from-[#00ff85]/10 to-[#00ff85]/5 border border-[#00ff85]/20 p-[22px]">
-										<h3 className="heading font-FoundersGrotesk text-[#111]">📊 Poll Results</h3>
+										<h3 className="sub-heading font-FoundersGrotesk text-[#111]">📊 Poll Results</h3>
 										<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
 											When 500+ youth say "we want to know about education budget," we launch an investigation.
 										</p>
 									</div>
 									<div className="rounded-[26px] bg-gradient-to-br from-[#ff85b5]/10 to-[#ff85b5]/5 border border-[#ff85b5]/20 p-[22px]">
-										<h3 className="heading font-FoundersGrotesk text-[#111]">🎙️ Voice Notes</h3>
+										<h3 className="sub-heading font-FoundersGrotesk text-[#111]">🎙️ Voice Notes</h3>
 										<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
 											Your story might be featured in our next documentary or audio story. With your permission.
 										</p>
 									</div>
 									<div className="rounded-[26px] bg-gradient-to-br from-[#ffd93d]/10 to-[#ffd93d]/5 border border-[#ffd93d]/20 p-[22px]">
-										<h3 className="heading font-FoundersGrotesk text-[#111]">💬 Comments</h3>
+										<h3 className="sub-heading font-FoundersGrotesk text-[#111]">💬 Comments</h3>
 										<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
 											Good questions in comments get answered. Often we add new sections to stories based on your feedback.
 										</p>
 									</div>
 									<div className="rounded-[26px] bg-gradient-to-br from-[#4ecdc4]/10 to-[#4ecdc4]/5 border border-[#4ecdc4]/20 p-[22px]">
-										<h3 className="heading font-FoundersGrotesk text-[#111]">📝 Story Tips</h3>
+										<h3 className="sub-heading font-FoundersGrotesk text-[#111]">📝 Story Tips</h3>
 										<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70">
 											Got a lead? Know something? We'll investigate it and give you credit for the tip-off.
 										</p>
@@ -309,42 +309,9 @@ export default function Participate() {
 						</section>
 
 						{/* FAQ SECTION */}
-						<section className="padding-x padding-y">
-							<div className="max-w-[1200px] mx-auto">
-								<div data-animate="fade-up" className="mb-[22px]">
-									<h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-										Common Questions
-									</h2>
-								</div>
+						{/* FAQ SECTION */}
 
-								<div className="space-y-[14px]">
-									<div data-animate="fade-up" className="rounded-[20px] bg-white border border-black/5 p-[22px]">
-										<h4 className="heading font-FoundersGrotesk text-[#111]">Will my name be published?</h4>
-										<p className="mt-[10px] paragraph font-NeueMontreal text-[#212121]/70">
-											Only if you want it to be. You can participate anonymously, with your first name only, or with full credit.
-										</p>
-									</div>
-									<div data-animate="fade-up" className="rounded-[20px] bg-white border border-black/5 p-[22px]">
-										<h4 className="heading font-FoundersGrotesk text-[#111]">Is my data safe?</h4>
-										<p className="mt-[10px] paragraph font-NeueMontreal text-[#212121]/70">
-											Yes. We don't sell your data. We don't track you. We use your feedback only to improve our work.
-										</p>
-									</div>
-									<div data-animate="fade-up" className="rounded-[20px] bg-white border border-black/5 p-[22px]">
-										<h4 className="heading font-FoundersGrotesk text-[#111]">Can I participate via SMS?</h4>
-										<p className="mt-[10px] paragraph font-NeueMontreal text-[#212121]/70">
-											Coming soon. For now, use WhatsApp, web, or call us. We're working on SMS support for low-data users.
-										</p>
-									</div>
-									<div data-animate="fade-up" className="rounded-[20px] bg-white border border-black/5 p-[22px]">
-										<h4 className="heading font-FoundersGrotesk text-[#111]">How do you choose what to investigate?</h4>
-										<p className="mt-[10px] paragraph font-NeueMontreal text-[#212121]/70">
-											Community feedback drives 60% of our investigations. The rest come from our team and partner organizations.
-										</p>
-									</div>
-								</div>
-							</div>
-						</section>
+
 
 						{/* CTA */}
 						<section className="padding-x padding-y">

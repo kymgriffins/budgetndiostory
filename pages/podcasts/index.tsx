@@ -226,7 +226,7 @@ export default function Podcasts() {
 										<div className="flex flex-col justify-between">
 											<div>
 												<p className="small-text font-NeueMontreal text-[#212121]/60 uppercase tracking-wide">Episode 24</p>
-												<h3 className="heading font-FoundersGrotesk text-[#111] uppercase mt-[12px]">
+												<h3 className="sub-heading font-FoundersGrotesk text-[#111] uppercase mt-[12px]">
 													Budget Breakdowns: The Health Sector
 												</h3>
 												<p className="mt-[16px] paragraph font-NeueMontreal text-[#212121]/70">
@@ -279,7 +279,7 @@ export default function Podcasts() {
 															Ep {idx + 1}
 														</span>
 														<div>
-															<h3 className="heading font-FoundersGrotesk text-[#111]">
+															<h3 className="sub-heading font-FoundersGrotesk text-[#111]">
 																{ep.title}
 															</h3>
 															<p className="mt-[8px] paragraph font-NeueMontreal text-[#212121]/70">

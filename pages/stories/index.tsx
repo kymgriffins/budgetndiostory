@@ -180,8 +180,8 @@ export default function Stories() {
 		{ id: "agriculture", label: "Agriculture" },
 	];
 
-	const filteredStories = selectedCategory === "all" 
-		? stories 
+	const filteredStories = selectedCategory === "all"
+		? stories
 		: stories.filter(s => s.category === selectedCategory);
 
 	return (
@@ -257,7 +257,7 @@ export default function Stories() {
 												<div className="text-[48px] mb-[12px] group-hover:scale-110 transition">
 													{story.image}
 												</div>
-												<h3 className="heading font-FoundersGrotesk text-[#111] line-clamp-2">
+												<h3 className="sub-heading font-FoundersGrotesk text-[#111] line-clamp-2">
 													{story.title}
 												</h3>
 												<p className="mt-[12px] paragraph font-NeueMontreal text-[#212121]/70 line-clamp-2">

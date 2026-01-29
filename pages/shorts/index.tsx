@@ -286,7 +286,7 @@ export default function Shorts() {
 											</div>
 											<div className="p-[16px]">
 												<div className="text-[32px] mb-[8px]">{short.icon}</div>
-												<h3 className="heading font-FoundersGrotesk text-[#111] line-clamp-2 text-[16px]">
+												<h3 className="text font-FoundersGrotesk text-[#111] line-clamp-2 text-[16px]">
 													{short.title}
 												</h3>
 												<div className="mt-[12px] flex items-center justify-between gap-[8px] text-[12px]">

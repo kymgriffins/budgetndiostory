@@ -11,7 +11,7 @@ export default function LandingFooter() {
 								Budget Ndio Story
 							</p>
 							<p className="mt-[10px] small-text font-NeueMontreal text-[#f1f1f1]/70 max-w-[44ch]">
-								Stories, not spreadsheets. Evidence, not promises. Built by Kenyans, for Kenyans.
+								Stories, not spreadsheets. Evidence, not promises. Kenyans na Budget.
 							</p>
 						</div>
 
