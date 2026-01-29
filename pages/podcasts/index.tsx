@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import LandingFooter from "@/components/LandingFooter";
 
 export default function Podcasts() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -367,9 +368,10 @@ export default function Podcasts() {
 								</div>
 							</div>
 						</section>
-					</main>
-				</div>
+				</main>
+				<LandingFooter />
 			</div>
-		</>
+		</div>
+	</>
 	);
 }

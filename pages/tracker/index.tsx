@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import LandingFooter from "@/components/LandingFooter";
 
 export default function Tracker() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -337,9 +338,10 @@ export default function Tracker() {
 								</div>
 							</div>
 						</section>
-					</main>
-				</div>
+				</main>
+				<LandingFooter />
 			</div>
-		</>
+		</div>
+	</>
 	);
 }

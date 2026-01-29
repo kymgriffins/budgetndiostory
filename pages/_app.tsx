@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
-import { Footer, Navbar } from "@/components";
+import { Navbar } from "@/components";
+import LandingFooter from "@/components/LandingFooter";
 import { AnimatePresence } from "framer-motion";
 
 export default function App({
@@ -12,6 +13,9 @@ export default function App({
 	router: any;
 }) {
 	const isLanding = router?.route === "/landing";
+	const path = router?.route ?? router?.pathname ?? "";
+	const hideOnRootOrContact = path === "/" || path === "/contact";
+
 	return (
 		<>
 			<Navbar />
@@ -25,7 +29,7 @@ export default function App({
 				/>
 			</AnimatePresence>
 			)}
-			{!isLanding && <Footer />}
+			{!hideOnRootOrContact && <LandingFooter />}
 		</>
 	);
 }

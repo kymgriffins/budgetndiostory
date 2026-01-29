@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import LandingFooter from "@/components/LandingFooter";
 
 export default function Stories() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -313,9 +314,9 @@ export default function Stories() {
 								</div>
 							</div>
 						</section>
-					</main>
-				</div>
+				</main>
+				<LandingFooter />
 			</div>
-		</>
+		</div>	</>
 	);
 }
