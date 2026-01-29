@@ -39,38 +39,33 @@ export const navbarItems = [
   {
     id: 1,
     title: "Home",
-    href: "/",
+    href: "/home",
   },
   {
     id: 2,
-    title: "EduStories",
-    href: "/edustories",
+    title: "Stories",
+    href: "/stories",
   },
-  // {
-  //    id: 2,
-  //    title: "Our work",
-  //    href: "/presentation",
-  // },
-  // {
-  //   id: 3,
-  //   title: "About us",
-  //   href: "/budgetndiostory",
-  // },
-  // {
-  //    id: 4,
-  //    title: "Insights",
-  //    href: "/insights",
-  // },
+  {
+    id: 3,
+    title: "Tracker",
+    href: "/tracker",
+  },
+  {
+    id: 4,
+    title: "Podcasts",
+    href: "/podcasts",
+  },
   {
     id: 5,
-    title: "Contact us",
+    title: "Shorts",
+    href: "/shorts",
+  },
+  {
+    id: 6,
+    title: "Contact",
     href: "/contact",
   },
-  // {
-  //    id: 6,
-  //    title: "Case",
-  //    href: "/case",
-  // },
 ];
 
 // Footer

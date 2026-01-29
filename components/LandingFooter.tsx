@@ -11,53 +11,53 @@ export default function LandingFooter() {
 								Budget Ndio Story
 							</p>
 							<p className="mt-[10px] small-text font-NeueMontreal text-[#f1f1f1]/70 max-w-[44ch]">
-								Make budgeting human. Learn the why, track the now, and write a better next chapter.
+								Stories, not spreadsheets. Evidence, not promises. Built by Kenyans, for Kenyans.
 							</p>
 						</div>
 
 						<div className="grid grid-cols-3 gap-[18px] smOnly:grid-cols-2 xm:grid-cols-2">
 							<div>
 								<p className="small-text font-NeueMontreal text-[#f1f1f1]/60 uppercase tracking-wide">
-									Product
+									Stories
 								</p>
 								<div className="mt-[10px] flex flex-col gap-[8px]">
-									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/budgetndiostory">
-										App
+									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/stories">
+										Stories
 									</Link>
-									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/edustories">
-										EduStories
+									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/tracker">
+										Budget Tracker
 									</Link>
-									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/insights">
-										Insights
+									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/podcasts">
+										Podcasts
 									</Link>
 								</div>
 							</div>
 							<div>
 								<p className="small-text font-NeueMontreal text-[#f1f1f1]/60 uppercase tracking-wide">
-									Company
+									Explore
 								</p>
 								<div className="mt-[10px] flex flex-col gap-[8px]">
+									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/shorts">
+										Shorts
+									</Link>
+									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/budget-simplified">
+										Budget Simplified
+									</Link>
 									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/contact">
 										Contact
 									</Link>
-									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/services">
-										Services
-									</Link>
-									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/">
-										Home
-									</Link>
 								</div>
 							</div>
 							<div>
 								<p className="small-text font-NeueMontreal text-[#f1f1f1]/60 uppercase tracking-wide">
-									Get started
+									Get Started
 								</p>
 								<div className="mt-[10px] flex flex-col gap-[8px]">
-									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/landing">
-										Landing
+									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/home">
+										Home
 									</Link>
-									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/budgetndiostory">
-										Start now
+									<Link className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors" href="/edustories">
+										Explore Stories
 									</Link>
 								</div>
 							</div>
@@ -69,7 +69,7 @@ export default function LandingFooter() {
 							© {new Date().getFullYear()} Budget Ndio Story.
 						</p>
 						<p className="small-text font-NeueMontreal text-[#f1f1f1]/55">
-							Ganji Ndio Inabonga.
+							Track. Verify. Act.
 						</p>
 					</div>
 				</div>
