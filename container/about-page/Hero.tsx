@@ -14,29 +14,7 @@ export default function Hero() {
             <div className="w-full margin padding-x">
               <div>
                 <h1 className="heading tracking-[-1.3px] text-[#212121] font-semibold font-FoundersGrotesk uppercase">
-                  WE BRIDGE <br />
-                  <div className="flex items-center gap-[5px]">
-                    <motion.span
-                      initial={{ width: 0 }}
-                      animate={{ width: "auto" }}
-                      transition={{
-                        ease: [0.86, 0, 0.07, 0.995],
-                        duration: 1,
-                        delay: 1.5,
-                      }}
-                    >
-                      {/* <Image
-                        width={120}
-                        height={50}
-                        src={ochiside}
-                        alt="img"
-                        className="w-auto h-[95px] lgOnly:w-auto lgOnly:h-auto mdOnly:w-[100px] mdOnly:h-[63px] smOnly:w-[74px] smOnly:h-[45px] xm:w-[64px] xm:h-[40px] object-cover xlOnly:mt-[15px] mt-[10px] rounded-[10px]"
-                      /> */}
-                    </motion.span>
-                    <h1 className="heading tracking-[-1.3px] text-[#212121] font-semibold font-FoundersGrotesk uppercase">
-                      The BUDGET GAp
-                    </h1>
-                  </div>
+                  Budget Ndio Story: Translating Public Budgets Into Citizen Stories
                 </h1>
               </div>
             </div>
@@ -93,11 +71,9 @@ export default function Hero() {
         <Eyes className="w-[300px] h-[300px] mdOnly:w-[200px] mdOnly:h-[200px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[150px] xm:h-[150px] smOnly:flex-col xm:flex-col" />
       </FadeUp>
       <FadeUp delay={0.8} duration={0.8} className="padding-x">
-        <h1 className="sub-heading font-medium font-NeueMontreal text-secondry">
-          Budget Ndio Story
-          <br className="smOnly:hidden xm:hidden" /> The Past, The Present and The
-          Future.
-        </h1>
+        <h2 className="sub-heading font-medium font-NeueMontreal text-secondry">
+          Bridging the Gap Between Government Spending and Citizen Understanding
+        </h2>
       </FadeUp>
     </section>
   );

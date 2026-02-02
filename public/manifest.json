@@ -1,0 +1,16 @@
+{
+  "name": "Budget Ndio Story",
+  "short_name": "Budget Ndio",
+  "description": "Budget Ndio Story translates national and county budgets into short, verifiable stories that help citizens understand where public money goes and how to act.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
