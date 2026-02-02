@@ -277,7 +277,7 @@ export default function Home() {
           <main id="landing-content">
             {/* TRUST BADGES */}
             <section className="padding-x pt-[16px]">
-              <div className="max-w-[1200px] mx-auto">
+              {/* <div className="max-w-[1200px] mx-auto">
                 <div
                   data-animate="fade-up"
                   className="flex items-center justify-center gap-[32px] flex-wrap"
@@ -297,7 +297,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </section>
 
             {/* HERO */}
