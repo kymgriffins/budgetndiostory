@@ -25,8 +25,6 @@ export default function App({
     "/insights", // Insights - uses Curve with showFooter
     "/case", // Case - uses Curve with showFooter
     "/presentation", // Presentation - uses Curve with showFooter
-    "/edustories", // EduStories - uses Curve with showFooter
-    "/edustories/[id]", // EduStories Detail - uses Curve with showFooter
     "/budgetndiostory", // BudgetNdioStory - uses Curve (no footer)
     "/workiz", // Workiz - uses Curve (no footer)
     "/stories", // Stories - manually imports LandingFooter
@@ -44,7 +42,7 @@ export default function App({
       {isLanding ? (
         <Component key={router.route} {...pageProps} />
       ) : (
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           <Component key={router.route} {...pageProps} />
         </AnimatePresence>
       )}

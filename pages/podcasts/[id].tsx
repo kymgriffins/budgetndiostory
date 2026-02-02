@@ -1,71 +1,196 @@
 "use client";
 
 import LandingFooter from "@/components/LandingFooter";
+import YouTubePlayer, { extractYouTubeId } from "@/components/YouTubePlayer";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
-// Sample podcast data
-const podcastEpisodes = [
+// Sample podcast data with comprehensive fields
+interface PodcastEpisode {
+  id: number;
+  title: string;
+  description: string;
+  duration: string;
+  durationSeconds: number;
+  excerpt: string;
+  type: string;
+  category: string;
+  mediaType: "audio" | "video";
+  audioUrl?: string;
+  videoUrl?: string;
+  coverColor: string;
+  publishDate: string;
+  host: string;
+  guests?: string[];
+  tags: string[];
+  playCount: number;
+  isFeatured: boolean;
+}
+
+const podcastEpisodes: PodcastEpisode[] = [
   {
     id: 1,
     title: "Budget Breakdowns: The Health Sector",
+    description:
+      "A comprehensive analysis of Kenya's healthcare budget allocation.",
     duration: "24 min",
+    durationSeconds: 1440,
     excerpt:
       "A deep dive into how much Kenya spends on healthcare and where the gaps are.",
     type: "breakdown",
+    category: "Health",
+    mediaType: "audio",
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     coverColor: "from-pink-500 to-rose-500",
+    publishDate: "2024-01-15",
+    host: "Amina Hassan",
+    guests: ["Dr. Sarah Ochieng"],
+    tags: ["healthcare", "budget 2024", "hospitals", "medical"],
+    playCount: 1250,
+    isFeatured: true,
   },
   {
     id: 2,
     title: "Conversations: Dr. Jane on Tax Policy",
+    description:
+      "An in-depth conversation with tax policy expert Dr. Jane Njeri.",
     duration: "32 min",
+    durationSeconds: 1920,
     excerpt:
       "Understanding tax collection, fairness, and what funds the government.",
     type: "conversation",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    category: "Tax",
+    mediaType: "video",
+    videoUrl: "https://youtu.be/I_6ZcOo6pnk?si=2Rsq527BK0gGecAn",
     coverColor: "from-blue-500 to-indigo-500",
+    publishDate: "2024-01-20",
+    host: "Amina Hassan",
+    guests: ["Dr. Jane Njeri"],
+    tags: ["tax", "policy", "revenue", "government funding"],
+    playCount: 2100,
+    isFeatured: true,
   },
   {
     id: 3,
     title: "Youth Voices: What We Want Funded",
+    description:
+      "Kenyan youth from diverse backgrounds share their views on budget priorities.",
     duration: "18 min",
+    durationSeconds: 1080,
     excerpt: "Kenyan youth discuss the budget priorities they want to see.",
     type: "voices",
+    category: "Youth",
+    mediaType: "audio",
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
     coverColor: "from-green-500 to-emerald-500",
+    publishDate: "2024-01-25",
+    host: "Kevo Mboya",
+    guests: ["Youth Panel"],
+    tags: ["youth", "education", "employment", "climate", "priorities"],
+    playCount: 890,
+    isFeatured: false,
   },
   {
     id: 4,
     title: "Audio Story: The Road That Never Was",
+    description:
+      "A narrated investigative piece about a Ksh 150M road project that was allocated funds but never completed.",
     duration: "28 min",
+    durationSeconds: 1680,
     excerpt:
       "Narrated account of Ksh 150M allocated for a road project that stalled.",
     type: "story",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+    category: "Infrastructure",
+    mediaType: "video",
+    videoUrl: "https://youtu.be/I_6ZcOo6pnk?si=2Rsq527BK0gGecAn",
     coverColor: "from-orange-500 to-amber-500",
+    publishDate: "2024-02-01",
+    host: "Amina Hassan",
+    tags: ["infrastructure", "corruption", "roads", "investigation"],
+    playCount: 3200,
+    isFeatured: true,
   },
   {
     id: 5,
     title: "Budget 101: National vs County",
+    description:
+      "A beginner-friendly explainer on the differences between national and county government budgets.",
     duration: "16 min",
+    durationSeconds: 960,
     excerpt:
       "A short explainer on the differences between national and county budgets.",
     type: "breakdown",
+    category: "Education",
+    mediaType: "audio",
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
     coverColor: "from-purple-500 to-violet-500",
+    publishDate: "2024-02-05",
+    host: "Kevo Mboya",
+    tags: ["education", "federalism", "counties", "budget basics"],
+    playCount: 1560,
+    isFeatured: false,
   },
   {
     id: 6,
     title: "On the Ground: Water Project Delays",
+    description:
+      "An audio documentary investigating the Makueni water project - why it was delayed, where the funds went.",
     duration: "26 min",
+    durationSeconds: 1560,
     excerpt:
       "Audio documentary on the Makueni water project and why it's delayed.",
     type: "story",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+    category: "Infrastructure",
+    mediaType: "video",
+    videoUrl: "https://youtu.be/I_6ZcOo6pnk?si=2Rsq527BK0gGecAn",
     coverColor: "from-cyan-500 to-sky-500",
+    publishDate: "2024-02-10",
+    host: "Amina Hassan",
+    guests: ["Makueni Residents", "Community Leaders"],
+    tags: ["water", "infrastructure", "Makueni", "accountability"],
+    playCount: 2450,
+    isFeatured: false,
+  },
+  {
+    id: 7,
+    title: "Education Funding: Where Does It Go?",
+    description:
+      "Breaking down Kenya's education budget from primary schools to universities.",
+    duration: "22 min",
+    durationSeconds: 1320,
+    excerpt: "Analyzing Kenya's education budget from primary to university.",
+    type: "breakdown",
+    category: "Education",
+    mediaType: "audio",
+    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    coverColor: "from-teal-500 to-cyan-500",
+    publishDate: "2024-02-15",
+    host: "Kevo Mboya",
+    guests: ["Teacher Union Rep"],
+    tags: ["education", "schools", "teachers", "free education"],
+    playCount: 1890,
+    isFeatured: false,
+  },
+  {
+    id: 8,
+    title: "Climate Finance: Kenya's Green Budget",
+    description: "Exploring how Kenya is allocating funds for climate action.",
+    duration: "30 min",
+    durationSeconds: 1800,
+    excerpt: "Examining Kenya's climate finance and green budget allocations.",
+    type: "conversation",
+    category: "Environment",
+    mediaType: "video",
+    videoUrl: "https://youtu.be/I_6ZcOo6pnk?si=2Rsq527BK0gGecAn",
+    coverColor: "from-emerald-500 to-teal-500",
+    publishDate: "2024-02-20",
+    host: "Amina Hassan",
+    guests: ["Climate Expert", "Environment CS"],
+    tags: ["climate", "environment", "green", "finance", "sustainability"],
+    playCount: 2100,
+    isFeatured: true,
   },
 ];
 
@@ -85,6 +210,7 @@ export default function PodcastPlayer() {
   const [waveformBars, setWaveformBars] = useState<number[]>([]);
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [viewMode, setViewMode] = useState<"audio" | "video">("audio");
 
   // Ensure we're on the client side before accessing router
   useEffect(() => {
@@ -98,6 +224,9 @@ export default function PodcastPlayer() {
   const episodeId = isClient && id ? Number(id) : 1;
   const episode =
     podcastEpisodes.find((ep) => ep.id === episodeId) || podcastEpisodes[0];
+
+  // Check if episode has video
+  const hasVideo = episode.videoUrl && episode.videoUrl.length > 0;
 
   // Generate waveform bars only after client is ready
   useEffect(() => {
@@ -227,53 +356,72 @@ export default function PodcastPlayer() {
 
           {/* Main Player Container */}
           <div className="flex flex-col lg:flex-row min-h-screen">
-            {/* Cover Art Section */}
+            {/* Cover Art / Video Section */}
             <div
-              className={`w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen bg-gradient-to-br ${episode.coverColor} flex items-center justify-center p-8`}
+              className={`w-full ${
+                viewMode === "video"
+                  ? "lg:w-full lg:aspect-video lg:max-h-[70vh] bg-black"
+                  : `lg:w-1/2 lg:min-h-screen bg-gradient-to-br ${episode.coverColor}`
+              } flex flex-col items-center justify-center p-0`}
             >
-              <div className="relative">
-                {/* Animated vinyl/record effect */}
-                <div
-                  className={`w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-xl border border-white/20 flex items-center justify-center ${isPlaying ? "animate-spin-slow" : ""}`}
-                >
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/10 flex items-center justify-center">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/20 flex items-center justify-center">
-                      <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-white" />
+              {viewMode === "video" && episode.videoUrl ? (
+                <div className="w-full h-full">
+                  <YouTubePlayer
+                    videoId={extractYouTubeId(episode.videoUrl)}
+                    autoplay={true}
+                  />
+                </div>
+              ) : (
+                <div className="relative">
+                  {/* Animated vinyl/record effect */}
+                  <div
+                    className={`w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-xl border border-white/20 flex items-center justify-center ${isPlaying ? "animate-spin-slow" : ""}`}
+                  >
+                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/10 flex items-center justify-center">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/20 flex items-center justify-center">
+                        <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-white" />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Play button overlay */}
-                <button
-                  onClick={handlePlayPause}
-                  className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition shadow-lg"
-                >
-                  {isPlaying ? (
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <rect x="6" y="4" width="4" height="16" />
-                      <rect x="14" y="4" width="4" height="16" />
-                    </svg>
-                  ) : (
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
+                  {/* Play button overlay */}
+                  <button
+                    onClick={handlePlayPause}
+                    className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition shadow-lg"
+                  >
+                    {isPlaying ? (
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <rect x="6" y="4" width="4" height="16" />
+                        <rect x="14" y="4" width="4" height="16" />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Player Controls Section */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-center p-6 md:p-12 lg:p-16">
+            <div
+              className={`w-full lg:w-1/2 flex flex-col justify-center p-6 md:p-12 lg:p-16 ${
+                viewMode === "video"
+                  ? "lg:w-full lg:max-h-[40vh] lg:overflow-y-auto"
+                  : ""
+              }`}
+            >
               {/* Episode Info */}
               <div className="mb-8">
                 <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-sm text-white/70 mb-4">
@@ -417,7 +565,33 @@ export default function PodcastPlayer() {
               </div>
 
               {/* Secondary Controls */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                {/* View Mode Toggle (if video available) */}
+                {hasVideo && (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setViewMode("audio")}
+                      className={`px-4 py-2 rounded-full transition text-sm font-medium ${
+                        viewMode === "audio"
+                          ? "bg-white text-black"
+                          : "bg-white/10 hover:bg-white/20"
+                      }`}
+                    >
+                      Audio
+                    </button>
+                    <button
+                      onClick={() => setViewMode("video")}
+                      className={`px-4 py-2 rounded-full transition text-sm font-medium ${
+                        viewMode === "video"
+                          ? "bg-white text-black"
+                          : "bg-white/10 hover:bg-white/20"
+                      }`}
+                    >
+                      Video
+                    </button>
+                  </div>
+                )}
+
                 {/* Playback Speed */}
                 <button
                   onClick={togglePlaybackSpeed}
@@ -484,9 +658,20 @@ export default function PodcastPlayer() {
             </div>
           </div>
 
+          {/* Hidden Audio Element */}
+          {viewMode === "audio" && (
+            <audio
+              ref={audioRef}
+              src={episode.audioUrl}
+              onTimeUpdate={handleTimeUpdate}
+              onLoadedMetadata={handleLoadedMetadata}
+              onEnded={() => setIsPlaying(false)}
+            />
+          )}
+
           {/* Full-width Footer Section */}
           {/* <div className="w-full bg-[#0a0a0a] -mx-6 lg:-mx-0"> */}
-            <LandingFooter />
+          <LandingFooter />
           {/* </div> */}
         </div>
       )}

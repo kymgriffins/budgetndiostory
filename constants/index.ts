@@ -52,6 +52,11 @@ export const navbarItems = [
     href: "/tracker",
   },
   {
+    id: 8,
+    title: "Edu",
+    href: "/edu",
+  },
+  {
     id: 4,
     title: "Podcasts",
     href: "/podcasts",
@@ -119,8 +124,13 @@ export const footernavbarItems = [
      title: "Tracker",
      href: "/tracker",
   },
-  {
+   {
     id: 4,
+    title: "Stories",
+    href: "/stories",
+  },
+  {
+    id: 5,
     title: "Contact us",
     href: "contact",
   },

@@ -13,10 +13,16 @@ const routes = {
   "/insights": "BUDGET NDIO STORY",
   "/contact": "BUDGET NDIO STORY",
   "/case": "BUDGET NDIO STORY",
-  "/edustories": "BUDGET NDIO STORY",
-  "/edustories/[id]": "BUDGET NDIO STORY",
   "/edu": "BUDGET NDIO STORY",
-  "/edu/[id]": "BUDGET NDIO STORY",
+};
+
+// Helper function to get route key for dynamic routes
+const getRouteKey = (route) => {
+  // For dynamic routes, check if route matches known patterns
+  if (route.startsWith("/edu/")) {
+    return "/edu";
+  }
+  return route;
 };
 
 const anim = (variants) => {
@@ -38,6 +44,7 @@ export default function Curve({
     width: null,
     height: null,
   });
+  const [prevRoute, setPrevRoute] = useState("");
 
   useEffect(() => {
     function resize() {
@@ -53,6 +60,10 @@ export default function Curve({
     };
   }, []);
 
+  // Get the display text for the current route
+  const routeKey = getRouteKey(router.route);
+  const displayText = routes[routeKey] || "BUDGET NDIO STORY";
+
   return (
     <div style={{ backgroundColor }}>
       <div
@@ -60,12 +71,14 @@ export default function Curve({
         className="fixed h w-full pointer-events-none
          left-0 top-0 z-50 bg-black"
       />
-      <motion.p
-        className="absolute left-1/2 top-[40%] text-white text-[50px] z-[60] -translate-x-1/2 text-center"
-        {...anim(text)}
-      >
-        {routes[router.route]}
-      </motion.p>
+      {dimensions.width != null && (
+        <motion.p
+          className="absolute left-1/2 top-[40%] text-white text-[50px] z-[60] -translate-x-1/2 text-center"
+          {...anim(text)}
+        >
+          {displayText}
+        </motion.p>
+      )}
       {dimensions.width != null && <SVG {...dimensions} />}
       {children}
       {showFooter && <LandingFooter />}
