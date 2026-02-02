@@ -15,40 +15,63 @@ export function PageTransitionLoader() {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const prevPathname = useRef(pathname);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const isNavigating = useRef(false);
 
   useEffect(() => {
-    if (pathname !== prevPathname.current) {
-      prevPathname.current = pathname;
-      setIsLoading(true);
-      setDisplayText(false);
+    // Skip if already navigating or same pathname
+    if (pathname === prevPathname.current || isNavigating.current) {
+      return;
+    }
 
-      // Sequence: show text -> fade in page -> hide loader
-      const tl = gsap.timeline({
-        onComplete: () => {
-          setIsLoading(false);
-          setDisplayText(false);
-        },
+    isNavigating.current = true;
+    prevPathname.current = pathname;
+    setIsLoading(true);
+    setDisplayText(false);
+
+    // Kill any existing timeline
+    if (timelineRef.current) {
+      timelineRef.current.kill();
+      timelineRef.current = null;
+    }
+
+    // Sequence: show text -> fade in page -> hide loader
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsLoading(false);
+        setDisplayText(false);
+        isNavigating.current = false;
+      },
+    });
+
+    timelineRef.current = tl;
+
+    // Show text with smooth fade
+    tl.set(textRef.current, { opacity: 0, y: 20 });
+    tl.to(textRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      onStart: () => setDisplayText(true),
+    })
+      // Hold for a moment
+      .to({}, { duration: 0.3 })
+      // Fade out text
+      .to(textRef.current, {
+        opacity: 0,
+        y: -20,
+        duration: 0.5,
+        ease: "power2.in",
       });
 
-      // Show text with smooth fade
-      tl.set(textRef.current, { opacity: 0, y: 20 });
-      tl.to(textRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        onStart: () => setDisplayText(true),
-      })
-        // Hold for a moment
-        .to({}, { duration: 0.3 })
-        // Fade out text
-        .to(textRef.current, {
-          opacity: 0,
-          y: -20,
-          duration: 0.5,
-          ease: "power2.in",
-        });
-    }
+    return () => {
+      if (timelineRef.current) {
+        timelineRef.current.kill();
+        timelineRef.current = null;
+      }
+      isNavigating.current = false;
+    };
   }, [pathname]);
 
   if (!isLoading) return null;
