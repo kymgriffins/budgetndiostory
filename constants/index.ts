@@ -56,11 +56,11 @@ export const navbarItems = [
     title: "Podcasts",
     href: "/podcasts",
   },
-  {
-    id: 5,
-    title: "Shorts",
-    href: "/shorts",
-  },
+  // {
+  //   id: 5,
+  //   title: "Shorts",
+  //   href: "/shorts",
+  // },
   // {
   //   id: 6,
   //   title: "About",
@@ -109,10 +109,15 @@ export const footernavbarItems = [
      title: "Podcasts",
      href: "/podcasts",
   },
+  // {
+  //    id: 3,
+  //    title: "Shorts",
+  //    href: "/shorts",
+  // },
   {
      id: 3,
-     title: "Shorts",
-     href: "/shorts",
+     title: "Tracker",
+     href: "/tracker",
   },
   {
     id: 4,
