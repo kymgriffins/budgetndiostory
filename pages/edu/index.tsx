@@ -20,13 +20,13 @@ export default function Edu() {
 
   return (
     <>
-      <Curve backgroundColor={"#f1f1f1"} showFooter>
+
         <SmoothScrollGsap className="h-screen overflow-y-auto overflow-x-hidden w-full">
           <Heroedu />
           <LearningPath />
           {/* <Ready /> */}
         </SmoothScrollGsap>
-      </Curve>
+     
     </>
   );
 }

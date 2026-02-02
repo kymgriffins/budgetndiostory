@@ -276,29 +276,7 @@ export default function Home() {
 
           <main id="landing-content">
             {/* TRUST BADGES */}
-            <section className="padding-x pt-[16px]">
-              {/* <div className="max-w-[1200px] mx-auto">
-                <div
-                  data-animate="fade-up"
-                  className="flex items-center justify-center gap-[32px] flex-wrap"
-                >
-                  <span className="text-[11px] uppercase tracking-[0.15em] font-NeueMontreal text-[#212121]/50">
-                    Trusted by citizens across Kenya
-                  </span>
-                  <div className="flex items-center gap-[24px] flex-wrap justify-center">
-                    <div className="h-[28px] w-[80px] bg-[#212121]/10 rounded-full flex items-center justify-center">
-                      <span className="text-[10px] font-NeueMontreal text-[#212121]/60">Media</span>
-                    </div>
-                    <div className="h-[28px] w-[80px] bg-[#212121]/10 rounded-full flex items-center justify-center">
-                      <span className="text-[10px] font-NeueMontreal text-[#212121]/60">Partners</span>
-                    </div>
-                    <div className="h-[28px] w-[80px] bg-[#212121]/10 rounded-full flex items-center justify-center">
-                      <span className="text-[10px] font-NeueMontreal text-[#212121]/60">Awards</span>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-            </section>
+           
 
             {/* HERO */}
             <section className="padding-x pt-[40px] smOnly:pt-[28px] xm:pt-[24px]">

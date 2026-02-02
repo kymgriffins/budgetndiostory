@@ -9,12 +9,25 @@ export { default as Layout } from "./Layout";
 export { default as Marquee } from "./Marquee";
 export { default as MobileNav } from "./MobileNav";
 export { default as Navbar } from "./Navbar";
+export {
+  flipVariants, PageTransition, scaleVariants, slideVariants, StaggerContainer,
+  StaggerItem
+} from "./PageTransition";
+export { PageTransitionLoader, PageTransitionWithLoader } from "./PageTransitionLoader";
 export { default as PlayVideo } from "./PlayVideo";
 export { default as ProjectCard } from "./ProjectCard";
 export { default as Ratings } from "./Ratings";
 export { default as Ready } from "./Ready";
+export {
+  ParallaxBackground, ParallaxImage, ResponsiveParallax
+} from "./ResponsiveParallax";
 export { default as RoundButton } from "./RoundButton";
 export { default as Rounded } from "./Rounded";
+export { FadeIn, ScrollReveal } from "./ScrollReveal";
+export {
+  ArticleSchema, BreadcrumbSchema, FAQSchema,
+  LocalBusinessSchema, OrganizationSchema, ServiceSchema, StructuredData, WebsiteSchema
+} from "./StructuredData";
 export { default as Tags } from "./Tags";
 export { default as VideoThumbnail } from "./VideoThumbnail";
 export { default as YouTubePlayer } from "./YouTubePlayer";
