@@ -1,4 +1,5 @@
 import { Navbar } from "@/components";
+import { AnalyticsProvider } from "@/components/Analytics";
 import LandingFooter from "@/components/LandingFooter";
 import "@/styles/globals.css";
 import { AnimatePresence } from "framer-motion";
@@ -32,12 +33,13 @@ export default function App({
     "/podcasts", // Podcasts - manually imports LandingFooter
     "/shorts", // Shorts - manually imports LandingFooter
     "/budget-simplified", // Budget Simplified - manually imports LandingFooter
+    "/analytics", // Analytics dashboard - no footer
   ];
 
   const shouldHideFooter = hideFooterRoutes.includes(path);
 
   return (
-    <>
+    <AnalyticsProvider>
       <Navbar />
       {isLanding ? (
         <Component key={router.route} {...pageProps} />
@@ -47,6 +49,6 @@ export default function App({
         </AnimatePresence>
       )}
       {!shouldHideFooter && <LandingFooter />}
-    </>
+    </AnalyticsProvider>
   );
 }
