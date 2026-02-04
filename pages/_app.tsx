@@ -3,6 +3,7 @@ import { AnalyticsProvider } from "@/components/Analytics";
 import LandingFooter from "@/components/LandingFooter";
 import "@/styles/globals.css";
 import { AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function App({
   Component,
@@ -49,6 +50,7 @@ export default function App({
         </AnimatePresence>
       )}
       {!shouldHideFooter && <LandingFooter />}
+      <Analytics />
     </AnalyticsProvider>
   );
 }
