@@ -1,0 +1,67 @@
+{
+  "stats": [
+    {
+      "label": "Voices Heard",
+      "value": "42,500+",
+      "description": "Community members participated in our surveys and polls"
+    },
+    {
+      "label": "Investigations",
+      "value": "18",
+      "description": "Stories launched based on community feedback"
+    },
+    {
+      "label": "Published",
+      "value": "7",
+      "description": "Impactful stories that sparked real change"
+    }
+  ],
+  "methods": [
+    {
+      "id": "1",
+      "title": "Quick Polls",
+      "emoji": "📊",
+      "description": "Vote on issues that matter to you. Your voice shapes our investigation priorities.",
+      "actionLabel": "Take a Poll"
+    },
+    {
+      "id": "2",
+      "title": "Voice Notes",
+      "emoji": "🎙️",
+      "description": "Share your story in your own words. Audio submissions help us hear from those often unheard.",
+      "actionLabel": "Record Voice Note"
+    },
+    {
+      "id": "3",
+      "title": "Comments",
+      "emoji": "💬",
+      "description": "Engage with our stories. Share your experiences and add context to our investigations.",
+      "actionLabel": "Join Discussion"
+    },
+    {
+      "id": "4",
+      "title": "Submit a Story",
+      "emoji": "📝",
+      "description": "Know something we should investigate? Submit a tip or story idea securely.",
+      "actionLabel": "Submit Story"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Is my participation anonymous?",
+      "answer": "Yes. We never share personally identifiable information without your explicit consent."
+    },
+    {
+      "question": "How do you use my feedback?",
+      "answer": "Community input directly influences which stories we pursue and how we cover them."
+    },
+    {
+      "question": "Can I submit a story tip?",
+      "answer": "Absolutely. Use our secure submission form to share information or documents."
+    },
+    {
+      "question": "How do you verify submissions?",
+      "answer": "Our editorial team follows strict verification protocols before publishing any content."
+    }
+  ]
+}

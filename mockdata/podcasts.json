@@ -1,0 +1,59 @@
+{
+  "podcasts": [
+    {
+      "id": "1",
+      "title": "Following the Money: Inside Kenya's Budget",
+      "description": "We break down the national budget in plain language, explaining where your tax money actually goes and why it matters to you.",
+      "episodeNumber": 42,
+      "duration": "28 min",
+      "category": "Budget Breakdown",
+      "publishDate": "Jan 15, 2024",
+      "isFeatured": true
+    },
+    {
+      "id": "2",
+      "title": "Youth Voices: The Next Generation Speaks",
+      "description": "Young Kenyans from across the country share their experiences with government services and what change means to them.",
+      "episodeNumber": 41,
+      "duration": "35 min",
+      "category": "Conversation",
+      "publishDate": "Jan 12, 2024"
+    },
+    {
+      "id": "3",
+      "title": "The Healthcare Crisis No One Talks About",
+      "description": "A deep dive into rural healthcare challenges, featuring interviews with doctors, patients, and administrators.",
+      "episodeNumber": 40,
+      "duration": "42 min",
+      "category": "Investigation",
+      "publishDate": "Jan 10, 2024"
+    },
+    {
+      "id": "4",
+      "title": "Education Emergency: What's Going Wrong?",
+      "description": "Teachers, parents, and students discuss the challenges facing our education system and potential solutions.",
+      "episodeNumber": 39,
+      "duration": "31 min",
+      "category": "Conversation",
+      "publishDate": "Jan 8, 2024"
+    },
+    {
+      "id": "5",
+      "title": "Infrastructure: Building Dreams or Pipelines?",
+      "description": "Analyzing major infrastructure projects and their impact on communities and the environment.",
+      "episodeNumber": 38,
+      "duration": "38 min",
+      "category": "Analysis",
+      "publishDate": "Jan 5, 2024"
+    },
+    {
+      "id": "6",
+      "title": "Agriculture: Feeding the Nation",
+      "description": "Farmers share their stories about subsidies, climate change, and finding markets for their produce.",
+      "episodeNumber": 37,
+      "duration": "33 min",
+      "category": "Story",
+      "publishDate": "Jan 3, 2024"
+    }
+  ]
+}

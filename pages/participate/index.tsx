@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { participationStats, participationMethods, faqs } from "@/mockdata";
 
 export default function Participate() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);

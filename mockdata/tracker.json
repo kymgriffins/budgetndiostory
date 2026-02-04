@@ -1,0 +1,78 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "name": "Sunshine County Road",
+      "description": "40km highway connecting agricultural heartland to trading center",
+      "county": "Sunshine County",
+      "sector": "Infrastructure",
+      "budget": "2.5B KES",
+      "allocated": 75,
+      "status": "In Progress",
+      "progress": 30,
+      "icon": "🛣️"
+    },
+    {
+      "id": "2",
+      "name": "Shinyanga Water Project",
+      "description": "Clean water supply for 50,000 residents",
+      "county": "Shinyanga County",
+      "sector": "Water",
+      "budget": "500M KES",
+      "allocated": 100,
+      "status": "Stalled",
+      "progress": 20,
+      "icon": "💧"
+    },
+    {
+      "id": "3",
+      "name": "Regional Referral Hospital",
+      "description": "200-bed hospital with modern equipment",
+      "county": "Central County",
+      "sector": "Health",
+      "budget": "800M KES",
+      "allocated": 100,
+      "status": "Completed",
+      "progress": 100,
+      "completionDate": "Dec 2023",
+      "icon": "🏥"
+    },
+    {
+      "id": "4",
+      "name": "Youth Skills Center",
+      "description": "Vocational training facility for 1,000 students annually",
+      "county": "Metro County",
+      "sector": "Education",
+      "budget": "350M KES",
+      "allocated": 50,
+      "status": "Allocated",
+      "progress": 0,
+      "icon": "🎓"
+    },
+    {
+      "id": "5",
+      "name": "Irrigation Scheme",
+      "description": "Modern irrigation for 5,000 acres of farmland",
+      "county": "Riverside County",
+      "sector": "Agriculture",
+      "budget": "420M KES",
+      "allocated": 100,
+      "status": "Completed",
+      "progress": 100,
+      "completionDate": "Nov 2023",
+      "icon": "🌾"
+    },
+    {
+      "id": "6",
+      "name": "Primary School Blocks",
+      "description": "Construction of 20 new classroom blocks",
+      "county": "Highlands County",
+      "sector": "Education",
+      "budget": "280M KES",
+      "allocated": 80,
+      "status": "In Progress",
+      "progress": 60,
+      "icon": "📚"
+    }
+  ]
+}

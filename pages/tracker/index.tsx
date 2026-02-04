@@ -2,6 +2,7 @@ import LandingFooter from "@/components/LandingFooter";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { projects } from "@/mockdata";
 
 export default function Tracker() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);

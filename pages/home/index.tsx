@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
+import { budgetSnapshot, homeStats, contentTypes } from "@/mockdata";
 
 export default function Home() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { mission, values, team } from "@/mockdata";
 
 export default function About() {
 	const scrollerRef = useRef<HTMLDivElement | null>(null);

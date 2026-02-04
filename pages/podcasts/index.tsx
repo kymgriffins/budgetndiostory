@@ -3,6 +3,7 @@ import VideoThumbnail from "@/components/VideoThumbnail";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { podcasts } from "@/mockdata";
 
 type MediaType = "audio" | "video";
 
@@ -354,12 +355,9 @@ export default function Podcasts() {
     };
   }, []);
 
-  const filteredEpisodes =
-    filter === "all"
-      ? episodes
-      : episodes.filter((ep) => ep.mediaType === filter);
+  const filteredEpisodes = podcasts;
 
-  const featuredEpisode = episodes[0];
+  const featuredEpisode = podcasts.find(p => p.isFeatured) || podcasts[0];
 
   const getMediaBadge = (type: MediaType) => {
     if (type === "video") {

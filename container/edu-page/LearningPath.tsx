@@ -1,70 +1,35 @@
 import { Marquee } from "@/components";
 import Link from "next/link";
+import { courses } from "@/mockdata";
 
-interface LearningPathItem {
-  id: string;
-  title: string;
-  description: string;
-  duration: string;
-  lessons: number;
-  completed: boolean;
-  current: boolean;
-  color: string;
-  gradient: string;
-}
+// Color mapping for course categories
+const colorMap: Record<string, string> = {
+  "Budget Basics": "from-green-400 to-emerald-500",
+  "County Government": "from-blue-400 to-indigo-500",
+  "Your Civic Rights": "from-purple-400 to-violet-500",
+  "Tracking Public Spending": "from-orange-400 to-amber-500",
+};
+
+const gradientMap: Record<string, string> = {
+  "Budget Basics": "bg-gradient-to-br from-green-400/20 to-emerald-500/20",
+  "County Government": "bg-gradient-to-br from-blue-400/20 to-indigo-500/20",
+  "Your Civic Rights": "bg-gradient-to-br from-purple-400/20 to-violet-500/20",
+  "Tracking Public Spending": "bg-gradient-to-br from-orange-400/20 to-amber-500/20",
+};
 
 export default function LearningPath() {
-  const learningPath: LearningPathItem[] = [
-    {
-      id: "basics",
-      title: "Budget Basics",
-      description:
-        "Understand how Kenya's national and county budgets work, from formulation to approval.",
-      duration: "15 min",
-      lessons: 4,
-      completed: true,
-      current: false,
-      color: "from-green-400500",
-      gradient:
-        "bg-gradient to-emerald--to-br from-green-400/20 to-emerald-500/20",
-    },
-    {
-      id: "reading",
-      title: "Reading the Budget",
-      description:
-        "Learn to read and interpret budget documents, spreadsheets, and financial reports.",
-      duration: "20 min",
-      lessons: 5,
-      completed: false,
-      current: true,
-      color: "from-blue-400 to-indigo-500",
-      gradient: "bg-gradient-to-br from-blue-400/20 to-indigo-500/20",
-    },
-    {
-      id: "tracking",
-      title: "Tracking Spending",
-      description:
-        "Follow the money from budget allocation to actual spending and project completion.",
-      duration: "25 min",
-      lessons: 6,
-      completed: false,
-      current: false,
-      color: "from-purple-400 to-violet-500",
-      gradient: "bg-gradient-to-br from-purple-400/20 to-violet-500/20",
-    },
-    {
-      id: "civic",
-      title: "Civic Action",
-      description:
-        "How to participate in budget processes, advocate for change, and hold leaders accountable.",
-      duration: "30 min",
-      lessons: 4,
-      completed: false,
-      current: false,
-      color: "from-orange-400 to-amber-500",
-      gradient: "bg-gradient-to-br from-orange-400/20 to-amber-500/20",
-    },
-  ];
+  // Transform courses to learning path format
+  const learningPath = courses.map((course, index) => ({
+    id: course.id,
+    title: course.title,
+    description: course.description,
+    duration: course.duration,
+    lessons: course.lessons.length,
+    completed: index === 0, // Mark first course as completed
+    current: index === 1, // Mark second course as current
+    color: colorMap[course.title] || "from-gray-400 to-gray-500",
+    gradient: gradientMap[course.title] || "bg-gradient-to-br from-gray-400/20 to-gray-500/20",
+  }));
 
   const completedCount = learningPath.filter((p) => p.completed).length;
   const progressPercent = Math.round(
@@ -209,7 +174,7 @@ export default function LearningPath() {
         </div>
       </div>
 
-  
+
 
       {/* ADDITIONAL RESOURCES */}
       <div
@@ -332,3 +297,4 @@ export default function LearningPath() {
     </section>
   );
 }
+

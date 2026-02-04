@@ -3,6 +3,46 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
+// Category emoji mapping
+const categoryEmojis: Record<string, string> = {
+  Infrastructure: "🛣️",
+  Health: "🏥",
+  Education: "📚",
+  Youth: "👥",
+  Water: "💧",
+  Agriculture: "🌾",
+  roads: "🛣️",
+  health: "🏥",
+  education: "📚",
+  youth: "👥",
+  water: "💧",
+  agriculture: "🌾",
+};
+
+// Map category to color gradient
+const categoryColors: Record<string, string> = {
+  Infrastructure: "from-orange-400 to-red-500",
+  Health: "from-green-400 to-emerald-600",
+  Education: "from-amber-400 to-orange-500",
+  Youth: "from-purple-400 to-violet-600",
+  Water: "from-cyan-400 to-blue-500",
+  Agriculture: "from-lime-400 to-green-500",
+  roads: "from-orange-400 to-red-500",
+  health: "from-green-400 to-emerald-600",
+  education: "from-amber-400 to-orange-500",
+  youth: "from-purple-400 to-violet-600",
+  water: "from-cyan-400 to-blue-500",
+  agriculture: "from-lime-400 to-green-500",
+};
+
+const getCategoryColor = (category: string): string => {
+  return categoryColors[category] || "from-gray-400 to-gray-600";
+};
+
+const getCategoryEmoji = (category: string): string => {
+  return categoryEmojis[category] || "📰";
+};
+
 export default function Stories() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -226,6 +266,13 @@ export default function Stories() {
 
   const categories = [
     { id: "all", label: "All Stories" },
+    { id: "all", label: "All" },
+    { id: "Infrastructure", label: "Infrastructure" },
+    { id: "Health", label: "Health" },
+    { id: "Education", label: "Education" },
+    { id: "Youth", label: "Youth" },
+    { id: "Water", label: "Water" },
+    { id: "Agriculture", label: "Agriculture" },
     { id: "roads", label: "Infrastructure" },
     { id: "health", label: "Health" },
     { id: "education", label: "Education" },
@@ -237,7 +284,9 @@ export default function Stories() {
   const filteredStories =
     selectedCategory === "all"
       ? stories
-      : stories.filter((s) => s.category === selectedCategory);
+      : stories.filter(
+          (s) => s.category.toLowerCase() === selectedCategory.toLowerCase(),
+        );
 
   const featuredStory = stories[0];
 
@@ -342,12 +391,12 @@ export default function Stories() {
                     </div>
                     <div className="col-span-4 relative overflow-hidden mdOnly:col-span-12 mdOnly:h-[200px] smOnly:col-span-12 smOnly:h-[180px] xm:col-span-12 xm:h-[160px]">
                       <div
-                        className={`absolute inset-0 bg-gradient-to-br ${featuredStory.color}`}
+                        className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor(featuredStory.category)}`}
                       ></div>
                       <div className="absolute inset-0 bg-black/10"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
                         <span className="text-[80px] opacity-50 mdOnly:text-[60px] smOnly:text-[48px] xm:text-[40px]">
-                          📰
+                          {getCategoryEmoji(featuredStory.category)}
                         </span>
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-[20px] bg-gradient-to-t from-black/30 to-transparent">
@@ -390,7 +439,7 @@ export default function Stories() {
                     >
                       <div className="relative h-[160px] overflow-hidden">
                         <div
-                          className={`absolute inset-0 bg-gradient-to-br ${story.color}`}
+                          className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor(story.category)}`}
                         ></div>
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="absolute top-[16px] left-[16px]">

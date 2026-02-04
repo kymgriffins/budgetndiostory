@@ -1,0 +1,70 @@
+{
+  "stories": [
+    {
+      "id": "1",
+      "title": "The Road to Nowhere: A County's Unfinished Dream",
+      "excerpt": "Three years after groundbreaking, the promised highway connecting rural farmers to markets remains a dusty track. We investigate where the money went.",
+      "category": "Infrastructure",
+      "emoji": "🛣️",
+      "readTime": "8 min read",
+      "author": "Wanjiku M.",
+      "date": "Jan 15, 2024",
+      "content": "In 2021, the county government announced a grand plan: a 40-kilometer highway connecting the agricultural heartland to the main trading center. The budget allocated was 2.5 billion shillings. Today, only 12 kilometers are complete, and the rest remains a memory of broken promises."
+    },
+    {
+      "id": "2",
+      "title": "When the Water Stops Running",
+      "excerpt": "A town's water crisis reveals a 500 million shilling project that never delivered on its promise to provide clean water to 50,000 residents.",
+      "category": "Water",
+      "emoji": "💧",
+      "readTime": "6 min read",
+      "author": "Ochieng A.",
+      "date": "Jan 12, 2024",
+      "content": "The Shinyanga Water Project was hailed as a solution to decades of water scarcity. Two years and 500 million shillings later, residents still queue at ancient wells."
+    },
+    {
+      "id": "3",
+      "title": "Textbooks in Storage: Why Schools Can't Get What They Need",
+      "excerpt": "While students share torn books, thousands of textbooks gather dust in a government warehouse. Our investigation reveals a supply chain broken by corruption.",
+      "category": "Education",
+      "emoji": "📚",
+      "readTime": "10 min read",
+      "author": "Amina K.",
+      "date": "Jan 10, 2024",
+      "content": "Government records show 2 million textbooks purchased for primary schools. But a spot check of 50 schools revealed barely 10% received their allocation."
+    },
+    {
+      "id": "4",
+      "title": "The Youth Fund That Youth Can't Access",
+      "excerpt": "Billions allocated for youth entrepreneurship remain unspent or trapped in bureaucracy. We follow the journey of applicants who gave up.",
+      "category": "Youth",
+      "emoji": "👥",
+      "readTime": "7 min read",
+      "author": "Brian O.",
+      "date": "Jan 8, 2024",
+      "content": "The Uwezo Fund was created to provide capital for young entrepreneurs. But application processes, collateral requirements, and corruption have left billions unutilized."
+    },
+    {
+      "id": "5",
+      "title": "Fertilizer on Paper: The Subsidy Scandal",
+      "excerpt": "Farmers receive vouchers but no fertilizer. Our three-month investigation uncovers a cartel that's starving the agricultural sector.",
+      "category": "Agriculture",
+      "emoji": "🌾",
+      "readTime": "9 min read",
+      "author": "Grace N.",
+      "date": "Jan 5, 2024",
+      "content": "Government fertilizer subsidies were meant to boost food production. Instead, we've found a sophisticated network of middlemen diverting supplies to black markets."
+    },
+    {
+      "id": "6",
+      "title": "Hospital Beds, Broken Promises",
+      "excerpt": "A new county hospital was announced with great fanfare. Two years later, it's a building without equipment, staff, or patients.",
+      "category": "Health",
+      "emoji": "🏥",
+      "readTime": "8 min read",
+      "author": "Dr. Sarah M.",
+      "date": "Jan 3, 2024",
+      "content": "The Sunshine County Referral Hospital was budgeted at 800 million shillings. The building stands complete, but without medical equipment worth 300 million shillings."
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "courses": [
+    {
+      "id": "budget-basics",
+      "title": "Budget Basics",
+      "description": "Understand how government budgets work and why they matter to you",
+      "duration": "45 min",
+      "thumbnail": "/images/budget-basics.jpg",
+      "lessons": [
+        {
+          "id": "1-1",
+          "title": "What is a Budget?",
+          "duration": "10 min",
+          "type": "video"
+        },
+        {
+          "id": "1-2",
+          "title": "Where Does Money Come From?",
+          "duration": "12 min",
+          "type": "video"
+        },
+        {
+          "id": "1-3",
+          "title": "The Budget Cycle Explained",
+          "duration": "15 min",
+          "type": "video"
+        },
+        {
+          "id": "1-4",
+          "title": "Test Your Knowledge",
+          "duration": "8 min",
+          "type": "quiz"
+        }
+      ]
+    },
+    {
+      "id": "county-gov",
+      "title": "County Government",
+      "description": "Learn how county governments work and how to engage with them",
+      "duration": "30 min",
+      "thumbnail": "/images/county-gov.jpg",
+      "lessons": [
+        {
+          "id": "2-1",
+          "title": "What is a County?",
+          "duration": "8 min",
+          "type": "video"
+        },
+        {
+          "id": "2-2",
+          "title": "Your County Assembly",
+          "duration": "10 min",
+          "type": "video"
+        },
+        {
+          "id": "2-3",
+          "title": "How to Attend a Assembly Sitting",
+          "duration": "12 min",
+          "type": "video"
+        }
+      ]
+    },
+    {
+      "id": "your-rights",
+      "title": "Your Civic Rights",
+      "description": "Know your rights as a citizen to access information and demand accountability",
+      "duration": "35 min",
+      "thumbnail": "/images/rights.jpg",
+      "lessons": [
+        {
+          "id": "3-1",
+          "title": "The Right to Information",
+          "duration": "10 min",
+          "type": "video"
+        },
+        {
+          "id": "3-2",
+          "title": "How to File an Access Request",
+          "duration": "15 min",
+          "type": "text"
+        },
+        {
+          "id": "3-3",
+          "title": "Citizen Participation Laws",
+          "duration": "10 min",
+          "type": "video"
+        }
+      ]
+    },
+    {
+      "id": "tracking-spending",
+      "title": "Tracking Public Spending",
+      "description": "Tools and techniques to follow the money and hold leaders accountable",
+      "duration": "40 min",
+      "thumbnail": "/images/tracking.jpg",
+      "lessons": [
+        {
+          "id": "4-1",
+          "title": "Public Procurement Portal",
+          "duration": "12 min",
+          "type": "video"
+        },
+        {
+          "id": "4-2",
+          "title": "Reading Audit Reports",
+          "duration": "15 min",
+          "type": "video"
+        },
+        {
+          "id": "4-3",
+          "title": "Community Monitoring Guide",
+          "duration": "13 min",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

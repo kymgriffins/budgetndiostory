@@ -1,0 +1,69 @@
+{
+  "shorts": [
+    {
+      "id": "1",
+      "title": "Where Did the Money Go?",
+      "description": "Quick breakdown of a 1 billion shilling project that vanished into thin air.",
+      "duration": "0:58",
+      "likes": "12.5K",
+      "category": "Explainer",
+      "isFeatured": true
+    },
+    {
+      "id": "2",
+      "title": "The Farmer's Lament",
+      "description": "A skit about subsidized fertilizer that never reaches real farmers.",
+      "duration": "1:15",
+      "likes": "8.2K",
+      "category": "Skit"
+    },
+    {
+      "id": "3",
+      "title": "Budget 101: In 60 Seconds",
+      "description": "Everything you need to know about national budgets, simplified.",
+      "duration": "1:00",
+      "likes": "15.7K",
+      "category": "Explainer"
+    },
+    {
+      "id": "4",
+      "title": "Interview: A Young Activist",
+      "description": "Meet the 22-year-old making waves in civic engagement.",
+      "duration": "2:30",
+      "likes": "6.3K",
+      "category": "Interview"
+    },
+    {
+      "id": "5",
+      "title": "County Assembly 101",
+      "description": "Who are these people and what do they actually do?",
+      "duration": "0:55",
+      "likes": "9.8K",
+      "category": "Explainer"
+    },
+    {
+      "id": "6",
+      "title": "The Water Project That Never Was",
+      "description": "Comedy meets tragedy in this tale of broken promises.",
+      "duration": "1:20",
+      "likes": "11.2K",
+      "category": "Comedy"
+    },
+    {
+      "id": "7",
+      "title": "Your Tax Dollars at Work",
+      "description": "Visualizing where your money goes (it's wild).",
+      "duration": "0:45",
+      "likes": "18.9K",
+      "category": "Explainer"
+    },
+    {
+      "id": "8",
+      "title": "Voting Myths Busted",
+      "description": "Common misconceptions about voting and citizenship.",
+      "duration": "1:10",
+      "likes": "7.5K",
+      "category": "Explainer"
+    }
+  ]
+}

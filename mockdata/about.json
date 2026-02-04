@@ -1,0 +1,61 @@
+{
+  "problemStatement": [
+    {
+      "title": "Youth Disengagement",
+      "description": "Young people feel disconnected from government processes that affect their daily lives"
+    },
+    {
+      "title": "Accessibility Gap",
+      "description": "Budget information is buried in technical documents, written for experts, not citizens"
+    },
+    {
+      "title": "Format Mismatch",
+      "description": "Young Kenyans consume content on mobile, but budget info is designed for print"
+    },
+    {
+      "title": "Accountability Void",
+      "description": "There's no easy way to track if promised projects actually happen"
+    }
+  ],
+  "mission": "To empower young Kenyans with accessible, engaging information about public budgets and to create platforms for meaningful civic participation that drives accountability.",
+  "values": [
+    {
+      "emoji": "🎯",
+      "title": "Clarity First",
+      "description": "We explain complex government spending in plain, simple language"
+    },
+    {
+      "emoji": "🔍",
+      "title": "Truth Above All",
+      "description": "We verify facts rigorously and present evidence-based stories"
+    },
+    {
+      "emoji": "🤝",
+      "title": "Non-Partisan",
+      "description": "We don't push political agendas. We focus on facts and accountability"
+    },
+    {
+      "emoji": "🎤",
+      "title": "Youth-Centered",
+      "description": "Everything we create is designed with and for young people"
+    },
+    {
+      "emoji": "🌍",
+      "title": "Inclusive",
+      "description": "We ensure marginalized voices are heard and represented"
+    },
+    {
+      "emoji": "🚀",
+      "title": "Action-Oriented",
+      "description": "We don't just inform—we create pathways for citizens to take action"
+    }
+  ],
+  "team": {
+    "stat": "15",
+    "description": "Team members across journalism, design, and community engagement"
+  },
+  "contact": {
+    "email": "hello@budgetndiostory.ke",
+    "phone": "+254 700 000 000"
+  }
+}
