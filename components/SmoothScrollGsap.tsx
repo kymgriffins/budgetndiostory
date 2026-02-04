@@ -19,9 +19,12 @@ type Props = {
  */
 export default function SmoothScrollGsap({ children, className }: Props) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
-    let loco: any;
+    // Prevent multiple initializations
+    if (initializedRef.current) return;
+    initializedRef.current = true;
     let ctx: any;
     let gsap: any;
     let ScrollTrigger: any;
@@ -31,6 +34,7 @@ export default function SmoothScrollGsap({ children, className }: Props) {
     if (!el) return;
 
     let cancelled = false;
+    let loco: any;
 
     (async () => {
       try {
@@ -63,7 +67,17 @@ export default function SmoothScrollGsap({ children, className }: Props) {
           autoStart: true,
         });
 
-        if (cancelled) return;
+        if (cancelled) {
+          // Cleanup if cancelled during async operation
+          try {
+            ctx?.revert?.();
+            loco?.destroy?.();
+          } catch {}
+          return;
+        }
+
+        // Mark as initialized
+        initializedRef.current = true;
 
         const getScrollY = () =>
           loco?.lenisInstance?.scroll ?? el.scrollTop ?? 0;
@@ -161,6 +175,8 @@ export default function SmoothScrollGsap({ children, className }: Props) {
 
     return () => {
       cancelled = true;
+      // Only cleanup if we actually initialized
+      if (!initializedRef.current) return;
       try {
         ctx?.revert?.();
         loco?.destroy?.();

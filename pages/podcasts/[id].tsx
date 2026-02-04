@@ -3,9 +3,9 @@
 import LandingFooter from "@/components/LandingFooter";
 import YouTubePlayer, { extractYouTubeId } from "@/components/YouTubePlayer";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Sample podcast data with comprehensive fields
 interface PodcastEpisode {
@@ -211,31 +211,31 @@ export default function PodcastPlayer() {
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [viewMode, setViewMode] = useState<"audio" | "video">("audio");
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  // Ensure we're on the client side before accessing router
+  // Set client flag on mount
   useEffect(() => {
     setIsClient(true);
-    // Give time for router to be ready
     const timer = setTimeout(() => setIsLoading(false), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  // Only get episode after client is ready and id is available
+  // Get episode from router params
   const episodeId = isClient && id ? Number(id) : 1;
   const episode =
     podcastEpisodes.find((ep) => ep.id === episodeId) || podcastEpisodes[0];
-
-  // Check if episode has video
   const hasVideo = episode.videoUrl && episode.videoUrl.length > 0;
 
-  // Generate waveform bars only after client is ready
+  // Generate waveform bars
   useEffect(() => {
     if (isClient) {
-      const bars = Array.from({ length: 100 }, () => Math.random() * 80 + 20);
+      const bars = Array.from({ length: 80 }, () => Math.random() * 70 + 30);
       setWaveformBars(bars);
     }
   }, [isClient, id]);
 
+  // Update playback speed
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.playbackRate = playbackSpeed;
@@ -316,6 +316,41 @@ export default function PodcastPlayer() {
     setPlaybackSpeed(speeds[nextIndex]);
   };
 
+  // Format publish date
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // Get next/previous episodes
+  const currentIndex = podcastEpisodes.findIndex((ep) => ep.id === episodeId);
+  const prevEpisode = currentIndex > 0 ? podcastEpisodes[currentIndex - 1] : null;
+  const nextEpisode =
+    currentIndex < podcastEpisodes.length - 1
+      ? podcastEpisodes[currentIndex + 1]
+      : null;
+
+  // Navigate to episode
+  const navigateToEpisode = (epId: number) => {
+    router.push(`/podcasts/${epId}`);
+  };
+
+  // Loading state
+  if (!isClient || isLoading) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+          <p className="text-white/60 font-NeueMontreal">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <Head>
@@ -324,356 +359,679 @@ export default function PodcastPlayer() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      {/* Loading State */}
-      {!isClient || isLoading ? (
-        <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-            <p className="text-white/60">Loading...</p>
-          </div>
-        </div>
-      ) : (
-        <div className="min-h-screen bg-[#0a0a0a] text-white">
-          {/* Back Button */}
-          <div className="fixed top-6 left-6 z-50">
-            <Link
-              href="/podcasts"
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition"
+      <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
+        {/* Fixed Back Button */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="fixed top-6 left-6 z-50"
+        >
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all hover:scale-105"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-              </svg>
-              Back
-            </Link>
-          </div>
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            <span className="font-NeueMontreal text-sm">Back</span>
+          </button>
+        </motion.div>
 
-          {/* Main Player Container */}
-          <div className="flex flex-col lg:flex-row min-h-screen">
-            {/* Cover Art / Video Section */}
+        {/* Main Content - Flex grow to push footer down */}
+        <main className="flex-grow">
+          {/* Hero Section with Media Player */}
+          <section className="relative">
+            {/* Animated Background Gradient */}
             <div
-              className={`w-full ${
-                viewMode === "video"
-                  ? "lg:w-full lg:aspect-video lg:max-h-[70vh] bg-black"
-                  : `lg:w-1/2 lg:min-h-screen bg-gradient-to-br ${episode.coverColor}`
-              } flex flex-col items-center justify-center p-0`}
-            >
-              {viewMode === "video" && episode.videoUrl ? (
-                <div className="w-full h-full">
-                  <YouTubePlayer
-                    videoId={extractYouTubeId(episode.videoUrl)}
-                    autoplay={true}
-                  />
-                </div>
-              ) : (
-                <div className="relative">
-                  {/* Animated vinyl/record effect */}
-                  <div
-                    className={`w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-xl border border-white/20 flex items-center justify-center ${isPlaying ? "animate-spin-slow" : ""}`}
-                  >
-                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/10 flex items-center justify-center">
-                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/20 flex items-center justify-center">
-                        <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-white" />
+              className={`absolute inset-0 bg-gradient-to-br ${episode.coverColor} opacity-20`}
+            />
+
+            <div className="relative max-w-7xl mx-auto px-6 py-12 pt-20">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                {/* Left: Episode Art / Video */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="order-2 lg:order-1"
+                >
+                  {/* Episode Type Badge */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-sm font-NeueMontreal text-white/80 capitalize">
+                      {episode.type}
+                    </span>
+                    <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-sm font-NeueMontreal text-white/80 capitalize">
+                      {episode.category}
+                    </span>
+                    {hasVideo && (
+                      <span className="px-4 py-1.5 rounded-full bg-red-500/20 text-red-400 text-sm font-NeueMontreal capitalize flex items-center gap-2">
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                        Video
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Episode Title */}
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-FoundersGrotesk font-bold leading-tight mb-4">
+                    {episode.title}
+                  </h1>
+
+                  {/* Episode Excerpt */}
+                  <p className="text-lg text-white/60 font-NeueMontreal mb-6 max-w-xl">
+                    {episode.excerpt}
+                  </p>
+
+                  {/* Host & Date Info */}
+                  <div className="flex flex-wrap items-center gap-4 mb-8">
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                          <circle cx="12" cy="7" r="4" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm text-white/50 font-NeueMontreal">
+                          Host
+                        </p>
+                        <p className="font-medium">{episode.host}</p>
+                      </div>
+                    </div>
+                    {episode.guests && episode.guests.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-sm text-white/50 font-NeueMontreal">
+                            Guest
+                          </p>
+                          <p className="font-medium">{episode.guests[0]}</p>
+                        </div>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                          <line x1="16" y1="2" x2="16" y2="6" />
+                          <line x1="8" y1="2" x2="8" y2="6" />
+                          <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm text-white/50 font-NeueMontreal">
+                          Published
+                        </p>
+                        <p className="font-medium">
+                          {formatDate(episode.publishDate)}
+                        </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Play button overlay */}
-                  <button
-                    onClick={handlePlayPause}
-                    className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition shadow-lg"
-                  >
-                    {isPlaying ? (
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <rect x="6" y="4" width="4" height="16" />
-                        <rect x="14" y="4" width="4" height="16" />
-                      </svg>
-                    ) : (
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Player Controls Section */}
-            <div
-              className={`w-full lg:w-1/2 flex flex-col justify-center p-6 md:p-12 lg:p-16 ${
-                viewMode === "video"
-                  ? "lg:w-full lg:max-h-[40vh] lg:overflow-y-auto"
-                  : ""
-              }`}
-            >
-              {/* Episode Info */}
-              <div className="mb-8">
-                <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-sm text-white/70 mb-4">
-                  Episode {episode.id}
-                </span>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-FoundersGrotesk leading-tight mb-4">
-                  {episode.title}
-                </h1>
-                <p className="text-lg text-white/60 font-NeueMontreal">
-                  {episode.excerpt}
-                </p>
-              </div>
-
-              {/* Waveform Visualization */}
-              <div className="mb-8">
-                <div
-                  ref={waveformRef}
-                  className="flex items-center justify-center gap-1 h-20 md:h-32"
-                >
-                  {waveformBars.map((height, index) => {
-                    const progress =
-                      duration > 0 ? (currentTime / duration) * 100 : 0;
-                    const isPlayed =
-                      (index / waveformBars.length) * 100 <= progress;
-                    return (
-                      <div
-                        key={index}
-                        className={`w-1 md:w-2 rounded-full transition-all duration-150 ${
-                          isPlayed
-                            ? "bg-white"
-                            : "bg-white/20 hover:bg-white/40"
-                        }`}
-                        style={{
-                          height: `${height}%`,
-                          maxHeight: "100%",
-                        }}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="mb-6">
-                <div
-                  ref={progressRef}
-                  className="w-full h-2 bg-white/20 rounded-full cursor-pointer overflow-hidden"
-                  onClick={handleProgressClick}
-                >
-                  <div
-                    className="h-full bg-white rounded-full transition-all duration-100"
-                    style={{ width: `${(currentTime / duration) * 100}%` }}
-                  />
-                </div>
-                <div className="flex justify-between mt-2 text-sm text-white/50 font-mono">
-                  <span>{formatTime(currentTime)}</span>
-                  <span>{formatTime(duration)}</span>
-                </div>
-              </div>
-
-              {/* Main Controls */}
-              <div className="flex items-center justify-center gap-6 mb-8">
-                {/* Rewind 15s */}
-                <button
-                  onClick={() => handleSkip(-15)}
-                  className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
-                    <text
-                      x="12"
-                      y="15"
-                      fontSize="7"
-                      fill="currentColor"
-                      textAnchor="middle"
-                    >
-                      15
-                    </text>
-                  </svg>
-                </button>
-
-                {/* Play/Pause */}
-                <button
-                  onClick={handlePlayPause}
-                  className="w-20 h-20 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 transition shadow-lg"
-                >
-                  {isPlaying ? (
+                  {/* Play Count */}
+                  <div className="flex items-center gap-2 text-white/50">
                     <svg
-                      width="32"
-                      height="32"
+                      width="18"
+                      height="18"
                       viewBox="0 0 24 24"
-                      fill="currentColor"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
                     >
-                      <rect x="6" y="4" width="4" height="16" />
-                      <rect x="14" y="4" width="4" height="16" />
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
                     </svg>
-                  ) : (
-                    <svg
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  )}
-                </button>
-
-                {/* Forward 30s */}
-                <button
-                  onClick={() => handleSkip(30)}
-                  className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z" />
-                    <text
-                      x="12"
-                      y="15"
-                      fontSize="7"
-                      fill="currentColor"
-                      textAnchor="middle"
-                    >
-                      30
-                    </text>
-                  </svg>
-                </button>
-              </div>
-
-              {/* Secondary Controls */}
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                {/* View Mode Toggle (if video available) */}
-                {hasVideo && (
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setViewMode("audio")}
-                      className={`px-4 py-2 rounded-full transition text-sm font-medium ${
-                        viewMode === "audio"
-                          ? "bg-white text-black"
-                          : "bg-white/10 hover:bg-white/20"
-                      }`}
-                    >
-                      Audio
-                    </button>
-                    <button
-                      onClick={() => setViewMode("video")}
-                      className={`px-4 py-2 rounded-full transition text-sm font-medium ${
-                        viewMode === "video"
-                          ? "bg-white text-black"
-                          : "bg-white/10 hover:bg-white/20"
-                      }`}
-                    >
-                      Video
-                    </button>
+                    <span className="font-NeueMontreal text-sm">
+                      {episode.playCount.toLocaleString()} plays
+                    </span>
                   </div>
-                )}
+                </motion.div>
 
-                {/* Playback Speed */}
-                <button
-                  onClick={togglePlaybackSpeed}
-                  className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm font-medium"
+                {/* Right: Media Player */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="order-1 lg:order-2"
                 >
-                  {playbackSpeed}x
-                </button>
+                  {/* View Mode Toggle */}
+                  {hasVideo && (
+                    <div className="flex gap-2 mb-4 justify-center lg:justify-start">
+                      <button
+                        onClick={() => setViewMode("audio")}
+                        className={`px-5 py-2 rounded-full transition-all text-sm font-medium ${
+                          viewMode === "audio"
+                            ? "bg-white text-black"
+                            : "bg-white/10 hover:bg-white/20"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path d="M9 18V5l12-2v13" />
+                            <circle cx="6" cy="18" r="3" />
+                            <circle cx="18" cy="16" r="3" />
+                          </svg>
+                          Audio
+                        </span>
+                      </button>
+                      <button
+                        onClick={() => setViewMode("video")}
+                        className={`px-5 py-2 rounded-full transition-all text-sm font-medium ${
+                          viewMode === "video"
+                            ? "bg-white text-black"
+                            : "bg-white/10 hover:bg-white/20"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
+                            <line x1="7" y1="2" x2="7" y2="22" />
+                            <line x1="17" y1="2" x2="17" y2="22" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <line x1="2" y1="7" x2="7" y2="7" />
+                            <line x1="2" y1="17" x2="7" y2="17" />
+                            <line x1="17" y1="17" x2="22" y2="17" />
+                            <line x1="17" y1="7" x2="22" y2="7" />
+                          </svg>
+                          Video
+                        </span>
+                      </button>
+                    </div>
+                  )}
 
-                {/* Volume Control */}
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={toggleMute}
-                    className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"
+                  {/* Media Container */}
+                  <div
+                    className={`relative rounded-2xl overflow-hidden bg-black/40 backdrop-blur-xl border border-white/10 ${
+                      viewMode === "video"
+                        ? "aspect-video"
+                        : "aspect-square max-w-md mx-auto lg:max-w-none"
+                    }`}
                   >
-                    {isMuted ? (
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                        <line x1="23" y1="9" x2="17" y2="15" />
-                        <line x1="17" y1="9" x2="23" y2="15" />
-                      </svg>
-                    ) : (
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                      </svg>
+                    {/* Video Mode */}
+                    {viewMode === "video" && episode.videoUrl && (
+                      <div className="w-full h-full">
+                        <YouTubePlayer
+                          videoId={extractYouTubeId(episode.videoUrl)}
+                          autoplay={true}
+                        />
+                      </div>
                     )}
-                  </button>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={isMuted ? 0 : volume}
-                    onChange={handleVolumeChange}
-                    className="w-24 h-1 bg-white/20 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
-                  />
-                </div>
-              </div>
 
-              {/* Episode Tags */}
-              <div className="mt-8 flex flex-wrap gap-2">
-                <span className="px-3 py-1 rounded-full bg-white/10 text-sm text-white/70">
-                  {episode.type}
-                </span>
-                <span className="px-3 py-1 rounded-full bg-white/10 text-sm text-white/70">
-                  {episode.duration}
-                </span>
+                    {/* Audio Mode */}
+                    {viewMode === "audio" && (
+                      <div className="flex flex-col items-center justify-center p-8 h-full">
+                        {/* Animated Vinyl Record */}
+                        <motion.div
+                          animate={{
+                            rotate: isPlaying ? 360 : 0,
+                          }}
+                          transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                          className="relative mb-8"
+                        >
+                          <div
+                            className={`w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-white/30 to-white/5 backdrop-blur-xl border-4 border-white/20 flex items-center justify-center ${
+                              isPlaying ? "shadow-2xl shadow-white/10" : ""
+                            }`}
+                          >
+                            {/* Vinyl Grooves */}
+                            <div className="absolute inset-4 rounded-full border border-white/10" />
+                            <div className="absolute inset-8 rounded-full border border-white/10" />
+                            <div className="absolute inset-12 rounded-full border border-white/10" />
+
+                            {/* Center Label */}
+                            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-white/40 to-white/10 flex items-center justify-center">
+                              <div className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center">
+                                <div className="w-3 h-3 rounded-full bg-black" />
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+
+                        {/* Waveform Visualization */}
+                        <div
+                          ref={waveformRef}
+                          className="flex items-center justify-center gap-1 w-full h-16 mb-6"
+                        >
+                          {waveformBars.map((height, index) => {
+                            const progress =
+                              duration > 0 ? (currentTime / duration) * 100 : 0;
+                            const isPlayed =
+                              (index / waveformBars.length) * 100 <= progress;
+                            return (
+                              <motion.div
+                                key={index}
+                                animate={{
+                                  height: isPlayed
+                                    ? `${Math.max(height * 0.3, height)}%`
+                                    : `${height}%`,
+                                }}
+                                className={`w-1.5 md:w-2 rounded-full transition-all duration-150 ${
+                                  isPlayed
+                                    ? "bg-white shadow-lg shadow-white/30"
+                                    : "bg-white/25 hover:bg-white/40"
+                                }`}
+                              />
+                            );
+                          })}
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div
+                          ref={progressRef}
+                          className="w-full h-1.5 bg-white/20 rounded-full cursor-pointer overflow-hidden mb-4 group"
+                          onClick={handleProgressClick}
+                        >
+                          <motion.div
+                            className="h-full bg-white rounded-full relative"
+                            style={{
+                              width: `${(currentTime / duration) * 100}%`,
+                            }}
+                          >
+                            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg scale-0 group-hover:scale-100" />
+                          </motion.div>
+                        </div>
+
+                        {/* Time Display */}
+                        <div className="flex justify-between w-full text-sm font-mono text-white/50 mb-6">
+                          <span>{formatTime(currentTime)}</span>
+                          <span>{formatTime(duration)}</span>
+                        </div>
+
+                        {/* Main Controls */}
+                        <div className="flex items-center justify-center gap-6">
+                          {/* Rewind */}
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => handleSkip(-15)}
+                            className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all"
+                          >
+                            <svg
+                              width="20"
+                              height="20"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
+                              <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
+                              <text
+                                x="12"
+                                y="15"
+                                fontSize="6"
+                                fill="currentColor"
+                                textAnchor="middle"
+                                className="font-NeueMontreal"
+                              >
+                                15
+                              </text>
+                            </svg>
+                          </motion.button>
+
+                          {/* Play/Pause */}
+                          <motion.button
+                            whileHover={{ scale: 1.08 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={handlePlayPause}
+                            className="w-20 h-20 rounded-full bg-white text-black flex items-center justify-center hover:shadow-2xl hover:shadow-white/20 transition-all"
+                          >
+                            {isPlaying ? (
+                              <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <rect x="6" y="4" width="4" height="16" />
+                                <rect x="14" y="4" width="4" height="16" />
+                              </svg>
+                            ) : (
+                              <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            )}
+                          </motion.button>
+
+                          {/* Forward */}
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => handleSkip(30)}
+                            className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all"
+                          >
+                            <svg
+                              width="20"
+                              height="20"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
+                              <path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z" />
+                              <text
+                                x="12"
+                                y="15"
+                                fontSize="6"
+                                fill="currentColor"
+                                textAnchor="middle"
+                                className="font-NeueMontreal"
+                              >
+                                30
+                              </text>
+                            </svg>
+                          </motion.button>
+                        </div>
+
+                        {/* Secondary Controls */}
+                        <div className="flex items-center justify-between w-full mt-6 pt-6 border-t border-white/10">
+                          {/* Volume */}
+                          <div
+                            className="relative"
+                            onMouseEnter={() => setShowVolumeSlider(true)}
+                            onMouseLeave={() => setShowVolumeSlider(false)}
+                          >
+                            <button
+                              onClick={toggleMute}
+                              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all"
+                            >
+                              {isMuted ? (
+                                <svg
+                                  width="18"
+                                  height="18"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                >
+                                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                  <line x1="23" y1="9" x2="17" y2="15" />
+                                  <line x1="17" y1="9" x2="23" y2="15" />
+                                </svg>
+                              ) : (
+                                <svg
+                                  width="18"
+                                  height="18"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                >
+                                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                                </svg>
+                              )}
+                            </button>
+
+                            {/* Volume Slider */}
+                            <AnimatePresence>
+                              {showVolumeSlider && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: 10 }}
+                                  className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 p-3 bg-black/80 backdrop-blur-xl rounded-xl"
+                                >
+                                  <input
+                                    type="range"
+                                    min="0"
+                                    max="1"
+                                    step="0.01"
+                                    value={isMuted ? 0 : volume}
+                                    onChange={handleVolumeChange}
+                                    className="w-24 h-1 bg-white/20 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+                                  />
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+
+                          {/* Playback Speed */}
+                          <button
+                            onClick={togglePlaybackSpeed}
+                            className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-all text-sm font-medium font-NeueMontreal"
+                          >
+                            {playbackSpeed}x
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Hidden Audio Element */}
-          {viewMode === "audio" && (
-            <audio
-              ref={audioRef}
-              src={episode.audioUrl}
-              onTimeUpdate={handleTimeUpdate}
-              onLoadedMetadata={handleLoadedMetadata}
-              onEnded={() => setIsPlaying(false)}
-            />
-          )}
+          {/* Episode Details Section */}
+          <section className="max-w-7xl mx-auto px-6 py-12">
+            <div className="grid lg:grid-cols-3 gap-12">
+              {/* Left: Description */}
+              <div className="lg:col-span-2">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-2xl font-FoundersGrotesk font-bold mb-4">
+                    About This Episode
+                  </h2>
+                  <p className="text-white/70 font-NeueMontreal leading-relaxed mb-6">
+                    {episode.description}
+                  </p>
 
-          {/* Full-width Footer Section */}
-          {/* <div className="w-full bg-[#0a0a0a] -mx-6 lg:-mx-0"> */}
+                  {/* Expandable Description Toggle */}
+                  <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="text-white/50 hover:text-white transition-colors text-sm font-NeueMontreal flex items-center gap-2"
+                  >
+                    {isExpanded ? "Show less" : "Read more"}
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className={`transition-transform ${
+                        isExpanded ? "rotate-180" : ""
+                      }`}
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </button>
+                </motion.div>
+
+                {/* Tags */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="mt-8"
+                >
+                  <h3 className="text-sm font-NeueMontreal text-white/50 mb-3">
+                    Tags
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {episode.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-NeueMontreal text-white/70 hover:bg-white/10 transition-colors cursor-pointer"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Right: Episode Navigation */}
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="bg-white/5 rounded-2xl p-6 border border-white/10"
+                >
+                  <h3 className="text-lg font-FoundersGrotesk font-bold mb-4">
+                    Episode Navigation
+                  </h3>
+
+                  {/* Previous Episode */}
+                  {prevEpisode && (
+                    <button
+                      onClick={() => navigateToEpisode(prevEpisode.id)}
+                      className="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all mb-3 group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-xs text-white/50 font-NeueMontreal">
+                            Previous Episode
+                          </p>
+                          <p className="font-medium truncate max-w-[200px]">
+                            {prevEpisode.title}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  )}
+
+                  {/* Next Episode */}
+                  {nextEpisode && (
+                    <button
+                      onClick={() => navigateToEpisode(nextEpisode.id)}
+                      className="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-xs text-white/50 font-NeueMontreal">
+                            Next Episode
+                          </p>
+                          <p className="font-medium truncate max-w-[200px]">
+                            {nextEpisode.title}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  )}
+
+                  {/* All Episodes Link */}
+                  <button
+                    onClick={() => router.push("/podcasts")}
+                    className="w-full mt-4 py-3 rounded-xl border border-white/20 text-center text-sm font-NeueMontreal hover:bg-white/10 transition-all"
+                  >
+                    View All Episodes
+                  </button>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        {/* Footer - Properly positioned at bottom */}
+        <footer className="mt-auto">
           <LandingFooter />
-          {/* </div> */}
-        </div>
+        </footer>
+      </div>
+
+      {/* Hidden Audio Element */}
+      {viewMode === "audio" && (
+        <audio
+          ref={audioRef}
+          src={episode.audioUrl}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={() => setIsPlaying(false)}
+        />
       )}
     </>
   );

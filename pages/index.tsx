@@ -276,7 +276,7 @@ export default function Home() {
 
           <main id="landing-content">
             {/* TRUST BADGES */}
-           
+
 
             {/* HERO */}
             <section className="padding-x pt-[40px] smOnly:pt-[28px] xm:pt-[24px]">
@@ -319,7 +319,7 @@ export default function Home() {
                       className="mt-[28px] flex items-center gap-[14px] flex-wrap"
                     >
                       <Link
-                        href="/edustories"
+                        href="/stories"
                         className="group px-[22px] py-[14px] rounded-full bg-[#212121] text-[#f1f1f1] paragraph font-NeueMontreal hover:bg-[#00aa55] hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl"
                       >
                         <span className="flex items-center gap-[8px]">
@@ -911,3 +911,4 @@ export default function Home() {
     </>
   );
 }
+

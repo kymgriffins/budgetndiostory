@@ -34,49 +34,12 @@ import {
   publication3,
 } from "@/public";
 
-// Navbar - Universal Navigation
-export const navbarItems = [
-  {
-    id: 1,
-    title: "Home",
-    href: "/",
-  },
-  {
-    id: 2,
-    title: "Stories",
-    href: "/stories",
-  },
-  {
-    id: 3,
-    title: "Tracker",
-    href: "/tracker",
-  },
-  {
-    id: 8,
-    title: "Edu",
-    href: "/edu",
-  },
-  {
-    id: 4,
-    title: "Podcasts",
-    href: "/podcasts",
-  },
-  // {
-  //   id: 5,
-  //   title: "Shorts",
-  //   href: "/shorts",
-  // },
-  // {
-  //   id: 6,
-  //   title: "About",
-  //   href: "/about",
-  // },
-  {
-    id: 7,
-    title: "Contact",
-    href: "/contact",
-  },
-];
+import { NAV_ITEMS, MOBILE_NAV_ITEMS } from "@/lib/routes";
+
+// Navbar - Universal Navigation (imported from @/lib/routes)
+export { NAV_ITEMS as navbarItems };
+
+// Mobile Navigation - import MOBILE_NAV_ITEMS directly from @/lib/routes
 
 // Footer
 
@@ -132,7 +95,7 @@ export const footernavbarItems = [
   {
     id: 5,
     title: "Contact us",
-    href: "contact",
+    href: "/contact",
   },
 ];
 

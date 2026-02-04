@@ -16,6 +16,26 @@ interface YouTubePlayerProps {
   ) => void;
 }
 
+// Extract video ID from YouTube URL or direct ID
+export function extractYouTubeId(input: string): string {
+  // Direct video ID
+  if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
+    return input;
+  }
+  // YouTube URL formats
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+    /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = input.match(pattern);
+    if (match) return match[1];
+  }
+
+  return input; // Return as-is if it looks like a direct ID
+}
+
 export default function YouTubePlayer({
   videoId,
   autoplay = false,
@@ -29,107 +49,186 @@ export default function YouTubePlayer({
   const [duration, setDuration] = useState(0);
   const [progress, setProgress] = useState(0);
   const [showControls, setShowControls] = useState(true);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [rotate, setRotate] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [playbackRate, setPlaybackRate] = useState(1);
+  const [isClient, setIsClient] = useState(false);
+  const [rotate, setRotate] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const playerIdRef = useRef<string>(`youtube-player-${Date.now()}`);
 
-  // Extract video ID from YouTube URL or direct ID
-  const getVideoId = useCallback((input: string): string => {
-    // Direct video ID
-    if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
-      return input;
-    }
-    // YouTube URL formats
-    const patterns = [
-      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
-      /youtube\.com\/v\/([a-zA-Z0-9_-]{11})/,
-    ];
-
-    for (const pattern of patterns) {
-      const match = input.match(pattern);
-      if (match) return match[1];
-    }
-
-    return input; // Return as-is if it looks like a direct ID
+  // Set client flag on mount
+  useEffect(() => {
+    setIsClient(true);
+    playerIdRef.current = `youtube-player-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }, []);
 
-  const actualVideoId = getVideoId(videoId);
+  const actualVideoId = extractYouTubeId(videoId);
+
+  // Mouse parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      let mouseX = e.clientX;
+      let mouseY = e.clientY;
+
+      let deltaX = mouseX - window.innerWidth / 2;
+      let deltaY = mouseY - window.innerHeight / 2;
+
+      var angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+      setRotate(angle - 180);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   // Initialize YouTube player
   useEffect(() => {
-    // Load YouTube IFrame API
-    if (!(window as any).YT) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.getElementsByTagName("script")[0];
-      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-    }
+    if (!isClient || !actualVideoId) return;
 
-    const onYouTubeIframeAPIReady = () => {
-      playerRef.current = new (window as any).YT.Player(
-        `youtube-player-${actualVideoId}`,
-        {
-          videoId: actualVideoId,
-          playerVars: {
-            autoplay: autoplay ? 1 : 0,
-            controls: 0,
-            disablekb: 1,
-            modestbranding: 1,
-            rel: 0,
-            showinfo: 0,
-            fs: 0,
-            playsinline: 1,
-            iv_load_policy: 3,
-          },
-          events: {
-            onReady: (event: any) => {
-              setIsLoading(false);
-              setDuration(event.target.getDuration());
-            },
-            onStateChange: (event: any) => {
-              const state = event.data;
-              setIsPlaying(state === 1);
-              if (onStateChange) onStateChange(state);
+    let mounted = true;
+    let ytPlayerReady = false;
 
-              if (state === 1) {
-                setDuration(event.target.getDuration());
-              }
-            },
-          },
-        },
-      );
-    };
-
-    if ((window as any).YT && (window as any).YT.Player) {
-      onYouTubeIframeAPIReady();
-    } else {
-      (window as any).onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-    }
-
-    return () => {
-      if (playerRef.current) {
+    // Cleanup previous player if exists
+    if (playerRef.current) {
+      try {
         playerRef.current.destroy();
+      } catch (e) {
+        // Player may already be destroyed
+      }
+      playerRef.current = null;
+    }
+
+    const initPlayer = () => {
+      if (!mounted || !actualVideoId) return;
+
+      // Clean up any existing API ready handler
+      if ((window as any).onYouTubeIframeAPIReady) {
+        delete (window as any).onYouTubeIframeAPIReady;
+      }
+
+      const onYouTubeIframeAPIReady = () => {
+        if (!mounted || !actualVideoId) return;
+
+        try {
+          playerRef.current = new (window as any).YT.Player(
+            playerIdRef.current,
+            {
+              videoId: actualVideoId,
+              playerVars: {
+                autoplay: autoplay ? 1 : 0,
+                controls: 0,
+                disablekb: 1,
+                modestbranding: 1,
+                rel: 0,
+                showinfo: 0,
+                fs: 1,
+                playsinline: 1,
+                iv_load_policy: 3,
+                origin: isClient ? window.location.origin : "",
+              },
+              events: {
+                onReady: (event: any) => {
+                  if (!mounted) return;
+                  ytPlayerReady = true;
+                  setIsLoading(false);
+                  try {
+                    setDuration(event.target.getDuration());
+                  } catch (e) {
+                    // Duration may not be available
+                  }
+                },
+                onStateChange: (event: any) => {
+                  if (!mounted) return;
+                  const state = event.data;
+                  setIsPlaying(state === 1);
+                  if (onStateChange) onStateChange(state);
+
+                  if (state === 1) {
+                    setIsLoading(false);
+                    try {
+                      setDuration(event.target.getDuration());
+                    } catch (e) {
+                      // Duration may not be available
+                    }
+                  } else if (state === 2) {
+                    // Paused
+                    setIsPlaying(false);
+                  } else if (state === 0) {
+                    // Ended
+                    setIsPlaying(false);
+                  }
+                },
+                onError: (event: any) => {
+                  if (!mounted) return;
+                  setIsLoading(false);
+                },
+              },
+            },
+          );
+        } catch (e) {
+          setIsLoading(false);
+        }
+      };
+
+      if ((window as any).YT && (window as any).YT.Player) {
+        setTimeout(onYouTubeIframeAPIReady, 100);
+      } else {
+        (window as any).onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+        // Load YouTube IFrame API
+        if (!(window as any).YT) {
+          const tag = document.createElement("script");
+          tag.src = "https://www.youtube.com/iframe_api";
+          const firstScriptTag = document.getElementsByTagName("script")[0];
+          if (firstScriptTag?.parentNode) {
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+          }
+        }
       }
     };
-  }, [actualVideoId, autoplay, onStateChange]);
+
+    // Small delay to ensure DOM is ready
+    const timeoutId = setTimeout(initPlayer, 100);
+
+    return () => {
+      mounted = false;
+      clearTimeout(timeoutId);
+      ytPlayerReady = false;
+
+      if (playerRef.current) {
+        try {
+          playerRef.current.destroy();
+        } catch (e) {
+          // Player may already be destroyed
+        }
+        playerRef.current = null;
+      }
+
+      if ((window as any).onYouTubeIframeAPIReady) {
+        delete (window as any).onYouTubeIframeAPIReady;
+      }
+    };
+  }, [actualVideoId, autoplay, onStateChange, isClient]);
 
   // Update progress
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (isPlaying) {
+    if (isPlaying && playerRef.current) {
       interval = setInterval(() => {
         if (playerRef.current) {
-          const current = playerRef.current.getCurrentTime();
-          const total = playerRef.current.getDuration();
-          setCurrentTime(current);
-          setProgress(total > 0 ? (current / total) * 100 : 0);
-          if (onProgress) onProgress((current / total) * 100, current, total);
+          try {
+            const current = playerRef.current.getCurrentTime();
+            const total = playerRef.current.getDuration();
+            setCurrentTime(current);
+            setProgress(total > 0 ? (current / total) * 100 : 0);
+            if (onProgress) onProgress((current / total) * 100, current, total);
+          } catch (e) {
+            // Player may not be ready
+          }
         }
       }, 100);
     }
@@ -160,94 +259,86 @@ export default function YouTubePlayer({
     };
   }, [isPlaying]);
 
-  // Mouse parallax effect
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      let mouseX = e.clientX;
-      let mouseY = e.clientY;
-
-      let deltaX = mouseX - window.innerWidth / 2;
-      let deltaY = mouseY - window.innerHeight / 2;
-
-      var angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-      setRotate(angle - 180);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  const togglePlay = () => {
+  const togglePlay = useCallback(() => {
     if (playerRef.current) {
-      if (isPlaying) {
-        playerRef.current.pauseVideo();
-      } else {
-        playerRef.current.playVideo();
+      try {
+        if (isPlaying) {
+          playerRef.current.pauseVideo();
+        } else {
+          playerRef.current.playVideo();
+        }
+      } catch (e) {
+        // Play/pause failed
       }
     }
-  };
+  }, [isPlaying]);
 
-  const toggleMute = () => {
+  const toggleMute = useCallback(() => {
     if (playerRef.current) {
-      if (isMuted) {
-        playerRef.current.unMute();
-        playerRef.current.setVolume(volume);
-        setIsMuted(false);
-      } else {
-        playerRef.current.mute();
-        setIsMuted(true);
+      try {
+        if (isMuted) {
+          playerRef.current.unMute();
+          playerRef.current.setVolume(volume);
+          setIsMuted(false);
+        } else {
+          playerRef.current.mute();
+          setIsMuted(true);
+        }
+      } catch (e) {
+        // Mute/unmute failed
       }
     }
-  };
+  }, [isMuted, volume]);
 
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseInt(e.target.value);
-    setVolume(newVolume);
-    if (playerRef.current) {
-      playerRef.current.setVolume(newVolume);
-      setIsMuted(newVolume === 0);
-    }
-  };
+  const handleVolumeChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newVolume = parseInt(e.target.value);
+      setVolume(newVolume);
+      if (playerRef.current) {
+        try {
+          playerRef.current.setVolume(newVolume);
+          setIsMuted(newVolume === 0);
+        } catch (e) {
+          // Volume change failed
+        }
+      }
+    },
+    [],
+  );
 
-  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (playerRef.current && duration > 0) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const percent = (e.clientX - rect.left) / rect.width;
-      const seekTime = percent * duration;
-      playerRef.current.seekTo(seekTime, true);
-      setProgress(percent * 100);
-    }
-  };
+  const handleProgressClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (playerRef.current && duration > 0) {
+        try {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const percent = (e.clientX - rect.left) / rect.width;
+          const seekTime = percent * duration;
+          playerRef.current.seekTo(seekTime, true);
+          setProgress(percent * 100);
+        } catch (e) {
+          // Seek failed
+        }
+      }
+    },
+    [duration],
+  );
 
-  const handleSkip = (seconds: number) => {
-    if (playerRef.current) {
-      const newTime = Math.max(0, Math.min(duration, currentTime + seconds));
-      playerRef.current.seekTo(newTime, true);
-    }
-  };
-
-  const toggleFullscreen = () => {
-    if (!containerRef.current) return;
-
-    if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen();
-      setIsFullscreen(false);
-    }
-  };
-
-  const changePlaybackRate = () => {
-    const rates = [0.5, 0.75, 1, 1.25, 1.5, 2];
-    const currentIndex = rates.indexOf(playbackRate);
-    const nextIndex = (currentIndex + 1) % rates.length;
-    const newRate = rates[nextIndex];
-    setPlaybackRate(newRate);
-    if (playerRef.current) {
-      playerRef.current.setPlaybackRate(newRate);
-    }
-  };
+  const handleSkip = useCallback(
+    (seconds: number) => {
+      if (playerRef.current) {
+        try {
+          const newTime = Math.max(
+            0,
+            Math.min(duration, currentTime + seconds),
+          );
+          playerRef.current.seekTo(newTime, true);
+        } catch (e) {
+          // Skip failed
+        }
+      }
+    },
+    [duration, currentTime],
+  );
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -255,27 +346,34 @@ export default function YouTubePlayer({
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
+  // Generate iframe src URL
+  const iframeSrc = isClient
+    ? `https://www.youtube.com/embed/${actualVideoId}?enablejsapi=1&autoplay=${autoplay ? 1 : 0}&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&playsinline=1&iv_load_policy=3`
+    : "";
+
   return (
     <div
       ref={containerRef}
-      className="w-full relative overflow-hidden cursor-pointer bg-black rounded-[16px]"
+      className="w-full relative overflow-hidden cursor-pointer bg-black rounded-[12px]"
       onClick={togglePlay}
     >
       {/* YouTube IFrame */}
       <div className="w-full aspect-video relative">
-        <iframe
-          ref={iframeRef}
-          id={`youtube-player-${actualVideoId}`}
-          className="w-full h-full absolute inset-0"
-          src={`https://www.youtube.com/embed/${actualVideoId}?enablejsapi=1&autoplay=${autoplay ? 1 : 0}&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&fs=0&playsinline=1&iv_load_policy=3`}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen={false}
-          title="YouTube video player"
-        />
+        {isClient && (
+          <iframe
+            ref={iframeRef}
+            id={playerIdRef.current}
+            className="w-full h-full absolute inset-0"
+            src={iframeSrc}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowFullScreen={true}
+            title="YouTube video player"
+          />
+        )}
 
         {/* Loading Overlay */}
         {isLoading && (
-          <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-10">
             <div className="flex flex-col items-center gap-4">
               <div className="w-12 h-12 border-2 border-white/20 border-t-white rounded-full animate-spin" />
               <p className="text-white/60 font-NeueMontreal text-sm">
@@ -293,41 +391,39 @@ export default function YouTubePlayer({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center bg-black/20"
+            className="absolute inset-0 flex items-center justify-center bg-black/30 z-20"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative">
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ repeat: Infinity, duration: 2 }}
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <div
+                className="w-[100px] h-[100px] smOnly:w-[80px] smOnly:h-[80px] bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-transform shadow-xl"
+                onClick={togglePlay}
               >
-                <div
-                  className="w-[120px] h-[120px] smOnly:w-[100px] smOnly:h-[100px] xm:w-[80px] xm:h-[80px] bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
-                  onClick={togglePlay}
-                >
-                  <div className="relative w-full h-full">
-                    <Image
-                      style={{
-                        transform: `rotate(${rotate}deg)`,
-                      }}
-                      src={eyes}
-                      alt="Play"
-                      className="w-full h-full object-cover"
-                    />
-                    <svg
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 smOnly:w-8 smOnly:h-8 xm:w-6 xm:h-6 text-white pl-1"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
+                <div className="relative w-full h-full">
+                  <Image
+                    style={{
+                      transform: `rotate(${rotate}deg)`,
+                    }}
+                    src={eyes}
+                    alt="Play"
+                    className="w-full h-full object-cover"
+                  />
+                  <svg
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 text-white pl-1"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
                 </div>
-              </motion.div>
-              <p className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-white font-NeueMontreal text-sm whitespace-nowrap">
-                Click to play
-              </p>
-            </div>
+              </div>
+            </motion.div>
+            <p className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-white font-NeueMontreal text-sm whitespace-nowrap">
+              Click to play
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -339,25 +435,25 @@ export default function YouTubePlayer({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4"
+            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 z-30"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Progress Bar */}
             <div
-              className="w-full h-1 bg-white/20 rounded-full cursor-pointer mb-4 group"
+              className="w-full h-1.5 bg-white/20 rounded-full cursor-pointer mb-4 group"
               onClick={handleProgressClick}
             >
               <div
                 className="h-full bg-white rounded-full relative transition-all"
                 style={{ width: `${progress}%` }}
               >
-                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg" />
               </div>
             </div>
 
             <div className="flex items-center justify-between">
               {/* Left Controls */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 {/* Play/Pause */}
                 <button
                   onClick={togglePlay}
@@ -383,9 +479,12 @@ export default function YouTubePlayer({
                   )}
                 </button>
 
-                {/* Skip Buttons */}
+                {/* Skip Back 10s */}
                 <button
-                  onClick={() => handleSkip(-10)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSkip(-10);
+                  }}
                   className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"
                 >
                   <svg
@@ -401,117 +500,101 @@ export default function YouTubePlayer({
                       d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"
                     />
                   </svg>
-                  <span className="text-xs absolute ml-6 mt-2">10</span>
+                  <span className="text-[10px] absolute ml-5 mt-3 font-medium">
+                    10
+                  </span>
                 </button>
 
+                {/* Skip Forward 10s */}
                 <button
-                  onClick={() => handleSkip(10)}
-                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSkip(10);
+                  }}
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition relative"
                 >
                   <svg
                     className="w-4 h-4 text-white"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    strokeWidth={2}
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={2}
                       d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"
                     />
                   </svg>
-                  <span className="text-xs absolute ml-6 mt-2">10</span>
+                  <span className="text-[10px] absolute ml-5 mt-3 font-medium">
+                    10
+                  </span>
                 </button>
 
-                {/* Volume Control */}
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={toggleMute}
-                    className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"
-                  >
-                    {isMuted || volume === 0 ? (
-                      <svg
-                        className="w-4 h-4 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        className="w-4 h-4 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={isMuted ? 0 : volume}
-                    onChange={handleVolumeChange}
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-20 h-1 bg-white/20 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
-                  />
-                </div>
-
                 {/* Time Display */}
-                <span className="text-white text-sm font-NeueMontreal">
+                <div className="text-sm text-white/80 font-mono ml-2">
                   {formatTime(currentTime)} / {formatTime(duration)}
-                </span>
+                </div>
               </div>
 
               {/* Right Controls */}
-              <div className="flex items-center gap-2">
-                {/* Playback Speed */}
+              <div className="flex items-center gap-3">
+                {/* Mute/Unmute */}
                 <button
-                  onClick={changePlaybackRate}
-                  className="px-2 py-1 rounded bg-white/10 hover:bg-white/20 transition text-sm text-white font-NeueMontreal"
-                >
-                  {playbackRate}x
-                </button>
-
-                {/* Fullscreen */}
-                <button
-                  onClick={toggleFullscreen}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleMute();
+                  }}
                   className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"
                 >
-                  <svg
-                    className="w-4 h-4 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                    />
-                  </svg>
+                  {isMuted ? (
+                    <svg
+                      className="w-4 h-4 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <line
+                        x1="23"
+                        y1="9"
+                        x2="17"
+                        y2="15"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                      />
+                      <line
+                        x1="17"
+                        y1="9"
+                        x2="23"
+                        y2="15"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="w-4 h-4 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    </svg>
+                  )}
                 </button>
+
+                {/* Volume Slider */}
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={isMuted ? 0 : volume}
+                  onChange={handleVolumeChange}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-20 h-1 bg-white/20 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+                />
               </div>
             </div>
           </motion.div>
@@ -519,19 +602,4 @@ export default function YouTubePlayer({
       </AnimatePresence>
     </div>
   );
-}
-
-// Helper function to extract YouTube video ID from various URL formats
-export function extractYouTubeId(url: string): string {
-  const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([a-zA-Z0-9_-]{11})/,
-  ];
-
-  for (const pattern of patterns) {
-    const match = url.match(pattern);
-    if (match) return match[1];
-  }
-
-  // If no match, return the original (might be a direct ID)
-  return url;
 }

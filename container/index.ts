@@ -50,3 +50,8 @@ export { default as CourseViewer } from "./edu-page/CourseViewer";
 export { default as Heroedu } from "./edu-page/Hero";
 export { default as LearningPath } from "./edu-page/LearningPath";
 
+// learn page
+export { default as CourseList } from "./learn-page/CourseList";
+export { default as Features } from "./learn-page/Features";
+export { default as LearnHero } from "./learn-page/Hero";
+

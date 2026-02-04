@@ -1,197 +1,141 @@
-import { Marquee } from "@/components";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { courses } from "@/mockdata";
-
-// Color mapping for course categories
-const colorMap: Record<string, string> = {
-  "Budget Basics": "from-green-400 to-emerald-500",
-  "County Government": "from-blue-400 to-indigo-500",
-  "Your Civic Rights": "from-purple-400 to-violet-500",
-  "Tracking Public Spending": "from-orange-400 to-amber-500",
-};
-
-const gradientMap: Record<string, string> = {
-  "Budget Basics": "bg-gradient-to-br from-green-400/20 to-emerald-500/20",
-  "County Government": "bg-gradient-to-br from-blue-400/20 to-indigo-500/20",
-  "Your Civic Rights": "bg-gradient-to-br from-purple-400/20 to-violet-500/20",
-  "Tracking Public Spending": "bg-gradient-to-br from-orange-400/20 to-amber-500/20",
-};
+import { motion } from "framer-motion";
+import {
+  getAllCourses,
+  getCompletedLessons,
+  calculateProgressPercent,
+} from "@/lib/edu-data";
+import CourseCard from "./CourseCard";
 
 export default function LearningPath() {
-  // Transform courses to learning path format
-  const learningPath = courses.map((course, index) => ({
-    id: course.id,
-    title: course.title,
-    description: course.description,
-    duration: course.duration,
-    lessons: course.lessons.length,
-    completed: index === 0, // Mark first course as completed
-    current: index === 1, // Mark second course as current
-    color: colorMap[course.title] || "from-gray-400 to-gray-500",
-    gradient: gradientMap[course.title] || "bg-gradient-to-br from-gray-400/20 to-gray-500/20",
-  }));
+  const [courses, setCourses] = useState<ReturnType<typeof getAllCourses>>([]);
+  const [progressMap, setProgressMap] = useState<Record<string, number>>({});
 
-  const completedCount = learningPath.filter((p) => p.completed).length;
-  const progressPercent = Math.round(
-    (completedCount / learningPath.length) * 100,
-  );
+  useEffect(() => {
+    // Load courses
+    const allCourses = getAllCourses();
+    setCourses(allCourses);
+
+    // Load progress for each course
+    const progress: Record<string, number> = {};
+    allCourses.forEach((course) => {
+      const percent = calculateProgressPercent(course.id);
+      console.log(`[LearningPath] Course: ${course.id}, Progress: ${percent}%`);
+      progress[course.id] = percent;
+    });
+    setProgressMap(progress);
+  }, []);
+
+  const completedCount = courses.filter(
+    (course) => progressMap[course.id] === 100
+  ).length;
+  const progressPercent = courses.length > 0
+    ? Math.round((completedCount / courses.length) * 100)
+    : 0;
 
   return (
-    <section
-      id="learning-path"
-      className="w-full min-h-screen bg-[#f1f1f1] rounded-t-[20px]"
-      data-scroll-section
-    >
+    <>
       {/* LEARNING PATH SECTION */}
-      <div
-        className="w-full bg-[#111] pt-[60px] pb-[60px] min-h-screen"
-        data-scroll-section
+      <section
+        id="learning-path"
+        className="w-full min-h-screen bg-[#f1f1f1] rounded-t-[20px]"
       >
-        <div className="w-full mx-auto max-w-[1200px] px-[24px]">
-          <div
-            className="flex items-center justify-between gap-[16px] flex-wrap mb-[24px]"
-            data-animate="fade-up"
-          >
-            <div>
-              <h2 className="text-[24px] font-FoundersGrotesk font-medium text-white leading-[1.2]">
-                Your Learning Path
-              </h2>
-              <p className="mt-[8px] text-[14px] font-NeueMontreal text-white/60">
-                Complete these courses to master budget literacy
-              </p>
-            </div>
-            <div className="text-right">
-              <span className="text-[14px] font-NeueMontreal text-white/50">
-                {completedCount} of {learningPath.length} completed
-              </span>
-              <div className="mt-[8px] w-[120px] h-[6px] bg-white/20 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-green-500 rounded-full transition-all duration-500"
-                  style={{ width: `${progressPercent}%` }}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="grid grid-cols-2 gap-[16px] lg:grid-cols-1 mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1"
-            data-animate="cards"
-          >
-            {learningPath.map((course, idx) => (
-              <Link
-                key={course.id}
-                href={`/edu/${course.id}`}
-                className={`group relative overflow-hidden rounded-[16px] ${course.gradient} ${course.color} p-[20px] hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] transition-all duration-300 border border-white/10`}
-                data-animate="card"
-              >
-                <div className="flex items-center justify-between gap-[12px]">
-                  <div className="flex items-center gap-[12px]">
-                    <div className="w-[48px] h-[48px] rounded-full bg-white/20 flex items-center justify-center text-[20px] text-white">
-                      {course.completed ? (
-                        <svg
-                          className="w-[24px] h-[24px]"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      ) : course.current ? (
-                        <svg
-                          className="w-[20px] h-[20px] pl-[2px]"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      ) : (
-                        <span className="font-FoundersGrotesk">{idx + 1}</span>
-                      )}
-                    </div>
-                    <div>
-                      <h3 className="text-[18px] font-FoundersGrotesk font-medium text-white">
-                        {course.title}
-                      </h3>
-                      <p className="text-[12px] font-NeueMontreal text-white/70 mt-[2px]">
-                        {course.duration} • {course.lessons} lessons
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-[8px]">
-                    {course.current && (
-                      <span className="px-[10px] py-[4px] rounded-full bg-white/20 text-[10px] font-NeueMontreal font-medium text-white">
-                        In Progress
-                      </span>
-                    )}
-                    {course.completed && (
-                      <span className="px-[10px] py-[4px] rounded-full bg-green-500/20 text-[10px] font-NeueMontreal font-medium text-green-300">
-                        Completed
-                      </span>
-                    )}
-                    <span className="w-[36px] h-[36px] rounded-full bg-white/10 flex items-center justify-center text-white/50 group-hover:bg-white group-hover:text-[#111] transition-all duration-300">
-                      <svg
-                        className="w-[16px] h-[16px]"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-                <p className="mt-[12px] text-[14px] font-NeueMontreal text-white/80">
-                  {course.description}
+        <div className="w-full bg-white pt-[60px] pb-[60px] min-h-screen">
+          <div className="w-full mx-auto max-w-[1200px] px-[24px]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center justify-between gap-[16px] flex-wrap mb-[24px]"
+              data-animate="fade-up"
+            >
+              <div>
+                <h2 className="text-[24px] font-FoundersGrotesk font-medium text-[#212121] leading-[1.2]">
+                  Your Learning Path
+                </h2>
+                <p className="mt-[8px] text-[14px] font-NeueMontreal text-[#212121]/60">
+                  Complete these courses to master budget literacy
                 </p>
-                <div className="mt-[16px] flex items-center gap-[8px]">
-                  <div className="flex -space-x-[4px]">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="w-[24px] h-[24px] rounded-full bg-white/30 border border-white/50 flex items-center justify-center text-[8px] text-white"
-                      >
-                        {i}
-                      </div>
-                    ))}
-                  </div>
-                  <span className="text-[11px] font-NeueMontreal text-white/50">
-                    and others started this course
-                  </span>
+              </div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-right"
+              >
+                <span className="text-[14px] font-NeueMontreal text-[#212121]/50">
+                  {completedCount} of {courses.length} completed
+                </span>
+                <div className="mt-[8px] w-[120px] h-[6px] bg-[#f1f1f1] rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progressPercent}%` }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="h-full bg-green-500 rounded-full"
+                  />
                 </div>
-              </Link>
-            ))}
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="grid grid-cols-2 gap-[16px] lg:grid-cols-1 mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1"
+              data-animate="cards"
+            >
+              {courses.map((course, idx) => (
+                <CourseCard
+                  key={course.id}
+                  course={course}
+                  index={idx}
+                  progress={progressMap[course.id]}
+                  isCompleted={progressMap[course.id] === 100}
+                  isCurrent={
+                    progressMap[course.id] > 0 &&
+                    progressMap[course.id] < 100
+                  }
+                />
+              ))}
+            </motion.div>
           </div>
         </div>
-      </div>
-
-
+      </section>
 
       {/* ADDITIONAL RESOURCES */}
-      <div
+      <section
         className="w-full flex justify-between gap-y-[30px] padding-x py-[40px] flex-wrap bg-[#f1f1f1]"
         data-animate="cards"
-        data-scroll-section
       >
         <div className="w-full mb-[20px]">
-          <h2 className="text-[32px] font-FoundersGrotesk font-medium text-[#212121] uppercase">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-[32px] font-FoundersGrotesk font-medium text-[#212121] uppercase"
+          >
             Quick Resources
-          </h2>
-          <p className="paragraph mt-[8px] text-gray-500 font-NeueMontreal">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="paragraph mt-[8px] text-gray-500 font-NeueMontreal"
+          >
             Additional materials to support your learning journey
-          </p>
+          </motion.p>
         </div>
 
-        <div className="w-[32%] smOnly:w-full xm:w-full" data-animate="card">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="w-[32%] smOnly:w-full xm:w-full"
+          data-animate="card"
+        >
           <div className="w-full rounded-[12px] overflow-hidden border border-[#21212122] bg-white hover:scale-[0.99] transition-transform duration-300">
             <div className="w-full h-[160px] bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
               <svg
@@ -224,9 +168,15 @@ export default function LearningPath() {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="w-[32%] smOnly:w-full xm:w-full" data-animate="card">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="w-[32%] smOnly:w-full xm:w-full"
+          data-animate="card"
+        >
           <div className="w-full rounded-[12px] overflow-hidden border border-[#21212122] bg-white hover:scale-[0.99] transition-transform duration-300">
             <div className="w-full h-[160px] bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
               <svg
@@ -258,9 +208,15 @@ export default function LearningPath() {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="w-[32%] smOnly:w-full xm:w-full" data-animate="card">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="w-[32%] smOnly:w-full xm:w-full"
+          data-animate="card"
+        >
           <div className="w-full rounded-[12px] overflow-hidden border border-[#21212122] bg-white hover:scale-[0.99] transition-transform duration-300">
             <div className="w-full h-[160px] bg-gradient-to-br from-purple-400 to-violet-500 flex items-center justify-center">
               <svg
@@ -292,9 +248,8 @@ export default function LearningPath() {
               </Link>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </section>
+    </>
   );
 }
-

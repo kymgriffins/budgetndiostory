@@ -1,5 +1,5 @@
 "use client";
-import { footernavbarItems } from "@/constants";
+import { MOBILE_NAV_ITEMS } from "@/lib/routes";
 import { logo, mobileLogo } from "@/public";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -54,7 +54,7 @@ export default function MobileNav() {
               />
             </div>
             <ul className="h-full w-full flex justify-center text-left flex-col gap-[10px] padding-x">
-              {footernavbarItems.map((item) => (
+              {MOBILE_NAV_ITEMS.map((item) => (
                 <Link
                   href={item.href}
                   key={item.id}

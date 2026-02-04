@@ -44,9 +44,7 @@ export default function Navbar() {
           {navbarItems.map((item) => (
             <Link
               key={item.id}
-              className={`w-fit paragraph font-medium font-NeueMontreal text-secondry capitalize flex flex-col hover ${
-                item.id === 5 && "ml-auto"
-              }`}
+              className={`w-fit paragraph font-medium font-NeueMontreal text-secondry capitalize flex flex-col hover`}
               href={item.href}
             >
               <TextHover titile1={item.title} titile2={item.title} />

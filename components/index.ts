@@ -33,6 +33,7 @@ export {
 } from "./ResponsiveParallax";
 export { default as RoundButton } from "./RoundButton";
 export { default as Rounded } from "./Rounded";
+export { default as SmoothScrollGsap } from "./SmoothScrollGsap";
 export { FadeIn, ScrollReveal } from "./ScrollReveal";
 export {
   ArticleSchema,
