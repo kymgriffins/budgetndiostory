@@ -266,20 +266,18 @@ export default function Stories() {
 
   const categories = [
     { id: "all", label: "All Stories" },
-    { id: "all", label: "All" },
     { id: "Infrastructure", label: "Infrastructure" },
     { id: "Health", label: "Health" },
     { id: "Education", label: "Education" },
     { id: "Youth", label: "Youth" },
     { id: "Water", label: "Water" },
     { id: "Agriculture", label: "Agriculture" },
-    { id: "roads", label: "Infrastructure" },
-    { id: "health", label: "Health" },
-    { id: "education", label: "Education" },
-    { id: "youth", label: "Youth" },
-    { id: "water", label: "Water" },
-    { id: "agriculture", label: "Agriculture" },
   ];
+
+  // Get unique categories for the tab bar
+  const uniqueCategories = categories.filter(
+    (cat, index, self) => index === self.findIndex((c) => c.id === cat.id),
+  );
 
   const filteredStories =
     selectedCategory === "all"
@@ -410,25 +408,71 @@ export default function Stories() {
               </div>
             </section>
 
-            {/* FILTERS */}
-            <section className="padding-x py-[30px] sticky top-[8vh] z-40 bg-white/95 backdrop-blur-sm border-b border-[#212121]/5">
-              <div className="max-w-[1200px] mx-auto">
-                <div className="flex gap-[8px] overflow-x-auto pb-[8px] scrollbar-hide">
-                  {categories.map((cat) => (
-                    <button
-                      key={cat.id}
-                      onClick={() => setSelectedCategory(cat.id)}
-                      className={`px-[16px] py-[10px] rounded-full whitespace-nowrap transition-all duration-200 text-[14px] font-NeueMontreal font-medium ${selectedCategory === cat.id ? "bg-[#212121] text-white shadow-lg shadow-[#212121]/10" : "bg-[#f5f5f5] text-[#212121]/60 hover:bg-[#212121]/5 hover:text-[#212121]"}`}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
+            {/* CATEGORY TABS */}
+            <section className="relative z-40">
+              {/* Sticky container with blur backdrop */}
+              <div className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-[#212121]/8">
+                <div className="max-w-[1200px] mx-auto">
+                  {/* Horizontal scroll container with snap */}
+                  <div
+                    className="flex gap-[8px] overflow-x-auto px-4 py-3 scrollbar-hide snap-x snap-mandatory"
+                    style={{
+                      scrollbarWidth: "none",
+                      msOverflowStyle: "none",
+                      WebkitOverflowScrolling: "touch",
+                    }}
+                  >
+                    {uniqueCategories.map((cat) => (
+                      <button
+                        key={cat.id}
+                        onClick={() => {
+                          setSelectedCategory(cat.id);
+                          // Smooth scroll to stories grid on mobile
+                          const storiesSection =
+                            document.getElementById("stories-grid");
+                          if (storiesSection && window.innerWidth < 768) {
+                            storiesSection.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            });
+                          }
+                        }}
+                        className={`relative px-[20px] py-[10px] rounded-full whitespace-nowrap text-[14px] font-NeueMontreal font-medium transition-all duration-300 snap-center flex-shrink-0 ${
+                          selectedCategory === cat.id
+                            ? "text-white"
+                            : "bg-[#f5f5f5] text-[#212121]/70 hover:bg-[#f0f0f0] hover:text-[#212121]"
+                        }`}
+                      >
+                        {/* Active background */}
+                        {selectedCategory === cat.id && (
+                          <span
+                            className="absolute inset-0 rounded-full bg-[#212121] shadow-lg shadow-[#212121]/20 transition-all duration-300"
+                            style={{ animation: "fadeIn 0.2s ease-out" }}
+                          />
+                        )}
+                        {/* Icon for visual appeal */}
+                        <span className="relative inline-flex items-center gap-[6px]">
+                          {getCategoryEmoji(cat.id)}
+                          {cat.label}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
+              </div>
+              {/* Progress indicator bar */}
+              <div className="h-[2px] bg-[#212121]/5">
+                <div
+                  className="h-full bg-[#212121]/20 transition-all duration-300"
+                  style={{
+                    width: `${Math.min(100, (uniqueCategories.findIndex((c) => c.id === selectedCategory) + 1) * (100 / uniqueCategories.length))}%`,
+                  }}
+                />
               </div>
             </section>
 
             {/* STORIES GRID */}
-            <section className="padding-x padding-y">
+            <section id="stories-grid" className="padding-x padding-y">
               <div className="max-w-[1200px] mx-auto">
                 <div className="grid grid-cols-3 gap-[24px] lg:grid-cols-2 mdOnly:grid-cols-2 smOnly:grid-cols-1 xm:grid-cols-1">
                   {filteredStories.slice(1).map((story) => (
