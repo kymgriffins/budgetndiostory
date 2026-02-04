@@ -45,7 +45,7 @@ export default function CourseList() {
       : courses.filter((course) => course.category === activeFilter);
 
   return (
-    <section id="courses" className="w-full py-20 bg-[#0a0a0a]">
+    <section id="courses" className="w-full py-20 bg-[#fafafa]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">

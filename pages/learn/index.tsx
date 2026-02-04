@@ -17,7 +17,7 @@ export default function LearnPage() {
 
   return (
     <PageTransition>
-      <SmoothScrollGsap className="min-h-screen overflow-y-auto overflow-x-hidden w-full bg-[#0a0a0a]">
+      <SmoothScrollGsap className="min-h-screen overflow-y-auto overflow-x-hidden w-full bg-[#f1f1f1]">
         <LearnHero />
         <CourseList />
         <Features />

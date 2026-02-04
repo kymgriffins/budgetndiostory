@@ -69,6 +69,39 @@ export interface TrackerProject {
   icon: string;
 }
 
+// Status types
+type TrackerStatus = "Allocated" | "In Progress" | "Completed" | "Stalled";
+type TrackerSector = "National" | "County";
+
+// More flexible type for JSON data (allows string literals)
+export interface YearlyTrackerItem {
+  id: string;
+  year?: number; // Optional - year is derived from parent YearlyTrackerData
+  category: string;
+  title: string;
+  description: string;
+  budget: string;
+  allocated: number;
+  status: TrackerStatus | string; // Allow string for JSON compatibility
+  progress: number;
+  icon: string;
+  sector: TrackerSector | string; // Allow string for JSON compatibility
+  quarter?: string;
+  beneficiaries?: string;
+  completionDate?: string;
+}
+
+export interface YearlyTrackerData {
+  year: number;
+  totalBudget: string;
+  totalProjects: number;
+  completed: number;
+  inProgress: number;
+  allocated: number;
+  stalled: number;
+  items: YearlyTrackerItem[];
+}
+
 export interface ParticipationStat {
   label: string;
   value: string;

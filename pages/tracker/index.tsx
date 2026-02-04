@@ -1,13 +1,29 @@
 import LandingFooter from "@/components/LandingFooter";
+import trackerYearlyData from "@/mockdata/tracker-yearly.json";
+import { YearlyTrackerData } from "@/mockdata/types";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { projects } from "@/mockdata";
 
 export default function Tracker() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const isMobile = useRef(false);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+  // Helper function to safely get the last year data with proper typing
+  const getLatestYearData = (
+    data: typeof trackerYearlyData,
+  ): YearlyTrackerData | null => {
+    const { years } = data;
+    if (years.length === 0) return null;
+    // Type assertion to ensure proper typing from JSON data
+    return years[years.length - 1] as YearlyTrackerData;
+  };
+
+  const [selectedYear, setSelectedYear] = useState<YearlyTrackerData | null>(
+    () => getLatestYearData(trackerYearlyData),
+  );
+  const [selectedItem, setSelectedItem] = useState<any>(null);
 
   useEffect(() => {
     let loco: any;
@@ -415,7 +431,320 @@ export default function Tracker() {
               </div>
             </section>
 
-            {/* SPENDING BREAKDOWN - FLIP CARDS WITH TABS */}
+            {/* HISTORICAL BUDGET TRACKER */}
+            <section className="padding-x padding-y">
+              <div className="max-w-[1200px] mx-auto">
+                <div data-animate="fade-up" className="mb-[22px]">
+                  <h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
+                    Historical Budget Tracker (2000-2025)
+                  </h2>
+                  <p className="mt-[8px] paragraph font-NeueMontreal text-[#212121]/70 max-w-[600px]">
+                    Select a year to explore budget allocations, projects, and
+                    progress over time.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                  {/* Year Selector - Left Side */}
+                  <div data-animate="fade-up" className="lg:col-span-1">
+                    <div className="bg-white rounded-xl border border-gray-200 p-4">
+                      <h3 className="font-FoundersGrotesk text-sm font-semibold text-[#111] mb-3">
+                        Select Year
+                      </h3>
+                      <div className="max-h-[400px] overflow-y-auto space-y-1 pr-2">
+                        {trackerYearlyData.years.map((year) => (
+                          <button
+                            key={year.year}
+                            onClick={() => {
+                              setSelectedYear(year);
+                              setSelectedItem(null);
+                            }}
+                            className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                              selectedYear?.year === year.year
+                                ? "bg-[#212121] text-white shadow-md"
+                                : "bg-gray-50 text-[#212121] hover:bg-gray-100"
+                            }`}
+                          >
+                            <span className="flex items-center justify-between">
+                              <span>{year.year}</span>
+                              <span
+                                className={`text-xs ${
+                                  selectedYear?.year === year.year
+                                    ? "text-white/60"
+                                    : "text-gray-400"
+                                }`}
+                              >
+                                {year.totalProjects} items
+                              </span>
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Details - Right Side */}
+                  <div data-animate="fade-up" className="lg:col-span-3">
+                    {selectedYear ? (
+                      <div className="space-y-4">
+                        {/* Year Summary Card */}
+                        <div className="bg-white rounded-xl border border-gray-200 p-6">
+                          <div className="flex items-center justify-between mb-4">
+                            <div>
+                              <h3 className="font-FoundersGrotesk text-xl font-bold text-[#111]">
+                                {selectedYear.year} Budget Overview
+                              </h3>
+                              <p className="text-sm text-gray-500 mt-1">
+                                {selectedYear.totalBudget} •{" "}
+                                {selectedYear.totalProjects} Projects
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium">
+                                {selectedYear.completed} Completed
+                              </span>
+                              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium">
+                                {selectedYear.inProgress} In Progress
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Progress bars */}
+                          <div className="grid grid-cols-4 gap-4">
+                            <div>
+                              <div className="text-xs text-gray-500 mb-1">
+                                Completed
+                              </div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-green-500 rounded-full"
+                                  style={{
+                                    width: `${(selectedYear.completed / selectedYear.totalProjects) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-xs text-gray-500 mb-1">
+                                In Progress
+                              </div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-blue-500 rounded-full"
+                                  style={{
+                                    width: `${(selectedYear.inProgress / selectedYear.totalProjects) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-xs text-gray-500 mb-1">
+                                Allocated
+                              </div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-yellow-500 rounded-full"
+                                  style={{
+                                    width: `${(selectedYear.allocated / selectedYear.totalProjects) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-xs text-gray-500 mb-1">
+                                Stalled
+                              </div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-red-500 rounded-full"
+                                  style={{
+                                    width: `${(selectedYear.stalled / selectedYear.totalProjects) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Project Items List */}
+                        <div className="space-y-3">
+                          {selectedYear.items.map((item) => (
+                            <div
+                              key={item.id}
+                              onClick={() =>
+                                setSelectedItem(
+                                  selectedItem?.id === item.id ? null : item,
+                                )
+                              }
+                              className={`bg-white rounded-xl border transition-all cursor-pointer ${
+                                selectedItem?.id === item.id
+                                  ? "border-blue-500 shadow-lg"
+                                  : "border-gray-200 hover:border-gray-300"
+                              }`}
+                            >
+                              <div className="p-4">
+                                <div className="flex items-center gap-4">
+                                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-2xl">
+                                    {item.icon}
+                                  </div>
+                                  <div className="flex-1">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-xs px-2 py-0.5 rounded bg-gray-200 text-gray-700">
+                                        {item.category}
+                                      </span>
+                                      <span
+                                        className={`text-xs px-2 py-0.5 rounded ${
+                                          item.sector === "National"
+                                            ? "bg-blue-100 text-blue-700"
+                                            : "bg-emerald-100 text-emerald-700"
+                                        }`}
+                                      >
+                                        {item.sector}
+                                      </span>
+                                    </div>
+                                    <h4 className="font-FoundersGrotesk font-semibold text-[#111] mt-1">
+                                      {item.title}
+                                    </h4>
+                                  </div>
+                                  <div className="text-right">
+                                    <div className="font-medium text-[#111]">
+                                      {item.budget}
+                                    </div>
+                                    <span
+                                      className={`text-xs px-2 py-0.5 rounded-full ${
+                                        item.status === "Completed"
+                                          ? "bg-green-100 text-green-700"
+                                          : item.status === "In Progress"
+                                            ? "bg-blue-100 text-blue-700"
+                                            : item.status === "Allocated"
+                                              ? "bg-yellow-100 text-yellow-700"
+                                              : "bg-red-100 text-red-700"
+                                      }`}
+                                    >
+                                      {item.status}
+                                    </span>
+                                  </div>
+                                  <svg
+                                    className={`w-5 h-5 text-gray-400 transition-transform ${
+                                      selectedItem?.id === item.id
+                                        ? "rotate-90"
+                                        : ""
+                                    }`}
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M9 5l7 7-7 7"
+                                    />
+                                  </svg>
+                                </div>
+
+                                {/* Expanded Details */}
+                                {selectedItem?.id === item.id && (
+                                  <div className="mt-4 pt-4 border-t border-gray-100">
+                                    <p className="text-sm text-gray-600 mb-4">
+                                      {item.description}
+                                    </p>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                                      <div>
+                                        <div className="text-xs text-gray-500">
+                                          Budget
+                                        </div>
+                                        <div className="font-medium">
+                                          {item.budget}
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <div className="text-xs text-gray-500">
+                                          Allocated
+                                        </div>
+                                        <div className="font-medium">
+                                          {item.allocated}%
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <div className="text-xs text-gray-500">
+                                          Progress
+                                        </div>
+                                        <div className="font-medium">
+                                          {item.progress}%
+                                        </div>
+                                      </div>
+                                      {item.beneficiaries && (
+                                        <div>
+                                          <div className="text-xs text-gray-500">
+                                            Beneficiaries
+                                          </div>
+                                          <div className="font-medium">
+                                            {item.beneficiaries}
+                                          </div>
+                                        </div>
+                                      )}
+                                    </div>
+                                    <Link
+                                      href={`/tracker/${selectedYear.year}/${item.id}`}
+                                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#212121] text-white rounded-lg text-sm font-medium hover:opacity-90 transition"
+                                    >
+                                      View Full Details
+                                      <svg
+                                        className="w-4 h-4"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                      </svg>
+                                    </Link>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* View All Link */}
+                        <Link
+                          href={`/tracker/${selectedYear.year}`}
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
+                        >
+                          View All {selectedYear.year} Data
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+                        <p className="text-gray-500">
+                          Select a year to view budget details
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* SPENDING BREAKDOWN - CARDS WITH TABS */}
             <section className="padding-x padding-y bg-[#fafafa]">
               <div className="max-w-[1200px] mx-auto">
                 <div data-animate="fade-up" className="mb-[22px]">
@@ -424,14 +753,17 @@ export default function Tracker() {
                   </h2>
                   <p className="mt-[8px] paragraph font-NeueMontreal text-[#212121]/70 max-w-[600px]">
                     Explore how Kenya's budget is allocated between National and
-                    County governments. Hover over cards for details.
+                    County governments. Click on cards for in-depth data.
                   </p>
                 </div>
 
                 {/* Tab Navigation */}
                 <div className="flex items-center gap-[12px] mb-[32px] flex-wrap">
                   <button
-                    onClick={() => setActiveTab("national")}
+                    onClick={() => {
+                      setActiveTab("national");
+                      setExpandedId(null);
+                    }}
                     className={`px-[24px] py-[14px] rounded-full text-[15px] font-NeueMontreal font-medium transition-all duration-300 ${
                       activeTab === "national"
                         ? "bg-[#1e40af] text-white shadow-lg"
@@ -456,7 +788,10 @@ export default function Tracker() {
                     </span>
                   </button>
                   <button
-                    onClick={() => setActiveTab("county")}
+                    onClick={() => {
+                      setActiveTab("county");
+                      setExpandedId(null);
+                    }}
                     className={`px-[24px] py-[14px] rounded-full text-[15px] font-NeueMontreal font-medium transition-all duration-300 ${
                       activeTab === "county"
                         ? "bg-[#059669] text-white shadow-lg"
@@ -504,42 +839,91 @@ export default function Tracker() {
                   {currentProjects.map((project) => (
                     <div
                       key={project.id}
-                      className="group relative overflow-hidden rounded-[26px] bg-white border border-black/10 transition-all duration-500 hover:border-black/25 hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)]"
+                      onClick={() =>
+                        setExpandedId(
+                          expandedId === project.id ? null : project.id,
+                        )
+                      }
+                      className={`group relative overflow-hidden rounded-[26px] bg-white border transition-all duration-500 cursor-pointer ${
+                        expandedId === project.id
+                          ? "border-[#1e40af] shadow-[0_20px_60px_rgba(30,64,175,0.15)]"
+                          : "border-black/10 hover:border-black/25 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]"
+                      }`}
                     >
-                      {/* Animated gradient background on hover */}
+                      {/* Linked chain indicator for expanded item */}
+                      {expandedId === project.id && (
+                        <div className="absolute top-4 right-4 z-20">
+                          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#1e40af]/10 border border-[#1e40af]/30 text-[#1e40af] text-[12px] font-NeueMontreal">
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                              />
+                            </svg>
+                            Linked Data
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Subtle gradient overlay */}
                       <div
-                        className={`absolute inset-0 bg-gradient-to-br ${activeTab === "national" ? "from-[#1e40af]" : "from-[#059669]"} via-[#2a2a2a] to-[#1a1a1a] transition-opacity duration-700 opacity-0 group-hover:opacity-100`}
+                        className={`absolute inset-0 bg-gradient-to-br ${
+                          activeTab === "national"
+                            ? "from-[#1e40af]/5 via-transparent to-transparent"
+                            : "from-[#059669]/5 via-transparent to-transparent"
+                        } transition-opacity duration-500`}
                       />
 
-                      {/* Front content */}
-                      <div className="relative z-10 h-full p-[26px] flex flex-col transition-all duration-500 group-hover:opacity-0 group-hover:pointer-events-none">
+                      {/* Card content */}
+                      <div className="relative z-10 h-full p-[26px] flex flex-col">
                         <div className="flex items-start justify-between mb-[16px]">
                           <div className="relative">
-                            <div className="w-[60px] h-[60px] rounded-2xl flex items-center justify-center text-[28px] bg-[#f5f5f5] group-hover:bg-white/10 transition-all duration-500">
+                            <div
+                              className={`w-[60px] h-[60px] rounded-2xl flex items-center justify-center text-[28px] ${
+                                activeTab === "national"
+                                  ? "bg-[#1e40af]/10"
+                                  : "bg-[#059669]/10"
+                              } transition-all duration-500`}
+                            >
                               {project.icon}
                             </div>
                             <div
-                              className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${activeTab === "national" ? "bg-[#1e40af]" : "bg-[#059669]"}`}
+                              className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${
+                                activeTab === "national"
+                                  ? "bg-[#1e40af]"
+                                  : "bg-[#059669]"
+                              }`}
                             />
                           </div>
                           <div className="text-right">
-                            <p className="text-[24px] font-FoundersGrotesk font-medium">
+                            <p className="text-[24px] font-FoundersGrotesk font-medium text-[#111]">
                               {project.budget}
                             </p>
-                            <p className="text-[11px] font-NeueMontreal uppercase tracking-wider mt-[4px] opacity-60">
+                            <p className="text-[11px] font-NeueMontreal uppercase tracking-wider mt-[4px] text-[#212121]/40">
                               Total Allocation
                             </p>
                           </div>
                         </div>
 
                         <div className="flex-1 flex flex-col justify-center">
-                          <h3 className="text-[22px] font-FoundersGrotesk leading-tight">
+                          <h3 className="text-[22px] font-FoundersGrotesk leading-tight text-[#111]">
                             {project.name}
                           </h3>
                           <div
-                            className={`mt-[12px] w-[40px] h-[3px] rounded-full bg-[#111]/10 group-hover:bg-white/30 transition-all duration-500`}
+                            className={`mt-[12px] w-[40px] h-[3px] rounded-full ${
+                              activeTab === "national"
+                                ? "bg-[#1e40af]"
+                                : "bg-[#059669]"
+                            } transition-all duration-500`}
                           />
-                          <p className="mt-[12px] text-[13px] font-NeueMontreal leading-relaxed opacity-60">
+                          <p className="mt-[12px] text-[13px] font-NeueMontreal leading-relaxed text-[#212121]/60">
                             {project.category} •{" "}
                             {activeTab === "national"
                               ? "Nationwide"
@@ -547,19 +931,29 @@ export default function Tracker() {
                           </p>
                         </div>
 
-                        <div className="mt-auto pt-[16px] border-t border-black/5 group-hover:border-white/10 transition-all duration-500 flex items-center justify-between">
+                        <div className="mt-auto pt-[16px] border-t border-black/5 flex items-center justify-between">
                           <div className="flex items-center gap-[6px]">
                             <span
-                              className={`w-2 h-2 rounded-full ${activeTab === "national" ? "bg-[#1e40af]" : "bg-[#059669]"}`}
+                              className={`w-2 h-2 rounded-full ${
+                                activeTab === "national"
+                                  ? "bg-[#1e40af]"
+                                  : "bg-[#059669]"
+                              }`}
                             />
-                            <span className="text-[12px] font-NeueMontreal opacity-60 capitalize">
+                            <span className="text-[12px] font-NeueMontreal text-[#212121]/60 capitalize">
                               {project.status.replace("-", " ")}
                             </span>
                           </div>
-                          <span className="text-[12px] font-NeueMontreal opacity-50 flex items-center gap-[6px] group-hover:opacity-0 group-hover:-translate-x-2 transition-all duration-300">
-                            <span>Details</span>
+                          <span className="text-[12px] font-NeueMontreal text-[#212121]/40 flex items-center gap-[6px] transition-all duration-300">
+                            <span>
+                              {expandedId === project.id
+                                ? "Close"
+                                : "View Details"}
+                            </span>
                             <svg
-                              className="w-4 h-4"
+                              className={`w-4 h-4 transition-transform duration-300 ${
+                                expandedId === project.id ? "rotate-180" : ""
+                              }`}
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -568,43 +962,74 @@ export default function Tracker() {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth={2}
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                d="M19 9l-7 7-7-7"
                               />
                             </svg>
                           </span>
                         </div>
                       </div>
 
-                      {/* Hover details overlay */}
-                      <div className="absolute inset-0 z-20 p-[26px] flex flex-col opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700">
-                        <div className="flex items-start justify-between">
-                          <div className="flex items-center gap-[12px]">
-                            <div className="w-[48px] h-[48px] rounded-xl bg-white/10 flex items-center justify-center text-[24px]">
-                              {project.icon}
+                      {/* Expanded content - Linked chain data visualization */}
+                      <div
+                        className={`absolute inset-x-0 bottom-0 z-20 p-[26px] bg-white/95 backdrop-blur-sm transition-all duration-500 ease-out ${
+                          expandedId === project.id
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-full pointer-events-none"
+                        }`}
+                      >
+                        {/* Chain link lines */}
+                        <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#1e40af]/30 to-transparent" />
+
+                        {/* Connected nodes visualization */}
+                        <div className="mb-4">
+                          <p className="text-[11px] font-NeueMontreal text-[#1e40af] uppercase tracking-wide mb-3 flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-[#1e40af]" />
+                            Data Chain
+                          </p>
+                          <div className="flex items-center gap-2 overflow-x-auto pb-2">
+                            {/* Chain items */}
+                            <div className="flex-shrink-0 px-4 py-2 rounded-lg bg-[#1e40af]/10 border border-[#1e40af]/20 text-[#111] text-[13px] font-NeueMontreal">
+                              {project.category}
                             </div>
-                            <div>
-                              <p className="text-[14px] font-NeueMontreal text-white/60 uppercase tracking-wide">
-                                {project.category}
-                              </p>
-                              <p className="text-[18px] font-FoundersGrotesk text-white mt-[2px]">
-                                {project.budget}
-                              </p>
+                            <svg
+                              className="w-4 h-4 text-[#1e40af]/50 flex-shrink-0"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
+                            </svg>
+                            <div className="flex-shrink-0 px-4 py-2 rounded-lg bg-[#1e40af]/10 border border-[#1e40af]/20 text-[#111] text-[13px] font-NeueMontreal">
+                              {project.timeline}
                             </div>
-                          </div>
-                          <div
-                            className={`px-3 py-1 rounded-full text-[11px] font-NeueMontreal font-medium text-white ${activeTab === "national" ? "bg-[#1e40af]" : "bg-[#059669]"}`}
-                          >
-                            {project.timeline}
+                            <svg
+                              className="w-4 h-4 text-[#1e40af]/50 flex-shrink-0"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
+                            </svg>
+                            <div className="flex-shrink-0 px-4 py-2 rounded-lg bg-[#1e40af]/10 border border-[#1e40af]/20 text-[#111] text-[13px] font-NeueMontreal">
+                              {project.impact}
+                            </div>
                           </div>
                         </div>
 
-                        <h3 className="mt-[20px] text-[24px] font-FoundersGrotesk leading-tight text-white">
-                          {project.name}
-                        </h3>
-
-                        <div className="mt-[16px] grid grid-cols-2 gap-[12px]">
-                          <div className="bg-white/5 rounded-[12px] p-[12px]">
-                            <div className="flex items-center gap-[8px] text-white/40">
+                        {/* Detailed breakdown */}
+                        <div className="mt-4 grid grid-cols-2 gap-[12px]">
+                          <div className="bg-[#f5f5f5] rounded-[12px] p-[12px]">
+                            <div className="flex items-center gap-[8px] text-[#212121]/40">
                               <svg
                                 className="w-4 h-4"
                                 fill="none"
@@ -622,12 +1047,12 @@ export default function Tracker() {
                                 Timeline
                               </span>
                             </div>
-                            <p className="mt-[6px] text-[14px] font-NeueMontreal text-white">
+                            <p className="mt-[6px] text-[14px] font-NeueMontreal text-[#111]">
                               {project.timeline}
                             </p>
                           </div>
-                          <div className="bg-white/5 rounded-[12px] p-[12px]">
-                            <div className="flex items-center gap-[8px] text-white/40">
+                          <div className="bg-[#f5f5f5] rounded-[12px] p-[12px]">
+                            <div className="flex items-center gap-[8px] text-[#212121]/40">
                               <svg
                                 className="w-4 h-4"
                                 fill="none"
@@ -645,26 +1070,26 @@ export default function Tracker() {
                                 Impact
                               </span>
                             </div>
-                            <p className="mt-[6px] text-[14px] font-NeueMontreal text-white">
+                            <p className="mt-[6px] text-[14px] font-NeueMontreal text-[#111]">
                               {project.impact}
                             </p>
                           </div>
                         </div>
 
-                        <p className="mt-[16px] text-[13px] font-NeueMontreal text-white/50 leading-relaxed">
+                        <p className="mt-4 text-[13px] font-NeueMontreal text-[#212121]/70 leading-relaxed">
                           {project.description}
                         </p>
 
-                        {/* Breakdown items */}
-                        <div className="mt-[16px]">
-                          <p className="text-[11px] font-NeueMontreal text-white/40 uppercase tracking-wide mb-[8px]">
-                            Key Components
+                        {/* Key components as chain */}
+                        <div className="mt-4">
+                          <p className="text-[11px] font-NeueMontreal text-[#212121]/50 uppercase tracking-wide mb-[8px]">
+                            Key Components Chain
                           </p>
                           <div className="flex flex-wrap gap-[8px]">
                             {project.breakdown.map((item, idx) => (
                               <span
                                 key={idx}
-                                className="px-3 py-1 rounded-full bg-white/10 text-[12px] font-NeueMontreal text-white/70"
+                                className="px-3 py-1 rounded-full bg-[#f5f5f5] border border-black/10 text-[12px] font-NeueMontreal text-[#212121]/70"
                               >
                                 {item}
                               </span>
@@ -672,10 +1097,15 @@ export default function Tracker() {
                           </div>
                         </div>
 
-                        <div className="mt-auto pt-[16px]">
-                          <div className="w-full bg-white/10 rounded-full h-[6px] overflow-hidden">
+                        {/* Progress bar */}
+                        <div className="mt-4 pt-[16px] border-t border-black/5">
+                          <div className="w-full bg-[#f5f5f5] rounded-full h-[6px] overflow-hidden">
                             <div
-                              className={`h-full ${activeTab === "national" ? "bg-[#1e40af]" : "bg-[#059669]"} transition-all duration-700`}
+                              className={`h-full ${
+                                activeTab === "national"
+                                  ? "bg-[#1e40af]"
+                                  : "bg-[#059669]"
+                              } transition-all duration-700`}
                               style={{
                                 width:
                                   project.status === "allocated"
@@ -687,11 +1117,11 @@ export default function Tracker() {
                             />
                           </div>
                           <div className="flex justify-between items-center mt-[8px]">
-                            <span className="text-[12px] font-NeueMontreal text-white/50 capitalize">
+                            <span className="text-[12px] font-NeueMontreal text-[#212121]/60 capitalize">
                               {activeTab === "national" ? "National" : "County"}{" "}
                               Budget
                             </span>
-                            <span className="text-[12px] font-NeueMontreal text-white/40">
+                            <span className="text-[12px] font-NeueMontreal text-[#212121]/50">
                               {project.status === "allocated"
                                 ? "Not started"
                                 : project.status === "in-progress"

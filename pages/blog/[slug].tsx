@@ -190,7 +190,7 @@ export default function BlogPostPage({
       <div
         ref={scrollerRef}
         data-scroll-container
-        className="relative h-screen overflow-y-auto overflow-x-hidden bg-[#fafafa] text-[#212121]"
+        className="relative min-h-screen bg-[#fafafa] text-[#212121]"
         style={{ position: "relative" }}
       >
         <div ref={contentRef} data-scroll-content>

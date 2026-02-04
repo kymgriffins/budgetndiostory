@@ -1,7 +1,7 @@
 "use client";
 
+import { ScrollReveal, Tags } from "@/components";
 import { motion } from "framer-motion";
-import { Tags, ScrollReveal } from "@/components";
 
 const topics = [
   { id: 1, title: "Budget Basics", href: "/learn#basics" },
@@ -12,7 +12,7 @@ const topics = [
 
 export default function LearnHero() {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-[#0a0a0a]">
+    <section className="relative w-full min-h-screen overflow-hidden bg-[#f1f1f1]">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-emerald-500/10 to-transparent blur-3xl animate-pulse" />
@@ -49,8 +49,9 @@ export default function LearnHero() {
         {/* Subtitle */}
         <ScrollReveal delay={0.2}>
           <p className="text-lg lg:text-xl text-white/60 max-w-2xl mb-10 font-NeueMontreal leading-relaxed">
-            Learn to read, understand, and engage with Kenya's national and county budgets.
-            Become an informed citizen who can hold leaders accountable.
+            Learn to read, understand, and engage with Kenya's national and
+            county budgets. Become an informed citizen who can hold leaders
+            accountable.
           </p>
         </ScrollReveal>
 
@@ -63,8 +64,18 @@ export default function LearnHero() {
             >
               <span className="relative z-10 flex items-center gap-2">
                 Start Learning
-                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                <svg
+                  className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
                 </svg>
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -74,9 +85,24 @@ export default function LearnHero() {
               className="px-8 py-4 bg-white/5 text-white font-medium rounded-full border border-white/10 hover:bg-white/10 transition-all flex items-center gap-2"
             >
               How it works
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
             </a>
           </div>
@@ -112,7 +138,9 @@ export default function LearnHero() {
         {/* Topics */}
         <ScrollReveal delay={0.6}>
           <div className="flex flex-wrap items-center gap-3 pt-6 border-t border-white/10">
-            <span className="text-sm text-white/50 font-NeueMontreal">Explore:</span>
+            <span className="text-sm text-white/50 font-NeueMontreal">
+              Explore:
+            </span>
             {topics.map((item) => (
               <Tags
                 key={item.id}
@@ -147,4 +175,3 @@ export default function LearnHero() {
     </section>
   );
 }
-

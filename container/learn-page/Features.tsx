@@ -134,7 +134,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="how-it-works" className="w-full py-20 bg-[#0a0a0a]">
+    <section id="how-it-works" className="w-full py-20 bg-[#fafafa]">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <ScrollReveal>
