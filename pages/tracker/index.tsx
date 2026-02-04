@@ -431,319 +431,6 @@ export default function Tracker() {
               </div>
             </section>
 
-            {/* HISTORICAL BUDGET TRACKER */}
-            <section className="padding-x padding-y">
-              <div className="max-w-[1200px] mx-auto">
-                <div data-animate="fade-up" className="mb-[22px]">
-                  <h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-                    Historical Budget Tracker (2000-2025)
-                  </h2>
-                  <p className="mt-[8px] paragraph font-NeueMontreal text-[#212121]/70 max-w-[600px]">
-                    Select a year to explore budget allocations, projects, and
-                    progress over time.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                  {/* Year Selector - Left Side */}
-                  <div data-animate="fade-up" className="lg:col-span-1">
-                    <div className="bg-white rounded-xl border border-gray-200 p-4">
-                      <h3 className="font-FoundersGrotesk text-sm font-semibold text-[#111] mb-3">
-                        Select Year
-                      </h3>
-                      <div className="max-h-[400px] overflow-y-auto space-y-1 pr-2">
-                        {trackerYearlyData.years.map((year) => (
-                          <button
-                            key={year.year}
-                            onClick={() => {
-                              setSelectedYear(year);
-                              setSelectedItem(null);
-                            }}
-                            className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                              selectedYear?.year === year.year
-                                ? "bg-[#212121] text-white shadow-md"
-                                : "bg-gray-50 text-[#212121] hover:bg-gray-100"
-                            }`}
-                          >
-                            <span className="flex items-center justify-between">
-                              <span>{year.year}</span>
-                              <span
-                                className={`text-xs ${
-                                  selectedYear?.year === year.year
-                                    ? "text-white/60"
-                                    : "text-gray-400"
-                                }`}
-                              >
-                                {year.totalProjects} items
-                              </span>
-                            </span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card Details - Right Side */}
-                  <div data-animate="fade-up" className="lg:col-span-3">
-                    {selectedYear ? (
-                      <div className="space-y-4">
-                        {/* Year Summary Card */}
-                        <div className="bg-white rounded-xl border border-gray-200 p-6">
-                          <div className="flex items-center justify-between mb-4">
-                            <div>
-                              <h3 className="font-FoundersGrotesk text-xl font-bold text-[#111]">
-                                {selectedYear.year} Budget Overview
-                              </h3>
-                              <p className="text-sm text-gray-500 mt-1">
-                                {selectedYear.totalBudget} •{" "}
-                                {selectedYear.totalProjects} Projects
-                              </p>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium">
-                                {selectedYear.completed} Completed
-                              </span>
-                              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium">
-                                {selectedYear.inProgress} In Progress
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Progress bars */}
-                          <div className="grid grid-cols-4 gap-4">
-                            <div>
-                              <div className="text-xs text-gray-500 mb-1">
-                                Completed
-                              </div>
-                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div
-                                  className="h-full bg-green-500 rounded-full"
-                                  style={{
-                                    width: `${(selectedYear.completed / selectedYear.totalProjects) * 100}%`,
-                                  }}
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <div className="text-xs text-gray-500 mb-1">
-                                In Progress
-                              </div>
-                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div
-                                  className="h-full bg-blue-500 rounded-full"
-                                  style={{
-                                    width: `${(selectedYear.inProgress / selectedYear.totalProjects) * 100}%`,
-                                  }}
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <div className="text-xs text-gray-500 mb-1">
-                                Allocated
-                              </div>
-                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div
-                                  className="h-full bg-yellow-500 rounded-full"
-                                  style={{
-                                    width: `${(selectedYear.allocated / selectedYear.totalProjects) * 100}%`,
-                                  }}
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <div className="text-xs text-gray-500 mb-1">
-                                Stalled
-                              </div>
-                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div
-                                  className="h-full bg-red-500 rounded-full"
-                                  style={{
-                                    width: `${(selectedYear.stalled / selectedYear.totalProjects) * 100}%`,
-                                  }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Project Items List */}
-                        <div className="space-y-3">
-                          {selectedYear.items.map((item) => (
-                            <div
-                              key={item.id}
-                              onClick={() =>
-                                setSelectedItem(
-                                  selectedItem?.id === item.id ? null : item,
-                                )
-                              }
-                              className={`bg-white rounded-xl border transition-all cursor-pointer ${
-                                selectedItem?.id === item.id
-                                  ? "border-blue-500 shadow-lg"
-                                  : "border-gray-200 hover:border-gray-300"
-                              }`}
-                            >
-                              <div className="p-4">
-                                <div className="flex items-center gap-4">
-                                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-2xl">
-                                    {item.icon}
-                                  </div>
-                                  <div className="flex-1">
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-xs px-2 py-0.5 rounded bg-gray-200 text-gray-700">
-                                        {item.category}
-                                      </span>
-                                      <span
-                                        className={`text-xs px-2 py-0.5 rounded ${
-                                          item.sector === "National"
-                                            ? "bg-blue-100 text-blue-700"
-                                            : "bg-emerald-100 text-emerald-700"
-                                        }`}
-                                      >
-                                        {item.sector}
-                                      </span>
-                                    </div>
-                                    <h4 className="font-FoundersGrotesk font-semibold text-[#111] mt-1">
-                                      {item.title}
-                                    </h4>
-                                  </div>
-                                  <div className="text-right">
-                                    <div className="font-medium text-[#111]">
-                                      {item.budget}
-                                    </div>
-                                    <span
-                                      className={`text-xs px-2 py-0.5 rounded-full ${
-                                        item.status === "Completed"
-                                          ? "bg-green-100 text-green-700"
-                                          : item.status === "In Progress"
-                                            ? "bg-blue-100 text-blue-700"
-                                            : item.status === "Allocated"
-                                              ? "bg-yellow-100 text-yellow-700"
-                                              : "bg-red-100 text-red-700"
-                                      }`}
-                                    >
-                                      {item.status}
-                                    </span>
-                                  </div>
-                                  <svg
-                                    className={`w-5 h-5 text-gray-400 transition-transform ${
-                                      selectedItem?.id === item.id
-                                        ? "rotate-90"
-                                        : ""
-                                    }`}
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M9 5l7 7-7 7"
-                                    />
-                                  </svg>
-                                </div>
-
-                                {/* Expanded Details */}
-                                {selectedItem?.id === item.id && (
-                                  <div className="mt-4 pt-4 border-t border-gray-100">
-                                    <p className="text-sm text-gray-600 mb-4">
-                                      {item.description}
-                                    </p>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                                      <div>
-                                        <div className="text-xs text-gray-500">
-                                          Budget
-                                        </div>
-                                        <div className="font-medium">
-                                          {item.budget}
-                                        </div>
-                                      </div>
-                                      <div>
-                                        <div className="text-xs text-gray-500">
-                                          Allocated
-                                        </div>
-                                        <div className="font-medium">
-                                          {item.allocated}%
-                                        </div>
-                                      </div>
-                                      <div>
-                                        <div className="text-xs text-gray-500">
-                                          Progress
-                                        </div>
-                                        <div className="font-medium">
-                                          {item.progress}%
-                                        </div>
-                                      </div>
-                                      {item.beneficiaries && (
-                                        <div>
-                                          <div className="text-xs text-gray-500">
-                                            Beneficiaries
-                                          </div>
-                                          <div className="font-medium">
-                                            {item.beneficiaries}
-                                          </div>
-                                        </div>
-                                      )}
-                                    </div>
-                                    <Link
-                                      href={`/tracker/${selectedYear.year}/${item.id}`}
-                                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#212121] text-white rounded-lg text-sm font-medium hover:opacity-90 transition"
-                                    >
-                                      View Full Details
-                                      <svg
-                                        className="w-4 h-4"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth={2}
-                                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                        />
-                                      </svg>
-                                    </Link>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* View All Link */}
-                        <Link
-                          href={`/tracker/${selectedYear.year}`}
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
-                        >
-                          View All {selectedYear.year} Data
-                          <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                          </svg>
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-                        <p className="text-gray-500">
-                          Select a year to view budget details
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </section>
-
             {/* SPENDING BREAKDOWN - CARDS WITH TABS */}
             <section className="padding-x padding-y bg-[#fafafa]">
               <div className="max-w-[1200px] mx-auto">
@@ -1230,7 +917,318 @@ export default function Tracker() {
                 </div>
               </div>
             </section>
+            {/* HISTORICAL BUDGET TRACKER */}
+            <section className="padding-x padding-y">
+              <div className="max-w-[1200px] mx-auto">
+                <div data-animate="fade-up" className="mb-[22px]">
+                  <h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
+                    Historical Budget Tracker (2000-2025)
+                  </h2>
+                  <p className="mt-[8px] paragraph font-NeueMontreal text-[#212121]/70 max-w-[600px]">
+                    Select a year to explore budget allocations, projects, and
+                    progress over time.
+                  </p>
+                </div>
 
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                  {/* Year Selector - Left Side */}
+                  <div data-animate="fade-up" className="lg:col-span-1">
+                    <div className="bg-white rounded-xl border border-gray-200 p-4">
+                      <h3 className="font-FoundersGrotesk text-sm font-semibold text-[#111] mb-3">
+                        Select Year
+                      </h3>
+                      <div className="max-h-[400px] overflow-y-auto space-y-1 pr-2">
+                        {trackerYearlyData.years.map((year) => (
+                          <button
+                            key={year.year}
+                            onClick={() => {
+                              setSelectedYear(year);
+                              setSelectedItem(null);
+                            }}
+                            className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                              selectedYear?.year === year.year
+                                ? "bg-[#212121] text-white shadow-md"
+                                : "bg-gray-50 text-[#212121] hover:bg-gray-100"
+                            }`}
+                          >
+                            <span className="flex items-center justify-between">
+                              <span>{year.year}</span>
+                              <span
+                                className={`text-xs ${
+                                  selectedYear?.year === year.year
+                                    ? "text-white/60"
+                                    : "text-gray-400"
+                                }`}
+                              >
+                                {year.totalProjects} items
+                              </span>
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Details - Right Side */}
+                  <div data-animate="fade-up" className="lg:col-span-3">
+                    {selectedYear ? (
+                      <div className="space-y-4">
+                        {/* Year Summary Card */}
+                        <div className="bg-white rounded-xl border border-gray-200 p-6">
+                          <div className="flex items-center justify-between mb-4">
+                            <div>
+                              <h3 className="font-FoundersGrotesk text-xl font-bold text-[#111]">
+                                {selectedYear.year} Budget Overview
+                              </h3>
+                              <p className="text-sm text-gray-500 mt-1">
+                                {selectedYear.totalBudget} •{" "}
+                                {selectedYear.totalProjects} Projects
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium">
+                                {selectedYear.completed} Completed
+                              </span>
+                              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium">
+                                {selectedYear.inProgress} In Progress
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Progress bars */}
+                          <div className="grid grid-cols-4 gap-4">
+                            <div>
+                              <div className="text-xs text-gray-500 mb-1">
+                                Completed
+                              </div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-green-500 rounded-full"
+                                  style={{
+                                    width: `${(selectedYear.completed / selectedYear.totalProjects) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-xs text-gray-500 mb-1">
+                                In Progress
+                              </div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-blue-500 rounded-full"
+                                  style={{
+                                    width: `${(selectedYear.inProgress / selectedYear.totalProjects) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-xs text-gray-500 mb-1">
+                                Allocated
+                              </div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-yellow-500 rounded-full"
+                                  style={{
+                                    width: `${(selectedYear.allocated / selectedYear.totalProjects) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-xs text-gray-500 mb-1">
+                                Stalled
+                              </div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-red-500 rounded-full"
+                                  style={{
+                                    width: `${(selectedYear.stalled / selectedYear.totalProjects) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Project Items List */}
+                        <div className="space-y-3">
+                          {selectedYear.items.map((item) => (
+                            <div
+                              key={item.id}
+                              onClick={() =>
+                                setSelectedItem(
+                                  selectedItem?.id === item.id ? null : item,
+                                )
+                              }
+                              className={`bg-white rounded-xl border transition-all cursor-pointer ${
+                                selectedItem?.id === item.id
+                                  ? "border-blue-500 shadow-lg"
+                                  : "border-gray-200 hover:border-gray-300"
+                              }`}
+                            >
+                              <div className="p-4">
+                                <div className="flex items-center gap-4">
+                                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-2xl">
+                                    {item.icon}
+                                  </div>
+                                  <div className="flex-1">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-xs px-2 py-0.5 rounded bg-gray-200 text-gray-700">
+                                        {item.category}
+                                      </span>
+                                      <span
+                                        className={`text-xs px-2 py-0.5 rounded ${
+                                          item.sector === "National"
+                                            ? "bg-blue-100 text-blue-700"
+                                            : "bg-emerald-100 text-emerald-700"
+                                        }`}
+                                      >
+                                        {item.sector}
+                                      </span>
+                                    </div>
+                                    <h4 className="font-FoundersGrotesk font-semibold text-[#111] mt-1">
+                                      {item.title}
+                                    </h4>
+                                  </div>
+                                  <div className="text-right">
+                                    <div className="font-medium text-[#111]">
+                                      {item.budget}
+                                    </div>
+                                    <span
+                                      className={`text-xs px-2 py-0.5 rounded-full ${
+                                        item.status === "Completed"
+                                          ? "bg-green-100 text-green-700"
+                                          : item.status === "In Progress"
+                                            ? "bg-blue-100 text-blue-700"
+                                            : item.status === "Allocated"
+                                              ? "bg-yellow-100 text-yellow-700"
+                                              : "bg-red-100 text-red-700"
+                                      }`}
+                                    >
+                                      {item.status}
+                                    </span>
+                                  </div>
+                                  <svg
+                                    className={`w-5 h-5 text-gray-400 transition-transform ${
+                                      selectedItem?.id === item.id
+                                        ? "rotate-90"
+                                        : ""
+                                    }`}
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M9 5l7 7-7 7"
+                                    />
+                                  </svg>
+                                </div>
+
+                                {/* Expanded Details */}
+                                {selectedItem?.id === item.id && (
+                                  <div className="mt-4 pt-4 border-t border-gray-100">
+                                    <p className="text-sm text-gray-600 mb-4">
+                                      {item.description}
+                                    </p>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                                      <div>
+                                        <div className="text-xs text-gray-500">
+                                          Budget
+                                        </div>
+                                        <div className="font-medium">
+                                          {item.budget}
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <div className="text-xs text-gray-500">
+                                          Allocated
+                                        </div>
+                                        <div className="font-medium">
+                                          {item.allocated}%
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <div className="text-xs text-gray-500">
+                                          Progress
+                                        </div>
+                                        <div className="font-medium">
+                                          {item.progress}%
+                                        </div>
+                                      </div>
+                                      {item.beneficiaries && (
+                                        <div>
+                                          <div className="text-xs text-gray-500">
+                                            Beneficiaries
+                                          </div>
+                                          <div className="font-medium">
+                                            {item.beneficiaries}
+                                          </div>
+                                        </div>
+                                      )}
+                                    </div>
+                                    <Link
+                                      href={`/tracker/${selectedYear.year}/${item.id}`}
+                                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#212121] text-white rounded-lg text-sm font-medium hover:opacity-90 transition"
+                                    >
+                                      View Full Details
+                                      <svg
+                                        className="w-4 h-4"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                      </svg>
+                                    </Link>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* View All Link */}
+                        <Link
+                          href={`/tracker/${selectedYear.year}`}
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
+                        >
+                          View All {selectedYear.year} Data
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+                        <p className="text-gray-500">
+                          Select a year to view budget details
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
             {/* INSIGHTS CTA */}
             <section className="padding-x padding-y">
               <div className="max-w-[1200px] mx-auto">

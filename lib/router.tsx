@@ -14,7 +14,6 @@ const ServicesPage = lazy(() => import('@/pages/services/index'));
 const InsightsPage = lazy(() => import('@/pages/insights/index'));
 const CasePage = lazy(() => import('@/pages/case/index'));
 const PresentationPage = lazy(() => import('@/pages/presentation/index'));
-const StoriesPage = lazy(() => import('@/pages/stories/index'));
 const TrackerPage = lazy(() => import('@/pages/tracker/index'));
 const PodcastsPage = lazy(() => import('@/pages/podcasts/index'));
 const PodcastEpisodePage = lazy(() => import('@/pages/podcasts/[id]'));
@@ -112,17 +111,6 @@ export const presentationRoute = createRoute({
   component: () => (
     <Suspense fallback={<div className="loading">Loading...</div>}>
       <PresentationPage />
-    </Suspense>
-  ),
-});
-
-// Stories Route
-export const storiesRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: 'stories',
-  component: () => (
-    <Suspense fallback={<div className="loading">Loading...</div>}>
-      <StoriesPage />
     </Suspense>
   ),
 });
@@ -290,7 +278,6 @@ const routeTree = rootRoute.addChildren([
   insightsRoute,
   caseRoute,
   presentationRoute,
-  storiesRoute,
   trackerRoute,
   podcastsRoute,
   podcastEpisodeRoute,

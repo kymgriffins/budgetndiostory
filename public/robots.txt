@@ -1,0 +1,39 @@
+# BudgetNDIOStory Robots.txt
+# Kenya Government Budget Tracking Platform
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://budgetndiostory.org/sitemap.xml
+
+# Disallow admin/private pages
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Crawl-delay for respecting server resources
+Crawl-delay: 10
+
+# Host directive
+Host: https://budgetndiostory.org
+
+# Special instructions for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
