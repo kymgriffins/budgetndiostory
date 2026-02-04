@@ -25,6 +25,8 @@ export const ROUTES = {
   WORKIZ: "/workiz",
   EDUSTORIES: "/edustories",
   LEARN: "/learn",
+  BLOG: "/blog",
+  ADMIN_BLOG: "/admin/blog",
 } as const;
 
 // Dynamic Routes
@@ -38,6 +40,7 @@ export const DYNAMIC_ROUTES = {
 export const NAV_ITEMS = [
   { id: 1, title: "Home", href: ROUTES.HOME },
   { id: 2, title: "Stories", href: ROUTES.STORIES },
+  { id: 9, title: "Blog", href: ROUTES.BLOG },
   { id: 3, title: "Tracker", href: ROUTES.TRACKER },
   { id: 8, title: "Learn", href: ROUTES.LEARN },
   { id: 4, title: "Podcasts", href: ROUTES.PODCASTS },
@@ -49,6 +52,7 @@ export const MOBILE_NAV_ITEMS = [
   { id: 2, title: "Podcasts", href: ROUTES.PODCASTS },
   { id: 3, title: "Tracker", href: ROUTES.TRACKER },
   { id: 4, title: "Stories", href: ROUTES.STORIES },
+  { id: 9, title: "Blog", href: ROUTES.BLOG },
   { id: 5, title: "Contact us", href: ROUTES.CONTACT },
 ] as const;
 
@@ -71,6 +75,7 @@ export const FOOTER_HIDE_ROUTES = [
   ROUTES.BUDGET_SIMPLIFIED,
   ROUTES.ANALYTICS,
   ROUTES.LEARN,
+  ROUTES.BLOG,
 ] as const;
 
 // Type for route values
