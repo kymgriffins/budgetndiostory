@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/useMediaQuery";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import React, { useEffect, useMemo, useRef } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -9,9 +11,10 @@ type Props = {
 
 /**
  * Smooth scrolling + scroll-triggered animations for a single page.
- * - Creates a LocomotiveScroll instance on a scoped container
- * - Bridges it to GSAP ScrollTrigger via scrollerProxy
+ * - Creates a LocomotiveScroll instance on a scoped container (desktop only)
+ * - Bridges it to GSAP ScrollTrigger via scrollerProxy (desktop only)
  * - Applies lightweight, responsive entrance animations based on data attributes
+ * - Uses native scroll on mobile for better performance
  *
  * Usage: wrap the page sections and add:
  * - data-animate="fade-up" on elements to animate individually
@@ -20,9 +23,110 @@ type Props = {
 export default function SmoothScrollGsap({ children, className }: Props) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const initializedRef = useRef(false);
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = useReducedMotion();
+
+  // Memoize to prevent unnecessary re-renders
+  const shouldUseNativeScroll = useMemo(
+    () => isMobile || prefersReducedMotion,
+    [isMobile, prefersReducedMotion],
+  );
 
   useEffect(() => {
-    // Prevent multiple initializations
+    // Skip if native scroll mode (mobile or reduced motion)
+    if (shouldUseNativeScroll) {
+      // Still run lightweight CSS animations on mobile
+      if (!initializedRef.current) {
+        initializedRef.current = true;
+        let gsap: any;
+        let ScrollTrigger: any;
+        let ctx: any;
+
+        (async () => {
+          try {
+            const gsapModule: any = await import("gsap");
+            const stModule: any = await import("gsap/ScrollTrigger");
+            gsap = gsapModule.gsap ?? gsapModule.default ?? gsapModule;
+            ScrollTrigger =
+              stModule.ScrollTrigger ?? stModule.default ?? stModule;
+
+            if (!gsap?.registerPlugin || !ScrollTrigger) return;
+            gsap.registerPlugin(ScrollTrigger);
+
+            const el = scrollerRef.current;
+            if (!el) return;
+
+            // Lightweight animations using native scroll
+            ctx = gsap.context(() => {
+              // Use shorter, simpler animations for mobile
+              const duration = prefersReducedMotion ? 0.1 : 0.4;
+              const stagger = prefersReducedMotion ? 0 : 0.05;
+
+              (
+                gsap.utils.toArray("[data-animate='fade-up']") as HTMLElement[]
+              ).forEach((node) => {
+                gsap.fromTo(
+                  node,
+                  { y: 20, opacity: 0 },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    duration,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                      trigger: node,
+                      scroller: el,
+                      start: "top 90%",
+                      toggleActions: "play none none reverse",
+                    },
+                  },
+                );
+              });
+
+              (
+                gsap.utils.toArray("[data-animate='cards']") as HTMLElement[]
+              ).forEach((wrap) => {
+                const cards = wrap.querySelectorAll<HTMLElement>(
+                  "[data-animate='card']",
+                );
+                if (!cards.length) return;
+                gsap.fromTo(
+                  cards,
+                  { y: 15, opacity: 0 },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    duration,
+                    ease: "power2.out",
+                    stagger,
+                    scrollTrigger: {
+                      trigger: wrap,
+                      scroller: el,
+                      start: "top 85%",
+                      toggleActions: "play none none reverse",
+                    },
+                  },
+                );
+              });
+            }, el);
+
+            ScrollTrigger.refresh();
+          } catch {
+            // No-op: if something fails, page still renders
+          }
+        })();
+
+        return () => {
+          if (!initializedRef.current) return;
+          try {
+            ctx?.revert?.();
+          } catch {}
+        };
+      }
+      return;
+    }
+
+    // Desktop: Full Locomotive Scroll + GSAP integration
     if (initializedRef.current) return;
     initializedRef.current = true;
     let ctx: any;
@@ -61,7 +165,7 @@ export default function SmoothScrollGsap({ children, className }: Props) {
             content: el,
             lerp: 0.08,
             smoothWheel: true,
-            smoothTouch: true,
+            smoothTouch: false, // Disable on touch for better mobile performance
           } as any,
           scrollCallback: () => ScrollTrigger.update(),
           autoStart: true,
@@ -185,7 +289,7 @@ export default function SmoothScrollGsap({ children, className }: Props) {
         // no-op
       }
     };
-  }, []);
+  }, [shouldUseNativeScroll]);
 
   return (
     <div

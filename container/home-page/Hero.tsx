@@ -67,6 +67,7 @@ export default function Hero() {
 								alt="Government"
 								width={60}
 								height={60}
+								priority
 								className="xm:hidden smOnly:hidden"
 							/>
 						</div>
