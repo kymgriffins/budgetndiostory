@@ -29,6 +29,8 @@ export const ROUTES = {
   BLOG: "/blog",
   ADMIN_BLOG: "/admin/blog",
   MVP1: "/mvp1",
+  FUNDS: "/funds",
+  BILLING: "/billing",
 } as const;
 
 // Dynamic Routes
@@ -76,6 +78,8 @@ export const FOOTER_HIDE_ROUTES = [
   ROUTES.ANALYTICS,
   ROUTES.LEARN,
   ROUTES.BLOG,
+  ROUTES.FUNDS,
+  ROUTES.BILLING,
 ] as const;
 
 // Type for route values

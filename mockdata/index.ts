@@ -8,6 +8,7 @@ import podcastsData from "./podcasts.json";
 import shortsData from "./shorts.json";
 import storiesData from "./stories.json";
 import trackerData from "./tracker.json";
+import fundsData from "./funds.json";
 
 export const stories = storiesData.stories as any[];
 export const podcasts = podcastsData.podcasts as any[];
@@ -26,3 +27,7 @@ export const values = aboutData.values as any[];
 export const team = aboutData.team as any;
 export const contact = aboutData.contact as any;
 export const courses = eduData.courses as any[];
+export const fundSources = fundsData.fundSources as any[];
+export const fundAllocations = fundsData.fundAllocations as any[];
+export const fundTransactions = fundsData.fundTransactions as any[];
+export const fundSummary = fundsData.fundSummary as any;

@@ -1,0 +1,505 @@
+{
+  "fundSources": [
+    {
+      "id": "fund-001",
+      "name": "National Treasury Grant",
+      "type": "government_grant",
+      "description": "Annual government allocation for civic education and budget tracking initiatives",
+      "organization": "National Treasury - Kenya",
+      "contactPerson": "John Mwangi",
+      "contactEmail": "j.mwangi@treasury.go.ke",
+      "amount": 5000000,
+      "currency": "KES",
+      "status": "secured",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "disbursementSchedule": [
+        {
+          "id": "dis-001",
+          "fundSourceId": "fund-001",
+          "amount": 1250000,
+          "currency": "KES",
+          "date": "2024-01-15",
+          "status": "received",
+          "referenceNumber": "TR2024001"
+        },
+        {
+          "id": "dis-002",
+          "fundSourceId": "fund-001",
+          "amount": 1250000,
+          "currency": "KES",
+          "date": "2024-04-01",
+          "status": "received",
+          "referenceNumber": "TR2024002"
+        },
+        {
+          "id": "dis-003",
+          "fundSourceId": "fund-001",
+          "amount": 1250000,
+          "currency": "KES",
+          "date": "2024-07-01",
+          "status": "received",
+          "referenceNumber": "TR2024003"
+        },
+        {
+          "id": "dis-004",
+          "fundSourceId": "fund-001",
+          "amount": 1250000,
+          "currency": "KES",
+          "date": "2024-10-01",
+          "status": "pending",
+          "referenceNumber": "TR2024004"
+        }
+      ],
+      "allocatedTo": [
+        "civic-education",
+        "budget-tracker",
+        "community-outreach"
+      ],
+      "requirements": [
+        "Quarterly progress reports",
+        "Annual audit",
+        "Community impact assessment"
+      ],
+      "reportingRequirements": [
+        {
+          "id": "rep-001",
+          "fundSourceId": "fund-001",
+          "type": "quarterly",
+          "dueDate": "2024-03-31",
+          "status": "approved",
+          "description": "Q1 Progress Report",
+          "submittedDate": "2024-03-28"
+        },
+        {
+          "id": "rep-002",
+          "fundSourceId": "fund-001",
+          "type": "quarterly",
+          "dueDate": "2024-06-30",
+          "status": "submitted",
+          "description": "Q2 Progress Report",
+          "submittedDate": "2024-06-29"
+        }
+      ],
+      "documents": [],
+      "createdAt": "2023-12-15T10:00:00Z",
+      "updatedAt": "2024-06-29T14:30:00Z"
+    },
+    {
+      "id": "fund-002",
+      "name": "Open Society Foundation Grant",
+      "type": "international_aid",
+      "description": "Funding for transparency and accountability in public finance",
+      "organization": "Open Society Foundation",
+      "contactPerson": "Sarah Johnson",
+      "contactEmail": "sjohnson@opensociety.org",
+      "amount": 150000,
+      "currency": "USD",
+      "status": "secured",
+      "startDate": "2024-03-01",
+      "endDate": "2025-02-28",
+      "disbursementSchedule": [
+        {
+          "id": "dis-005",
+          "fundSourceId": "fund-002",
+          "amount": 75000,
+          "currency": "USD",
+          "date": "2024-03-01",
+          "status": "received",
+          "referenceNumber": "OSF2024001"
+        },
+        {
+          "id": "dis-006",
+          "fundSourceId": "fund-002",
+          "amount": 75000,
+          "currency": "USD",
+          "date": "2024-09-01",
+          "status": "pending",
+          "referenceNumber": "OSF2024002"
+        }
+      ],
+      "allocatedTo": ["data-portal", "research-analysis"],
+      "requirements": [
+        "Bi-annual reports",
+        "Impact metrics",
+        "Financial statements"
+      ],
+      "reportingRequirements": [
+        {
+          "id": "rep-003",
+          "fundSourceId": "fund-002",
+          "type": "milestone",
+          "dueDate": "2024-08-31",
+          "status": "pending",
+          "description": "Mid-term impact report"
+        }
+      ],
+      "documents": [],
+      "createdAt": "2024-01-20T09:00:00Z",
+      "updatedAt": "2024-06-15T11:00:00Z"
+    },
+    {
+      "id": "fund-003",
+      "name": "Corporate Partnership - Equity Bank",
+      "type": "corporate_sponsorship",
+      "description": "Sponsorship for financial literacy workshops and community programs",
+      "organization": "Equity Bank Kenya",
+      "contactPerson": "Grace Wanjiku",
+      "contactEmail": "gwanjiku@equitybank.co.ke",
+      "amount": 2000000,
+      "currency": "KES",
+      "status": "secured",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "disbursementSchedule": [
+        {
+          "id": "dis-007",
+          "fundSourceId": "fund-003",
+          "amount": 1000000,
+          "currency": "KES",
+          "date": "2024-01-15",
+          "status": "received",
+          "referenceNumber": "EQ2024001"
+        },
+        {
+          "id": "dis-008",
+          "fundSourceId": "fund-003",
+          "amount": 1000000,
+          "currency": "KES",
+          "date": "2024-07-01",
+          "status": "pending",
+          "referenceNumber": "EQ2024002"
+        }
+      ],
+      "allocatedTo": ["financial-literacy", "youth-programs"],
+      "requirements": [
+        "Brand acknowledgment",
+        "Event reports",
+        "Participant feedback"
+      ],
+      "reportingRequirements": [],
+      "documents": [],
+      "createdAt": "2023-11-10T08:00:00Z",
+      "updatedAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "fund-004",
+      "name": "World Bank Data Initiative",
+      "type": "international_aid",
+      "description": "Grant for developing open data infrastructure for public finance",
+      "organization": "World Bank Group",
+      "contactPerson": "Michael Chen",
+      "contactEmail": "mchen@worldbank.org",
+      "amount": 250000,
+      "currency": "USD",
+      "status": "in_progress",
+      "startDate": "2024-04-01",
+      "endDate": "2025-03-31",
+      "disbursementSchedule": [
+        {
+          "id": "dis-009",
+          "fundSourceId": "fund-004",
+          "amount": 125000,
+          "currency": "USD",
+          "date": "2024-04-01",
+          "status": "processed",
+          "referenceNumber": "WB2024001"
+        },
+        {
+          "id": "dis-010",
+          "fundSourceId": "fund-004",
+          "amount": 125000,
+          "currency": "USD",
+          "date": "2024-10-01",
+          "status": "pending",
+          "referenceNumber": "WB2024002"
+        }
+      ],
+      "allocatedTo": ["data-infrastructure", "api-development"],
+      "requirements": [
+        "Technical reports",
+        "Documentation",
+        "User training materials"
+      ],
+      "reportingRequirements": [
+        {
+          "id": "rep-004",
+          "fundSourceId": "fund-004",
+          "type": "quarterly",
+          "dueDate": "2024-06-30",
+          "status": "submitted",
+          "description": "Technical progress report Q2"
+        }
+      ],
+      "documents": [],
+      "createdAt": "2024-02-01T12:00:00Z",
+      "updatedAt": "2024-06-30T16:00:00Z"
+    },
+    {
+      "id": "fund-005",
+      "name": "Annual Membership Program",
+      "type": "membership_fee",
+      "description": "Recurring membership fees from individual and organizational members",
+      "organization": "N/A",
+      "amount": 500000,
+      "currency": "KES",
+      "status": "in_progress",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "disbursementSchedule": [],
+      "allocatedTo": ["operations", "general-activities"],
+      "requirements": [],
+      "reportingRequirements": [],
+      "documents": [],
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-06-30T12:00:00Z"
+    },
+    {
+      "id": "fund-006",
+      "name": "Crowdfunding Campaign 2024",
+      "type": "crowdfunding",
+      "description": "Community crowdfunding for local budget tracking tools",
+      "organization": "N/A",
+      "contactPerson": "Community Team",
+      "contactEmail": "community@budgetndiostory.org",
+      "amount": 300000,
+      "currency": "KES",
+      "status": "pending",
+      "startDate": "2024-09-01",
+      "endDate": "2024-11-30",
+      "disbursementSchedule": [],
+      "allocatedTo": ["mobile-app", "community-tools"],
+      "requirements": ["Campaign report", "Backer updates"],
+      "reportingRequirements": [],
+      "documents": [],
+      "createdAt": "2024-06-01T10:00:00Z",
+      "updatedAt": "2024-06-01T10:00:00Z"
+    }
+  ],
+  "fundAllocations": [
+    {
+      "id": "alloc-001",
+      "fundSourceId": "fund-001",
+      "projectId": "civic-education",
+      "programName": "Civic Education Program",
+      "description": "Community workshops on budget participation and citizen oversight",
+      "allocatedAmount": 2000000,
+      "currency": "KES",
+      "utilizedAmount": 1450000,
+      "status": "active",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "milestones": [
+        {
+          "id": "ms-001",
+          "allocationId": "alloc-001",
+          "name": "Q1 Workshops Complete",
+          "description": "Complete 20 community workshops",
+          "targetAmount": 500000,
+          "targetDate": "2024-03-31",
+          "status": "completed",
+          "completedDate": "2024-03-25"
+        },
+        {
+          "id": "ms-002",
+          "allocationId": "alloc-001",
+          "name": "Q2 Workshops Complete",
+          "description": "Complete 25 additional workshops",
+          "targetAmount": 500000,
+          "targetDate": "2024-06-30",
+          "status": "completed",
+          "completedDate": "2024-06-28"
+        },
+        {
+          "id": "ms-003",
+          "allocationId": "alloc-001",
+          "name": "Q3-Q4 Workshops",
+          "description": "Complete remaining workshops and impact assessment",
+          "targetAmount": 1000000,
+          "targetDate": "2024-12-31",
+          "status": "pending"
+        }
+      ],
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-06-28T14:00:00Z"
+    },
+    {
+      "id": "alloc-002",
+      "fundSourceId": "fund-001",
+      "projectId": "budget-tracker",
+      "programName": "Budget Tracker Maintenance",
+      "description": "Ongoing maintenance and updates to the budget tracking platform",
+      "allocatedAmount": 1500000,
+      "currency": "KES",
+      "utilizedAmount": 820000,
+      "status": "active",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "milestones": [
+        {
+          "id": "ms-004",
+          "allocationId": "alloc-002",
+          "name": "Platform Updates Q1-Q2",
+          "description": "Major feature updates and bug fixes",
+          "targetAmount": 750000,
+          "targetDate": "2024-06-30",
+          "status": "completed",
+          "completedDate": "2024-06-25"
+        }
+      ],
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-06-25T11:00:00Z"
+    },
+    {
+      "id": "alloc-003",
+      "fundSourceId": "fund-002",
+      "projectId": "data-portal",
+      "programName": "Open Data Portal",
+      "description": "Development of open data portal for public finance transparency",
+      "allocatedAmount": 120000,
+      "currency": "USD",
+      "utilizedAmount": 45000,
+      "status": "active",
+      "startDate": "2024-03-01",
+      "endDate": "2025-02-28",
+      "milestones": [
+        {
+          "id": "ms-005",
+          "allocationId": "alloc-003",
+          "name": "Phase 1: MVP Launch",
+          "description": "Launch minimum viable product",
+          "targetAmount": 60000,
+          "targetDate": "2024-06-30",
+          "status": "completed",
+          "completedDate": "2024-06-15"
+        },
+        {
+          "id": "ms-006",
+          "allocationId": "alloc-003",
+          "name": "Phase 2: Enhanced Features",
+          "description": "Add advanced visualization and API access",
+          "targetAmount": 60000,
+          "targetDate": "2024-12-31",
+          "status": "in_progress"
+        }
+      ],
+      "createdAt": "2024-03-01T00:00:00Z",
+      "updatedAt": "2024-06-15T16:00:00Z"
+    }
+  ],
+  "fundTransactions": [
+    {
+      "id": "txn-001",
+      "fundSourceId": "fund-001",
+      "allocationId": "alloc-001",
+      "type": "expense",
+      "category": "Workshops",
+      "description": "Venue rental for Mombasa workshop series",
+      "amount": 85000,
+      "currency": "KES",
+      "date": "2024-02-15",
+      "vendor": "Mombasa Conference Center",
+      "receiptNumber": "REC-2024-0156",
+      "approvedBy": "Program Manager",
+      "status": "processed",
+      "createdAt": "2024-02-15T10:30:00Z"
+    },
+    {
+      "id": "txn-002",
+      "fundSourceId": "fund-001",
+      "allocationId": "alloc-001",
+      "type": "expense",
+      "category": "Materials",
+      "description": "Printed educational materials for workshops",
+      "amount": 125000,
+      "currency": "KES",
+      "date": "2024-02-20",
+      "vendor": "PrintPro Kenya",
+      "receiptNumber": "REC-2024-0189",
+      "approvedBy": "Program Manager",
+      "status": "processed",
+      "createdAt": "2024-02-20T14:00:00Z"
+    },
+    {
+      "id": "txn-003",
+      "fundSourceId": "fund-001",
+      "allocationId": "alloc-002",
+      "type": "expense",
+      "category": "Software",
+      "description": "Annual hosting and server costs",
+      "amount": 180000,
+      "currency": "KES",
+      "date": "2024-01-10",
+      "vendor": "DigitalOcean",
+      "receiptNumber": "REC-2024-0001",
+      "approvedBy": "Tech Lead",
+      "status": "processed",
+      "createdAt": "2024-01-10T09:00:00Z"
+    },
+    {
+      "id": "txn-004",
+      "fundSourceId": "fund-001",
+      "type": "income",
+      "category": "Government Grant",
+      "description": "Q1 Treasury disbursement",
+      "amount": 1250000,
+      "currency": "KES",
+      "date": "2024-01-15",
+      "status": "processed",
+      "createdAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "txn-005",
+      "fundSourceId": "fund-003",
+      "type": "income",
+      "category": "Corporate Sponsorship",
+      "description": "Equity Bank sponsorship - first tranche",
+      "amount": 1000000,
+      "currency": "KES",
+      "date": "2024-01-15",
+      "status": "processed",
+      "createdAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "txn-006",
+      "fundSourceId": "fund-002",
+      "allocationId": "alloc-003",
+      "type": "expense",
+      "category": "Development",
+      "description": "Frontend developer contract",
+      "amount": 35000,
+      "currency": "USD",
+      "date": "2024-04-01",
+      "vendor": "DevContractor Ltd",
+      "approvedBy": "Project Manager",
+      "status": "processed",
+      "createdAt": "2024-04-01T11:00:00Z"
+    }
+  ],
+  "fundSummary": {
+    "totalSecured": 12500000,
+    "totalPending": 300000,
+    "totalUtilized": 5800000,
+    "totalRemaining": 7000000,
+    "byType": {
+      "government_grant": 5000000,
+      "donation": 0,
+      "partnership": 0,
+      "corporate_sponsorship": 2000000,
+      "international_aid": 400000,
+      "membership_fee": 500000,
+      "event_revenue": 0,
+      "crowdfunding": 0
+    },
+    "byStatus": {
+      "pending": 300000,
+      "secured": 12200000,
+      "in_progress": 0,
+      "completed": 0,
+      "cancelled": 0
+    },
+    "currency": "KES",
+    "periodStart": "2024-01-01",
+    "periodEnd": "2024-12-31"
+  }
+}
