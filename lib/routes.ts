@@ -27,6 +27,7 @@ export const ROUTES = {
   LEARN: "/learn",
   BLOG: "/blog",
   ADMIN_BLOG: "/admin/blog",
+  MVP1: "/mvp1",
 } as const;
 
 // Dynamic Routes
@@ -39,19 +40,16 @@ export const DYNAMIC_ROUTES = {
 // Navigation Items (for Navbar and MobileNav)
 export const NAV_ITEMS = [
   { id: 1, title: "Home", href: ROUTES.HOME },
-  { id: 2, title: "Stories", href: ROUTES.STORIES },
   { id: 9, title: "Blog", href: ROUTES.BLOG },
   { id: 3, title: "Tracker", href: ROUTES.TRACKER },
-  { id: 8, title: "Learn", href: ROUTES.LEARN },
-  { id: 4, title: "Podcasts", href: ROUTES.PODCASTS },
+  // { id: 4, title: "Podcasts", href: ROUTES.PODCASTS },
   { id: 7, title: "Contact", href: ROUTES.CONTACT },
 ] as const;
 
 export const MOBILE_NAV_ITEMS = [
   { id: 1, title: "Home", href: ROUTES.HOME },
-  { id: 2, title: "Podcasts", href: ROUTES.PODCASTS },
+  // { id: 2, title: "Podcasts", href: ROUTES.PODCASTS },
   { id: 3, title: "Tracker", href: ROUTES.TRACKER },
-  { id: 4, title: "Stories", href: ROUTES.STORIES },
   { id: 9, title: "Blog", href: ROUTES.BLOG },
   { id: 5, title: "Contact us", href: ROUTES.CONTACT },
 ] as const;
@@ -70,7 +68,7 @@ export const FOOTER_HIDE_ROUTES = [
   ROUTES.WORKIZ,
   ROUTES.STORIES,
   ROUTES.TRACKER,
-  ROUTES.PODCASTS,
+  // ROUTES.PODCASTS, // Removed - show footer on podcasts page
   ROUTES.SHORTS,
   ROUTES.BUDGET_SIMPLIFIED,
   ROUTES.ANALYTICS,

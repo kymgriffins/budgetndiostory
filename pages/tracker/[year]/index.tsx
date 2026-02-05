@@ -1,6 +1,6 @@
 import LandingFooter from "@/components/LandingFooter";
 import TrackerCard from "@/components/TrackerCard";
-import trackerYearlyData from "@/mockdata/tracker-yearly.json";
+import unifiedTrackerData from "@/mockdata/tracker-unified.json";
 import { YearlyTrackerData } from "@/mockdata/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
@@ -8,8 +8,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
+// Cast the imported JSON to the proper type
+const trackerData = unifiedTrackerData as unknown as UnifiedTrackerData;
+
 interface YearTrackerPageProps {
   yearData: YearlyTrackerData | null;
+}
+
+interface UnifiedTrackerData {
+  sectors: any[];
+  years: YearlyTrackerData[];
 }
 
 export default function YearTrackerPage({ yearData }: YearTrackerPageProps) {
@@ -362,7 +370,7 @@ export default function YearTrackerPage({ yearData }: YearTrackerPageProps) {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredItems.map((item) => (
                     <TrackerCard
-                      key={item.id}
+                      key={item.slug}
                       item={item}
                       year={yearData.year}
                     />
@@ -390,7 +398,7 @@ export default function YearTrackerPage({ yearData }: YearTrackerPageProps) {
                     Browse Other Years
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {trackerYearlyData.years.map((year) => (
+                    {trackerData.years.map((year) => (
                       <Link
                         key={year.year}
                         href={`/tracker/${year.year}`}
@@ -417,7 +425,7 @@ export default function YearTrackerPage({ yearData }: YearTrackerPageProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = trackerYearlyData.years.map((year) => ({
+  const paths = trackerData.years.map((year) => ({
     params: { year: year.year.toString() },
   }));
 
@@ -429,7 +437,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const year = parseInt(params?.year as string);
-  const yearData = trackerYearlyData.years.find((y) => y.year === year);
+  const yearData = trackerData.years.find((y) => y.year === year);
 
   if (!yearData) {
     return {

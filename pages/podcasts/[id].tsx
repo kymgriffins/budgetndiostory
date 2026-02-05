@@ -1018,9 +1018,7 @@ export default function PodcastPlayer() {
         </main>
 
         {/* Footer - Properly positioned at bottom */}
-        <footer className="mt-auto">
-          <LandingFooter />
-        </footer>
+        
       </div>
 
       {/* Hidden Audio Element */}

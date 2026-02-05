@@ -33,11 +33,10 @@ export function getSectorColor(sector: string): string {
 
 export default function TrackerCard({ item, year }: TrackerCardProps) {
   const progressPercentage = Math.min(item.progress, 100);
-  const isFullyFunded = item.allocated >= 100;
 
   return (
     <Link
-      href={`/tracker/${year}/${item.id}`}
+      href={`/tracker/${year}/${item.slug}`}
       className={`block relative p-6 rounded-xl border-l-4 ${getSectorColor(item.sector)} hover:shadow-xl transition-all duration-300 group`}
       data-hover="card"
     >

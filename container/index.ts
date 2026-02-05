@@ -55,3 +55,8 @@ export { default as CourseList } from "./learn-page/CourseList";
 export { default as Features } from "./learn-page/Features";
 export { default as LearnHero } from "./learn-page/Hero";
 
+// mvp1 page
+export { default as Cta } from "./mvp1-page/Cta";
+export { default as Mvp1Features } from "./mvp1-page/Features";
+export { default as Mvp1Hero } from "./mvp1-page/Hero";
+

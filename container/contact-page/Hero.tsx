@@ -1,43 +1,20 @@
-import Image from "next/image";
-import { contactHero } from "@/public";
-import { motion } from "framer-motion";
+"use client";
+import { FadeUp } from "@/animation";
 
 export default function Hero() {
-	return (
-		<section className="w-full padding-x">
-			<div className="w-full flex flex-col">
-				<div className="w-full margin">
-					<h1 className="heading tracking-[-1.3px] text-[#212121] font-semibold font-FoundersGrotesk uppercase">
-						<div className="flex items-center gap-[5px]">
-							<motion.span
-								initial={{ width: 0 }}
-								animate={{ width: "auto" }}
-								transition={{
-									ease: [0.86, 0, 0.07, 0.995],
-									duration: 1,
-									delay: 1.5,
-								}}>
-								<Image
-									width={120}
-									height={50}
-									src={contactHero}
-									alt="img"
-									className="w-auto h-[95px] lgOnly:w-auto lgOnly:h-auto mdOnly:w-[100px] mdOnly:h-[63px] smOnly:w-[74px] smOnly:h-[45px] xm:w-[64px] xm:h-[40px] object-cover xlOnly:mt-[15px] mt-[10px] rounded-[10px]"
-								/>
-							</motion.span>
-							<h1 className="heading tracking-[-1.3px] text-[#212121] font-semibold font-FoundersGrotesk uppercase">
-								LET’S START <br />
-							</h1>
-						</div>
-						A PROJECT TOGETHER
-					</h1>
-				</div>
-				<div className="w-full pb-[15px]">
-					<h3 className="paragraph font-medium text-secondry font-NeueMontreal">
-						Fill the form below:
-					</h3>
-				</div>
-			</div>
-		</section>
-	);
+  return (
+    <section className="w-full padding-x pt-[120px] pb-[60px]">
+      <FadeUp duration={0.8}>
+        <div className="w-full flex flex-col gap-[30px]">
+          <h1 className="heading tracking-[-2px] text-secondry font-semibold font-FoundersGrotesk uppercase leading-tight">
+            Get in <span className="text-secondry">Touch</span>
+          </h1>
+          <p className="paragraph max-w-[600px] text-secondry font-NeueMontreal">
+            Have a question about budgets, want to collaborate on a project, or
+            just want to say hello? We'd love to hear from you.
+          </p>
+        </div>
+      </FadeUp>
+    </section>
+  );
 }

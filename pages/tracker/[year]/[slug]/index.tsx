@@ -1,11 +1,15 @@
 import LandingFooter from "@/components/LandingFooter";
-import trackerYearlyData from "@/mockdata/tracker-yearly.json";
-import { YearlyTrackerItem } from "@/mockdata/types";
+import TrackerCard from "@/components/TrackerCard";
+import unifiedTrackerData from "@/mockdata/tracker-unified.json";
+import { YearlyTrackerItem, UnifiedTrackerData } from "@/mockdata/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
+
+// Cast the imported JSON to the proper type
+const trackerData = unifiedTrackerData as unknown as UnifiedTrackerData;
 
 interface ItemDetailPageProps {
   item: YearlyTrackerItem;
@@ -313,15 +317,7 @@ export default function ItemDetailPage({
                         </div>
                         <div className="h-4 bg-gray-200 rounded-full overflow-hidden">
                           <div
-                            className={`h-full rounded-full transition-all duration-500 ${
-                              item.status === "Completed"
-                                ? "bg-green-500"
-                                : item.status === "In Progress"
-                                  ? "bg-blue-500"
-                                  : item.status === "Allocated"
-                                    ? "bg-yellow-500"
-                                    : "bg-red-500"
-                            }`}
+                            className={`h-full rounded-full transition-all duration-500 ${getStatusColor(item.status)}`}
                             style={{ width: `${item.progress}%` }}
                           />
                         </div>
@@ -497,12 +493,12 @@ export default function ItemDetailPage({
                       View All {year} Items
                     </Link>
                     {yearData.items
-                      .filter((i: YearlyTrackerItem) => i.id !== item.id)
+                      .filter((i: YearlyTrackerItem) => i.slug !== item.slug)
                       .slice(0, 3)
                       .map((otherItem: YearlyTrackerItem) => (
                         <Link
-                          key={otherItem.id}
-                          href={`/tracker/${year}/${otherItem.id}`}
+                          key={otherItem.slug}
+                          href={`/tracker/${year}/${otherItem.slug}`}
                           className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-[#212121] hover:bg-gray-200 transition-colors"
                         >
                           {otherItem.title.substring(0, 30)}...
@@ -524,12 +520,12 @@ export default function ItemDetailPage({
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: any[] = [];
 
-  trackerYearlyData.years.forEach((yearData) => {
+  trackerData.years.forEach((yearData) => {
     yearData.items.forEach((item) => {
       paths.push({
         params: {
           year: yearData.year.toString(),
-          id: item.id,
+          slug: item.slug,
         },
       });
     });
@@ -543,10 +539,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const year = parseInt(params?.year as string);
-  const itemId = params?.id as string;
+  const slug = params?.slug as string;
 
-  const yearData = trackerYearlyData.years.find((y) => y.year === year);
-  const item = yearData?.items.find((i) => i.id === itemId);
+  const yearData = trackerData.years.find((y) => y.year === year);
+  const item = yearData?.items.find((i) => i.slug === slug);
 
   if (!yearData || !item) {
     return {

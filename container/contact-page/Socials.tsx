@@ -1,114 +1,133 @@
 "use client";
-import { LinkHover, TextMask } from "@/animation";
-import { Eyes } from "@/components";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { FadeUp, LinkHover } from "@/animation";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Socials() {
-	const [rotate, setRotate] = useState(0);
-	// Phrases matching the Budget Ndio Story vibe
-	const phrase = ["Budget", "Ndio", "Story"];
+  const [year, setYear] = useState(2024);
 
-	useEffect(() => {
-		window.addEventListener("mousemove", (e) => {
-			let mouseX = e.clientX;
-			let mouseY = e.clientY;
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
 
-			let deltaX = mouseX - window.innerWidth / 2;
-			let deltaY = mouseY - window.innerHeight / 2;
+  const contactInfo = [
+    {
+      icon: <Mail size={20} strokeWidth={1.5} />,
+      label: "Email",
+      value: "hello@budgetndiostory.org",
+      href: "mailto:hello@budgetndiostory.org",
+    },
+    {
+      icon: <Phone size={20} strokeWidth={1.5} />,
+      label: "Phone",
+      value: "+254 700 000 000",
+      href: "tel:+254700000000",
+    },
+    {
+      icon: <MapPin size={20} strokeWidth={1.5} />,
+      label: "Location",
+      value: "Nairobi, Kenya",
+      href: "#",
+    },
+  ];
 
-			let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-			setRotate(angle - 280);
-		});
-	}, []);
+  const socialLinks = [
+    { name: "Instagram", href: "https://instagram.com" },
+    { name: "Twitter", href: "https://twitter.com" },
+    { name: "LinkedIn", href: "https://linkedin.com" },
+    { name: "YouTube", href: "https://youtube.com" },
+  ];
 
-	const container = useRef(null);
-	const { scrollYProgress } = useScroll({
-		target: container,
-		offset: ["start end", "end start"],
-	});
-	const mq = useTransform(scrollYProgress, [0, 1], [0, -700]);
+  return (
+    <section className="w-full bg-background py-[80px]">
+      <FadeUp>
+        <div className="w-full flex flex-col lgOnly:flex-row gap-[60px] padding-x">
+          {/* Contact Info */}
+          <div className="w-full lgOnly:w-[40%]">
+            <h2 className="sub-heading font-FoundersGrotesk text-secondry uppercase mb-[40px]">
+              Contact Info
+            </h2>
+            <div className="flex flex-col gap-[30px]">
+              {contactInfo.map((item, index) => (
+                <div key={index} className="flex items-start gap-[15px]">
+                  <div className="text-secondry mt-[2px]">{item.icon}</div>
+                  <div>
+                    <p className="paragraph font-NeueMontreal text-secondry mb-[5px]">
+                      {item.label}
+                    </p>
+                    <LinkHover
+                      className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
+                      title={item.value}
+                      href={item.href}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-	return (
-		<section
-			className="w-full min-h-screen smOnly:h-screen xm:h-screen bg-about padding-y relative"
-			ref={container}
-		>
-			<div className="w-full h-full flex justify-center gap-[50px] items-center flex-col">
-				{/* Rotating Story Phrases */}
-				<div className="flex flex-col gap-[10px] pb-[50px]">
-					<h1 className="text-white text-[277px] leading-[207px] lgOnly:text-[230px] lgOnly:leading-[170px] mdOnly:text-[150px] mdOnly:leading-[100px] smOnly:text-[74px] smOnly:leading-[68px] xm:text-[64px] xm:leading-[48px] text-center font-bold font-FoundersGrotesk text-secondry uppercase pointer-events-none">
-						<TextMask>{phrase}</TextMask>
-					</h1>
-				</div>
+          {/* Social Links */}
+          <div className="w-full lgOnly:w-[30%]">
+            <h2 className="sub-heading font-FoundersGrotesk text-secondry uppercase mb-[40px]">
+              Follow Us
+            </h2>
+            <div className="flex flex-col gap-[15px]">
+              {socialLinks.map((social, index) => (
+                <LinkHover
+                  key={index}
+                  className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
+                  title={social.name}
+                  href={social.href}
+                />
+              ))}
+            </div>
+          </div>
 
-				{/* Contact / Info Section */}
-				<div className="w-full border-t border-[#21212155] pt-[20px]">
-					<div className="w-full flex smOnly:flex-col xm:flex-col justify-between gap-y-[20px] padding-x">
-						{/* Storyline Contact Info */}
-						<div className="w-[50%] smOnly:w-full xm:w-full">
-							<h3 className="paragraph font-medium text-white font-NeueMontreal">
-								Where Budget Meets Reality
-							</h3>
-						</div>
-						<div className=" w-[50%] smOnly:w-full xm:w-full flex smOnly:flex-col xm:flex-col justify-between gap-y-[20px]">
-							<div>
-								<h1 className=" paragraph font-medium font-NeueMontreal text-white	 pb-[20px]">
-									Visit Us
-								</h1>
-								<div className="flex flex-col gap-y-[10px]">
-									<LinkHover
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="Budget Hub, Nairobi"
-										href="/"
-									/>
-									<LinkHover
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="Affordable Street, Nairobi"
-										href="/"
-									/>
-									<LinkHover
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="Floor 2, Room 15"
-										href="/"
-									/>
-									<LinkHover
-										className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-										title="Open for Everyone"
-										href="/"
-									/>
-								</div>
-							</div>
+          {/* Newsletter / CTA */}
+          <div className="w-full lgOnly:w-[30%]">
+            <h2 className="sub-heading font-FoundersGrotesk text-secondry uppercase mb-[20px]">
+              Stay Updated
+            </h2>
+            <p className="paragraph font-NeueMontreal text-secondry mb-[20px]">
+              Subscribe to our newsletter for budget insights and updates.
+            </p>
+            <div className="flex gap-[10px]">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="paragraph w-full font-NeueMontreal text-secondry bg-transparent border-b border-[#21212155] focus:border-secondry outline-none py-[10px]"
+              />
+              <button className="paragraph font-NeueMontreal text-secondry uppercase hover:underline">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </FadeUp>
 
-							<div className="flex w-fit h-fit gap-x-[5px] group">
-								<div className="rounded-[50px] border-[2px] border-[#21212155] group-hover:bg-secondry py-[3px] px-[12px] cursor-pointer">
-									<Link
-										href="mailto:hello@budgetndiyo.com"
-										className="paragraph font-NeueMontreal text-white uppercase group-hover:text-background transition-all duration-200 ease-in"
-									>
-										hello@budgetndiostory.ke
-									</Link>
-								</div>
-								<div className="w-[33px] flex items-center justify-center h-[33px] border-[2px] border-[#21212155] rounded-[50px] group-hover:bg-secondry transition-all duration-200 ease-in cursor-pointer smOnly:hidden xm:hidden">
-									<p className="paragraph font-normal text-secondry group-hover:text-background">
-										<ArrowUpRight size={24} strokeWidth={1.25} />
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			{/* Motion Eyes */}
-			<motion.div
-				className="w-full absolute top-[50%] transform translate-y-[-50%] gap-[30px] flex items-center justify-center"
-				style={{ y: mq }}
-			>
-				<Eyes className="w-[230px] h-[230px] mdOnly:w-[200px] mdOnly:h-[200px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[150px] xm:h-[150px] smOnly:flex-col xm:flex-col" />
-			</motion.div>
-		</section>
-	);
+      {/* Bottom Bar */}
+      <div className="w-full border-t border-[#21212122] mt-[60px] pt-[30px]">
+        <div className="flex flex-col smOnly:flex-row xm:flex-row justify-between items-center gap-[20px] padding-x">
+          <p className="paragraph font-NeueMontreal text-secondry">
+            © {year} Budget Ndio Story. All rights reserved.
+          </p>
+          <div className="flex gap-[30px]">
+            <Link
+              href="/privacy"
+              className="paragraph font-NeueMontreal text-secondry hover:underline"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="paragraph font-NeueMontreal text-secondry hover:underline"
+            >
+              Terms of Service
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

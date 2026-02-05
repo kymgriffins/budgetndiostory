@@ -1,10 +1,10 @@
-import LandingFooter from "./LandingFooter";
 import { ReactNode } from "react";
+import LandingFooter from "./LandingFooter";
 
 interface LayoutProps {
-	children: ReactNode;
-	showFooter?: boolean;
-	className?: string;
+  children: ReactNode;
+  showFooter?: boolean;
+  className?: string;
 }
 
 /**
@@ -30,20 +30,18 @@ interface LayoutProps {
  * ```
  */
 export default function Layout({
-	children,
-	showFooter = true,
-	className = "",
+  children,
+  showFooter = true,
+  className = "",
 }: LayoutProps) {
-	return (
-		<>
-			{/* Spacer for fixed navbar height (desktop + mobile nav are both 8vh) */}
-			<div className="h-[8vh]" />
+  return (
+    <>
+      {/* Spacer for fixed navbar height (desktop + mobile nav are both 8vh) */}
+      <div className="h-[8vh]" />
 
-			<div className={className}>
-				{children}
-			</div>
+      <div className={className}>{children}</div>
 
-			{showFooter && <LandingFooter />}
-		</>
-	);
+      {showFooter && <LandingFooter />}
+    </>
+  );
 }

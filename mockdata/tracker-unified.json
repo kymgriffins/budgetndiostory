@@ -1,0 +1,459 @@
+{
+  "sectors": [
+    {
+      "slug": "national-education",
+      "name": "Education",
+      "type": "national",
+      "budget": "Ksh 701–718B",
+      "status": "allocated",
+      "county": "National",
+      "icon": "📚",
+      "description": "Funds teacher salaries through TSC, free basic education, and university funding via HELB.",
+      "timeline": "FY 2024/25",
+      "impact": "10M+ students supported",
+      "category": "Education",
+      "breakdown": [
+        "Teacher salaries (TSC)",
+        "Free basic education",
+        "University funding (HELB)"
+      ]
+    },
+    {
+      "slug": "national-infrastructure",
+      "name": "Infrastructure (Energy & ICT)",
+      "type": "national",
+      "budget": "Ksh 500–554B",
+      "status": "in-progress",
+      "county": "National",
+      "icon": "⚡",
+      "description": "Major projects including road maintenance (Ksh 190B+), railway expansion, and digital superhighway initiatives.",
+      "timeline": "FY 2024/25",
+      "impact": "National connectivity",
+      "category": "Infrastructure",
+      "breakdown": [
+        "Road maintenance (Ksh 190B+)",
+        "Railway expansion",
+        "Digital superhighway"
+      ]
+    },
+    {
+      "slug": "national-security",
+      "name": "National Security",
+      "type": "national",
+      "budget": "Ksh 251–279B",
+      "status": "allocated",
+      "county": "National",
+      "icon": "🛡️",
+      "description": "Funding for Ministry of Defence, National Police Service, and National Intelligence Service.",
+      "timeline": "FY 2024/25",
+      "impact": "Nationwide security",
+      "category": "Security",
+      "breakdown": [
+        "Ministry of Defence",
+        "National Police Service",
+        "National Intelligence Service"
+      ]
+    },
+    {
+      "slug": "national-debt",
+      "name": "Debt Servicing (CFS)",
+      "type": "national",
+      "budget": "Ksh 1.2T",
+      "status": "allocated",
+      "county": "National",
+      "icon": "💰",
+      "description": "Consolidated Fund Services for public debt interest payments and pensions.",
+      "timeline": "FY 2024/25",
+      "impact": "Debt sustainability",
+      "category": "Debt",
+      "breakdown": ["Public debt interest", "Pension payments", "Fund services"]
+    },
+    {
+      "slug": "county-health",
+      "name": "Health",
+      "type": "county",
+      "budget": "Ksh 380–400B",
+      "status": "in-progress",
+      "county": "County",
+      "icon": "🏥",
+      "description": "Fully devolved function managing County Referral Hospitals, dispensaries, and healthcare workers.",
+      "timeline": "FY 2024/25",
+      "impact": "47 Counties covered",
+      "category": "Health",
+      "breakdown": [
+        "County Referral Hospitals",
+        "Dispensaries",
+        "Doctors & nurses"
+      ]
+    },
+    {
+      "slug": "county-agriculture",
+      "name": "Agriculture",
+      "type": "county",
+      "budget": "Equitable Share",
+      "status": "allocated",
+      "county": "County",
+      "icon": "🌾",
+      "description": "Crop and animal husbandry, livestock auctions, and local irrigation projects for food security.",
+      "timeline": "FY 2024/25",
+      "impact": "Smallholder farmers",
+      "category": "Agriculture",
+      "breakdown": [
+        "Extension services",
+        "Livestock programs",
+        "Local irrigation"
+      ]
+    },
+    {
+      "slug": "county-ecde",
+      "name": "ECDE & Vocational",
+      "type": "county",
+      "budget": "Equitable Share",
+      "status": "allocated",
+      "county": "County",
+      "icon": "👶",
+      "description": "Early Childhood Education and village polytechnics funding (devolved from national).",
+      "timeline": "FY 2024/25",
+      "impact": "Pre-primary education",
+      "category": "Education",
+      "breakdown": [
+        "Pre-primary schools",
+        "Village polytechnics",
+        "Vocational training"
+      ]
+    },
+    {
+      "slug": "county-infrastructure",
+      "name": "Local Infrastructure",
+      "type": "county",
+      "budget": "Equitable Share",
+      "status": "in-progress",
+      "county": "County",
+      "icon": "🛣️",
+      "description": "Last-mile access roads, street lighting, and local markets development.",
+      "timeline": "FY 2024/25",
+      "impact": "47 Counties",
+      "category": "Infrastructure",
+      "breakdown": ["Feeder roads", "Street lighting", "Local markets"]
+    }
+  ],
+  "years": [
+    {
+      "year": 2000,
+      "totalBudget": "Ksh 310B",
+      "totalProjects": 5,
+      "completed": 2,
+      "inProgress": 2,
+      "allocated": 1,
+      "stalled": 0,
+      "items": [
+        {
+          "slug": "nairobi-mombasa-highway",
+          "category": "Infrastructure",
+          "title": "Nairobi-Mombasa Highway Rehabilitation",
+          "description": "Major road rehabilitation connecting Kenya's two largest cities",
+          "budget": "Ksh 45B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "🛣️",
+          "sector": "National",
+          "quarter": "Q4 2000",
+          "beneficiaries": "5M+ travelers"
+        },
+        {
+          "slug": "district-hospital-upgrades",
+          "category": "Health",
+          "title": "District Hospital Upgrades",
+          "description": "Upgrading 15 district hospitals across Kenya",
+          "budget": "Ksh 12B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "🏥",
+          "sector": "National",
+          "quarter": "Q4 2000",
+          "beneficiaries": "3M+ patients"
+        },
+        {
+          "slug": "primary-school-construction",
+          "category": "Education",
+          "title": "Primary School Construction",
+          "description": "Building 50 new primary schools in underserved areas",
+          "budget": "Ksh 8B",
+          "allocated": 80,
+          "status": "In Progress",
+          "progress": 65,
+          "icon": "📚",
+          "sector": "National",
+          "beneficiaries": "100,000 students"
+        },
+        {
+          "slug": "rural-water-supply",
+          "category": "Water",
+          "title": "Rural Water Supply",
+          "description": "Boreholes and water points for rural communities",
+          "budget": "Ksh 5B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "💧",
+          "sector": "County",
+          "quarter": "Q4 2000",
+          "beneficiaries": "500,000 residents"
+        },
+        {
+          "slug": "irrigation-schemes",
+          "category": "Agriculture",
+          "title": "Irrigation Schemes",
+          "description": "Small-scale irrigation projects for food security",
+          "budget": "Ksh 6B",
+          "allocated": 60,
+          "status": "In Progress",
+          "progress": 40,
+          "icon": "🌾",
+          "sector": "County",
+          "beneficiaries": "50,000 farmers"
+        }
+      ]
+    },
+    {
+      "year": 2001,
+      "totalBudget": "Ksh 340B",
+      "totalProjects": 5,
+      "completed": 2,
+      "inProgress": 2,
+      "allocated": 1,
+      "stalled": 0,
+      "items": [
+        {
+          "slug": "kisumu-port-development",
+          "category": "Infrastructure",
+          "title": "Kisumu Port Development",
+          "description": "Modernization of Kisumu Port on Lake Victoria",
+          "budget": "Ksh 18B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "⚓",
+          "sector": "National",
+          "quarter": "Q4 2001",
+          "beneficiaries": "2M+ traders"
+        },
+        {
+          "slug": "hiv-aids-treatment",
+          "category": "Health",
+          "title": "HIV/AIDS Treatment Program",
+          "description": "ARV distribution and treatment centers",
+          "budget": "Ksh 15B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "💊",
+          "sector": "National",
+          "quarter": "Q4 2001",
+          "beneficiaries": "200,000 patients"
+        },
+        {
+          "slug": "secondary-school-expansion",
+          "category": "Education",
+          "title": "Secondary School Expansion",
+          "description": "Building 30 new secondary schools",
+          "budget": "Ksh 10B",
+          "allocated": 90,
+          "status": "In Progress",
+          "progress": 70,
+          "icon": "🎓",
+          "sector": "National",
+          "beneficiaries": "75,000 students"
+        },
+        {
+          "slug": "rural-electrification",
+          "category": "Infrastructure",
+          "title": "Rural Electrification",
+          "description": "Connecting rural areas to national grid",
+          "budget": "Ksh 8B",
+          "allocated": 75,
+          "status": "In Progress",
+          "progress": 55,
+          "icon": "⚡",
+          "sector": "National",
+          "beneficiaries": "300,000 households"
+        },
+        {
+          "slug": "coffee-revitalization",
+          "category": "Agriculture",
+          "title": "Coffee Revitalization",
+          "description": "Support for coffee farmers and cooperatives",
+          "budget": "Ksh 4B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "☕",
+          "sector": "County",
+          "quarter": "Q4 2001",
+          "beneficiaries": "100,000 farmers"
+        }
+      ]
+    },
+    {
+      "year": 2002,
+      "totalBudget": "Ksh 370B",
+      "totalProjects": 5,
+      "completed": 3,
+      "inProgress": 2,
+      "allocated": 0,
+      "stalled": 0,
+      "items": [
+        {
+          "slug": "thika-superhighway-planning",
+          "category": "Infrastructure",
+          "title": "Thika Superhighway Planning",
+          "description": "Planning and design of major highway upgrade",
+          "budget": "Ksh 3B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "🛣️",
+          "sector": "National",
+          "quarter": "Q4 2002",
+          "beneficiaries": "Planning complete"
+        },
+        {
+          "slug": "maternal-health-initiative",
+          "category": "Health",
+          "title": "Maternal Health Initiative",
+          "description": "Improving maternal healthcare across counties",
+          "budget": "Ksh 7B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "👶",
+          "sector": "National",
+          "quarter": "Q4 2002",
+          "beneficiaries": "1M+ mothers"
+        },
+        {
+          "slug": "free-primary-education-prep",
+          "category": "Education",
+          "title": "Free Primary Education Prep",
+          "description": "Infrastructure for free primary education launch",
+          "budget": "Ksh 12B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "📚",
+          "sector": "National",
+          "quarter": "Q4 2002",
+          "beneficiaries": "5M+ students"
+        },
+        {
+          "slug": "nairobi-water-supply",
+          "category": "Water",
+          "title": "Nairobi Water Supply",
+          "description": "Expanding Nairobi's water treatment capacity",
+          "budget": "Ksh 15B",
+          "allocated": 85,
+          "status": "In Progress",
+          "progress": 60,
+          "icon": "💧",
+          "sector": "County",
+          "beneficiaries": "4M+ residents"
+        },
+        {
+          "slug": "railway-rehabilitation",
+          "category": "Infrastructure",
+          "title": "Railway Rehabilitation",
+          "description": "Kenya Uganda Railway upgrades",
+          "budget": "Ksh 20B",
+          "allocated": 70,
+          "status": "In Progress",
+          "progress": 45,
+          "icon": "🚂",
+          "sector": "National",
+          "beneficiaries": "Cargo & passenger"
+        }
+      ]
+    },
+    {
+      "year": 2003,
+      "totalBudget": "Ksh 420B",
+      "totalProjects": 5,
+      "completed": 3,
+      "inProgress": 2,
+      "allocated": 0,
+      "stalled": 0,
+      "items": [
+        {
+          "slug": "free-primary-education",
+          "category": "Education",
+          "title": "Free Primary Education Rollout",
+          "description": "Free primary education for all Kenyan children",
+          "budget": "Ksh 18B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "📚",
+          "sector": "National",
+          "quarter": "Q1 2003",
+          "beneficiaries": "6M+ students"
+        },
+        {
+          "slug": "free-primary-healthcare",
+          "category": "Health",
+          "title": "Free Primary Healthcare",
+          "description": "Free healthcare in public health facilities",
+          "budget": "Ksh 14B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "🏥",
+          "sector": "National",
+          "quarter": "Q2 2003",
+          "beneficiaries": "25M+ citizens"
+        },
+        {
+          "slug": "thika-superhighway-phase1",
+          "category": "Infrastructure",
+          "title": "Thika Superhighway Phase 1",
+          "description": "First phase of Nairobi-Thika highway upgrade",
+          "budget": "Ksh 25B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "🛣️",
+          "sector": "National",
+          "quarter": "Q4 2003",
+          "beneficiaries": "2M+ daily commuters"
+        },
+        {
+          "slug": "fertilizer-subsidy",
+          "category": "Agriculture",
+          "title": "Fertilizer Subsidy Program",
+          "description": "Subsidized fertilizers for smallholder farmers",
+          "budget": "Ksh 6B",
+          "allocated": 100,
+          "status": "Completed",
+          "progress": 100,
+          "icon": "🌾",
+          "sector": "County",
+          "quarter": "Q3 2003",
+          "beneficiaries": "2M+ farmers"
+        },
+        {
+          "slug": "tana-river-development",
+          "category": "Water",
+          "title": "Tana River Development",
+          "description": "Water projects in Tana River County",
+          "budget": "Ksh 8B",
+          "allocated": 80,
+          "status": "In Progress",
+          "progress": 65,
+          "icon": "💧",
+          "sector": "County",
+          "beneficiaries": "300,000 residents"
+        }
+      ]
+    }
+  ]
+}
