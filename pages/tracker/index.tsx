@@ -355,23 +355,68 @@ export default function Tracker() {
                 </div>
 
                 {/* Yearly Tracker Link */}
-                <div className="mt-[40px] rounded-[24px] bg-gradient-to-r from-[#1e40af]/10 to-[#059669]/10 border border-black/10 p-[24px]">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-[20px] font-FoundersGrotesk uppercase text-[#111] mb-[8px]">
-                        Explore Yearly Budgets
-                      </h3>
-                      <p className="text-[14px] font-NeueMontreal text-[#212121]/70">
-                        View budget allocations and project progress by year from 2000 to present.
-                      </p>
+                <div className="mt-[40px] grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+                  {/* Latest Budget Details Card */}
+                  <Link
+                    href="/tracker/details/2024"
+                    className="rounded-[24px] bg-gradient-to-br from-[#1e40af] to-[#3b82f6] border border-black/10 p-[24px] hover:shadow-lg transition-all duration-300 group"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-[11px] font-NeueMontreal uppercase tracking-wide mb-3">
+                          📊 KENYA BUDGET 2024/25
+                        </span>
+                        <h3 className="text-[20px] font-FoundersGrotesk uppercase text-white mb-2">
+                          Detailed Analytics
+                        </h3>
+                        <p className="text-[14px] font-NeueMontreal text-white/70">
+                          Explore Ksh 4.0T budget with pie charts, bar graphs, heatmaps, and data science insights.
+                        </p>
+                      </div>
+                      <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                      </div>
                     </div>
-                    <Link
-                      href="/tracker/2000"
-                      className="px-[24px] py-[12px] rounded-full bg-[#212121] text-white font-NeueMontreal hover:bg-[#333] transition-colors whitespace-nowrap"
-                    >
-                      Browse by Year
-                    </Link>
-                  </div>
+                    <div className="flex items-center gap-2 text-white/80 text-[14px] font-NeueMontreal">
+                      <span>Explore Visualizations</span>
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </Link>
+
+                  {/* Browse by Year */}
+                  <Link
+                    href="/tracker/2000"
+                    className="rounded-[24px] bg-white border border-black/10 p-[24px] hover:shadow-lg transition-all duration-300 group"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <span className="inline-block px-3 py-1 rounded-full bg-[#f1f1f1] text-[#666] text-[11px] font-NeueMontreal uppercase tracking-wide mb-3">
+                          📅 HISTORICAL DATA
+                        </span>
+                        <h3 className="text-[20px] font-FoundersGrotesk uppercase text-[#111] mb-2">
+                          Browse by Year
+                        </h3>
+                        <p className="text-[14px] font-NeueMontreal text-[#666]">
+                          View budget allocations and project progress from 2000 to present.
+                        </p>
+                      </div>
+                      <div className="w-12 h-12 rounded-full bg-[#1e40af]/10 flex items-center justify-center group-hover:bg-[#1e40af]/20 transition-colors">
+                        <svg className="w-6 h-6 text-[#1e40af]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-[#1e40af] text-[14px] font-NeueMontreal">
+                      <span>View All Years</span>
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </section>

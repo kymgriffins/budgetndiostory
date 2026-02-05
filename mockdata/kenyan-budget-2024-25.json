@@ -1,0 +1,503 @@
+{
+  "metadata": {
+    "fiscalYear": "2024/25",
+    "totalBudget": "Ksh 4.0 Trillion",
+    "totalBudgetNumeric": 4000000000000,
+    "currency": "KES",
+    "presentationDate": "June 30, 2024",
+    "parliament": "12th Parliament",
+    "administration": "Ruto Administration - Third Year"
+  },
+  "nationalBudget": {
+    "totalAllocation": 2870000000000,
+    "recurrentExpenditure": 1980000000000,
+    "developmentExpenditure": 890000000000,
+    "sectors": [
+      {
+        "id": "education-2024",
+        "name": "Education",
+        "icon": "📚",
+        "budget": "Ksh 701-718 Billion",
+        "budgetNumeric": 710000000000,
+        "percentageOfTotal": 17.8,
+        "allocationStatus": "allocated",
+        "description": "Funds teacher salaries through TSC, free basic education, and university funding via HELB",
+        "timeline": "FY 2024/25",
+        "impact": "10M+ students supported",
+        "breakdown": [
+          "Teacher salaries (TSC) - Ksh 340B",
+          "Free basic education - Ksh 180B",
+          "University funding (HELB) - Ksh 85B",
+          "TVET programs - Ksh 65B",
+          "Special needs education - Ksh 20B",
+          "Education infrastructure - Ksh 20B"
+        ],
+        "subSectors": [
+          { "name": "Primary Education", "allocation": 280000000000 },
+          { "name": "Secondary Education", "allocation": 185000000000 },
+          { "name": "TVET", "allocation": 65000000000 },
+          { "name": "Higher Education", "allocation": 120000000000 },
+          { "name": "Teacher Management", "allocation": 60000000000 }
+        ],
+        "keyProjects": [
+          {
+            "name": "Junior School Construction",
+            "budget": "Ksh 15B",
+            "status": "In Progress",
+            "progress": 45
+          },
+          {
+            "name": "Digital Learning Tablets",
+            "budget": "Ksh 8B",
+            "status": "Completed",
+            "progress": 100
+          },
+          {
+            "name": "Teacher Recruitment 2024",
+            "budget": "Ksh 25B",
+            "status": "In Progress",
+            "progress": 60
+          }
+        ],
+        "performanceMetrics": {
+          "efficiencyScore": 82,
+          "utilizationRate": 94,
+          "completionRate": 78,
+          "perCapitaAllocation": 14200
+        },
+        "yearlyTrends": [
+          { "year": "FY 2020/21", "allocation": 450000000000 },
+          { "year": "FY 2021/22", "allocation": 520000000000 },
+          { "year": "FY 2022/23", "allocation": 580000000000 },
+          { "year": "FY 2023/24", "allocation": 650000000000 },
+          { "year": "FY 2024/25", "allocation": 710000000000 }
+        ]
+      },
+      {
+        "id": "infrastructure-2024",
+        "name": "Infrastructure & Energy",
+        "icon": "⚡",
+        "budget": "Ksh 500-554 Billion",
+        "budgetNumeric": 527000000000,
+        "percentageOfTotal": 13.2,
+        "allocationStatus": "in-progress",
+        "description": "Major projects including road maintenance, railway expansion, and digital superhighway initiatives",
+        "timeline": "FY 2024/25",
+        "impact": "National connectivity",
+        "breakdown": [
+          "Road maintenance (Ksh 190B+)",
+          "Railway expansion - Ksh 120B",
+          "Digital superhighway - Ksh 45B",
+          "Energy programs - Ksh 95B",
+          "Housing - Ksh 52B"
+        ],
+        "subSectors": [
+          { "name": "Roads", "allocation": 190000000000 },
+          { "name": "Railways", "allocation": 120000000000 },
+          { "name": "Energy", "allocation": 95000000000 },
+          { "name": "Digital Infrastructure", "allocation": 45000000000 },
+          { "name": "Housing", "allocation": 77000000000 }
+        ],
+        "keyProjects": [
+          {
+            "name": "Nairobi-Mombasa Expressway",
+            "budget": "Ksh 120B",
+            "status": "In Progress",
+            "progress": 25
+          },
+          {
+            "name": "Standard Gauge Railway Phase 2",
+            "budget": "Ksh 85B",
+            "status": "In Progress",
+            "progress": 35
+          },
+          {
+            "name": "Last Mile Connectivity",
+            "budget": "Ksh 25B",
+            "status": "In Progress",
+            "progress": 55
+          }
+        ],
+        "performanceMetrics": {
+          "efficiencyScore": 68,
+          "utilizationRate": 82,
+          "completionRate": 62,
+          "perCapitaAllocation": 10500
+        },
+        "yearlyTrends": [
+          { "year": "FY 2020/21", "allocation": 320000000000 },
+          { "year": "FY 2021/22", "allocation": 380000000000 },
+          { "year": "FY 2022/23", "allocation": 420000000000 },
+          { "year": "FY 2023/24", "allocation": 480000000000 },
+          { "year": "FY 2024/25", "allocation": 527000000000 }
+        ]
+      },
+      {
+        "id": "health-2024",
+        "name": "Health",
+        "icon": "🏥",
+        "budget": "Ksh 147-153 Billion",
+        "budgetNumeric": 150000000000,
+        "percentageOfTotal": 3.8,
+        "allocationStatus": "allocated",
+        "description": "National health programs including Universal Health Coverage, Linda Mama, and health infrastructure",
+        "timeline": "FY 2024/25",
+        "impact": "Universal Health Coverage",
+        "breakdown": [
+          "Universal Health Coverage - Ksh 45B",
+          "Linda Mama Program - Ksh 18B",
+          "Health infrastructure - Ksh 32B",
+          "Medical supplies - Ksh 28B",
+          "Health workforce - Ksh 27B"
+        ],
+        "subSectors": [
+          { "name": "Preventive Health", "allocation": 35000000000 },
+          { "name": "Curative Health", "allocation": 55000000000 },
+          { "name": "Health Infrastructure", "allocation": 32000000000 },
+          { "name": "Health Workforce", "allocation": 28000000000 }
+        ],
+        "keyProjects": [
+          {
+            "name": "UHC Rollout",
+            "budget": "Ksh 45B",
+            "status": "In Progress",
+            "progress": 70
+          },
+          {
+            "name": "County Hospital Upgrades",
+            "budget": "Ksh 18B",
+            "status": "In Progress",
+            "progress": 50
+          },
+          {
+            "name": "Health Insurance Subsidy",
+            "budget": "Ksh 12B",
+            "status": "In Progress",
+            "progress": 85
+          }
+        ],
+        "performanceMetrics": {
+          "efficiencyScore": 75,
+          "utilizationRate": 88,
+          "completionRate": 72,
+          "perCapitaAllocation": 3000
+        },
+        "yearlyTrends": [
+          { "year": "FY 2020/21", "allocation": 98000000000 },
+          { "year": "FY 2021/22", "allocation": 112000000000 },
+          { "year": "FY 2022/23", "allocation": 125000000000 },
+          { "year": "FY 2023/24", "allocation": 138000000000 },
+          { "year": "FY 2024/25", "allocation": 150000000000 }
+        ]
+      },
+      {
+        "id": "security-2024",
+        "name": "National Security",
+        "icon": "🛡️",
+        "budget": "Ksh 251-279 Billion",
+        "budgetNumeric": 265000000000,
+        "percentageOfTotal": 6.6,
+        "allocationStatus": "allocated",
+        "description": "Funding for Ministry of Defence, National Police Service, and National Intelligence Service",
+        "timeline": "FY 2024/25",
+        "impact": "Nationwide security",
+        "breakdown": [
+          "National Police Service - Ksh 135B",
+          "Ministry of Defence - Ksh 85B",
+          "National Intelligence Service - Ksh 25B",
+          "Prisons - Ksh 20B"
+        ],
+        "subSectors": [
+          { "name": "Police", "allocation": 135000000000 },
+          { "name": "Defence", "allocation": 85000000000 },
+          { "name": "Intelligence", "allocation": 25000000000 },
+          { "name": "Prisons", "allocation": 20000000000 }
+        ],
+        "performanceMetrics": {
+          "efficiencyScore": 88,
+          "utilizationRate": 96,
+          "completionRate": 95,
+          "perCapitaAllocation": 5300
+        },
+        "yearlyTrends": [
+          { "year": "FY 2020/21", "allocation": 210000000000 },
+          { "year": "FY 2021/22", "allocation": 225000000000 },
+          { "year": "FY 2022/23", "allocation": 240000000000 },
+          { "year": "FY 2023/24", "allocation": 252000000000 },
+          { "year": "FY 2024/25", "allocation": 265000000000 }
+        ]
+      },
+      {
+        "id": "debt-2024",
+        "name": "Debt Servicing",
+        "icon": "💰",
+        "budget": "Ksh 1.2 Trillion",
+        "budgetNumeric": 1200000000000,
+        "percentageOfTotal": 30.0,
+        "allocationStatus": "allocated",
+        "description": "Consolidated Fund Services for public debt interest payments and pensions",
+        "timeline": "FY 2024/25",
+        "impact": "Debt sustainability",
+        "breakdown": [
+          "Domestic debt interest - Ksh 520B",
+          "External debt interest - Ksh 280B",
+          "Pension payments - Ksh 320B",
+          "Fund services - Ksh 80B"
+        ],
+        "subSectors": [
+          { "name": "Domestic Debt", "allocation": 520000000000 },
+          { "name": "External Debt", "allocation": 280000000000 },
+          { "name": "Pensions", "allocation": 320000000000 },
+          { "name": "Other CFS", "allocation": 80000000000 }
+        ],
+        "performanceMetrics": {
+          "efficiencyScore": 95,
+          "utilizationRate": 99,
+          "completionRate": 100,
+          "perCapitaAllocation": 24000
+        },
+        "yearlyTrends": [
+          { "year": "FY 2020/21", "allocation": 850000000000 },
+          { "year": "FY 2021/22", "allocation": 920000000000 },
+          { "year": "FY 2022/23", "allocation": 980000000000 },
+          { "year": "FY 2023/24", "allocation": 1100000000000 },
+          { "year": "FY 2024/25", "allocation": 1200000000000 }
+        ]
+      },
+      {
+        "id": "agriculture-2024",
+        "name": "Agriculture",
+        "icon": "🌾",
+        "budget": "Ksh 85 Billion",
+        "budgetNumeric": 85000000000,
+        "percentageOfTotal": 2.1,
+        "allocationStatus": "allocated",
+        "description": "Crop and animal husbandry, agricultural extension services, and irrigation programs",
+        "timeline": "FY 2024/25",
+        "impact": "Smallholder farmers support",
+        "breakdown": [
+          "Extension services - Ksh 18B",
+          "Input subsidies - Ksh 25B",
+          "Irrigation programs - Ksh 22B",
+          "Livestock programs - Ksh 15B",
+          "Fisheries - Ksh 5B"
+        ],
+        "subSectors": [
+          { "name": "Crop Development", "allocation": 35000000000 },
+          { "name": "Livestock", "allocation": 25000000000 },
+          { "name": "Irrigation", "allocation": 15000000000 },
+          { "name": "Fisheries", "allocation": 10000000000 }
+        ],
+        "keyProjects": [
+          {
+            "name": "A四季施肥计划",
+            "budget": "Ksh 15B",
+            "status": "In Progress",
+            "progress": 65
+          },
+          {
+            "name": "Smallholder Irrigation",
+            "budget": "Ksh 8B",
+            "status": "In Progress",
+            "progress": 40
+          }
+        ],
+        "performanceMetrics": {
+          "efficiencyScore": 65,
+          "utilizationRate": 78,
+          "completionRate": 58,
+          "perCapitaAllocation": 1700
+        },
+        "yearlyTrends": [
+          { "year": "FY 2020/21", "allocation": 55000000000 },
+          { "year": "FY 2021/22", "allocation": 62000000000 },
+          { "year": "FY 2022/23", "allocation": 70000000000 },
+          { "year": "FY 2023/24", "allocation": 78000000000 },
+          { "year": "FY 2024/25", "allocation": 85000000000 }
+        ]
+      }
+    ]
+  },
+  "countyBudget": {
+    "totalEquitableShare": 3700000000000,
+    "conditionalGrants": 285000000000,
+    "totalCountyAllocation": 3985000000000,
+    "sectors": [
+      {
+        "id": "county-health-2024",
+        "name": "Health",
+        "icon": "🏥",
+        "budget": "Ksh 380-400 Billion",
+        "budgetNumeric": 390000000000,
+        "percentageOfTotal": 9.8,
+        "allocationStatus": "in-progress",
+        "description": "Fully devolved function managing County Referral Hospitals, dispensaries, and healthcare workers",
+        "timeline": "FY 2024/25",
+        "impact": "47 Counties covered",
+        "breakdown": [
+          "County Referral Hospitals",
+          "Dispensaries",
+          "Doctors & nurses"
+        ]
+      },
+      {
+        "id": "county-agriculture-2024",
+        "name": "Agriculture",
+        "icon": "🌾",
+        "budget": "Equitable Share",
+        "budgetNumeric": 0,
+        "allocationStatus": "allocated",
+        "description": "Crop and animal husbandry, livestock auctions, and local irrigation projects for food security",
+        "timeline": "FY 2024/25",
+        "impact": "Smallholder farmers"
+      },
+      {
+        "id": "county-ecde-2024",
+        "name": "ECDE & Vocational",
+        "icon": "👶",
+        "budget": "Equitable Share",
+        "budgetNumeric": 0,
+        "allocationStatus": "allocated",
+        "description": "Early Childhood Education and village polytechnics funding (devolved from national)",
+        "timeline": "FY 2024/25",
+        "impact": "Pre-primary education"
+      },
+      {
+        "id": "county-infrastructure-2024",
+        "name": "Local Infrastructure",
+        "icon": "🛣️",
+        "budget": "Equitable Share",
+        "budgetNumeric": 0,
+        "allocationStatus": "in-progress",
+        "description": "Last-mile access roads, street lighting, and local markets development",
+        "timeline": "FY 2024/25",
+        "impact": "47 Counties"
+      }
+    ],
+    "countyAllocations": [
+      {
+        "name": "Nairobi",
+        "code": "001",
+        "population": 5000000,
+        "allocation": 52000000000
+      },
+      {
+        "name": "Mombasa",
+        "code": "002",
+        "population": 1200000,
+        "allocation": 28000000000
+      },
+      {
+        "name": "Kisumu",
+        "code": "003",
+        "population": 1200000,
+        "allocation": 27000000000
+      },
+      {
+        "name": "Nakuru",
+        "code": "004",
+        "population": 2100000,
+        "allocation": 35000000000
+      },
+      {
+        "name": "Eldoret",
+        "code": "005",
+        "population": 1800000,
+        "allocation": 32000000000
+      },
+      {
+        "name": "Kericho",
+        "code": "006",
+        "population": 900000,
+        "allocation": 22000000000
+      },
+      {
+        "name": "Kiambu",
+        "code": "007",
+        "population": 2400000,
+        "allocation": 38000000000
+      },
+      {
+        "name": "Machakos",
+        "code": "008",
+        "population": 1400000,
+        "allocation": 29000000000
+      }
+    ]
+  },
+  "historicalContext": {
+    "budgetEvolution": [
+      {
+        "year": "FY 2000/01",
+        "totalBudget": "Ksh 310B",
+        "gdpPercentage": 25.2
+      },
+      {
+        "year": "FY 2010/11",
+        "totalBudget": "Ksh 1.1T",
+        "gdpPercentage": 26.8
+      },
+      {
+        "year": "FY 2020/21",
+        "totalBudget": "Ksh 2.7T",
+        "gdpPercentage": 27.5
+      },
+      { "year": "FY 2024/25", "totalBudget": "Ksh 4.0T", "gdpPercentage": 28.5 }
+    ],
+    "keyReforms": [
+      {
+        "year": 2003,
+        "reform": "Free Primary Education",
+        "impact": "6M+ students enrolled"
+      },
+      {
+        "year": 2010,
+        "reform": "Constitution Devolution",
+        "impact": "47 Counties established"
+      },
+      {
+        "year": 2013,
+        "reform": "Free Secondary Education",
+        "impact": "3M+ students supported"
+      },
+      {
+        "year": 2022,
+        "reform": "Housing Levy",
+        "impact": "1.5M+ homes targeted"
+      },
+      {
+        "year": 2024,
+        "reform": "Expanded UHC",
+        "impact": "Universal health coverage"
+      }
+    ]
+  },
+  "analytics": {
+    "efficiencyScore": 78,
+    "utilizationRate": 89,
+    "completionRate": 75,
+    "nationalVsCountyRatio": 42.5,
+    "gdpContribution": 28.5,
+    "perCapitaBudget": 80000,
+    "inflationAdjustedGrowth": 4.2,
+    "debtToGdpRatio": 68.5,
+    "revenueMobilization": 85
+  },
+  "summary": {
+    "totalSectors": 10,
+    "totalProjects": 245,
+    "completedProjects": 142,
+    "inProgressProjects": 78,
+    "allocatedProjects": 25,
+    "stalledProjects": 0,
+    "totalBeneficiaries": "50M+ Kenyans",
+    "keyHighlights": [
+      "Largest budget in Kenya's history at Ksh 4.0 Trillion",
+      "Education receives highest allocation at Ksh 718B",
+      "Debt servicing remains a major expenditure at Ksh 1.2T",
+      "Infrastructure development prioritized with Ksh 554B",
+      "Universal Health Coverage expanded significantly",
+      "Agricultural transformation through various programs"
+    ]
+  }
+}
