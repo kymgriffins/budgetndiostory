@@ -247,98 +247,6 @@ export default function BlogIndex() {
                 </div>
               </div>
             </section>
-
-            {/* FEATURED POSTS */}
-            {featuredPosts.length > 0 &&
-              selectedCategory === "all" &&
-              !searchQuery && (
-                <section className="padding-x py-[20px]">
-                  <div className="max-w-[1200px] mx-auto">
-                    <div className="mb-[12px] px-[4px]">
-                      <span className="text-[12px] font-NeueMontreal font-medium text-[#212121]/50 uppercase tracking-[0.15em]">
-                        Featured
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-[24px] lg:grid-cols-1">
-                      {featuredPosts.slice(0, 2).map((post) => (
-                        <Link
-                          key={post.id}
-                          href={`/blog/${post.slug}`}
-                          className="group block rounded-[24px] overflow-hidden bg-white border border-[#212121]/8 hover:border-[#212121]/15 transition-all duration-300 hover:shadow-[0_25px_80px_rgba(0,0,0,0.1)]"
-                        >
-                          <div className="grid grid-cols-12 gap-0">
-                            <div className="col-span-8 p-[36px] flex flex-col justify-center mdOnly:col-span-12 smOnly:col-span-12 xm:col-span-12">
-                              <div className="flex items-center gap-[12px] mb-[16px] flex-wrap">
-                                <span
-                                  className={`px-[12px] py-[6px] rounded-full text-[12px] font-NeueMontreal font-medium bg-gradient-to-r ${CATEGORY_CONFIG[post.category as keyof typeof CATEGORY_CONFIG]?.color} text-white`}
-                                >
-                                  {post.category}
-                                </span>
-                                <span className="text-[13px] font-NeueMontreal text-[#212121]/40">
-                                  {new Date(
-                                    post.publishedAt || post.createdAt,
-                                  ).toLocaleDateString("en-US", {
-                                    month: "short",
-                                    day: "numeric",
-                                    year: "numeric",
-                                  })}
-                                </span>
-                              </div>
-                              <h2 className="text-[28px] font-FoundersGrotesk font-medium text-[#111] leading-[1.15] group-hover:text-[#212121]/80 transition-colors mdOnly:text-[24px] smOnly:text-[20px] xm:text-[18px]">
-                                {post.title}
-                              </h2>
-                              <p className="mt-[16px] text-[16px] font-NeueMontreal text-[#212121]/60 leading-[1.65] max-w-[520px]">
-                                {post.excerpt}
-                              </p>
-                              <div className="mt-[24px] flex items-center gap-[16px] flex-wrap">
-                                <div className="flex items-center gap-[10px]">
-                                  {post.author.avatar ? (
-                                    <img
-                                      src={post.author.avatar}
-                                      alt={post.author.name}
-                                      className="w-[32px] h-[32px] rounded-full object-cover"
-                                    />
-                                  ) : (
-                                    <div className="w-[32px] h-[32px] rounded-full bg-[#212121]/10 flex items-center justify-center text-[14px] font-medium">
-                                      {post.author.name.charAt(0)}
-                                    </div>
-                                  )}
-                                  <span className="text-[14px] font-NeueMontreal text-[#212121]/70">
-                                    {post.author.name}
-                                  </span>
-                                </div>
-                                <span className="w-[4px] h-[4px] rounded-full bg-[#212121]/20"></span>
-                                <span className="text-[14px] font-NeueMontreal text-[#212121]/50">
-                                  {post.readTime}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="col-span-4 relative overflow-hidden mdOnly:col-span-12 mdOnly:h-[200px] smOnly:col-span-12 smOnly:h-[180px] xm:col-span-12 xm:h-[160px]">
-                              <div
-                                className={`absolute inset-0 bg-gradient-to-br ${CATEGORY_CONFIG[post.category as keyof typeof CATEGORY_CONFIG]?.color || "from-gray-400 to-gray-600"}`}
-                              ></div>
-                              <div className="absolute inset-0 bg-black/10"></div>
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                <span className="text-[80px] opacity-50 mdOnly:text-[60px] smOnly:text-[48px] xm:text-[40px]">
-                                  {CATEGORY_CONFIG[
-                                    post.category as keyof typeof CATEGORY_CONFIG
-                                  ]?.emoji || "📰"}
-                                </span>
-                              </div>
-                              <div className="absolute bottom-0 left-0 right-0 p-[20px] bg-gradient-to-t from-black/30 to-transparent">
-                                <span className="text-[14px] font-NeueMontreal text-white/80">
-                                  Read Full Article →
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-              )}
-
             {/* CATEGORY TABS */}
             <section className="relative z-40">
               <div className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-[#212121]/8">
@@ -499,14 +407,6 @@ export default function BlogIndex() {
                         ? `No results for "${searchQuery}". Try a different search term.`
                         : "No articles in this category yet."}
                     </p>
-                    {searchQuery && (
-                      <button
-                        onClick={() => setSearchQuery("")}
-                        className="mt-[20px] px-[20px] py-[10px] rounded-full bg-[#212121] text-white text-[14px] font-NeueMontreal hover:opacity-90 transition"
-                      >
-                        Clear Search
-                      </button>
-                    )}
                   </div>
                 )}
               </div>
