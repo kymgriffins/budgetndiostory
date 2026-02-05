@@ -22,6 +22,7 @@ export const ROUTES = {
   ANALYTICS: "/analytics",
   BUDGET_SIMPLIFIED: "/budget-simplified",
   BUDGETNDIOSTORY: "/budgetndiostory",
+  CONFIG: "/config",
   WORKIZ: "/workiz",
   EDUSTORIES: "/edustories",
   LEARN: "/learn",
@@ -71,6 +72,7 @@ export const FOOTER_HIDE_ROUTES = [
   // ROUTES.PODCASTS, // Removed - show footer on podcasts page
   ROUTES.SHORTS,
   ROUTES.BUDGET_SIMPLIFIED,
+  ROUTES.CONFIG,
   ROUTES.ANALYTICS,
   ROUTES.LEARN,
   ROUTES.BLOG,
