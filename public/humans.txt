@@ -1,0 +1,18 @@
+/* Team */
+Founder: Budget Ndio Story
+Contact: hello@budgetndiostory.org
+Location: Nairobi, Kenya
+
+/* Technology */
+Framework: Next.js 16
+Language: TypeScript
+Styling: Tailwind CSS
+Hosting: Vercel
+
+/* Site */
+Last Update: 2026-02-06
+Language: English
+Doctype: HTML5
+
+/* Accessibility */
+Accessibility: WCAG 2.1 AA compliant

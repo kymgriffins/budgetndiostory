@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://budgetndiostory.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://budgetndiostory.org";
 
 /**
  * Generate page metadata with SEO best practices
@@ -56,6 +56,10 @@ export function generatePageMetadata(
     },
     alternates: {
       canonical: fullUrl,
+      languages: {
+        en: siteUrl,
+        sw: `${siteUrl}/sw`,
+      },
     },
     robots: {
       index: !noIndex,
@@ -82,6 +86,18 @@ export function generatePageMetadata(
           height: 630,
           alt: title,
         },
+        {
+          url: fullImage,
+          width: 800,
+          height: 600,
+          alt: title,
+        },
+        {
+          url: fullImage,
+          width: 180,
+          height: 180,
+          alt: title,
+        },
       ],
     },
     twitter: {
@@ -90,10 +106,16 @@ export function generatePageMetadata(
       description,
       images: [fullImage],
       creator: "@budgetndiostory",
+      site: "@budgetndiostory",
+    },
+    facebook: {
+      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
     },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+      yandex: process.env.NEXT_PUBLIC_YANDEX_SITE_VERIFICATION,
     },
+    category: "Creative Agency",
   };
 
   // Add optional article-specific metadata
@@ -146,12 +168,21 @@ export function getOrganizationSchema() {
       "https://instagram.com/budgetndiostory",
       "https://linkedin.com/company/budgetndiostory",
       "https://youtube.com/@budgetndiostory",
+      "https://tiktok.com/@budgetndiostory",
     ],
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+254-700-000-000",
       contactType: "customer service",
       availableLanguage: ["English", "Swahili"],
+    },
+    foundingDate: "2020",
+    description:
+      "Budget Ndio Story is a creative digital agency specializing in web design, development, and digital storytelling.",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Nairobi",
+      addressCountry: "KE",
     },
   };
 }
@@ -233,6 +264,44 @@ export function getArticleSchema(article: {
       "@id": `${siteUrl}/articles`,
     },
     keywords: article.tags?.join(", "),
+    articleSection: "Blog",
+    inLanguage: "en-US",
+  };
+}
+
+/**
+ * Course schema for educational content
+ */
+export function getCourseSchema(course: {
+  title: string;
+  description: string;
+  image: string;
+  provider: string;
+  offers?: {
+    price: string;
+    currency: string;
+  };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.description,
+    image: course.image.startsWith("http")
+      ? course.image
+      : `${siteUrl}${course.image}`,
+    provider: {
+      "@type": "Organization",
+      name: course.provider,
+      sameAs: siteUrl,
+    },
+    offers: course.offers
+      ? {
+          "@type": "Offer",
+          price: course.offers.price,
+          priceCurrency: course.offers.currency,
+        }
+      : undefined,
   };
 }
 
