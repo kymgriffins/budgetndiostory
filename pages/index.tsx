@@ -94,7 +94,7 @@ export default function Home() {
           gsap.fromTo(
             "[data-hero='sub']",
             { y: 14, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
+            { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
           );
           gsap.fromTo(
             "[data-hero='title']",
@@ -105,7 +105,7 @@ export default function Home() {
               duration: 0.75,
               ease: "power3.out",
               delay: 0.05,
-            }
+            },
           );
           gsap.fromTo(
             "[data-hero='cta']",
@@ -116,7 +116,7 @@ export default function Home() {
               duration: 0.65,
               ease: "power3.out",
               delay: 0.12,
-            }
+            },
           );
 
           // Enhanced fade-up elements
@@ -132,7 +132,7 @@ export default function Home() {
                 duration: 0.9,
                 ease: "power3.out",
                 scrollTrigger: { trigger: node, start: "top 85%" },
-              }
+              },
             );
           });
 
@@ -141,7 +141,7 @@ export default function Home() {
             gsap.utils.toArray("[data-animate='cards']") as HTMLElement[]
           ).forEach((wrap) => {
             const cards = wrap.querySelectorAll<HTMLElement>(
-              "[data-animate='card']"
+              "[data-animate='card']",
             );
             if (!cards.length) return;
             gsap.fromTo(
@@ -155,7 +155,7 @@ export default function Home() {
                 ease: "power3.out",
                 stagger: 0.1,
                 scrollTrigger: { trigger: wrap, start: "top 80%" },
-              }
+              },
             );
           });
 
@@ -172,44 +172,44 @@ export default function Home() {
           });
 
           // Animated counter for stats
-          (
-            gsap.utils.toArray("[data-counter]") as HTMLElement[]
-          ).forEach((node) => {
-            const target = parseInt(node.getAttribute("data-counter") || "0");
-            gsap.fromTo(
-              node,
-              { innerText: 0 },
-              {
-                innerText: target,
-                duration: 2,
-                ease: "power2.out",
-                snap: { innerText: 1 },
-                scrollTrigger: { trigger: node, start: "top 85%" },
-              }
-            );
-          });
+          (gsap.utils.toArray("[data-counter]") as HTMLElement[]).forEach(
+            (node) => {
+              const target = parseInt(node.getAttribute("data-counter") || "0");
+              gsap.fromTo(
+                node,
+                { innerText: 0 },
+                {
+                  innerText: target,
+                  duration: 2,
+                  ease: "power2.out",
+                  snap: { innerText: 1 },
+                  scrollTrigger: { trigger: node, start: "top 85%" },
+                },
+              );
+            },
+          );
 
           // Scale on scroll for cards
-          (
-            gsap.utils.toArray("[data-scale='card']") as HTMLElement[]
-          ).forEach((node) => {
-            gsap.fromTo(
-              node,
-              { scale: 0.9, opacity: 0 },
-              {
-                scale: 1,
-                opacity: 1,
-                duration: 1,
-                ease: "power2.out",
-                scrollTrigger: {
-                  trigger: node,
-                  start: "top 75%",
-                  end: "bottom top",
-                  scrub: 1,
+          (gsap.utils.toArray("[data-scale='card']") as HTMLElement[]).forEach(
+            (node) => {
+              gsap.fromTo(
+                node,
+                { scale: 0.9, opacity: 0 },
+                {
+                  scale: 1,
+                  opacity: 1,
+                  duration: 1,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: node,
+                    start: "top 75%",
+                    end: "bottom top",
+                    scrub: 1,
+                  },
                 },
-              }
-            );
-          });
+              );
+            },
+          );
         }, el);
 
         ScrollTrigger.refresh();
@@ -277,7 +277,6 @@ export default function Home() {
           <main id="landing-content">
             {/* TRUST BADGES */}
 
-
             {/* HERO */}
             <section className="padding-x pt-[40px] smOnly:pt-[28px] xm:pt-[24px]">
               <div className="max-w-[1200px] mx-auto">
@@ -310,8 +309,8 @@ export default function Home() {
                       className="mt-[22px] font-NeueMontreal text-[#212121]/80 text-[clamp(17px,2.3vw,24px)] leading-[1.5] max-w-[58ch]"
                     >
                       Budget Ndio Story turns complex budgets into clear, local
-                      narratives—videos, field reports, and photo essays that show
-                      where your tax money actually goes.
+                      narratives—videos, field reports, and photo essays that
+                      show where your tax money actually goes.
                     </p>
 
                     <div
@@ -319,13 +318,23 @@ export default function Home() {
                       className="mt-[28px] flex items-center gap-[14px] flex-wrap"
                     >
                       <Link
-                        href="/stories"
+                        href="/blog"
                         className="group px-[22px] py-[14px] rounded-full bg-[#212121] text-[#f1f1f1] paragraph font-NeueMontreal hover:bg-[#00aa55] hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl"
                       >
                         <span className="flex items-center gap-[8px]">
                           Explore Stories
-                          <svg className="w-[16px] h-[16px] group-hover:translate-x-[4px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          <svg
+                            className="w-[16px] h-[16px] group-hover:translate-x-[4px] transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
                           </svg>
                         </span>
                       </Link>
@@ -500,8 +509,18 @@ export default function Home() {
                     className="rounded-[24px] bg-white/90 border border-black/5 p-[18px] hover:shadow-md transition-all duration-300"
                   >
                     <div className="w-[40px] h-[40px] rounded-full bg-[#00ff85]/20 flex items-center justify-center mb-[12px]">
-                      <svg className="w-[20px] h-[20px] text-[#00aa55]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-[20px] h-[20px] text-[#00aa55]"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                     </div>
                     <p className="text-[20px] font-NeueMontreal text-[#111]">
@@ -513,8 +532,18 @@ export default function Home() {
                     className="rounded-[24px] bg-white/90 border border-black/5 p-[18px] hover:shadow-md transition-all duration-300"
                   >
                     <div className="w-[40px] h-[40px] rounded-full bg-[#212121]/10 flex items-center justify-center mb-[12px]">
-                      <svg className="w-[20px] h-[20px] text-[#212121]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      <svg
+                        className="w-[20px] h-[20px] text-[#212121]"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                        />
                       </svg>
                     </div>
                     <p className="text-[20px] font-NeueMontreal text-[#111]">
@@ -526,8 +555,18 @@ export default function Home() {
                     className="rounded-[24px] bg-white/90 border border-black/5 p-[18px] hover:shadow-md transition-all duration-300"
                   >
                     <div className="w-[40px] h-[40px] rounded-full bg-[#ff2f55]/10 flex items-center justify-center mb-[12px]">
-                      <svg className="w-[20px] h-[20px] text-[#ff2f55]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      <svg
+                        className="w-[20px] h-[20px] text-[#ff2f55]"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                        />
                       </svg>
                     </div>
                     <p className="text-[20px] font-NeueMontreal text-[#111]">
@@ -539,8 +578,18 @@ export default function Home() {
                     className="rounded-[24px] bg-[#212121] text-[#f1f1f1] border border-black/10 p-[18px] hover:shadow-xl transition-all duration-300"
                   >
                     <div className="w-[40px] h-[40px] rounded-full bg-[#00ff85]/20 flex items-center justify-center mb-[12px]">
-                      <svg className="w-[20px] h-[20px] text-[#00ff85]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      <svg
+                        className="w-[20px] h-[20px] text-[#00ff85]"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
                       </svg>
                     </div>
                     <p className="text-[20px] font-NeueMontreal">
@@ -573,8 +622,18 @@ export default function Home() {
                   >
                     <span className="flex items-center gap-[8px]">
                       View All Stories
-                      <svg className="w-[14px] h-[14px] group-hover:translate-x-[4px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <svg
+                        className="w-[14px] h-[14px] group-hover:translate-x-[4px] transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
                       </svg>
                     </span>
                   </Link>
@@ -600,7 +659,8 @@ export default function Home() {
                       This road was budgeted for Ksh 5M
                     </p>
                     <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[12px]">
-                      Field verification shows partial completion and missing signboards.
+                      Field verification shows partial completion and missing
+                      signboards.
                     </p>
                     <div className="mt-[16px] flex items-center gap-[8px] text-[#00aa55] small-text font-NeueMontreal group-hover:underline cursor-pointer">
                       Read full report →
@@ -644,7 +704,8 @@ export default function Home() {
                       Who benefits from the budget?
                     </p>
                     <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[12px]">
-                      Spotlights on contractors, beneficiaries, and discrepancies.
+                      Spotlights on contractors, beneficiaries, and
+                      discrepancies.
                     </p>
                     <div className="mt-[16px] flex items-center gap-[8px] text-[#00aa55] small-text font-NeueMontreal group-hover:underline cursor-pointer">
                       Read full report →
@@ -661,14 +722,13 @@ export default function Home() {
                   data-animate="fade-up"
                   className="rounded-[34px] bg-white/80 border border-black/5 p-[28px] smOnly:p-[22px] xm:p-[18px]"
                 >
-                  <div
-                    className="flex items-end justify-between gap-[16px] flex-wrap mb-[24px]"
-                  >
+                  <div className="flex items-end justify-between gap-[16px] flex-wrap mb-[24px]">
                     <h3 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
                       How It Works
                     </h3>
                     <p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[58ch]">
-                      A simple process that turns complex public budgets into civic action.
+                      A simple process that turns complex public budgets into
+                      civic action.
                     </p>
                   </div>
 
@@ -689,7 +749,8 @@ export default function Home() {
                         Identify the Line
                       </p>
                       <p className="small-text font-NeueMontreal text-[#212121]/65 mt-[8px]">
-                        Find the budget line, allocation amount, and expected outputs from official documents.
+                        Find the budget line, allocation amount, and expected
+                        outputs from official documents.
                       </p>
                     </div>
                     <div
@@ -705,7 +766,8 @@ export default function Home() {
                         Verify on the Ground
                       </p>
                       <p className="small-text font-NeueMontreal text-[#212121]/65 mt-[8px]">
-                        Field reports, photos, and community input confirm whether work was actually done.
+                        Field reports, photos, and community input confirm
+                        whether work was actually done.
                       </p>
                     </div>
                     <div
@@ -721,7 +783,8 @@ export default function Home() {
                         Act & Amplify
                       </p>
                       <p className="small-text font-NeueMontreal text-[#f1f1f1]/70 mt-[8px]">
-                        Share findings, contact officials, or start a community campaign for accountability.
+                        Share findings, contact officials, or start a community
+                        campaign for accountability.
                       </p>
                     </div>
                   </div>
@@ -788,7 +851,8 @@ export default function Home() {
                     Explore the Platform
                   </h2>
                   <p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[60ch]">
-                    See how we turn budget documents into stories, trackers, and actionable insights.
+                    See how we turn budget documents into stories, trackers, and
+                    actionable insights.
                   </p>
                 </div>
 
@@ -802,8 +866,18 @@ export default function Home() {
                   >
                     <div className="p-[22px]">
                       <div className="w-[44px] h-[44px] rounded-full bg-[#212121]/10 flex items-center justify-center mb-[12px]">
-                        <svg className="w-[22px] h-[22px] text-[#212121]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        <svg
+                          className="w-[22px] h-[22px] text-[#212121]"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                          />
                         </svg>
                       </div>
                       <p className="text-[22px] font-NeueMontreal text-[#111]">
@@ -821,8 +895,18 @@ export default function Home() {
                   >
                     <div className="p-[22px]">
                       <div className="w-[44px] h-[44px] rounded-full bg-[#ff2f55]/10 flex items-center justify-center mb-[12px]">
-                        <svg className="w-[22px] h-[22px] text-[#ff2f55]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        <svg
+                          className="w-[22px] h-[22px] text-[#ff2f55]"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                          />
                         </svg>
                       </div>
                       <p className="text-[22px] font-NeueMontreal text-[#111]">
@@ -840,8 +924,18 @@ export default function Home() {
                   >
                     <div className="p-[22px]">
                       <div className="w-[44px] h-[44px] rounded-full bg-[#00ff85]/20 flex items-center justify-center mb-[12px]">
-                        <svg className="w-[22px] h-[22px] text-[#00aa55]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        <svg
+                          className="w-[22px] h-[22px] text-[#00aa55]"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                          />
                         </svg>
                       </div>
                       <p className="text-[22px] font-NeueMontreal text-[#f1f1f1]">
@@ -872,8 +966,9 @@ export default function Home() {
                       Start Following Your County
                     </h3>
                     <p className="paragraph font-NeueMontreal text-[#f1f1f1]/70 mt-[12px] max-w-[600px] mx-auto">
-                      Explore budget stories, track public spending in your area, and join the
-                      conversation on where tax money goes and who benefits.
+                      Explore budget stories, track public spending in your
+                      area, and join the conversation on where tax money goes
+                      and who benefits.
                     </p>
 
                     <div className="mt-[28px] flex items-center justify-center gap-[14px] flex-wrap">
@@ -883,8 +978,18 @@ export default function Home() {
                       >
                         <span className="flex items-center gap-[8px]">
                           Explore Stories
-                          <svg className="w-[16px] h-[16px] group-hover:translate-x-[4px] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          <svg
+                            className="w-[16px] h-[16px] group-hover:translate-x-[4px] transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
                           </svg>
                         </span>
                       </Link>
@@ -911,4 +1016,3 @@ export default function Home() {
     </>
   );
 }
-

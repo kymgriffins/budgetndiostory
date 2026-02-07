@@ -42,19 +42,17 @@ export const DYNAMIC_ROUTES = {
 
 // Navigation Items (for Navbar and MobileNav)
 export const NAV_ITEMS = [
-  { id: 1, title: "Home", href: ROUTES.HOME },
-  { id: 9, title: "Blog", href: ROUTES.BLOG },
-  { id: 3, title: "Tracker", href: ROUTES.TRACKER },
-  // { id: 4, title: "Podcasts", href: ROUTES.PODCASTS },
-  { id: 7, title: "Contact", href: ROUTES.CONTACT },
+  { id: 1, title: "Home", href: "/" },
+  { id: 9, title: "Blog", href: "/blog" },
+  { id: 3, title: "Tracker", href: "/tracker" },
+  { id: 7, title: "Contact", href: "/contact" },
 ] as const;
 
 export const MOBILE_NAV_ITEMS = [
-  { id: 1, title: "Home", href: ROUTES.HOME },
-  // { id: 2, title: "Podcasts", href: ROUTES.PODCASTS },
-  { id: 3, title: "Tracker", href: ROUTES.TRACKER },
-  { id: 9, title: "Blog", href: ROUTES.BLOG },
-  { id: 5, title: "Contact us", href: ROUTES.CONTACT },
+  { id: 1, title: "Home", href: "/" },
+  { id: 3, title: "Tracker", href: "/tracker" },
+  { id: 9, title: "Blog", href: "/blog" },
+  { id: 5, title: "Contact us", href: "/contact" },
 ] as const;
 
 // Footer Routes (routes that should NOT show the footer)

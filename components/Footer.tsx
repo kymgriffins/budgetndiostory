@@ -11,19 +11,19 @@ export default function Footer() {
     <footer className="w-full min-h-screen padding-x z-30 relative pt-[40px] bg-background flex flex-col justify-between rounded-t-[20px] mt-[-20px]">
       <div className="w-full flex justify-between smOnly:flex-col xm:flex-col">
         <div className="flex flex-col justify-between smOnly:w-full xm:w-full w-1/2">
-          <h1 className="text-[150px] leading-[115px] lgOnly:text-[130px] lgOnly:leading-[98px] mdOnly:text-[100px] mdOnly:leading-[75px] smOnly:text-[74px] smOnly:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
+          <h2 className="text-[150px] leading-[115px] lgOnly:text-[130px] lgOnly:leading-[98px] mdOnly:text-[100px] mdOnly:leading-[75px] smOnly:text-[74px] smOnly:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
             <TextMask>{phrase}</TextMask>
-          </h1>
+          </h2>
         </div>
         <div className="h-full flex flex-col justify-between smOnly:w-full xm:w-full w-1/2">
           <div>
-            <h1 className="text-[150px] leading-[115px] lgOnly:text-[130px] lgOnly:leading-[98px] mdOnly:text-[100px] mdOnly:leading-[75px] smOnly:text-[74px] smOnly:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
+            <h2 className="text-[150px] leading-[115px] lgOnly:text-[130px] lgOnly:leading-[98px] mdOnly:text-[100px] mdOnly:leading-[75px] smOnly:text-[74px] smOnly:leading-[68px] xm:text-[64px] xm:leading-[48px] font-semibold font-FoundersGrotesk text-secondry uppercase">
               <TextMask>{phrase1}</TextMask>
-            </h1>
+            </h2>
             <div className="pt-[50px]">
-              <h1 className="paragraph font-medium font-NeueMontreal text-secondry pb-[20px]">
+              <p className="paragraph font-medium font-NeueMontreal text-secondry pb-[20px]">
                 S:
-              </h1>
+              </p>
               {footerItems.map((item) => (
                 <LinkHover
                   title={item.title}
@@ -35,9 +35,9 @@ export default function Footer() {
             </div>
             <div className="flex justify-between">
               <div className="pt-[50px]">
-                <h1 className="paragraph font-medium font-NeueMontreal text-secondry pb-[20px]">
+                <p className="paragraph font-medium font-NeueMontreal text-secondry pb-[20px]">
                   L:
-                </h1>
+                </p>
                 <div className="flex flex-col gap-y-[10px]">
                   <LinkHover
                     className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium  capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
@@ -62,9 +62,9 @@ export default function Footer() {
                 </div>
               </div>
               <div className="pt-[50px]">
-                <h1 className="paragraph font-medium font-NeueMontreal text-secondry pb-[20px]">
+                <p className="paragraph font-medium font-NeueMontreal text-secondry pb-[20px]">
                   M:
-                </h1>
+                </p>
                 {footernavbarItems.map((item) => (
                   <LinkHover
                     key={item.id}
@@ -76,9 +76,9 @@ export default function Footer() {
               </div>
             </div>
             <div className="pt-[50px] flex items-center gap-x-[10px]">
-              <h1 className="paragraph font-medium font-NeueMontreal text-secondry whitespace-nowrap">
+              <p className="paragraph font-medium font-NeueMontreal text-secondry whitespace-nowrap">
                 Email:
-              </h1>
+              </p>
               <LinkHover
                 title="info@budgetndiyo.org"
                 href="mailto:info@budgetndiyo.org"
@@ -96,9 +96,9 @@ export default function Footer() {
         </div>
         <div className="w-1/2 h-full flex gap-[10px] justify-between items-end smOnly:w-full xm:w-full smOnly:flex-col xm:flex-col smOnly:items-start xm:items-start">
           <div className="flex smOnly:flex-col xm:flex-col gap-[10px]">
-            <h1 className="paragraph font-medium font-NeueMontreal text-secondry opacity-40">
+            <p className="paragraph font-medium font-NeueMontreal text-secondry opacity-40">
               © Budget Ndio Story 2026.
-            </h1>
+            </p>
             {/* <LinkHover
 							title="Legal Terms"
 							href="/"
