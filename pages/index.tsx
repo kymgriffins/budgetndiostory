@@ -617,7 +617,7 @@ export default function Home() {
                     </p>
                   </div>
                   <Link
-                    href="/stories"
+                    href="/blog"
                     className="group px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121] hover:text-[#f1f1f1] transition-all duration-300"
                   >
                     <span className="flex items-center gap-[8px]">
@@ -973,7 +973,7 @@ export default function Home() {
 
                     <div className="mt-[28px] flex items-center justify-center gap-[14px] flex-wrap">
                       <Link
-                        href="/stories"
+                        href="/blog"
                         className="group px-[24px] py-[16px] rounded-full bg-[#00aa55] text-[#f1f1f1] paragraph font-NeueMontreal hover:bg-[#00cc66] hover:scale-[1.02] transition-all duration-300 shadow-lg"
                       >
                         <span className="flex items-center gap-[8px]">

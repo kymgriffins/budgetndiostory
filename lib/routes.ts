@@ -12,7 +12,7 @@ export const ROUTES = {
   INSIGHTS: "/insights",
   CASE: "/case",
   PRESENTATION: "/presentation",
-  STORIES: "/stories",
+  STORIES: "/blog",
   TRACKER: "/tracker",
   PODCASTS: "/podcasts",
   SHORTS: "/shorts",
