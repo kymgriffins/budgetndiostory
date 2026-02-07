@@ -282,23 +282,15 @@ export default function Home() {
               <div className="max-w-[1200px] mx-auto">
                 <div className="grid grid-cols-2 gap-[40px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1 items-start">
                   <div data-parallax="hero">
-                    <div
-                      data-animate="fade-up"
-                      className="inline-block px-[14px] py-[8px] rounded-full bg-[#00ff85]/20 border border-[#00ff85]/30 mb-[20px]"
-                    >
-                      <span className="text-[11px] uppercase tracking-[0.12em] font-NeueMontreal text-[#00aa55]">
-                        Civic Transparency
-                      </span>
-                    </div>
                     <p
                       data-hero="sub"
                       className="text-[13px] tracking-[0.2em] uppercase font-NeueMontreal text-[#212121]/70"
                     >
-                      The Kenyan Budget, Told as a Story
+                      The STORY BEHIND THE Kenyan Budget
                     </p>
                     <h1
                       data-hero="title"
-                      className="font-FoundersGrotesk uppercase text-[#111] tracking-[-0.03em] mt-[16px] leading-[0.86] text-[clamp(56px,11vw,180px)]"
+                      className=" font-FoundersGrotesk uppercase text-[#111] tracking-[-0.03em] mt-[16px] leading-[0.86] text-[clamp(56px,11vw,180px)]"
                     >
                       The Kenyan Budget.
                       <br />
@@ -338,33 +330,13 @@ export default function Home() {
                           </svg>
                         </span>
                       </Link>
-                      <Link
-                        href="/contact"
-                        className="px-[22px] py-[14px] rounded-full border border-[#212121]/30 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 hover:border-[#212121] transition-all duration-300"
-                      >
-                        Report a Finding
-                      </Link>
+
                       <Link
                         href="/participate"
                         className="px-[22px] py-[14px] rounded-full border border-[#212121]/30 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 hover:border-[#212121] transition-all duration-300"
                       >
                         Get Involved
                       </Link>
-                    </div>
-
-                    <div
-                      data-animate="fade-up"
-                      className="mt-[24px] flex gap-[10px] flex-wrap"
-                    >
-                      <span className="px-[14px] py-[10px] rounded-full bg-white/80 border border-black/5 small-text font-NeueMontreal text-[#212121]/70 shadow-sm">
-                        National Budgets
-                      </span>
-                      <span className="px-[14px] py-[10px] rounded-full bg-white/80 border border-black/5 small-text font-NeueMontreal text-[#212121]/70 shadow-sm">
-                        County Stories
-                      </span>
-                      <span className="px-[14px] py-[10px] rounded-full bg-white/80 border border-black/5 small-text font-NeueMontreal text-[#212121]/70 shadow-sm">
-                        Civic Action
-                      </span>
                     </div>
                   </div>
 
@@ -410,77 +382,6 @@ export default function Home() {
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(255,47,85,0.1),transparent)]" />
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* IMPACT STATS */}
-            <section className="padding-x pt-[60px]">
-              <div className="max-w-[1200px] mx-auto">
-                <div
-                  data-animate="cards"
-                  className="grid grid-cols-4 gap-[16px] mdOnly:grid-cols-2 smOnly:grid-cols-2 xm:grid-cols-2"
-                >
-                  <div
-                    data-animate="card"
-                    data-scale="card"
-                    className="rounded-[26px] bg-white/90 border border-black/5 p-[22px] hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
-                  >
-                    <p className="small-text font-NeueMontreal text-[#212121]/60">
-                      Budget Lines Tracked
-                    </p>
-                    <p className="text-[42px] leading-[1.1] font-FoundersGrotesk text-[#111] mt-[8px]">
-                      <span data-counter={500}>0</span>+
-                    </p>
-                    <p className="small-text font-NeueMontreal text-[#00aa55] mt-[4px]">
-                      Verified stories
-                    </p>
-                  </div>
-                  <div
-                    data-animate="card"
-                    data-scale="card"
-                    className="rounded-[26px] bg-white/90 border border-black/5 p-[22px] hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
-                  >
-                    <p className="small-text font-NeueMontreal text-[#212121]/60">
-                      Counties Covered
-                    </p>
-                    <p className="text-[42px] leading-[1.1] font-FoundersGrotesk text-[#111] mt-[8px]">
-                      <span data-counter={47}>0</span>
-                    </p>
-                    <p className="small-text font-NeueMontreal text-[#00aa55] mt-[4px]">
-                      Across Kenya
-                    </p>
-                  </div>
-                  <div
-                    data-animate="card"
-                    data-scale="card"
-                    className="rounded-[26px] bg-white/90 border border-black/5 p-[22px] hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
-                  >
-                    <p className="small-text font-NeueMontreal text-[#212121]/60">
-                      Citizens Engaged
-                    </p>
-                    <p className="text-[42px] leading-[1.1] font-FoundersGrotesk text-[#111] mt-[8px]">
-                      <span data-counter={15000}>0</span>
-                    </p>
-                    <p className="small-text font-NeueMontreal text-[#00aa55] mt-[4px]">
-                      Active community
-                    </p>
-                  </div>
-                  <div
-                    data-animate="card"
-                    data-scale="card"
-                    className="rounded-[26px] bg-[#212121] text-[#f1f1f1] border border-black/10 p-[22px] hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
-                  >
-                    <p className="small-text font-NeueMontreal text-[#f1f1f1]/60">
-                      Actions Taken
-                    </p>
-                    <p className="text-[42px] leading-[1.1] font-FoundersGrotesk mt-[8px]">
-                      <span data-counter={3200}>0</span>+
-                    </p>
-                    <p className="small-text font-NeueMontreal text-[#00ff85] mt-[4px]">
-                      Reports & petitions
-                    </p>
                   </div>
                 </div>
               </div>
