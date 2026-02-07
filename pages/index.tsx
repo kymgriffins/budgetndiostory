@@ -502,122 +502,10 @@ export default function Home() {
             </section>
 
             {/* STORIES FROM THE GROUND */}
-            <section className="padding-x padding-y">
-              <div className="max-w-[1200px] mx-auto">
-                <div
-                  data-animate="fade-up"
-                  className="flex items-end justify-between gap-[16px] flex-wrap mb-[30px]"
-                >
-                  <div>
-                    <h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-                      Stories from the Ground
-                    </h2>
-                    <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[8px] max-w-[60ch]">
-                      Real reports and investigations that answer: What was
-                      budgeted? What exists? Who benefits?
-                    </p>
-                  </div>
-                  <Link
-                    href="/blog"
-                    className="group px-[18px] py-[12px] rounded-full border border-[#212121]/25 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121] hover:text-[#f1f1f1] transition-all duration-300"
-                  >
-                    <span className="flex items-center gap-[8px]">
-                      View All Stories
-                      <svg
-                        className="w-[14px] h-[14px] group-hover:translate-x-[4px] transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-                </div>
 
-                <div
-                  data-animate="cards"
-                  className="grid grid-cols-3 gap-[18px] mdOnly:grid-cols-2 smOnly:grid-cols-1 xm:grid-cols-1"
-                >
-                  <div
-                    data-animate="card"
-                    className="group rounded-[28px] bg-white/90 border border-black/5 p-[24px] hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
-                  >
-                    <div className="flex items-center justify-between mb-[12px]">
-                      <span className="px-[10px] py-[6px] rounded-full bg-[#ff2f55]/10 text-[#ff2f55] small-text font-NeueMontreal">
-                        Report
-                      </span>
-                      <span className="text-[12px] font-NeueMontreal text-[#212121]/50">
-                        County • Road
-                      </span>
-                    </div>
-                    <p className="text-[24px] font-NeueMontreal text-[#111] leading-[1.3]">
-                      This road was budgeted for Ksh 5M
-                    </p>
-                    <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[12px]">
-                      Field verification shows partial completion and missing
-                      signboards.
-                    </p>
-                    <div className="mt-[16px] flex items-center gap-[8px] text-[#00aa55] small-text font-NeueMontreal group-hover:underline cursor-pointer">
-                      Read full report →
-                    </div>
-                  </div>
-                  <div
-                    data-animate="card"
-                    className="group rounded-[28px] bg-white/90 border border-black/5 p-[24px] hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
-                  >
-                    <div className="flex items-center justify-between mb-[12px]">
-                      <span className="px-[10px] py-[6px] rounded-full bg-[#00ff85]/20 text-[#00aa55] small-text font-NeueMontreal">
-                        Investigation
-                      </span>
-                      <span className="text-[12px] font-NeueMontreal text-[#212121]/50">
-                        County • Health
-                      </span>
-                    </div>
-                    <p className="text-[24px] font-NeueMontreal text-[#111] leading-[1.3]">
-                      Clinic supplies: where did they go?
-                    </p>
-                    <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[12px]">
-                      An investigation into procurement and delivery timelines.
-                    </p>
-                    <div className="mt-[16px] flex items-center gap-[8px] text-[#00aa55] small-text font-NeueMontreal group-hover:underline cursor-pointer">
-                      Read full report →
-                    </div>
-                  </div>
-                  <div
-                    data-animate="card"
-                    className="group rounded-[28px] bg-white/90 border border-black/5 p-[24px] hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
-                  >
-                    <div className="flex items-center justify-between mb-[12px]">
-                      <span className="px-[10px] py-[6px] rounded-full bg-[#212121]/10 text-[#212121] small-text font-NeueMontreal">
-                        Spotlight
-                      </span>
-                      <span className="text-[12px] font-NeueMontreal text-[#212121]/50">
-                        County • Analysis
-                      </span>
-                    </div>
-                    <p className="text-[24px] font-NeueMontreal text-[#111] leading-[1.3]">
-                      Who benefits from the budget?
-                    </p>
-                    <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[12px]">
-                      Spotlights on contractors, beneficiaries, and
-                      discrepancies.
-                    </p>
-                    <div className="mt-[16px] flex items-center gap-[8px] text-[#00aa55] small-text font-NeueMontreal group-hover:underline cursor-pointer">
-                      Read full report →
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
 
             {/* HOW IT WORKS */}
-            <section className="padding-x pb-[50px]">
+            <section className="padding-x pt-[50px] pb-[50px]">
               <div className="max-w-[1200px] mx-auto">
                 <div
                   data-animate="fade-up"
@@ -625,7 +513,7 @@ export default function Home() {
                 >
                   <div className="flex items-end justify-between gap-[16px] flex-wrap mb-[24px]">
                     <h3 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-                      How It Works
+                      How We Works
                     </h3>
                     <p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[58ch]">
                       A simple process that turns complex public budgets into
