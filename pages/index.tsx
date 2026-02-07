@@ -332,7 +332,7 @@ export default function Home() {
                       </Link>
 
                       <Link
-                        href="/participate"
+                        href="/contact"
                         className="px-[22px] py-[14px] rounded-full border border-[#212121]/30 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 hover:border-[#212121] transition-all duration-300"
                       >
                         Get Involved
