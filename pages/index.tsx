@@ -1,234 +1,139 @@
-import LandingFooter from "@/components/LandingFooter";
+"use client";
+
+import { NavbarLanding, VideoHeroLanding } from "@/components";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowRight,
+  ChevronDown,
+  ChevronUp,
+  FileText,
+  Mail,
+  MapPin,
+  Moon,
+  Phone,
+  Play,
+  Sun,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Home() {
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+/**
+ * Video Landing Page
+ * Purposeful budget storytelling landing page
+ *
+ * Features:
+ * - Full-screen video hero
+ * - Minimalist navbar (Tracker hidden)
+ * - Purposeful content sections
+ * - FAQ section with accordion
+ * - New footer with theme toggler
+ */
+export default function VideoLanding() {
+  const [year, setYear] = useState(2026);
+  const [isDark, setIsDark] = useState(true);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    let loco: any;
-    let ctx: any;
-    let gsap: any;
-    let ScrollTrigger: any;
-
-    const el = scrollerRef.current;
-    const content = contentRef.current;
-    if (!el || !content) return;
-
-    let cancelled = false;
-
-    (async () => {
-      try {
-        if (
-          typeof window !== "undefined" &&
-          window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
-        ) {
-          return;
-        }
-
-        const LocomotiveScroll = (await import("locomotive-scroll")).default;
-        const gsapModule: any = await import("gsap");
-        const stModule: any = await import("gsap/ScrollTrigger");
-
-        gsap = gsapModule.gsap ?? gsapModule.default ?? gsapModule;
-        ScrollTrigger = stModule.ScrollTrigger ?? stModule.default ?? stModule;
-
-        if (!gsap?.registerPlugin || !ScrollTrigger) return;
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Ensure correct offset calculations for scrollerProxy
-        if (getComputedStyle(el).position === "static") {
-          el.style.position = "relative";
-        }
-
-        loco = new LocomotiveScroll({
-          lenisOptions: {
-            wrapper: el,
-            content,
-            lerp: 0.08,
-            smoothWheel: true,
-            smoothTouch: true,
-          } as any,
-          scrollCallback: () => {
-            ScrollTrigger.update();
-            // Update scroll progress
-            const scrollHeight = el.scrollHeight - window.innerHeight;
-            const progress = (el.scrollTop / scrollHeight) * 100;
-            setScrollProgress(progress);
-          },
-          autoStart: true,
-        });
-
-        if (cancelled) return;
-
-        const getScrollY = () =>
-          loco?.lenisInstance?.scroll ?? el.scrollTop ?? 0;
-
-        ScrollTrigger.scrollerProxy(el, {
-          scrollTop(value?: number) {
-            if (typeof value === "number") {
-              return loco?.scrollTo?.(value, { immediate: true });
-            }
-            return getScrollY();
-          },
-          getBoundingClientRect() {
-            return {
-              top: 0,
-              left: 0,
-              width: window.innerWidth,
-              height: window.innerHeight,
-            };
-          },
-          pinType:
-            getComputedStyle(el).transform !== "none" ? "transform" : "fixed",
-        });
-
-        ScrollTrigger.defaults({ scroller: el });
-        ScrollTrigger.addEventListener("refresh", () => loco?.update?.());
-
-        ctx = gsap.context(() => {
-          // Hero reveal with enhanced animations
-          gsap.fromTo(
-            "[data-hero='sub']",
-            { y: 14, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
-          );
-          gsap.fromTo(
-            "[data-hero='title']",
-            { y: 18, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.75,
-              ease: "power3.out",
-              delay: 0.05,
-            },
-          );
-          gsap.fromTo(
-            "[data-hero='cta']",
-            { y: 12, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.65,
-              ease: "power3.out",
-              delay: 0.12,
-            },
-          );
-
-          // Enhanced fade-up elements
-          (
-            gsap.utils.toArray("[data-animate='fade-up']") as HTMLElement[]
-          ).forEach((node) => {
-            gsap.fromTo(
-              node,
-              { y: 60, opacity: 0 },
-              {
-                y: 0,
-                opacity: 1,
-                duration: 0.9,
-                ease: "power3.out",
-                scrollTrigger: { trigger: node, start: "top 85%" },
-              },
-            );
-          });
-
-          // Stagger feature cards with enhanced effects
-          (
-            gsap.utils.toArray("[data-animate='cards']") as HTMLElement[]
-          ).forEach((wrap) => {
-            const cards = wrap.querySelectorAll<HTMLElement>(
-              "[data-animate='card']",
-            );
-            if (!cards.length) return;
-            gsap.fromTo(
-              cards,
-              { y: 40, opacity: 0, scale: 0.95 },
-              {
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                duration: 0.7,
-                ease: "power3.out",
-                stagger: 0.1,
-                scrollTrigger: { trigger: wrap, start: "top 80%" },
-              },
-            );
-          });
-
-          // Parallax effect for hero elements
-          gsap.to("[data-parallax='hero']", {
-            yPercent: -20,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "[data-parallax='hero']",
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
-
-          // Animated counter for stats
-          (gsap.utils.toArray("[data-counter]") as HTMLElement[]).forEach(
-            (node) => {
-              const target = parseInt(node.getAttribute("data-counter") || "0");
-              gsap.fromTo(
-                node,
-                { innerText: 0 },
-                {
-                  innerText: target,
-                  duration: 2,
-                  ease: "power2.out",
-                  snap: { innerText: 1 },
-                  scrollTrigger: { trigger: node, start: "top 85%" },
-                },
-              );
-            },
-          );
-
-          // Scale on scroll for cards
-          (gsap.utils.toArray("[data-scale='card']") as HTMLElement[]).forEach(
-            (node) => {
-              gsap.fromTo(
-                node,
-                { scale: 0.9, opacity: 0 },
-                {
-                  scale: 1,
-                  opacity: 1,
-                  duration: 1,
-                  ease: "power2.out",
-                  scrollTrigger: {
-                    trigger: node,
-                    start: "top 75%",
-                    end: "bottom top",
-                    scrub: 1,
-                  },
-                },
-              );
-            },
-          );
-        }, el);
-
-        ScrollTrigger.refresh();
-        loco?.resize?.();
-      } catch {
-        // no-op: page still renders without smooth scroll
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-      try {
-        ctx?.revert?.();
-        loco?.destroy?.();
-      } catch {
-        // no-op
-      }
-    };
+    setYear(new Date().getFullYear());
   }, []);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle("dark");
+  };
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const contactInfo = [
+    {
+      icon: <Mail size={20} strokeWidth={1.5} />,
+      label: "Email",
+      value: "hello@budgetndiostory.org",
+      href: "mailto:hello@budgetndiostory.org",
+    },
+    {
+      icon: <Phone size={20} strokeWidth={1.5} />,
+      label: "Phone",
+      value: "+254 700 000 000",
+      href: "tel:+254700000000",
+    },
+    {
+      icon: <MapPin size={20} strokeWidth={1.5} />,
+      label: "Location",
+      value: "Nairobi, Kenya",
+      href: "#",
+    },
+  ];
+
+  const socialLinks = [
+    { name: "Instagram", href: "https://instagram.com" },
+    { name: "Twitter", href: "https://twitter.com" },
+    { name: "LinkedIn", href: "https://linkedin.com" },
+    { name: "YouTube", href: "https://youtube.com" },
+  ];
+
+  const quickActions = [
+    {
+      icon: <Play size={20} />,
+      title: "Latest Story",
+      desc: "Watch our newest budget breakdown",
+      href: "/blog",
+      color: "#00aa55",
+      bgColor: "bg-[#00aa55]/10",
+    },
+    {
+      icon: <TrendingUp size={20} />,
+      title: "Budget Tracker",
+      desc: "Follow the money in real-time",
+      href: "/tracker",
+      color: "#212121",
+      bgColor: "bg-white/10",
+    },
+    {
+      icon: <FileText size={20} />,
+      title: "Field Reports",
+      desc: "Stories from the ground",
+      href: "/edustories",
+      color: "#ff2f55",
+      bgColor: "bg-[#ff2f55]/10",
+    },
+    {
+      icon: <Users size={20} />,
+      title: "Community",
+      desc: "Join the conversation",
+      href: "/contact",
+      color: "#00aa55",
+      bgColor: "bg-[#00aa55]/10",
+    },
+  ];
+
+  const faqs = [
+    {
+      question: "What is Budget Ndio Story?",
+      answer:
+        "Budget Ndio Story is a civic initiative that translates complex national and county budgets into simple, engaging stories. We help citizens understand where public money goes and how they can participate in budget processes.",
+    },
+    {
+      question: "How do you verify budget information?",
+      answer:
+        "Our team analyzes official budget documents, procurement records, and spending reports. We then cross-reference this data by visiting project sites and interviewing local communities to verify what's actually happening on the ground.",
+    },
+    {
+      question: "How can I get involved?",
+      answer:
+        "There are many ways to get involved! You can subscribe to our newsletter for updates, share our stories on social media, join our community discussions, or reach out to us for partnership opportunities.",
+    },
+    {
+      question: "Is the information on your site free to use?",
+      answer:
+        "Yes! All our content is freely available for educational and civic purposes. We encourage sharing and redistribution with attribution to Budget Ndio Story.",
+    },
+  ];
 
   return (
     <>
@@ -238,569 +143,376 @@ export default function Home() {
           name="description"
           content="Budget Ndio Story translates national and county budgets into short, verifiable stories that help citizens understand where public money goes and how to act."
         />
-        <meta
-          property="og:title"
-          content="Budget Ndio Story — Civic Budget Stories"
-        />
+        <meta property="og:title" content="Budget Ndio Story" />
         <meta
           property="og:description"
-          content="Track. Verify. Act. Stories, reports and multimedia that make public budgets clear and accountable."
+          content="Bridging the budget literacy gap for youth through storytelling."
         />
-        <meta name="theme-color" content="#f1f1f1" />
+        <meta name="theme-color" content="#0a0a0a" />
       </Head>
 
-      {/* Sticky Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 h-[3px] bg-[#f1f1f1] z-[1000]">
-        <div
-          className="h-full bg-[#212121] transition-all duration-300"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      <div className="bg-[#0a0a0a] text-white min-h-screen">
+        {/* Navigation */}
+        <NavbarLanding />
 
-      <div
-        ref={scrollerRef}
-        data-scroll-container
-        className="relative h-screen overflow-y-auto overflow-x-hidden bg-[#f1f1f1] text-[#212121]"
-        style={{ position: "relative" }}
-      >
-        <div ref={contentRef} data-scroll-content>
-          {/* Spacer for fixed navbar height */}
-          <div className="h-[8vh]" />
+        {/* Video Hero */}
+        <VideoHeroLanding />
 
-          <a
-            href="#landing-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-[10px] focus:left-[10px] focus:z-[100] focus:bg-[#212121] focus:text-[#f1f1f1] focus:px-[14px] focus:py-[10px] focus:rounded-full"
-          >
-            Skip to content
-          </a>
-
-          <main id="landing-content">
-            {/* TRUST BADGES */}
-
-            {/* HERO */}
-            <section className="padding-x pt-[40px] smOnly:pt-[28px] xm:pt-[24px]">
-              <div className="max-w-[1200px] mx-auto">
-                <div className="grid grid-cols-2 gap-[40px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1 items-start">
-                  <div data-parallax="hero">
-                    <p
-                      data-hero="sub"
-                      className="text-[13px] tracking-[0.2em] uppercase font-NeueMontreal text-[#212121]/70"
+        <main>
+          {/* QUICK ACTIONS - Responsive grid */}
+          <section className="padding-x pt-16 pb-8">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {quickActions.map((action, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                  >
+                    <Link
+                      href={action.href}
+                      className="block rounded-2xl bg-white/5 border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 group h-full"
                     >
-                      The STORY BEHIND THE Kenyan Budget
-                    </p>
-                    <h1
-                      data-hero="title"
-                      className=" font-FoundersGrotesk uppercase text-[#111] tracking-[-0.03em] mt-[16px] leading-[0.86] text-[clamp(56px,11vw,180px)]"
-                    >
-                      The Kenyan Budget.
+                      <div
+                        className={`w-10 h-10 rounded-full ${action.bgColor} flex items-center justify-center mb-3`}
+                      >
+                        <div style={{ color: action.color }}>{action.icon}</div>
+                      </div>
+                      <p className="font-FoundersGrotesk text-lg font-medium">
+                        {action.title}
+                      </p>
+                      <p className="font-NeueMontreal text-white/60 text-sm mt-1">
+                        {action.desc}
+                      </p>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* FEATURED STORY - Quote card style */}
+          <section className="padding-x py-12">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/20 via-white/5 to-[#ff2f55]/20 border border-white/10 p-6 lg:p-10"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      Featured Story
+                    </span>
+                    <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight mt-3">
+                      Where did the
                       <br />
-                      <span className="text-[#00aa55]">Explained.</span>
-                    </h1>
-                    <p
-                      data-animate="fade-up"
-                      className="mt-[22px] font-NeueMontreal text-[#212121]/80 text-[clamp(17px,2.3vw,24px)] leading-[1.5] max-w-[58ch]"
-                    >
-                      Budget Ndio Story turns complex budgets into clear, local
-                      narratives—videos, field reports, and photo essays that
-                      show where your tax money actually goes.
+                      <span className="text-[#00aa55]">health budget</span> go?
+                    </h2>
+                    <p className="font-NeueMontreal text-white/70 mt-4 leading-relaxed">
+                      We traced KSh 12 billion allocated for county health
+                      facilities. Here's what we found on the ground versus
+                      what's in the records.
                     </p>
-
-                    <div
-                      data-hero="cta"
-                      className="mt-[28px] flex items-center gap-[14px] flex-wrap"
-                    >
+                    <div className="flex flex-wrap gap-3 mt-6">
                       <Link
                         href="/blog"
-                        className="group px-[22px] py-[14px] rounded-full bg-[#212121] text-[#f1f1f1] paragraph font-NeueMontreal hover:bg-[#00aa55] hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00aa55] text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-[#00cc66] transition-colors whitespace-nowrap"
                       >
-                        <span className="flex items-center gap-[8px]">
-                          Explore Stories
-                          <svg
-                            className="w-[16px] h-[16px] group-hover:translate-x-[4px] transition-transform"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                          </svg>
-                        </span>
-                      </Link>
-
-                      <Link
-                        href="/contact"
-                        className="px-[22px] py-[14px] rounded-full border border-[#212121]/30 text-[#212121] paragraph font-NeueMontreal hover:bg-[#212121]/5 hover:border-[#212121] transition-all duration-300"
-                      >
-                        Get Involved
+                        Read Full Story <ArrowRight size={14} />
                       </Link>
                     </div>
                   </div>
-
-                  <div className="w-full">
-                    <div
-                      data-animate="fade-up"
-                      className="rounded-[32px] overflow-hidden bg-[#111] border border-black/10 shadow-[0_30px_100px_rgba(0,0,0,0.15)]"
-                    >
-                      <div className="p-[26px] smOnly:p-[20px] xm:p-[18px]">
-                        <p className="font-NeueMontreal text-[#f1f1f1]/95 text-[18px] leading-[1.6]">
-                          "Hii budget ni yako. If you don't understand it,
-                          someone else will decide your future."
-                        </p>
-                        <div className="mt-[20px] grid grid-cols-3 gap-[12px] smOnly:grid-cols-2 xm:grid-cols-2">
-                          <div className="rounded-[18px] bg-[#00ff85]/10 border border-[#00ff85]/20 p-[14px]">
-                            <p className="small-text font-NeueMontreal text-[#00ff85]/70">
-                              Budgeted
-                            </p>
-                            <p className="paragraph font-NeueMontreal text-[#f1f1f1]">
-                              What was promised
-                            </p>
-                          </div>
-                          <div className="rounded-[18px] bg-white/10 border border-white/10 p-[14px]">
-                            <p className="small-text font-NeueMontreal text-[#f1f1f1]/60">
-                              Reality
-                            </p>
-                            <p className="paragraph font-NeueMontreal text-[#f1f1f1]">
-                              What exists
-                            </p>
-                          </div>
-                          <div className="rounded-[18px] bg-[#ff2f55]/10 border border-[#ff2f55]/20 p-[14px]">
-                            <p className="small-text font-NeueMontreal text-[#ff2f55]/70">
-                              Action
-                            </p>
-                            <p className="paragraph font-NeueMontreal text-[#f1f1f1]">
-                              What you can do
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="h-[280px] smOnly:h-[220px] xm:h-[200px] bg-gradient-to-br from-[#00ff85]/15 via-[#f1f1f1]/5 to-[#ff2f55]/20 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,255,133,0.1),transparent)]" />
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(255,47,85,0.1),transparent)]" />
-                      </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="rounded-2xl bg-[#00aa55]/20 border border-[#00aa55]/30 p-4">
+                      <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider">
+                        Budgeted
+                      </p>
+                      <p className="font-FoundersGrotesk text-2xl font-medium mt-1">
+                        KSh 12B
+                      </p>
+                      <p className="font-NeueMontreal text-white/60 text-sm mt-1">
+                        What was promised
+                      </p>
+                    </div>
+                    <div className="rounded-2xl bg-white/10 border border-white/20 p-4">
+                      <p className="text-xs font-NeueMontreal text-white/60 uppercase tracking-wider">
+                        Verified
+                      </p>
+                      <p className="font-FoundersGrotesk text-2xl font-medium mt-1">
+                        KSh 4.2B
+                      </p>
+                      <p className="font-NeueMontreal text-white/60 text-sm mt-1">
+                        What we found
+                      </p>
+                    </div>
+                    <div className="rounded-2xl bg-[#ff2f55]/20 border border-[#ff2f55]/30 p-4 sm:col-span-2">
+                      <p className="text-xs font-NeueMontreal text-[#ff2f55]/70 uppercase tracking-wider">
+                        Action Needed
+                      </p>
+                      <p className="font-NeueMontreal text-white/80 mt-2">
+                        3 facilities in Nakuru County require immediate
+                        accountability review. Sign the petition to demand
+                        transparency.
+                      </p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </motion.div>
+            </div>
+          </section>
 
-            {/* QUICK SNAPSHOT */}
-            <section className="padding-x pt-[50px]">
-              <div className="max-w-[1200px] mx-auto">
-                <div
-                  data-animate="fade-up"
-                  className="flex items-center justify-between gap-[16px] flex-wrap mb-[26px]"
-                >
-                  <h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-                    Quick Snapshot
-                  </h2>
-                  <p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[50ch]">
-                    Your gateway to civic transparency and accountability
-                  </p>
-                </div>
-                <div
-                  data-animate="cards"
-                  className="grid grid-cols-4 gap-[14px] mdOnly:grid-cols-2 smOnly:grid-cols-2 xm:grid-cols-2"
-                >
-                  <div
-                    data-animate="card"
-                    className="rounded-[24px] bg-white/90 border border-black/5 p-[18px] hover:shadow-md transition-all duration-300"
-                  >
-                    <div className="w-[40px] h-[40px] rounded-full bg-[#00ff85]/20 flex items-center justify-center mb-[12px]">
-                      <svg
-                        className="w-[20px] h-[20px] text-[#00aa55]"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-                    <p className="text-[20px] font-NeueMontreal text-[#111]">
-                      Story of the Week
-                    </p>
-                  </div>
-                  <div
-                    data-animate="card"
-                    className="rounded-[24px] bg-white/90 border border-black/5 p-[18px] hover:shadow-md transition-all duration-300"
-                  >
-                    <div className="w-[40px] h-[40px] rounded-full bg-[#212121]/10 flex items-center justify-center mb-[12px]">
-                      <svg
-                        className="w-[20px] h-[20px] text-[#212121]"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                        />
-                      </svg>
-                    </div>
-                    <p className="text-[20px] font-NeueMontreal text-[#111]">
-                      Budget Highlights
-                    </p>
-                  </div>
-                  <div
-                    data-animate="card"
-                    className="rounded-[24px] bg-white/90 border border-black/5 p-[18px] hover:shadow-md transition-all duration-300"
-                  >
-                    <div className="w-[40px] h-[40px] rounded-full bg-[#ff2f55]/10 flex items-center justify-center mb-[12px]">
-                      <svg
-                        className="w-[20px] h-[20px] text-[#ff2f55]"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                        />
-                      </svg>
-                    </div>
-                    <p className="text-[20px] font-NeueMontreal text-[#111]">
-                      Field Reports
-                    </p>
-                  </div>
-                  <div
-                    data-animate="card"
-                    className="rounded-[24px] bg-[#212121] text-[#f1f1f1] border border-black/10 p-[18px] hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="w-[40px] h-[40px] rounded-full bg-[#00ff85]/20 flex items-center justify-center mb-[12px]">
-                      <svg
-                        className="w-[20px] h-[20px] text-[#00ff85]"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                    </div>
-                    <p className="text-[20px] font-NeueMontreal">
-                      Community Action
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
+          {/* HOW IT WORKS */}
+          <section className="padding-x py-16">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                  Our Process
+                </span>
+                <h2 className="font-FoundersGrotesk text-3xl lg:text-4xl font-semibold tracking-tight mt-3">
+                  From numbers to narratives
+                </h2>
+              </motion.div>
 
-            {/* STORIES FROM THE GROUND */}
-
-
-            {/* HOW IT WORKS */}
-            <section className="padding-x pt-[50px] pb-[50px]">
-              <div className="max-w-[1200px] mx-auto">
-                <div
-                  data-animate="fade-up"
-                  className="rounded-[34px] bg-white/80 border border-black/5 p-[28px] smOnly:p-[22px] xm:p-[18px]"
-                >
-                  <div className="flex items-end justify-between gap-[16px] flex-wrap mb-[24px]">
-                    <h3 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-                      How We Works
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  {
+                    step: "01",
+                    title: "Research",
+                    desc: "We analyze budget documents, procurement records, and spending reports from national and county governments.",
+                  },
+                  {
+                    step: "02",
+                    title: "Verify",
+                    desc: "Our team visits project sites, interviews local communities, and cross-references data with on-ground reality.",
+                  },
+                  {
+                    step: "03",
+                    title: "Act",
+                    desc: "We transform findings into accessible videos, articles, and interactive tools that empower citizens to act.",
+                  },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    className="relative rounded-2xl bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors"
+                  >
+                    <span className="text-xs font-NeueMontreal text-[#00aa55] uppercase tracking-wider">
+                      {item.step}
+                    </span>
+                    <h3 className="font-FoundersGrotesk text-xl font-medium mt-3">
+                      {item.title}
                     </h3>
-                    <p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[58ch]">
-                      A simple process that turns complex public budgets into
-                      civic action.
+                    <p className="font-NeueMontreal text-white/60 mt-3 leading-relaxed">
+                      {item.desc}
                     </p>
-                  </div>
-
-                  <div
-                    data-animate="cards"
-                    className="mt-[22px] grid grid-cols-3 gap-[18px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1"
-                  >
-                    <div
-                      data-animate="card"
-                      className="rounded-[24px] bg-white border border-black/5 p-[22px] hover:shadow-md transition-all duration-300"
-                    >
-                      <div className="flex items-center gap-[12px] mb-[12px]">
-                        <div className="w-[48px] h-[48px] rounded-full bg-[#00ff85]/20 flex items-center justify-center text-[#00aa55] font-FoundersGrotesk text-[24px] font-bold">
-                          1
-                        </div>
-                      </div>
-                      <p className="paragraph font-NeueMontreal text-[#111] font-medium">
-                        Identify the Line
-                      </p>
-                      <p className="small-text font-NeueMontreal text-[#212121]/65 mt-[8px]">
-                        Find the budget line, allocation amount, and expected
-                        outputs from official documents.
-                      </p>
-                    </div>
-                    <div
-                      data-animate="card"
-                      className="rounded-[24px] bg-white border border-black/5 p-[22px] hover:shadow-md transition-all duration-300"
-                    >
-                      <div className="flex items-center gap-[12px] mb-[12px]">
-                        <div className="w-[48px] h-[48px] rounded-full bg-[#212121]/10 flex items-center justify-center text-[#212121] font-FoundersGrotesk text-[24px] font-bold">
-                          2
-                        </div>
-                      </div>
-                      <p className="paragraph font-NeueMontreal text-[#111] font-medium">
-                        Verify on the Ground
-                      </p>
-                      <p className="small-text font-NeueMontreal text-[#212121]/65 mt-[8px]">
-                        Field reports, photos, and community input confirm
-                        whether work was actually done.
-                      </p>
-                    </div>
-                    <div
-                      data-animate="card"
-                      className="rounded-[24px] bg-[#212121] text-[#f1f1f1] border border-black/10 p-[22px] hover:shadow-xl transition-all duration-300"
-                    >
-                      <div className="flex items-center gap-[12px] mb-[12px]">
-                        <div className="w-[48px] h-[48px] rounded-full bg-[#00ff85]/20 flex items-center justify-center text-[#00aa55] font-FoundersGrotesk text-[24px] font-bold">
-                          3
-                        </div>
-                      </div>
-                      <p className="paragraph font-NeueMontreal font-medium">
-                        Act & Amplify
-                      </p>
-                      <p className="small-text font-NeueMontreal text-[#f1f1f1]/70 mt-[8px]">
-                        Share findings, contact officials, or start a community
-                        campaign for accountability.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                  </motion.div>
+                ))}
               </div>
-            </section>
+            </div>
+          </section>
 
-            {/* FAQ SECTION */}
-            <section className="padding-x pb-[50px]">
-              <div className="max-w-[800px] mx-auto">
-                <div data-animate="fade-up" className="text-center mb-[32px]">
-                  <h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-                    Frequently Asked Questions
-                  </h2>
-                  <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[8px]">
-                    Everything you need to know about Budget Ndio Story
-                  </p>
-                </div>
+          {/* FAQ SECTION */}
+          <section className="padding-x py-16">
+            <div className="max-w-3xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                  FAQ
+                </span>
+                <h2 className="font-FoundersGrotesk text-3xl lg:text-4xl font-semibold tracking-tight mt-3">
+                  Frequently Asked Questions
+                </h2>
+              </motion.div>
 
-                <div data-animate="cards" className="space-y-[12px]">
-                  {[
-                    {
-                      q: "How do you verify budget stories?",
-                      a: "We combine official budget documents with field verification—photos, interviews, and on-ground reports from community members.",
-                    },
-                    {
-                      q: "Is this only for national budgets?",
-                      a: "No! We cover both national and county budgets, focusing on where you live and the projects that affect your community directly.",
-                    },
-                    {
-                      q: "How can I contribute a story?",
-                      a: "Use the 'Report a Finding' button to submit evidence. Our team verifies submissions before publishing them on the platform.",
-                    },
-                    {
-                      q: "Is this content free to access?",
-                      a: "Yes! All our budget stories, reports, and educational content are completely free and open to everyone.",
-                    },
-                  ].map((faq, i) => (
-                    <div
-                      key={i}
-                      data-animate="card"
-                      className="rounded-[20px] bg-white border border-black/5 p-[20px] hover:shadow-sm transition-all duration-300"
+              <div className="space-y-4">
+                {faqs.map((faq, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                    className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden"
+                  >
+                    <button
+                      onClick={() => toggleFaq(i)}
+                      className="w-full px-6 py-5 flex items-center justify-between text-left"
                     >
-                      <p className="paragraph font-NeueMontreal text-[#111] font-medium">
-                        {faq.q}
-                      </p>
-                      <p className="small-text font-NeueMontreal text-[#212121]/70 mt-[8px]">
-                        {faq.a}
-                      </p>
+                      <span className="font-FoundersGrotesk text-lg font-medium">
+                        {faq.question}
+                      </span>
+                      {openFaq === i ? (
+                        <ChevronUp size={20} className="text-white/60" />
+                      ) : (
+                        <ChevronDown size={20} className="text-white/60" />
+                      )}
+                    </button>
+                    <AnimatePresence>
+                      {openFaq === i && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-5">
+                            <p className="font-NeueMontreal text-white/70 leading-relaxed">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section className="padding-x py-16">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/20 via-white/5 to-transparent border border-white/10 p-8 lg:p-12 text-center"
+              >
+                <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight">
+                  Your tax money.
+                  <br />
+                  <span className="text-white/60">Your right to know.</span>
+                </h2>
+                <p className="font-NeueMontreal text-white/70 mt-4 max-w-xl mx-auto">
+                  Join thousands of Kenyans who are demanding accountability.
+                  Learn how your money is being spent and what you can do about
+                  it.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 mt-8">
+                  <Link
+                    href="/learn"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/90 transition-colors whitespace-nowrap"
+                  >
+                    Start Learning
+                    <ArrowRight size={16} />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 px-6 py-3 border border-white/30 rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/10 transition-colors whitespace-nowrap"
+                  >
+                    Get Involved
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        </main>
+
+        {/* Footer */}
+        <footer className="py-16 px-8 border-t border-white/10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+              {/* Contact Info */}
+              <div>
+                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+                  Contact Info
+                </h3>
+                <div className="flex flex-col gap-4">
+                  {contactInfo.map((item, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="text-white/60">{item.icon}</div>
+                      <div>
+                        <p className="text-xs font-NeueMontreal text-white/50 mb-0.5">
+                          {item.label}
+                        </p>
+                        <Link
+                          href={item.href}
+                          className="text-sm font-NeueMontreal text-white/80 hover:text-white transition-colors"
+                        >
+                          {item.value}
+                        </Link>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
-            </section>
 
-            {/* PREVIEW STRIP */}
-            <section className="padding-x padding-y">
-              <div className="max-w-[1200px] mx-auto">
-                <div
-                  data-animate="fade-up"
-                  className="flex items-end justify-between gap-[16px] flex-wrap mb-[30px]"
-                >
-                  <h2 className="sub-heading font-FoundersGrotesk uppercase text-[#111]">
-                    Explore the Platform
-                  </h2>
-                  <p className="paragraph font-NeueMontreal text-[#212121]/70 max-w-[60ch]">
-                    See how we turn budget documents into stories, trackers, and
-                    actionable insights.
-                  </p>
-                </div>
-
-                <div
-                  data-animate="cards"
-                  className="grid grid-cols-3 gap-[18px] mdOnly:grid-cols-1 smOnly:grid-cols-1 xm:grid-cols-1"
-                >
-                  <div
-                    data-animate="card"
-                    className="group rounded-[28px] overflow-hidden bg-white border border-black/5 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="p-[22px]">
-                      <div className="w-[44px] h-[44px] rounded-full bg-[#212121]/10 flex items-center justify-center mb-[12px]">
-                        <svg
-                          className="w-[22px] h-[22px] text-[#212121]"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                          />
-                        </svg>
-                      </div>
-                      <p className="text-[22px] font-NeueMontreal text-[#111]">
-                        Budget Tracker
-                      </p>
-                      <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[6px]">
-                        See allocations by sector and track spending over time
-                      </p>
-                    </div>
-                    <div className="h-[200px] bg-gradient-to-br from-[#00ff85]/10 via-black/0 to-black/5" />
-                  </div>
-                  <div
-                    data-animate="card"
-                    className="group rounded-[28px] overflow-hidden bg-white border border-black/5 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="p-[22px]">
-                      <div className="w-[44px] h-[44px] rounded-full bg-[#ff2f55]/10 flex items-center justify-center mb-[12px]">
-                        <svg
-                          className="w-[22px] h-[22px] text-[#ff2f55]"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                          />
-                        </svg>
-                      </div>
-                      <p className="text-[22px] font-NeueMontreal text-[#111]">
-                        Story Archives
-                      </p>
-                      <p className="paragraph font-NeueMontreal text-[#212121]/70 mt-[6px]">
-                        Video, audio & field reports from across Kenya
-                      </p>
-                    </div>
-                    <div className="h-[200px] bg-gradient-to-br from-[#ff2f55]/10 via-black/0 to-black/5" />
-                  </div>
-                  <div
-                    data-animate="card"
-                    className="group rounded-[28px] overflow-hidden bg-[#111] border border-black/10 hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="p-[22px]">
-                      <div className="w-[44px] h-[44px] rounded-full bg-[#00ff85]/20 flex items-center justify-center mb-[12px]">
-                        <svg
-                          className="w-[22px] h-[22px] text-[#00aa55]"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                          />
-                        </svg>
-                      </div>
-                      <p className="text-[22px] font-NeueMontreal text-[#f1f1f1]">
-                        Participation Hub
-                      </p>
-                      <p className="paragraph font-NeueMontreal text-[#f1f1f1]/70 mt-[6px]">
-                        Report findings, vote on investigations, and take action
-                      </p>
-                    </div>
-                    <div className="h-[200px] bg-gradient-to-br from-[#00ff85]/15 via-[#f1f1f1]/5 to-[#ff2f55]/10" />
-                  </div>
+              {/* Social Links */}
+              <div>
+                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+                  Follow Us
+                </h3>
+                <div className="flex flex-wrap gap-4">
+                  {socialLinks.map((social, index) => (
+                    <Link
+                      key={index}
+                      href={social.href}
+                      className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                    >
+                      {social.name}
+                    </Link>
+                  ))}
                 </div>
               </div>
-            </section>
 
-            {/* BIG CTA */}
-            <section className="padding-x pb-[100px] smOnly:pb-[70px] xm:pb-[70px]">
-              <div className="max-w-[1200px] mx-auto">
-                <div
-                  data-animate="fade-up"
-                  className="rounded-[36px] bg-gradient-to-br from-[#212121] via-[#2a2a2a] to-[#111] border border-black/10 p-[32px] smOnly:p-[24px] xm:p-[20px] text-center relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,255,133,0.1),transparent)]" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(255,47,85,0.08),transparent)]" />
-
-                  <div className="relative z-10">
-                    <h3 className="sub-heading font-FoundersGrotesk uppercase text-[#f1f1f1]">
-                      Start Following Your County
-                    </h3>
-                    <p className="paragraph font-NeueMontreal text-[#f1f1f1]/70 mt-[12px] max-w-[600px] mx-auto">
-                      Explore budget stories, track public spending in your
-                      area, and join the conversation on where tax money goes
-                      and who benefits.
-                    </p>
-
-                    <div className="mt-[28px] flex items-center justify-center gap-[14px] flex-wrap">
-                      <Link
-                        href="/blog"
-                        className="group px-[24px] py-[16px] rounded-full bg-[#00aa55] text-[#f1f1f1] paragraph font-NeueMontreal hover:bg-[#00cc66] hover:scale-[1.02] transition-all duration-300 shadow-lg"
-                      >
-                        <span className="flex items-center gap-[8px]">
-                          Explore Stories
-                          <svg
-                            className="w-[16px] h-[16px] group-hover:translate-x-[4px] transition-transform"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                          </svg>
-                        </span>
-                      </Link>
-                      <Link
-                        href="/budget-simplified"
-                        className="px-[24px] py-[16px] rounded-full border border-[#f1f1f1]/30 text-[#f1f1f1] paragraph font-NeueMontreal hover:bg-[#f1f1f1]/10 hover:border-[#f1f1f1] transition-all duration-300"
-                      >
-                        How Budgets Work
-                      </Link>
-                    </div>
-
-                    <p className="mt-[20px] small-text font-NeueMontreal text-[#f1f1f1]/40">
-                      Free to use • No account required • Open data
-                    </p>
-                  </div>
+              {/* Newsletter & Theme Toggle */}
+              <div>
+                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+                  Stay Updated
+                </h3>
+                <p className="text-sm font-NeueMontreal text-white/60 mb-4">
+                  Subscribe to our newsletter for budget insights and updates.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2 mb-6">
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    className="flex-1 px-4 py-2 text-sm font-NeueMontreal text-white bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-white/30 transition-colors"
+                  />
+                  <button className="px-4 py-2 text-sm font-NeueMontreal text-white bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition-colors whitespace-nowrap">
+                    Subscribe
+                  </button>
                 </div>
+                {/* Theme Toggle */}
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                >
+                  {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                  {isDark ? "Light Mode" : "Dark Mode"}
+                </button>
               </div>
-            </section>
+            </div>
 
-            <LandingFooter />
-          </main>
-        </div>
+            {/* Copyright */}
+            <div className="mt-12 pt-8 border-t border-white/10 text-center">
+              <p className="text-sm font-NeueMontreal text-white/50">
+                © {year} Budget Ndio Story. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );

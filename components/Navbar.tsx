@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
@@ -40,7 +41,7 @@ export default function Navbar() {
             />
           </Link>
         </div>
-        <div className="flex gap-x-[20px] w-[50%]">
+        <div className="flex gap-x-[20px] w-[50%] items-center">
           {navbarItems.map((item) => (
             <Link
               key={item.id}
@@ -50,6 +51,7 @@ export default function Navbar() {
               <TextHover titile1={item.title} titile2={item.title} />
             </Link>
           ))}
+          <ThemeToggle />
         </div>
       </motion.nav>
       <MobileNav />

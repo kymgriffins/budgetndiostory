@@ -217,12 +217,13 @@ export default function BlogIndex() {
                     Latest Insights & Analysis
                   </span>
                 </div>
+                
 
                 <h1
                   data-hero="title"
                   className="heading font-FoundersGrotesk text-[#111] uppercase leading-[1.1] max-w-[700px]"
                 >
-                  The Budget Blog
+                  The Budget
                 </h1>
 
                 <p className="mt-[20px] text-[18px] font-NeueMontreal text-[#212121]/60 max-w-[550px] leading-[1.6]">

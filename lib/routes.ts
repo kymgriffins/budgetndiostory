@@ -57,6 +57,7 @@ export const MOBILE_NAV_ITEMS = [
 
 // Footer Routes (routes that should NOT show the footer)
 export const FOOTER_HIDE_ROUTES = [
+  "/video-landing",
   ROUTES.HOME,
   ROUTES.CONTACT,
   ROUTES.LANDING,

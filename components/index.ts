@@ -9,6 +9,7 @@ export { default as Layout } from "./Layout";
 export { default as Marquee } from "./Marquee";
 export { default as MobileNav } from "./MobileNav";
 export { default as Navbar } from "./Navbar";
+export { default as NavbarLanding } from "./NavbarLanding";
 export { HeroImage, OptimizedImage, ThumbnailImage } from "./OptimizedImage";
 export {
   flipVariants,
@@ -33,8 +34,8 @@ export {
 } from "./ResponsiveParallax";
 export { default as RoundButton } from "./RoundButton";
 export { default as Rounded } from "./Rounded";
-export { default as SmoothScrollGsap } from "./SmoothScrollGsap";
 export { FadeIn, ScrollReveal } from "./ScrollReveal";
+export { default as SmoothScrollGsap } from "./SmoothScrollGsap";
 export {
   ArticleSchema,
   BreadcrumbSchema,
@@ -46,6 +47,8 @@ export {
   WebsiteSchema
 } from "./StructuredData";
 export { default as Tags } from "./Tags";
+export { default as VideoHero } from "./VideoHero";
+export { default as VideoHeroLanding } from "./VideoHeroLanding";
 export { default as VideoThumbnail } from "./VideoThumbnail";
 export { WebVitals } from "./WebVitals";
 export { default as YouTubePlayer } from "./YouTubePlayer";
