@@ -358,7 +358,7 @@ export default function YouTubePlayer({
       onClick={togglePlay}
     >
       {/* YouTube IFrame */}
-      <div className="w-full aspect-video relative">
+      <div className="w-full aspect-video relative grayscale">
         {isClient && (
           <iframe
             ref={iframeRef}
@@ -383,6 +383,9 @@ export default function YouTubePlayer({
           </div>
         )}
       </div>
+
+      {/* Gray Monochromatic Overlay */}
+      <div className="absolute inset-0 bg-gray-500/20 grayscale pointer-events-none z-10" />
 
       {/* Custom Play Button Overlay */}
       <AnimatePresence>

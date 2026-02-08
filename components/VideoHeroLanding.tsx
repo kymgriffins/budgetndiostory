@@ -29,9 +29,7 @@ export default function VideoHeroLanding() {
         loop
         muted
         playsInline
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-          isVideoLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 grayscale ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
         onLoadedData={() => setIsVideoLoaded(true)}
       >
         <source src="/budgetndiostory.mp4" type="video/mp4" />
@@ -39,6 +37,9 @@ export default function VideoHeroLanding() {
 
       {/* Loading placeholder - shows while video loads */}
       {!isVideoLoaded && <div className="absolute inset-0 bg-[#0a0a0a]" />}
+
+      {/* Gray Monochromatic Overlay - Adds gray tint while preserving grayscale effect */}
+      <div className="absolute inset-0 bg-gray-500/20 grayscale" />
 
       {/* Overlay - Subtle gradient for text readability */}
       <div className="absolute inset-0 bg-black/40" />
@@ -97,7 +98,7 @@ export default function VideoHeroLanding() {
         >
           <Link href="/learn" className="inline-flex items-center gap-3 group">
             <span className="font-NeueMontreal text-white text-sm uppercase tracking-wider">
-          Get Involved
+              Get Involved
             </span>
             <ArrowUpRight
               size={18}

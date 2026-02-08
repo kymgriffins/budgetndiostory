@@ -29,9 +29,7 @@ export default function VideoHero() {
         loop
         muted
         playsInline
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-          isVideoLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 grayscale ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
         onLoadedData={() => setIsVideoLoaded(true)}
       >
         <source src="/budgetndiostory.mp4" type="video/mp4" />
@@ -39,6 +37,9 @@ export default function VideoHero() {
 
       {/* Loading placeholder - shows while video loads */}
       {!isVideoLoaded && <div className="absolute inset-0 bg-background" />}
+
+      {/* Gray Monochromatic Overlay - Adds gray tint while preserving grayscale effect */}
+      <div className="absolute inset-0 bg-gray-500/20 grayscale" />
 
       {/* Gradient Overlay - Smooth gradient for text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/50" />
