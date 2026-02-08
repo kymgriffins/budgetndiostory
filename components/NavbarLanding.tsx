@@ -1,7 +1,5 @@
 "use client";
 
-import { navbarItems } from "@/constants";
-import { MOBILE_NAV_ITEMS } from "@/lib/routes";
 import { logo } from "@/public";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -67,18 +65,22 @@ export default function NavbarLanding({
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center gap-10">
-          {navbarItems
-            .filter((item) => item.title !== "Tracker")
-            .map((item) => (
-              <Link
-                key={item.id}
-                className="text-sm font-NeueMontreal text-white/90 hover:text-white transition-colors duration-300"
-                href={item.href}
-              >
-                {item.title}
-              </Link>
-            ))}
+        <div className="hidden lg:flex items-center gap-8">
+          {[
+            { id: 1, title: "Home", href: "/" },
+            { id: 2, title: "Tracker", href: "/tracker" },
+            { id: 3, title: "Stories", href: "/blog" },
+            { id: 4, title: "Learn", href: "/learn" },
+            { id: 5, title: "Contact", href: "/contact" },
+          ].map((item) => (
+            <Link
+              key={item.id}
+              className="text-sm font-NeueMontreal text-white/90 hover:text-white transition-colors duration-300"
+              href={item.href}
+            >
+              {item.title}
+            </Link>
+          ))}
         </div>
 
         {/* CTA Button */}
@@ -130,18 +132,22 @@ export default function NavbarLanding({
 
             {/* Navigation Items */}
             <ul className="flex-1 flex flex-col justify-center gap-8 px-8">
-              {MOBILE_NAV_ITEMS.filter((item) => item.title !== "Tracker").map(
-                (item) => (
-                  <Link
-                    href={item.href}
-                    key={item.id}
-                    onClick={() => setToggle(false)}
-                    className="text-5xl font-FoundersGrotesk uppercase font-bold text-white tracking-tight"
-                  >
-                    {item.title}
-                  </Link>
-                ),
-              )}
+              {[
+                { id: 1, title: "Home", href: "/" },
+                { id: 2, title: "Tracker", href: "/tracker" },
+                { id: 3, title: "Stories", href: "/blog" },
+                { id: 4, title: "Learn", href: "/learn" },
+                { id: 5, title: "Contact", href: "/contact" },
+              ].map((item) => (
+                <Link
+                  href={item.href}
+                  key={item.id}
+                  onClick={() => setToggle(false)}
+                  className="text-5xl font-FoundersGrotesk uppercase font-bold text-white tracking-tight"
+                >
+                  {item.title}
+                </Link>
+              ))}
             </ul>
 
             {/* CTA at bottom */}

@@ -57,7 +57,7 @@ export default function VideoHero() {
             delay: 0.2,
             ease: [0.86, 0, 0.07, 0.995],
           }}
-          className="text-center heading tracking-[-1.3px] text-white font-semibold font-FoundersGrotesk uppercase"
+          className="text-center heading tracking-[-1.3px] text-white font-semibold font-NeueMontreal uppercase"
         >
           Budget Ndio Story
         </motion.h1>

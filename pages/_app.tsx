@@ -20,7 +20,7 @@ function AppContent({
 	router: any;
 }) {
 	const isLanding = router?.route === "/landing";
-	const isVideoLanding = router?.route === "/video-landing" || router?.route === "/";
+	const isVideoLanding = router?.route === "/video-landing" || router?.route === "/" || router?.route === "/blog" || router?.route === "/tracker" || router?.route === "/edustories" || router?.route === "/contact" || router?.route === "/learn";
 	const path = router?.route ?? router?.pathname ?? "";
 
 	const shouldHideFooter = FOOTER_HIDE_ROUTES.includes(path as any);
