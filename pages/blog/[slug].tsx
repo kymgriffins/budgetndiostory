@@ -1,248 +1,191 @@
-import BlogComments from "@/components/BlogComments";
-import { blogPosts, getPublishedPosts } from "@/lib/blog-data";
-import { getCommentsByPostId } from "@/lib/blog-discussions";
-import { BlogPost, CATEGORY_CONFIG, ThreadComment } from "@/lib/blog-types";
+"use client";
+
+import { NavbarLanding } from "@/components";
+import { blogPosts, getBlogPostBySlug } from "@/lib/blog-data";
+import { BlogPost } from "@/lib/blog-types";
+import { CATEGORY_CONFIG } from "@/lib/blog-types";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Moon,
+  Share2,
+  Sun,
+  Tag,
+} from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
-// Generate static paths for all published posts
-export async function getStaticPaths() {
-  const posts = getPublishedPosts();
-  const paths = posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
+export default function BlogPostPage() {
+  const pathname = usePathname();
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
+  // Extract slug from pathname: /blog/slug -> slug
+  const slug = useMemo(() => {
+    if (!pathname) return "";
+    const segments = pathname.split("/").filter(Boolean);
+    // Expecting ["blog", "slug"]
+    if (segments.length >= 2) {
+      return segments[segments.length - 1];
+    }
+    return "";
+  }, [pathname]);
 
-// Get static props for a single post
-export async function getStaticProps({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+  const [post, setPost] = useState<BlogPost | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+  const [isDark, setIsDark] = useState(true);
+  const [showShare, setShowShare] = useState(false);
 
-  if (!post) {
-    return {
-      notFound: true,
-    };
-  }
+  useEffect(() => {
+    console.log("Looking for slug:", slug);
+    const foundPost = getBlogPostBySlug(slug);
+    console.log("Found post:", foundPost ? foundPost.title : "none");
+    setPost(foundPost);
+    setLoading(false);
+  }, [slug]);
 
-  // Get related posts (same category, excluding current)
-  const relatedPosts = getPublishedPosts()
-    .filter((p) => p.category === post.category && p.id !== post.id)
-    .slice(0, 3);
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
 
-  // Get comments for this post
-  const comments = getCommentsByPostId(post.id);
-
-  return {
-    props: {
-      post,
-      relatedPosts,
-      comments,
-    },
-    revalidate: 60, // Revalidate every 60 seconds
-  };
-}
-
-export default function BlogPostPage({
-  post,
-  relatedPosts,
-  comments: initialComments,
-}: {
-  post: BlogPost;
-  relatedPosts: BlogPost[];
-  comments: ThreadComment[];
-}) {
-  const router = useRouter();
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [comments, setComments] = useState<ThreadComment[]>(initialComments);
-
-  // Simple markdown-like content renderer
-  const renderContent = (content: string) => {
-    const lines = content.split("\n");
-    return lines.map((line, index) => {
-      // Headers
-      if (line.startsWith("# ")) {
-        return (
-          <h1
-            key={index}
-            className="text-[36px] font-FoundersGrotesk font-bold mt-[32px] mb-[16px] text-[#111]"
-          >
-            {line.replace("# ", "")}
-          </h1>
-        );
-      }
-      if (line.startsWith("## ")) {
-        return (
-          <h2
-            key={index}
-            className="text-[28px] font-FoundersGrotesk font-semibold mt-[28px] mb-[14px] text-[#111]"
-          >
-            {line.replace("## ", "")}
-          </h2>
-        );
-      }
-      if (line.startsWith("### ")) {
-        return (
-          <h3
-            key={index}
-            className="text-[22px] font-FoundersGrotesk font-medium mt-[24px] mb-[12px] text-[#111]"
-          >
-            {line.replace("### ", "")}
-          </h3>
-        );
-      }
-
-      // Blockquotes
-      if (line.startsWith("> ")) {
-        return (
-          <blockquote
-            key={index}
-            className="border-l-4 border-[#00aa55] pl-[20px] py-[8px] my-[20px] text-[16px] font-NeueMontreal italic text-[#212121]/70 bg-[#f5f5f5] rounded-r-[8px]"
-          >
-            {line.replace("> ", "")}
-          </blockquote>
-        );
-      }
-
-      // Unordered lists
-      if (line.startsWith("- ")) {
-        return (
-          <li
-            key={index}
-            className="ml-[24px] list-disc text-[16px] font-NeueMontreal text-[#212121]/70 mb-[8px]"
-          >
-            {line.replace("- ", "")}
-          </li>
-        );
-      }
-
-      // Numbered lists
-      if (/^\d+\. /.test(line)) {
-        return (
-          <li
-            key={index}
-            className="ml-[24px] list-decimal text-[16px] font-NeueMontreal text-[#212121]/70 mb-[8px]"
-          >
-            {line.replace(/^\d+\. /, "")}
-          </li>
-        );
-      }
-
-      // Empty lines
-      if (line.trim() === "") {
-        return <br key={index} />;
-      }
-
-      // Regular paragraphs
-      return (
-        <p
-          key={index}
-          className="text-[16px] font-NeueMontreal text-[#212121]/80 leading-[1.8] mb-[16px]"
-        >
-          {line}
-        </p>
-      );
-    });
-  };
-
-  // If the page is still generating, show loading
-  if (router.isFallback) {
+  // Show loading state
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#fafafa]">
-        <div className="text-center">
-          <div className="w-[48px] h-[48px] border-4 border-[#212121]/10 border-t-[#00aa55] rounded-full animate-spin mx-auto mb-[16px]"></div>
-          <p className="text-[16px] font-NeueMontreal text-[#212121]/60">
-            Loading article...
-          </p>
-        </div>
+      <div className="bg-[#0a0a0a] text-white min-h-screen flex items-center justify-center">
+        <div className="animate-pulse">Loading...</div>
       </div>
     );
   }
 
+  if (!post || post.status !== "published") {
+    return (
+      <>
+        <Head>
+          <title>Post Not Found - Budget Ndio Story</title>
+        </Head>
+        <div className="bg-[#0a0a0a] text-white min-h-screen">
+          <NavbarLanding />
+          <main className="pt-32 pb-16 px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <span className="text-6xl mb-4 block">😕</span>
+              <h1 className="font-FoundersGrotesk text-3xl font-semibold mb-4">
+                Post Not Found
+              </h1>
+              <p className="font-NeueMontreal text-white/60 mb-8">
+                The article you're looking for doesn't exist or hasn't been
+                published yet.
+              </p>
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-NeueMontreal text-sm"
+              >
+                <ArrowLeft size={16} />
+                Back to Blog
+              </Link>
+            </div>
+          </main>
+        </div>
+      </>
+    );
+  }
+
+  const categoryConfig =
+    CATEGORY_CONFIG[post.category as keyof typeof CATEGORY_CONFIG];
+
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareText = `Check out "${post.title}" on Budget Ndio Story`;
+
   return (
     <>
       <Head>
-        <title>{post.seo.title || post.title} | Budget Ndio Story</title>
+        <title>{post.seo.title || post.title}</title>
         <meta
           name="description"
           content={post.seo.description || post.excerpt}
         />
-        <meta
-          name="keywords"
-          content={post.seo.keywords?.join(", ") || post.tags.join(", ")}
-        />
+        {post.seo.keywords && (
+          <meta name="keywords" content={post.seo.keywords.join(", ")} />
+        )}
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.title} />
-        <meta name="twitter:description" content={post.excerpt} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#0a0a0a" />
+        <link
+          rel="canonical"
+          href={`https://budgetndiostory.org/blog/${post.slug}`}
+        />
       </Head>
 
-      <div
-        ref={scrollerRef}
-        data-scroll-container
-        className="relative min-h-screen bg-[#fafafa] text-[#212121]"
-        style={{ position: "relative" }}
-      >
-        <div ref={contentRef} data-scroll-content>
-          {/* Spacer for fixed navbar */}
-          <div className="h-[8vh]" />
+      <div className="bg-[#0a0a0a] text-white min-h-screen">
+        {/* Navigation */}
+        <NavbarLanding />
 
-          <a
-            href="#article-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-[10px] focus:left-[10px] focus:z-[100] focus:bg-[#212121] focus:text-[#f1f1f1] focus:px-[14px] focus:py-[10px] focus:rounded-full"
-          >
-            Skip to content
-          </a>
+        <main>
+          {/* Hero Section */}
+          <section className="pt-32 pb-12 px-8">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                {/* Back Link */}
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-2 text-sm font-NeueMontreal text-white/50 hover:text-white transition-colors mb-8"
+                >
+                  <ArrowLeft size={16} />
+                  Back to Blog
+                </Link>
 
-          <main id="article-content" className="w-full">
-            {/* Breadcrumb */}
-            <nav className="px-4 sm:px-[40px] md:px-[60px] py-[16px] max-w-[1200px] mx-auto">
-              <ol className="flex items-center gap-[8px] text-[13px] font-NeueMontreal">
-                <li>
-                  <Link
-                    href="/"
-                    className="text-[#212121]/50 hover:text-[#212121] transition"
+                {/* Category Badge */}
+                <div className="flex items-center gap-3 mb-6">
+                  <span
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-NeueMontreal bg-white/10 border border-white/10`}
                   >
-                    Home
-                  </Link>
-                </li>
-                <li className="text-[#212121]/30">/</li>
-                <li>
-                  <Link
-                    href="/blog"
-                    className="text-[#212121]/50 hover:text-[#212121] transition"
-                  >
-                    Blog
-                  </Link>
-                </li>
-                <li className="text-[#212121]/30">/</li>
-                <li className="text-[#212121]/70 truncate max-w-[200px]">
-                  {post.title}
-                </li>
-              </ol>
-            </nav>
-
-            {/* Article Header */}
-            <article>
-              <header className="px-4 sm:px-[40px] md:px-[60px] py-[20px] max-w-[900px] mx-auto">
-                <div className="flex items-center gap-[12px] mb-[20px] flex-wrap">
-                  <Link
-                    href={`/blog?category=${post.category.toLowerCase()}`}
-                    className={`px-[14px] py-[6px] rounded-full text-[12px] font-NeueMontreal font-medium bg-gradient-to-r ${CATEGORY_CONFIG[post.category as keyof typeof CATEGORY_CONFIG]?.color} text-white hover:opacity-90 transition`}
-                  >
+                    <span className="text-lg">{categoryConfig?.emoji}</span>
                     {post.category}
-                  </Link>
-                  <span className="text-[13px] font-NeueMontreal text-[#212121]/40">
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h1 className="font-FoundersGrotesk text-3xl lg:text-5xl font-semibold tracking-tight leading-tight mb-6">
+                  {post.title}
+                </h1>
+
+                {/* Excerpt */}
+                <p className="font-NeueMontreal text-lg text-white/60 leading-relaxed mb-8">
+                  {post.excerpt}
+                </p>
+
+                {/* Meta Info */}
+                <div className="flex flex-wrap items-center gap-6 pb-8 border-b border-white/10">
+                  {/* Author */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#ff2f55] to-[#00aa55] flex items-center justify-center font-FoundersGrotesk font-medium text-sm">
+                      {post.author.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </div>
+                    <div>
+                      <p className="font-NeueMontreal text-sm font-medium">
+                        {post.author.name}
+                      </p>
+                      <p className="font-NeueMontreal text-xs text-white/50">
+                        {post.author.role}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Date */}
+                  <div className="flex items-center gap-2 text-sm font-NeueMontreal text-white/50">
+                    <Calendar size={16} />
                     {new Date(
                       post.publishedAt || post.createdAt,
                     ).toLocaleDateString("en-US", {
@@ -250,79 +193,141 @@ export default function BlogPostPage({
                       day: "numeric",
                       year: "numeric",
                     })}
-                  </span>
-                  <span className="w-[3px] h-[3px] rounded-full bg-[#212121]/20"></span>
-                  <span className="text-[13px] font-NeueMontreal text-[#212121]/40">
+                  </div>
+
+                  {/* Read Time */}
+                  <div className="flex items-center gap-2 text-sm font-NeueMontreal text-white/50">
+                    <Clock size={16} />
                     {post.readTime}
-                  </span>
-                </div>
+                  </div>
 
-                <h1 className="text-[40px] sm:text-[48px] md:text-[56px] font-FoundersGrotesk font-bold text-[#111] leading-[1.1] mb-[24px]">
-                  {post.title}
-                </h1>
-
-                <p className="text-[20px] sm:text-[22px] font-NeueMontreal text-[#212121]/60 leading-[1.6] mb-[32px] max-w-[800px]">
-                  {post.excerpt}
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-[16px] pb-[32px] border-b border-[#212121]/10">
-                  {post.author.avatar ? (
-                    <img
-                      src={post.author.avatar}
-                      alt={post.author.name}
-                      className="w-[48px] h-[48px] rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-[48px] h-[48px] rounded-full bg-[#212121]/10 flex items-center justify-center text-[20px] font-medium text-[#212121]/60">
-                      {post.author.name.charAt(0)}
-                    </div>
-                  )}
-                  <div>
-                    <p className="text-[16px] font-NeueMontreal font-medium text-[#212121]">
-                      {post.author.name}
-                    </p>
-                    <p className="text-[13px] font-NeueMontreal text-[#212121]/50">
-                      {post.author.role}
-                    </p>
+                  {/* Comments */}
+                  <div className="flex items-center gap-2 text-sm font-NeueMontreal text-white/50">
+                    <MessageSquare size={16} />
+                    {post.commentCount || 0} comments
                   </div>
                 </div>
-              </header>
+              </motion.div>
+            </div>
+          </section>
 
-              {/* Featured Image Area */}
-              <div className="px-4 sm:px-[40px] md:px-[60px] py-[20px] max-w-[1000px] mx-auto">
-                <div className="relative h-[400px] sm:h-[500px] rounded-[24px] overflow-hidden">
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${CATEGORY_CONFIG[post.category as keyof typeof CATEGORY_CONFIG]?.color || "from-gray-400 to-gray-600"}`}
-                  ></div>
-                  <div className="absolute inset-0 bg-black/10"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-[120px] sm:text-[160px] opacity-30">
-                      {CATEGORY_CONFIG[
-                        post.category as keyof typeof CATEGORY_CONFIG
-                      ]?.emoji || "📰"}
-                    </span>
-                  </div>
-                </div>
-              </div>
+          {/* Featured Image Placeholder */}
+          <section className="px-8 pb-12">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative h-[400px] rounded-2xl overflow-hidden"
+              >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${categoryConfig?.color || "from-gray-400 to-gray-600"}`}
+                />
+                <div className="absolute inset-0 bg-black/20" />
+              </motion.div>
+            </div>
+          </section>
 
-              {/* Article Content */}
-              <div className="px-4 sm:px-[40px] md:px-[60px] py-[32px] max-w-[800px] mx-auto">
-                <div className="prose prose-lg max-w-none">
-                  {renderContent(post.content)}
-                </div>
+          {/* Content */}
+          <section className="px-8 pb-16">
+            <div className="max-w-3xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                {/* Article Content */}
+                <article className="prose prose-invert prose-lg max-w-none">
+                  {post.content.split("\n").map((paragraph, i) => {
+                    const trimmed = paragraph.trim();
+                    if (!trimmed) return null;
+
+                    // Headers
+                    if (trimmed.startsWith("# ")) {
+                      return (
+                        <h1
+                          key={i}
+                          className="font-FoundersGrotesk text-3xl font-semibold mt-12 mb-6"
+                        >
+                          {trimmed.replace(/^#+\s*/, "")}
+                        </h1>
+                      );
+                    }
+                    if (trimmed.startsWith("## ")) {
+                      return (
+                        <h2
+                          key={i}
+                          className="font-FoundersGrotesk text-2xl font-semibold mt-10 mb-4"
+                        >
+                          {trimmed.replace(/^#+\s*/, "")}
+                        </h2>
+                      );
+                    }
+                    if (trimmed.startsWith("### ")) {
+                      return (
+                        <h3
+                          key={i}
+                          className="font-FoundersGrotesk text-xl font-semibold mt-8 mb-3"
+                        >
+                          {trimmed.replace(/^#+\s*/, "")}
+                        </h3>
+                      );
+                    }
+
+                    // Blockquotes
+                    if (trimmed.startsWith("> ")) {
+                      return (
+                        <blockquote
+                          key={i}
+                          className="border-l-4 border-[#ff2f55] pl-6 my-6 italic text-white/70"
+                        >
+                          {trimmed.replace(/^>\s*/, "")}
+                        </blockquote>
+                      );
+                    }
+
+                    // Lists
+                    if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+                      return (
+                        <li key={i} className="ml-4 mb-2 text-white/80">
+                          {trimmed.replace(/^[-*]\s*/, "")}
+                        </li>
+                      );
+                    }
+
+                    // Numbered lists
+                    if (/^\d+\.\s/.test(trimmed)) {
+                      return (
+                        <li
+                          key={i}
+                          className="ml-4 mb-2 text-white/80 list-decimal"
+                        >
+                          {trimmed.replace(/^\d+\.\s*/, "")}
+                        </li>
+                      );
+                    }
+
+                    // Regular paragraphs
+                    return (
+                      <p
+                        key={i}
+                        className="font-NeueMontreal text-white/80 leading-relaxed mb-4"
+                      >
+                        {trimmed}
+                      </p>
+                    );
+                  })}
+                </article>
 
                 {/* Tags */}
-                <div className="mt-[48px] pt-[32px] border-t border-[#212121]/10">
-                  <p className="text-[14px] font-NeueMontreal text-[#212121]/50 mb-[12px]">
-                    Tagged with:
-                  </p>
-                  <div className="flex flex-wrap gap-[8px]">
+                <div className="mt-12 pt-8 border-t border-white/10">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Tag size={18} className="text-white/50" />
                     {post.tags.map((tag) => (
                       <Link
                         key={tag}
-                        href={`/blog?search=${tag}`}
-                        className="px-[12px] py-[6px] rounded-full text-[13px] font-NeueMontreal bg-[#f5f5f5] text-[#212121]/60 hover:bg-[#212121] hover:text-white transition-all duration-300"
+                        href={`/blog?tag=${tag}`}
+                        className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-NeueMontreal text-white/70 hover:bg-white/10 hover:text-white transition-colors"
                       >
                         #{tag}
                       </Link>
@@ -330,93 +335,238 @@ export default function BlogPostPage({
                   </div>
                 </div>
 
-                {/* Share */}
-                <div className="mt-[32px] flex items-center gap-[16px]">
-                  <span className="text-[14px] font-NeueMontreal text-[#212121]/50">
+                {/* Share Buttons */}
+                <div className="mt-8 flex items-center gap-4">
+                  <span className="text-sm font-NeueMontreal text-white/50">
                     Share this article:
                   </span>
-                  <button className="w-[40px] h-[40px] rounded-full bg-[#212121]/5 hover:bg-[#212121] hover:text-white flex items-center justify-center transition-all duration-300">
-                    <span className="text-[18px]">📤</span>
-                  </button>
-                  <button className="w-[40px] h-[40px] rounded-full bg-[#212121]/5 hover:bg-[#1877f2] hover:text-white flex items-center justify-center transition-all duration-300">
-                    <span className="text-[18px]">f</span>
-                  </button>
-                  <button className="w-[40px] h-[40px] rounded-full bg-[#212121]/5 hover:bg-[#1da1f2] hover:text-white flex items-center justify-center transition-all duration-300">
-                    <span className="text-[18px]">𝕏</span>
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            {/* Related Posts */}
-            {relatedPosts.length > 0 && (
-              <section className="px-4 sm:px-[40px] md:px-[60px] py-[60px] bg-white mt-[20px]">
-                <div className="max-w-[1200px] mx-auto">
-                  <h2 className="text-[28px] font-FoundersGrotesk font-semibold text-[#111] mb-[32px]">
-                    Related Articles
-                  </h2>
-                  <div className="grid grid-cols-3 gap-[24px] lg:grid-cols-2 mdOnly:grid-cols-2 smOnly:grid-cols-1 xm:grid-cols-1">
-                    {relatedPosts.map((relatedPost) => (
-                      <Link
-                        key={relatedPost.id}
-                        href={`/blog/${relatedPost.slug}`}
-                        className="group block rounded-[20px] overflow-hidden bg-[#fafafa] border border-[#212121]/8 hover:border-[#212121]/15 transition-all duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowShare(!showShare)}
+                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-NeueMontreal text-white/70 hover:bg-white/10 transition-colors"
+                    >
+                      <Share2 size={16} />
+                      Share
+                    </button>
+                    {showShare && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute top-full left-0 mt-2 p-3 bg-white/10 border border-white/10 rounded-xl backdrop-blur-sm"
                       >
-                        <div className="relative h-[140px] overflow-hidden">
-                          <div
-                            className={`absolute inset-0 bg-gradient-to-br ${CATEGORY_CONFIG[relatedPost.category as keyof typeof CATEGORY_CONFIG]?.color || "from-gray-400 to-gray-600"}`}
-                          ></div>
-                          <div className="absolute inset-0 bg-black/10"></div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() =>
+                              window.open(
+                                `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                                  shareText,
+                                )}&url=${encodeURIComponent(shareUrl)}`,
+                                "_blank",
+                              )
+                            }
+                            className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm"
+                          >
+                            Twitter
+                          </button>
+                          <button
+                            onClick={() =>
+                              window.open(
+                                `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                                  shareUrl,
+                                )}`,
+                                "_blank",
+                              )
+                            }
+                            className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm"
+                          >
+                            Facebook
+                          </button>
+                          <button
+                            onClick={() =>
+                              navigator.clipboard.writeText(shareUrl)
+                            }
+                            className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm"
+                          >
+                            Copy
+                          </button>
                         </div>
-                        <div className="p-[20px]">
-                          <span className="text-[11px] font-NeueMontreal px-[8px] py-[4px] rounded-full bg-white/90 text-[#212121]/60">
-                            {relatedPost.category}
-                          </span>
-                          <h3 className="mt-[12px] text-[18px] font-FoundersGrotesk font-medium text-[#111] leading-[1.2] group-hover:text-[#212121]/70 transition-colors">
-                            {relatedPost.title}
-                          </h3>
-                          <p className="mt-[8px] text-[13px] font-NeueMontreal text-[#212121]/50 line-clamp-2">
-                            {relatedPost.excerpt}
-                          </p>
-                        </div>
-                      </Link>
-                    ))}
+                      </motion.div>
+                    )}
                   </div>
                 </div>
-              </section>
-            )}
 
-            {/* Discussion / Comments */}
-            <section className="px-4 sm:px-[40px] py-[40px] max-w-[900px] mx-auto">
-              <BlogComments
-                postId={post.id}
-                comments={comments}
-                onAddComment={(comment: ThreadComment) => {
-                  setComments([comment, ...comments]);
-                }}
-                onReply={(parentId: string, content: string) => {
-                  // Handle reply - in production, this would call an API
-                  console.log("Reply to", parentId, ":", content);
-                }}
-                onReact={(commentId: string, reaction: string) => {
-                  // Handle reaction - in production, this would call an API
-                  console.log("React to", commentId, ":", reaction);
-                }}
-              />
-            </section>
+                {/* Author Bio */}
+                <div className="mt-12 p-6 rounded-2xl bg-white/5 border border-white/10">
+                  <div className="flex items-start gap-4">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#ff2f55] to-[#00aa55] flex items-center justify-center font-FoundersGrotesk font-medium text-lg flex-shrink-0">
+                      {post.author.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </div>
+                    <div>
+                      <p className="font-FoundersGrotesk text-lg font-medium mb-1">
+                        {post.author.name}
+                      </p>
+                      <p className="font-NeueMontreal text-sm text-[#ff2f55] mb-3">
+                        {post.author.role}
+                      </p>
+                      {post.author.bio && (
+                        <p className="font-NeueMontreal text-white/70 text-sm leading-relaxed">
+                          {post.author.bio}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </section>
 
-            {/* Back to Blog */}
-            <section className="px-4 sm:px-[40px] py-[40px] text-center">
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-[8px] px-[24px] py-[14px] rounded-full bg-[#212121] text-white font-NeueMontreal hover:opacity-90 transition hover:scale-[1.02]"
+          {/* Related Posts */}
+          <section className="px-8 py-16 border-t border-white/10">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
               >
-                <span>←</span>
-                <span>Back to Blog</span>
-              </Link>
-            </section>
-          </main>
-        </div>
+                <h2 className="font-FoundersGrotesk text-2xl font-semibold mb-8">
+                  More Articles
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {blogPosts
+                    .filter((p) => p.id !== post.id && p.status === "published")
+                    .slice(0, 2)
+                    .map((relatedPost) => {
+                      const relatedConfig =
+                        CATEGORY_CONFIG[
+                          relatedPost.category as keyof typeof CATEGORY_CONFIG
+                        ];
+                      return (
+                        <Link
+                          key={relatedPost.id}
+                          href={`/blog/${relatedPost.slug}`}
+                          className="group rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:bg-white/10 transition-all"
+                        >
+                          <div className="relative h-32 overflow-hidden">
+                            <div
+                              className={`absolute inset-0 bg-gradient-to-br ${relatedConfig?.color || "from-gray-400 to-gray-600"}`}
+                            />
+                            <div className="absolute inset-0 bg-black/20" />
+                            <div className="absolute top-3 left-3">
+                              <span className="px-2 py-1 rounded-full text-xs font-NeueMontreal bg-black/50 text-white/90">
+                                {relatedPost.category}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="p-4">
+                            <h3 className="font-FoundersGrotesk text-lg font-medium group-hover:text-[#00aa55] transition-colors">
+                              {relatedPost.title}
+                            </h3>
+                            <p className="mt-2 text-sm font-NeueMontreal text-white/60 line-clamp-2">
+                              {relatedPost.excerpt}
+                            </p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        </main>
+
+        {/* Footer */}
+        <footer className="py-16 px-8 border-t border-white/10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+              {/* Contact Info */}
+              <div>
+                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+                  Contact Info
+                </h3>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <Mail size={20} className="text-white/60" />
+                    <div>
+                      <p className="text-xs font-NeueMontreal text-white/50 mb-0.5">
+                        Email
+                      </p>
+                      <Link
+                        href="mailto:hello@budgetndiostory.org"
+                        className="text-sm font-NeueMontreal text-white/80 hover:text-white transition-colors"
+                      >
+                        hello@budgetndiostory.org
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin size={20} className="text-white/60" />
+                    <div>
+                      <p className="text-xs font-NeueMontreal text-white/50 mb-0.5">
+                        Location
+                      </p>
+                      <p className="text-sm font-NeueMontreal text-white/80">
+                        Nairobi, Kenya
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+                  Quick Links
+                </h3>
+                <div className="flex flex-col gap-3">
+                  <Link
+                    href="/tracker"
+                    className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                  >
+                    Budget Tracker
+                  </Link>
+                  <Link
+                    href="/learn"
+                    className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                  >
+                    Learn
+                  </Link>
+                  <Link
+                    href="/edustories"
+                    className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                  >
+                    Edu Stories
+                  </Link>
+                </div>
+              </div>
+
+              {/* Theme Toggle */}
+              <div>
+                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+                  Appearance
+                </h3>
+                <button
+                  onClick={() => setIsDark(!isDark)}
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                >
+                  {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                  {isDark ? "Light Mode" : "Dark Mode"}
+                </button>
+              </div>
+            </div>
+
+            {/* Copyright */}
+            <div className="mt-12 pt-8 border-t border-white/10 text-center">
+              <p className="text-sm font-NeueMontreal text-white/50">
+                © {new Date().getFullYear()} Budget Ndio Story. All rights
+                reserved.
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );

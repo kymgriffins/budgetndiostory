@@ -4,10 +4,18 @@ import { NavbarLanding } from "@/components";
 import { blogPosts, getFeaturedPosts } from "@/lib/blog-data";
 import { CATEGORY_CONFIG } from "@/lib/blog-types";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowRight,
+  ChevronDown,
+  ChevronUp,
+  Mail,
+  MapPin,
+  Moon,
+  Sun,
+} from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronDown, ChevronUp, Mail, MapPin, Moon, Phone, Sun } from "lucide-react";
 
 // Get unique categories
 const categories = Array.from(
@@ -106,12 +114,12 @@ export default function BlogIndex() {
                 transition={{ duration: 0.6 }}
               >
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-sm font-NeueMontreal text-white/70 mb-6">
-                  <span className="w-2 h-2 rounded-full bg-[#00aa55] animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#ff2f55] animate-pulse" />
                   Latest Insights & Analysis
                 </span>
 
                 <h1 className="font-FoundersGrotesk text-4xl lg:text-6xl font-semibold tracking-tight uppercase">
-                  Budget <span className="text-[#00aa55]">Stories</span>
+                  Budget <span className="text-[#ff2f55]">Stories</span>
                 </h1>
 
                 <p className="mt-4 text-lg font-NeueMontreal text-white/60 max-w-xl leading-relaxed">
@@ -231,7 +239,7 @@ export default function BlogIndex() {
                               </span>
                             ))}
                           </div>
-                          <div className="mt-4 flex items-center gap-2 text-sm font-NeueMontreal text-[#00aa55]">
+                          <div className="mt-4 flex items-center gap-2 text-sm font-NeueMontreal text-[#ff2f55]">
                             Read More <ArrowRight size={14} />
                           </div>
                         </div>
@@ -331,7 +339,7 @@ export default function BlogIndex() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/20 via-white/5 to-transparent border border-white/10 p-8 lg:p-12 text-center"
+                className="rounded-3xl bg-gradient-to-br from-[#ff2f55]/20 via-white/5 to-transparent border border-white/10 p-8 lg:p-12 text-center"
               >
                 <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight">
                   Have a story to share?

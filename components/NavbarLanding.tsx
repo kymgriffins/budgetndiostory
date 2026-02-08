@@ -1,6 +1,6 @@
 "use client";
 
-import { logo } from "@/public";
+import logo from "@/public/logo.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -68,10 +68,8 @@ export default function NavbarLanding({
         <div className="hidden lg:flex items-center gap-8">
           {[
             { id: 1, title: "Home", href: "/" },
-            { id: 2, title: "Tracker", href: "/tracker" },
-            { id: 3, title: "Stories", href: "/blog" },
-            { id: 4, title: "Learn", href: "/learn" },
-            { id: 5, title: "Contact", href: "/contact" },
+            { id: 2, title: "Stories", href: "/blog" },
+            { id: 3, title: "Contact", href: "/contact" },
           ].map((item) => (
             <Link
               key={item.id}
@@ -87,11 +85,11 @@ export default function NavbarLanding({
         <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
           <Link
-            href="/learn"
+            href="/blog"
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/30 hover:bg-white hover:text-black transition-all duration-300"
           >
             <span className="text-sm font-NeueMontreal uppercase tracking-wider text-white hover:text-black transition-colors duration-300">
-              Start Learning
+              Read Stories
             </span>
           </Link>
         </div>
@@ -134,10 +132,8 @@ export default function NavbarLanding({
             <ul className="flex-1 flex flex-col justify-center gap-8 px-8">
               {[
                 { id: 1, title: "Home", href: "/" },
-                { id: 2, title: "Tracker", href: "/tracker" },
-                { id: 3, title: "Stories", href: "/blog" },
-                { id: 4, title: "Learn", href: "/learn" },
-                { id: 5, title: "Contact", href: "/contact" },
+                { id: 2, title: "Stories", href: "/blog" },
+                { id: 3, title: "Contact", href: "/contact" },
               ].map((item) => (
                 <Link
                   href={item.href}
@@ -153,12 +149,12 @@ export default function NavbarLanding({
             {/* CTA at bottom */}
             <div className="px-8 pb-12">
               <Link
-                href="/learn"
+                href="/blog"
                 onClick={() => setToggle(false)}
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black"
               >
                 <span className="text-sm font-NeueMontreal uppercase tracking-wider">
-                  Start Learning
+                  Read Stories
                 </span>
               </Link>
             </div>

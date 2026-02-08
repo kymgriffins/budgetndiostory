@@ -57,7 +57,7 @@ export default function VideoHeroLanding() {
             delay: 0.2,
             ease: [0.25, 0.1, 0.25, 1],
           }}
-          className="text-center font-FoundersGrotesk text-white font-semibold tracking-[-0.03em] text-[clamp(40px,8vw,100px)] leading-[0.9]"
+          className="text-center font-NeueMontreal text-white font-semibold tracking-[-0.03em] text-[clamp(40px,8vw,100px)] leading-[0.9]"
         >
           Budget Ndio
           <br />

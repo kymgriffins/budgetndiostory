@@ -490,7 +490,12 @@ export function getBlogPostById(id: string): BlogPost | undefined {
 }
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((post) => post.slug === slug);
+  if (!slug) return undefined;
+  return blogPosts.find(
+    (post) =>
+      post.slug.toLowerCase() === slug.toLowerCase() &&
+      post.status === "published",
+  );
 }
 
 export function getPublishedPosts(): BlogPost[] {
