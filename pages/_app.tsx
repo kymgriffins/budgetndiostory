@@ -1,64 +1,63 @@
-import { Navbar } from "@/components";
-import { AnalyticsProvider } from "@/components/Analytics";
-import FooterV2 from "@/components/FooterV2";
-import LandingFooter from "@/components/LandingFooter";
-import { ThemeProvider } from "@/components/theme-provider";
-import { FooterV2Provider, useFooterV2 } from "@/context/FooterV2Context";
-import { FOOTER_HIDE_ROUTES } from "@/lib/routes";
-import "@/styles/globals.css";
+import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import { AnimatePresence } from "framer-motion";
+import { ThemeProvider } from "@/components/theme-provider";
+import { AnalyticsProvider } from "@/components/Analytics";
+import { FooterV2Provider } from "@/context/FooterV2Context";
+import "@/styles/globals.css";
 
-function AppContent({
-  Component,
-  pageProps,
-  router,
-}: {
-  Component: any;
-  pageProps: any;
-  router: any;
-}) {
-  const isLanding = router?.route === "/landing";
-  const isVideoLanding =
-    router?.route === "/video-landing" ||
-    router?.route === "/" ||
-    router?.route === "/blog" ||
-    router?.route === "/blog/" ||
-    router?.route?.startsWith("/blog/") ||
-    router?.route === "/tracker" ||
-    router?.route === "/edustories" ||
-    router?.route === "/contact" ||
-    router?.route === "/learn";
-  const path = router?.route ?? router?.pathname ?? "";
+interface LayoutProps {
+  children: ReactNode;
+  showNavbar?: boolean;
+  showFooter?: boolean;
+  showPageTransition?: boolean;
+}
 
-  const shouldHideFooter = FOOTER_HIDE_ROUTES.includes(path as any);
-  const { showFooterV2 } = useFooterV2();
+// Base Layout - empty wrapper
+export function BaseLayout({ children }: LayoutProps) {
+  return <>{children}</>;
+}
 
-  return (
-    <>
-      {!isVideoLanding && <Navbar />}
-      {isLanding ? (
-        <Component key={router.route} {...pageProps} />
-      ) : (
-        <AnimatePresence mode="wait">
-          <Component key={router.route} {...pageProps} />
-        </AnimatePresence>
-      )}
-      {!shouldHideFooter && (showFooterV2 ? <FooterV2 /> : <LandingFooter />)}
-      <Analytics />
-    </>
+// Landing Layout - no navbar, no footer
+export function LandingLayout({ children }: LayoutProps) {
+  return <>{children}</>;
+}
+
+// Video Landing Layout - no navbar, custom footer handling
+export function VideoLandingLayout({ children }: LayoutProps) {
+  return <>{children}</>;
+}
+
+// Default Layout - has navbar, has footer
+export function DefaultLayout({
+  children,
+  showPageTransition = true,
+}: LayoutProps) {
+  return showPageTransition ? (
+    <AnimatePresence mode="wait">{children}</AnimatePresence>
+  ) : (
+    <>{children}</>
   );
 }
+
+export type LayoutFunction = (page: ReactNode) => ReactNode;
+
+// Page component type with optional getLayout
+type PageComponent = {
+  getLayout?: LayoutFunction;
+  (props: any): ReactNode;
+};
 
 export default function App({
   Component,
   pageProps,
-  router,
 }: {
-  Component: any;
+  Component: PageComponent;
   pageProps: any;
-  router: any;
 }) {
+  // Use page-specific layout or default to BaseLayout
+  const getLayout = Component.getLayout || ((page: ReactNode) => page);
+
   return (
     <ThemeProvider
       attribute="class"
@@ -68,11 +67,8 @@ export default function App({
     >
       <AnalyticsProvider>
         <FooterV2Provider>
-          <AppContent
-            Component={Component}
-            pageProps={pageProps}
-            router={router}
-          />
+          {getLayout(<Component {...pageProps} />)}
+          <Analytics />
         </FooterV2Provider>
       </AnalyticsProvider>
     </ThemeProvider>

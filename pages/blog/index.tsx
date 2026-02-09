@@ -1,21 +1,13 @@
 "use client";
 
-import { NavbarLanding } from "@/components";
+import { MainFooter, NavbarLanding } from "@/components";
 import { blogPosts, getFeaturedPosts } from "@/lib/blog-data";
 import { CATEGORY_CONFIG } from "@/lib/blog-types";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowRight,
-  ChevronDown,
-  ChevronUp,
-  Mail,
-  MapPin,
-  Moon,
-  Sun,
-} from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 // Get unique categories
 const categories = Array.from(
@@ -30,13 +22,8 @@ export default function BlogIndex() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [displayedPosts, setDisplayedPosts] = useState(blogPosts);
-  const [isDark, setIsDark] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const featuredPosts = getFeaturedPosts();
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark);
-  }, [isDark]);
 
   // Filter posts based on category and search
   useEffect(() => {
@@ -361,96 +348,13 @@ export default function BlogIndex() {
           </section>
         </main>
 
-        {/* Footer */}
-        <footer className="py-16 px-8 border-t border-white/10">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              {/* Contact Info */}
-              <div>
-                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
-                  Contact Info
-                </h3>
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <Mail size={20} className="text-white/60" />
-                    <div>
-                      <p className="text-xs font-NeueMontreal text-white/50 mb-0.5">
-                        Email
-                      </p>
-                      <Link
-                        href="mailto:hello@budgetndiostory.org"
-                        className="text-sm font-NeueMontreal text-white/80 hover:text-white transition-colors"
-                      >
-                        hello@budgetndiostory.org
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin size={20} className="text-white/60" />
-                    <div>
-                      <p className="text-xs font-NeueMontreal text-white/50 mb-0.5">
-                        Location
-                      </p>
-                      <p className="text-sm font-NeueMontreal text-white/80">
-                        Nairobi, Kenya
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
-                  Quick Links
-                </h3>
-                <div className="flex flex-col gap-3">
-                  <Link
-                    href="/tracker"
-                    className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
-                  >
-                    Budget Tracker
-                  </Link>
-                  <Link
-                    href="/learn"
-                    className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
-                  >
-                    Learn
-                  </Link>
-                  <Link
-                    href="/edustories"
-                    className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
-                  >
-                    Edu Stories
-                  </Link>
-                </div>
-              </div>
-
-              {/* Theme Toggle */}
-              <div>
-                <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
-                  Appearance
-                </h3>
-                <button
-                  onClick={() => setIsDark(!isDark)}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
-                >
-                  {isDark ? <Sun size={16} /> : <Moon size={16} />}
-                  {isDark ? "Light Mode" : "Dark Mode"}
-                </button>
-              </div>
-            </div>
-
-            {/* Copyright */}
-            <div className="mt-12 pt-8 border-t border-white/10 text-center">
-              <p className="text-sm font-NeueMontreal text-white/50">
-                © {new Date().getFullYear()} Budget Ndio Story. All rights
-                reserved.
-              </p>
-            </div>
-          </div>
-        </footer>
+        <MainFooter />
       </div>
     </>
   );
 }
+
+// Per-page layout - co-located with page
+BlogIndex.getLayout = function getLayout(page: ReactNode) {
+  return <>{page}</>;
+};

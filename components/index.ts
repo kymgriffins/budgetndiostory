@@ -5,6 +5,7 @@ export { default as Eyes } from "./Eyes";
 export { default as Footer } from "./Footer";
 export { default as Heading } from "./Heading";
 export { default as LandingFooter } from "./LandingFooter";
+export { default as MainFooter } from "./MainFooter";
 export { default as Layout } from "./Layout";
 export { default as Marquee } from "./Marquee";
 export { default as MobileNav } from "./MobileNav";

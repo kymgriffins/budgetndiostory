@@ -1,0 +1,136 @@
+"use client";
+
+import { Mail, MapPin, Moon, Phone, Sun } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const contactInfo = [
+  {
+    icon: <Mail size={20} strokeWidth={1.5} />,
+    label: "Email",
+    value: "hello@budgetndiostory.org",
+    href: "mailto:hello@budgetndiostory.org",
+  },
+  {
+    icon: <Phone size={20} strokeWidth={1.5} />,
+    label: "Phone",
+    value: "+254 700 000 000",
+    href: "tel:+254700000000",
+  },
+  {
+    icon: <MapPin size={20} strokeWidth={1.5} />,
+    label: "Location",
+    value: "Nairobi, Kenya",
+    href: "#",
+  },
+];
+
+const socialLinks = [
+  { name: "Instagram", href: "https://instagram.com" },
+  { name: "Twitter", href: "https://twitter.com" },
+  { name: "LinkedIn", href: "https://linkedin.com" },
+  { name: "YouTube", href: "https://youtube.com" },
+];
+
+export default function MainFooter() {
+  const [year, setYear] = useState(2024);
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+  };
+
+  return (
+    <footer className="py-16 px-8 border-t border-white/10">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Contact Info */}
+          <div>
+            <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+              Contact Info
+            </h3>
+            <div className="flex flex-col gap-4">
+              {contactInfo.map((item, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="text-white/60">{item.icon}</div>
+                  <div>
+                    <p className="text-xs font-NeueMontreal text-white/50 mb-0.5">
+                      {item.label}
+                    </p>
+                    <Link
+                      href={item.href}
+                      className="text-sm font-NeueMontreal text-white/80 hover:text-white transition-colors"
+                    >
+                      {item.value}
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div>
+            <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+              Follow Us
+            </h3>
+            <div className="flex flex-wrap gap-4">
+              {socialLinks.map((social, index) => (
+                <Link
+                  key={index}
+                  href={social.href}
+                  className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                >
+                  {social.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Newsletter & Theme Toggle */}
+          <div>
+            <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
+              Stay Updated
+            </h3>
+            <p className="text-sm font-NeueMontreal text-white/60 mb-4">
+              Subscribe to our newsletter for budget insights and updates.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-2 mb-6">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="flex-1 px-4 py-2 text-sm font-NeueMontreal text-white bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-white/30 transition-colors"
+              />
+              <button className="px-4 py-2 text-sm font-NeueMontreal text-white bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition-colors whitespace-nowrap">
+                Subscribe
+              </button>
+            </div>
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+            >
+              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+              {isDark ? "Light Mode" : "Dark Mode"}
+            </button>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-12 pt-8 border-t border-white/10 text-center">
+          <p className="text-sm font-NeueMontreal text-white/50">
+            © {year} Budget Ndio Story. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
