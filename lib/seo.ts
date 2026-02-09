@@ -109,7 +109,6 @@ export function generatePageMetadata(
       site: "@budgetndiostory",
     },
     facebook: {
-      profile: "https://www.facebook.com/profile.php?id=61586898487932",
       appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
     },
     verification: {
