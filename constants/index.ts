@@ -46,23 +46,23 @@ export { NAV_ITEMS as navbarItems };
 export const footerItems = [
   {
     id: 1,
-    title: "Instagram",
-    href: "https://www.instagram.com/",
+    title: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61586898487932",
   },
   {
     id: 2,
-    title: "Behance",
-    href: "https://www.behance.com/",
+    title: "TikTok",
+    href: "https://www.tiktok.com/@budget.ndio.story",
   },
   {
     id: 3,
-    title: "Facebook",
-    href: "https://www.facebook.com/",
+    title: "Instagram",
+    href: "https://www.instagram.com/budgetndiostory",
   },
   {
     id: 4,
-    title: "Linkedin",
-    href: "https://www.linkedin.com/",
+    title: "X",
+    href: "https://x.com/BudgetNdioStory",
   },
 ];
 

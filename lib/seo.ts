@@ -109,6 +109,7 @@ export function generatePageMetadata(
       site: "@budgetndiostory",
     },
     facebook: {
+      profile: "https://www.facebook.com/profile.php?id=61586898487932",
       appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
     },
     verification: {
@@ -164,11 +165,10 @@ export function getOrganizationSchema() {
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
     sameAs: [
-      "https://twitter.com/budgetndiostory",
-      "https://instagram.com/budgetndiostory",
-      "https://linkedin.com/company/budgetndiostory",
-      "https://youtube.com/@budgetndiostory",
-      "https://tiktok.com/@budgetndiostory",
+      "https://www.facebook.com/profile.php?id=61586898487932",
+      "https://www.tiktok.com/@budget.ndio.story",
+      "https://www.instagram.com/budgetndiostory",
+      "https://x.com/BudgetNdioStory",
     ],
     contactPoint: {
       "@type": "ContactPoint",

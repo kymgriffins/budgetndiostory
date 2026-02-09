@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, MapPin, Moon, Phone, Sun } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -26,27 +26,21 @@ const contactInfo = [
 ];
 
 const socialLinks = [
-  { name: "Instagram", href: "https://instagram.com" },
-  { name: "Twitter", href: "https://twitter.com" },
-  { name: "LinkedIn", href: "https://linkedin.com" },
-  { name: "YouTube", href: "https://youtube.com" },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61586898487932",
+  },
+  { name: "TikTok", href: "https://www.tiktok.com/@budget.ndio.story" },
+  { name: "Instagram", href: "https://www.instagram.com/budgetndiostory" },
+  { name: "X", href: "https://x.com/BudgetNdioStory" },
 ];
 
 export default function MainFooter() {
-  const [year, setYear] = useState(2024);
-  const [isDark, setIsDark] = useState(true);
+  const [year, setYear] = useState(2026);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
   }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark);
-  }, [isDark]);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
 
   return (
     <footer className="py-16 px-8 border-t border-white/10">
@@ -87,6 +81,8 @@ export default function MainFooter() {
                 <Link
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
                 >
                   {social.name}
@@ -95,7 +91,7 @@ export default function MainFooter() {
             </div>
           </div>
 
-          {/* Newsletter & Theme Toggle */}
+          {/* Newsletter */}
           <div>
             <h3 className="font-FoundersGrotesk text-lg font-medium text-white uppercase mb-6">
               Stay Updated
@@ -113,14 +109,6 @@ export default function MainFooter() {
                 Subscribe
               </button>
             </div>
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
-            >
-              {isDark ? <Sun size={16} /> : <Moon size={16} />}
-              {isDark ? "Light Mode" : "Dark Mode"}
-            </button>
           </div>
         </div>
 
@@ -134,3 +122,4 @@ export default function MainFooter() {
     </footer>
   );
 }
+

@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
-import { ThemeToggle } from "./theme-toggle";
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
@@ -51,7 +50,6 @@ export default function Navbar() {
               <TextHover titile1={item.title} titile2={item.title} />
             </Link>
           ))}
-          <ThemeToggle />
         </div>
       </motion.nav>
       <MobileNav />
