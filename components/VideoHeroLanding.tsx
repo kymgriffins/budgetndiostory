@@ -29,7 +29,7 @@ export default function VideoHeroLanding() {
         loop
         muted
         playsInline
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 grayscale ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
         onLoadedData={() => setIsVideoLoaded(true)}
       >
         <source src="/budgetndiostory.mp4" type="video/mp4" />
