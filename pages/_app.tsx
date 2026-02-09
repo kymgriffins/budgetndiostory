@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
-import { Analytics } from "@vercel/analytics/next";
-import { AnimatePresence } from "framer-motion";
-import { ThemeProvider } from "@/components/theme-provider";
 import { AnalyticsProvider } from "@/components/Analytics";
+import { ThemeProvider } from "@/components/theme-provider";
 import { FooterV2Provider } from "@/context/FooterV2Context";
 import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/next";
+import { AnimatePresence } from "framer-motion";
+import Script from "next/script";
+import { ReactNode } from "react";
 
 interface LayoutProps {
   children: ReactNode;
@@ -67,6 +68,23 @@ export default function App({
     >
       <AnalyticsProvider>
         <FooterV2Provider>
+          {/* Google Analytics - gtag.js */}
+          <Script
+            strategy="beforeInteractive"
+            src="https://www.googletagmanager.com/gtag/js?id=G-DQMEN6448V"
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-DQMEN6448V');
+              `,
+            }}
+          />
           {getLayout(<Component {...pageProps} />)}
           <Analytics />
         </FooterV2Provider>
