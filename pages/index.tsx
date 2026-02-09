@@ -99,7 +99,7 @@ export default function VideoLanding() {
   return (
     <>
       <Head>
-        <title>Budget Ndio Story — The Mwananchi and The Budget , </title>
+        <title>Budget Ndio Story — The Mwananchi and The Budget</title>
         <meta
           name="description"
           content="Budget Ndio Story translates national and county budgets into short, verifiable stories that help citizens understand where public money goes and how to act."
@@ -110,6 +110,8 @@ export default function VideoLanding() {
           content="Bridging the budget literacy gap for youth through storytelling."
         />
         <meta name="theme-color" content="#0a0a0a" />
+        {/* Hidden H1 for SEO - screen readers only */}
+        <h1 className="sr-only">Budget Ndio Story - Civic Education Through Budget Storytelling</h1>
       </Head>
 
       <div className="bg-[#0a0a0a] text-white min-h-screen">
