@@ -38,11 +38,7 @@ export default function VideoHeroLanding() {
       {/* Loading placeholder - shows while video loads */}
       {!isVideoLoaded && <div className="absolute inset-0 bg-[#0a0a0a]" />}
 
-      {/* Gray Monochromatic Overlay - Adds gray tint while preserving grayscale effect */}
-      <div className="absolute inset-0 bg-gray-500/20 grayscale" />
 
-      {/* Overlay - Subtle gradient for text readability */}
-      <div className="absolute inset-0 bg-black/40" />
 
       {/* Content Container - Centered */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
