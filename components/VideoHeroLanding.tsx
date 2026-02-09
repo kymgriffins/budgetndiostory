@@ -58,6 +58,7 @@ export default function VideoHeroLanding() {
         >
           Budget Ndio
           <br />
+          <br />
           Story
         </motion.h1>
 
