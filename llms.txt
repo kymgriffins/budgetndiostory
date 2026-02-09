@@ -1,0 +1,304 @@
+# LLMs.txt - BudgetNdioStory Project Documentation
+
+This document provides an overview of the BudgetNdioStory project for Large Language Models to understand the codebase structure, conventions, and architecture.
+
+## Project Overview
+
+**Name:** budgetndiostory
+**Type:** Next.js Website with Civic Education & Budget Analysis Focus
+**Framework:** Next.js 16 (canary) with React 19, TypeScript
+**Styling:** Tailwind CSS
+**Animations:** GSAP, Framer Motion, Locomotive Scroll
+
+## Tech Stack
+
+- **Frontend Framework:** Next.js 16.2.0-canary.13 (App Router pattern with Pages router)
+- **Language:** TypeScript 5
+- **Styling:** Tailwind CSS 3.3 with CSS variables for theming
+- **Animation:** GSAP 3.12.5, Framer Motion 11, Locomotive Scroll 5.0
+- **UI Components:** Custom components with shadcn/ui-inspired design tokens
+- **Charts:** Recharts for data visualizations (BudgetBarChart, BudgetLineChart, BudgetPieChart, BudgetHeatmap)
+- **State/Theme:** next-themes for dark mode support
+- **Icons:** lucide-react, react-icons
+- **Deployment:** PM2, Vercel, Nginx
+
+## Directory Structure
+
+```
+budgetndiostory/
+├── pages/                 # Next.js Pages router (legacy)
+│   ├── _app.tsx          # Custom App component
+│   ├── _document.tsx     # Custom Document component
+│   ├── index.tsx         # Home page
+│   ├── blog/             # Blog with dynamic routes [slug]
+│   ├── edu/              # Education/courses page
+│   ├── learn/            # Learning platform
+│   └── [other pages...]
+├── components/           # Reusable UI components
+│   ├── visualizations/  # Chart components (Recharts)
+│   ├── year-selector/   # Year selection component
+│   └── analytics/       # Analytics components
+├── container/           # Page-specific layouts/sections
+│   ├── home-page/
+│   ├── about-page/
+│   ├── contact-page/
+│   ├── edu-page/
+│   ├── learn-page/
+│   ├── insights-page/
+│   ├── services-page/
+│   └── [other page containers...]
+├── animation/           # Animation utilities and components
+│   ├── LinkHover.tsx
+│   ├── LogoMarquee.tsx
+│   ├── PageAnimations.tsx
+│   ├── TextHover.tsx
+│   └── TextMask.tsx
+├── lib/                 # Utility functions and configurations
+│   ├── routes.ts        # Centralized route constants
+│   ├── seo.ts           # SEO utilities
+│   ├── router.tsx       # Router utilities
+│   ├── gsap.ts          # GSAP helpers
+│   └── blog-data.ts     # Blog data/mocks
+├── hooks/               # Custom React hooks
+│   ├── useLocomotive.ts
+│   ├── useMediaQuery.ts
+│   └── [other hooks...]
+├── context/             # React Context providers
+├── constants/           # Constants
+├── types/               # TypeScript type definitions
+├── fonts/               # Custom fonts (FoundersGrotesk, NeueMontreal)
+├── mockdata/            # Mock data for development
+└── design-library/      # Shared design system
+```
+
+## Key Conventions
+
+### Import Alias
+
+```typescript
+// Use @/* for absolute imports
+import Component from "@/components/Component";
+import { ROUTES } from "@/lib/routes";
+```
+
+### Tailwind Classes
+
+The project uses semantic color tokens defined in CSS variables:
+- `background`, `foreground`
+- `card`, `card-foreground`
+- `primary`, `primary-foreground`
+- `secondary`, `secondary-foreground`
+- `muted`, `muted-foreground`
+- `accent`, `accent-foreground`
+- `destructive`, `destructive-foreground`
+
+Example usage:
+```tsx
+<div className="bg-background text-foreground">
+  <button className="bg-primary text-primary-foreground">Click</button>
+</div>
+```
+
+### Screen Breakpoints
+
+```typescript
+xm: { max: "400px" }      // Extra small mobile
+sm: { min: "401px", max: "768px" }  // Mobile
+md: { min: "769px", max: "1024px" } // Tablet
+lg: { min: "1025px", max: "1490px" } // Desktop
+xl: { min: "1491px" }     // Large desktop
+```
+
+### Font Families
+
+- `font-FoundersGrotesk` - Display headings
+- `font-NeueMontreal` - Body text
+
+## Component Patterns
+
+### Exported from components/index.ts
+
+Key exports include:
+- `Layout` - Main layout wrapper
+- `Navbar`, `NavbarLanding` - Navigation components
+- `Footer`, `MainFooter`, `LandingFooter`, `FooterV2` - Footer variants
+- `PageTransition`, `PageTransitionLoader` - Page transition effects
+- `ScrollReveal`, `FadeIn` - Scroll-based reveal animations
+- `ResponsiveParallax`, `ParallaxImage` - Parallax effects
+- `OptimizedImage`, `HeroImage`, `ThumbnailImage` - Image optimization
+- `StructuredData` components - SEO schemas (ArticleSchema, FAQSchema, OrganizationSchema, etc.)
+- `Button`, `RoundButton`, `Rounded` - Button variants
+- `Marquee`, `Eyes`, `Curve` - Visual effect components
+
+### Animation Components
+
+Located in `animation/`:
+- `LinkHover.tsx` - Hover effects for links
+- `LogoMarquee.tsx` - Scrolling logo marquee
+- `PageAnimations.tsx` - Page-level animations
+- `TextHover.tsx` - Text hover effects
+- `TextMask.tsx` - Text masking animations
+
+## Route Constants
+
+Use centralized routes from [`lib/routes.ts`](lib/routes.ts):
+
+```typescript
+import { ROUTES, NAV_ITEMS } from "@/lib/routes";
+
+// Static routes
+ROUTES.HOME          // "/"
+ROUTES.ABOUT         // "/about"
+ROUTES.CONTACT       // "/contact"
+ROUTES.SERVICES      // "/services"
+ROUTES.INSIGHTS      // "/insights"
+ROUTES.BLOG          // "/blog"
+ROUTES.TRACKER       // "/tracker"
+ROUTES.LEARN         // "/learn"
+ROUTES.WORKIZ        // "/workiz"
+
+// Dynamic routes
+DYNAMIC_ROUTES.LEARN_Course(id)      // `/learn/${id}`
+DYNAMIC_ROUTES.EDU_COURSE(id)        // `/edu/${id}`
+DYNAMIC_ROUTES.PODCAST_EPISODE(id)   // `/podcasts/${id}`
+```
+
+## Data Visualizations
+
+Located in `components/visualizations/`:
+- `BudgetBarChart.tsx` - Bar chart for budget comparisons
+- `BudgetLineChart.tsx` - Line chart for trends
+- `BudgetPieChart.tsx` - Pie chart for distributions
+- `BudgetHeatmap.tsx` - Heatmap for data density
+
+## Mock Data
+
+Located in `mockdata/`:
+- `home.json` - Home page data
+- `about.json` - About page data
+- `edu.json` - Education/courses data
+- `funds.json` - Budget/funds data
+- `billing.json` - Billing data
+
+## SEO & Structured Data
+
+The project uses comprehensive SEO with structured data components:
+- Organization Schema
+- Website Schema
+- Article Schema (for blog posts)
+- FAQ Schema
+- Local Business Schema
+- Breadcrumb Schema
+
+Configured in [`next.config.mjs`](next.config.mjs) with:
+- Security headers (X-Frame-Options, X-XSS-Protection, etc.)
+- Cache headers for sitemap/robots.txt
+- Redirects for canonical URLs
+- CDN configuration for images
+
+## Scripts
+
+```bash
+npm run dev           # Start development server
+npm run build         # Build for production
+npm run start         # Start production server
+npm run lint          # Run ESLint
+npm run pm2:start     # Start with PM2 process manager
+npm run pm2:restart   # Restart PM2
+npm run pm2:stop      # Stop PM2
+npm run pm2:logs      # View PM2 logs
+```
+
+## Environment Variables
+
+Required in `.env`:
+- `NEXT_PUBLIC_SITE_URL` - Production site URL (default: https://budgetndiostory.org)
+
+## Design System
+
+### Color Theming
+
+Dark mode is supported via `next-themes`. Colors are defined as CSS variables in HSL format:
+- `--background`, `--foreground`
+- `--card`, `--card-foreground`
+- `--primary`, `--primary-foreground`
+- `--secondary`, `--secondary-foreground`
+- `--muted`, `--muted-foreground`
+- `--accent`, `--accent-foreground`
+- `--border`, `--input`, `--ring`
+
+### Animation Variants
+
+Framer Motion variants available in [`PageTransition.tsx`](components/PageTransition.tsx):
+- `flipVariants` - Flip animation
+- `scaleVariants` - Scale animation
+- `slideVariants` - Slide animation
+- `StaggerContainer`, `StaggerItem` - Staggered animations
+
+## Important Files to Know
+
+1. [`next.config.mjs`](next.config.mjs) - Next.js configuration, SEO, headers
+2. [`tailwind.config.ts`](tailwind.config.ts) - Tailwind theme, breakpoints, custom colors
+3. [`tsconfig.json`](tsconfig.json) - TypeScript configuration, path aliases
+4. [`lib/routes.ts`](lib/routes.ts) - Centralized route definitions
+5. [`components/index.ts`](components/index.ts) - Component barrel export
+6. [`types/index.ts`](types/index.ts) - TypeScript type definitions
+7. [`constants/index.ts`](constants/index.ts) - Global constants
+
+## Common Patterns
+
+### Page Structure (Pages Router)
+```tsx
+// pages/page-name/index.tsx
+import Layout from "@/components/Layout";
+import { StructuredData } from "@/components/StructuredData";
+
+export default function PageName() {
+  return (
+    <Layout>
+      <StructuredData.OrganizationSchema />
+      {/* Page content */}
+    </Layout>
+  );
+}
+```
+
+### Component with Animation
+```tsx
+import { ScrollReveal } from "@/components/ScrollReveal";
+
+export default function Component() {
+  return (
+    <ScrollReveal>
+      <div>Content to reveal on scroll</div>
+    </ScrollReveal>
+  );
+}
+```
+
+### Using Routes
+```tsx
+import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
+
+<Link href={ROUTES.BLOG}>Blog</Link>
+```
+
+## Build & Deployment
+
+- **Build Output:** Static + Server (hybrid)
+- **Compression:** Enabled (gzip/brotli)
+- **Images:** AVIF/WebP with CDN support
+- **Process Manager:** PM2 for production
+- **Web Server:** Nginx (see [`nginx.conf`](nginx.conf))
+- **VPS Setup:** See [`VPS_SETUP.md`](VPS_SETUP.md)
+
+## Notes for LLMs
+
+1. **Pages Router:** This project uses the legacy Pages router, not the App Router
+2. **CSS Variables:** Use semantic color tokens, not hardcoded colors
+3. **Custom Fonts:** FoundersGrotesk and NeueMontreal are loaded locally
+4. **Animation Heavy:** Project uses GSAP, Framer Motion, and Locomotive Scroll extensively
+5. **SEO First:** Structured data components should be included on pages
+6. **Dynamic Routes:** Blog uses `[slug]` parameter
+7. **PM2:** Production uses PM2 process manager - use `npm run pm2:*` commands

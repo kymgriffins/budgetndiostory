@@ -168,6 +168,8 @@ export function getOrganizationSchema() {
       "https://www.tiktok.com/@budget.ndio.story",
       "https://www.instagram.com/budgetndiostory",
       "https://x.com/BudgetNdioStory",
+      "https://www.linkedin.com/company/budgetndiostory",
+      "https://www.youtube.com/@BudgetNdioStory",
     ],
     contactPoint: {
       "@type": "ContactPoint",

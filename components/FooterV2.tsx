@@ -3,6 +3,7 @@ import { FadeUp, LinkHover } from "@/animation";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ProtectedEmailWithIcon } from "./ProtectedEmail";
 
 export default function FooterV2() {
   const [year, setYear] = useState(2024);
@@ -15,8 +16,7 @@ export default function FooterV2() {
     {
       icon: <Mail size={20} strokeWidth={1.5} />,
       label: "Email",
-      value: "hello@budgetndiostory.org",
-      href: "mailto:hello@budgetndiostory.org",
+      email: "hello@budgetndiostory.org",
     },
     {
       icon: <Phone size={20} strokeWidth={1.5} />,
@@ -40,6 +40,14 @@ export default function FooterV2() {
     { name: "TikTok", href: "https://www.tiktok.com/@budget.ndio.story" },
     { name: "Instagram", href: "https://www.instagram.com/budgetndiostory" },
     { name: "X", href: "https://x.com/BudgetNdioStory" },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/budgetndiostory",
+    },
+    {
+      name: "YouTube",
+      href: "https://www.youtube.com/@BudgetNdioStory",
+    },
   ];
 
   return (
@@ -59,11 +67,19 @@ export default function FooterV2() {
                     <p className="paragraph font-NeueMontreal text-secondry mb-[5px]">
                       {item.label}
                     </p>
-                    <LinkHover
-                      className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
-                      title={item.value}
-                      href={item.href}
-                    />
+                    {item.email ? (
+                      <ProtectedEmailWithIcon
+                        email={item.email}
+                        showIcon={false}
+                        className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
+                      />
+                    ) : (
+                      <LinkHover
+                        className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
+                        title={item.value}
+                        href={item.href}
+                      />
+                    )}
                   </div>
                 </div>
               ))}

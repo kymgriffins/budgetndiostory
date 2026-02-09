@@ -6,12 +6,18 @@ const nextConfig = {
   // SEO: Proper site URL
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://budgetndiostory.org",
 
+  // Enable experimental features for performance
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion", "gsap"],
+  },
+
   // CDN Configuration for static assets
   // Using Vercel's edge network (default), but can configure additional CDN domains
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
     // CDN domains for images (if using external CDN)
     remotePatterns: [
       {

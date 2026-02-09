@@ -26,6 +26,7 @@ export {
 } from "./PageTransitionLoader";
 export { default as PlayVideo } from "./PlayVideo";
 export { default as ProjectCard } from "./ProjectCard";
+export { default as ProtectedEmail, ProtectedEmailWithIcon } from "./ProtectedEmail";
 export { default as Ratings } from "./Ratings";
 export { default as Ready } from "./Ready";
 export {

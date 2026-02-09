@@ -33,16 +33,19 @@ export function OrganizationSchema() {
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://budgetndiostory.com",
     logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://budgetndiostory.com"}/logo.png`,
     sameAs: [
-      "https://twitter.com/budgetndiostory",
+      "https://twitter.com/BudgetNdioStory",
       "https://instagram.com/budgetndiostory",
-      "https://linkedin.com/company/budgetndiostory",
-      "https://youtube.com/@budgetndiostory",
+      "https://www.linkedin.com/company/budgetndiostory",
+      "https://www.youtube.com/@BudgetNdioStory",
+      "https://www.tiktok.com/@budget.ndio.story",
+      "https://www.facebook.com/profile.php?id=61586898487932",
     ],
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+254-700-000-000",
       contactType: "customer service",
       availableLanguage: ["English", "Swahili"],
+      email: "hello@budgetndiostory.org",
     },
   };
 
