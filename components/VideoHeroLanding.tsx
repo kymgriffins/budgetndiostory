@@ -56,10 +56,7 @@ export default function VideoHeroLanding() {
           }}
           className="text-center font-NeueMontreal text-white font-semibold tracking-[-0.03em] text-[clamp(40px,8vw,100px)] leading-[0.9]"
         >
-          Budget Ndio
-          <br />
-          <br />
-          Story
+         
         </motion.h1>
 
         {/* Subtitle */}
