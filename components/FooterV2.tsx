@@ -17,6 +17,8 @@ export default function FooterV2() {
       icon: <Mail size={20} strokeWidth={1.5} />,
       label: "Email",
       email: "info@budgetndiostory.org",
+      value: "info@budgetndiostory.org",
+      href: "mailto:info@budgetndiostory.org",
     },
     {
       icon: <Phone size={20} strokeWidth={1.5} />,
