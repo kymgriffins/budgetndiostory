@@ -62,7 +62,7 @@ export default function BlogIndex() {
     {
       question: "Can I contribute a story?",
       answer:
-        "Yes! We welcome contributions from citizens, journalists, and researchers. Contact us at hello@budgetndiostory.org to discuss your story ideas.",
+        "Yes! We welcome contributions from citizens, journalists, and researchers. Contact us at info@budgetndiostory.org to discuss your story ideas.",
     },
     {
       question: "Is the content free to use?",

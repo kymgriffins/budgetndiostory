@@ -128,7 +128,7 @@ export default function EduStoriesPage() {
     {
       question: "Can I contribute a field report?",
       answer:
-        "Yes! We welcome citizen journalism. Contact us at hello@budgetndiostory.org if you have information about a budget project that needs investigation.",
+        "Yes! We welcome citizen journalism. Contact us at info@budgetndiostory.org if you have information about a budget project that needs investigation.",
     },
   ];
 
@@ -401,10 +401,10 @@ export default function EduStoriesPage() {
                         Email
                       </p>
                       <Link
-                        href="mailto:hello@budgetndiostory.org"
+                        href="mailto:info@budgetndiostory.org"
                         className="text-sm font-NeueMontreal text-white/80 hover:text-white transition-colors"
                       >
-                        hello@budgetndiostory.org
+                        info@budgetndiostory.org
                       </Link>
                     </div>
                   </div>

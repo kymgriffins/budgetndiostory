@@ -8,14 +8,14 @@ const contactInfo = [
   {
     icon: <Mail size={20} strokeWidth={1.5} />,
     label: "Email",
-    value: "hello@budgetndiostory.org",
-    href: "mailto:hello@budgetndiostory.org",
+    value: "info@budgetndiostory.org",
+    href: "mailto:info@budgetndiostory.org",
   },
   {
     icon: <Phone size={20} strokeWidth={1.5} />,
     label: "Phone",
-    value: "+254 700 000 000",
-    href: "tel:+254700000000",
+    value: "+254711106814",
+    href: "tel:+254711106814",
   },
   {
     icon: <MapPin size={20} strokeWidth={1.5} />,
@@ -122,4 +122,3 @@ export default function MainFooter() {
     </footer>
   );
 }
-

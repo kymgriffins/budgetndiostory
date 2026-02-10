@@ -52,14 +52,14 @@ export default function Contact() {
     {
       icon: <Mail size={20} strokeWidth={1.5} />,
       label: "Email",
-      value: "hello@budgetndiostory.org",
-      href: "mailto:hello@budgetndiostory.org",
+      value: "info@budgetndiostory.org",
+      href: "mailto:info@budgetndiostory.org",
     },
     {
       icon: <Phone size={20} strokeWidth={1.5} />,
       label: "Phone",
-      value: "+254 700 000 000",
-      href: "tel:+254700000000",
+      value: "+254711106814",
+      href: "tel:+254711106814",
     },
     {
       icon: <MapPin size={20} strokeWidth={1.5} />,
@@ -80,7 +80,7 @@ export default function Contact() {
     {
       question: "How can I collaborate with Budget Ndio Story?",
       answer:
-        "We welcome partnerships with civic organizations, media houses, and research institutions. Email us at hello@budgetndiostory.org to discuss collaboration opportunities.",
+        "We welcome partnerships with civic organizations, media houses, and research institutions. Email us at info@budgetndiostory.org to discuss collaboration opportunities.",
     },
     {
       question: "Can I request a custom investigation?",
@@ -393,10 +393,10 @@ export default function Contact() {
                         Email
                       </p>
                       <Link
-                        href="mailto:hello@budgetndiostory.org"
+                        href="mailto:info@budgetndiostory.org"
                         className="text-sm font-NeueMontreal text-white/80 hover:text-white transition-colors"
                       >
-                        hello@budgetndiostory.org
+                        info@budgetndiostory.org
                       </Link>
                     </div>
                   </div>

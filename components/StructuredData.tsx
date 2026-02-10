@@ -42,10 +42,10 @@ export function OrganizationSchema() {
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+254-700-000-000",
+      telephone: "+254711106814",
       contactType: "customer service",
       availableLanguage: ["English", "Swahili"],
-      email: "hello@budgetndiostory.org",
+      email: "info@budgetndiostory.org",
     },
   };
 

@@ -173,7 +173,7 @@ export function getOrganizationSchema() {
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+254-700-000-000",
+      telephone: "+254711106814",
       contactType: "customer service",
       availableLanguage: ["English", "Swahili"],
     },

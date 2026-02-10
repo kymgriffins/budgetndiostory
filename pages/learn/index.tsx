@@ -802,10 +802,10 @@ export default function LearnPage() {
                 </h3>
                 <div className="space-y-2">
                   <a
-                    href="mailto:hello@budgetndiostory.org"
+                    href="mailto:info@budgetndiostory.org"
                     className="block text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
                   >
-                    hello@budgetndiostory.org
+                    info@budgetndiostory.org
                   </a>
                   <p className="text-sm font-NeueMontreal text-white/60">
                     Nairobi, Kenya
