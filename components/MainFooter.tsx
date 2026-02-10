@@ -3,6 +3,7 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Newsletter from "./Newsletter";
 
 const contactInfo = [
   {
@@ -99,16 +100,11 @@ export default function MainFooter() {
             <p className="text-sm font-NeueMontreal text-white/60 mb-4">
               Subscribe to our newsletter for budget insights and updates.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 mb-6">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 px-4 py-2 text-sm font-NeueMontreal text-white bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-white/30 transition-colors"
-              />
-              <button className="px-4 py-2 text-sm font-NeueMontreal text-white bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition-colors whitespace-nowrap">
-                Subscribe
-              </button>
-            </div>
+            <Newsletter
+              variant="dark"
+              placeholder="Your email"
+              buttonText="Subscribe"
+            />
           </div>
         </div>
 

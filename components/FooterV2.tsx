@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ProtectedEmailWithIcon } from "./ProtectedEmail";
+import Newsletter from "./Newsletter";
 
 export default function FooterV2() {
   const [year, setYear] = useState(2024);
@@ -115,16 +116,11 @@ export default function FooterV2() {
             <p className="paragraph font-NeueMontreal text-secondry mb-[20px]">
               Subscribe to our newsletter for budget insights and updates.
             </p>
-            <div className="flex gap-[10px]">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="paragraph w-full font-NeueMontreal text-secondry bg-transparent border-b border-[#21212155] focus:border-secondry outline-none py-[10px]"
-              />
-              <button className="paragraph font-NeueMontreal text-secondry uppercase hover:underline">
-                Subscribe
-              </button>
-            </div>
+            <Newsletter
+              variant="light"
+              placeholder="Your email"
+              buttonText="Subscribe"
+            />
           </div>
         </div>
       </FadeUp>

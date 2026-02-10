@@ -11,6 +11,7 @@ export { default as Marquee } from "./Marquee";
 export { default as MobileNav } from "./MobileNav";
 export { default as Navbar } from "./Navbar";
 export { default as NavbarLanding } from "./NavbarLanding";
+export { default as Newsletter } from "./Newsletter";
 export { HeroImage, OptimizedImage, ThumbnailImage } from "./OptimizedImage";
 export {
   flipVariants,

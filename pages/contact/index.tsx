@@ -1,6 +1,7 @@
 "use client";
 
 import { NavbarLanding } from "@/components";
+import Newsletter from "@/components/Newsletter";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
@@ -295,16 +296,11 @@ export default function Contact() {
                       Subscribe to our newsletter for budget insights and
                       updates.
                     </p>
-                    <div className="flex gap-2">
-                      <input
-                        type="email"
-                        placeholder="Your email"
-                        className="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 transition-colors"
-                      />
-                      <button className="px-6 py-3 rounded-xl bg-white/10 border border-white/10 text-sm font-NeueMontreal hover:bg-white/20 transition-colors">
-                        Subscribe
-                      </button>
-                    </div>
+                    <Newsletter
+                      variant="dark"
+                      placeholder="Your email"
+                      buttonText="Subscribe"
+                    />
                   </div>
                 </motion.div>
               </div>
