@@ -1,8 +1,6 @@
 "use client";
 
-import { eyes } from "@/public";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface YouTubePlayerProps {
@@ -52,7 +50,6 @@ export default function YouTubePlayer({
   const [isLoading, setIsLoading] = useState(true);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isClient, setIsClient] = useState(false);
-  const [rotate, setRotate] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -67,23 +64,6 @@ export default function YouTubePlayer({
   }, []);
 
   const actualVideoId = extractYouTubeId(videoId);
-
-  // Mouse parallax effect
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      let mouseX = e.clientX;
-      let mouseY = e.clientY;
-
-      let deltaX = mouseX - window.innerWidth / 2;
-      let deltaY = mouseY - window.innerHeight / 2;
-
-      var angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-      setRotate(angle - 180);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   // Initialize YouTube player
   useEffect(() => {
@@ -398,35 +378,22 @@ export default function YouTubePlayer({
             onClick={(e) => e.stopPropagation()}
           >
             <motion.div
-              animate={{ scale: [1, 1.1, 1] }}
+              animate={{ scale: [1, 1.05, 1] }}
               transition={{ repeat: Infinity, duration: 2 }}
             >
               <div
-                className="w-[100px] h-[100px] smOnly:w-[80px] smOnly:h-[80px] bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-transform shadow-xl"
+                className="w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-transform shadow-xl"
                 onClick={togglePlay}
               >
-                <div className="relative w-full h-full">
-                  <Image
-                    style={{
-                      transform: `rotate(${rotate}deg)`,
-                    }}
-                    src={eyes}
-                    alt="Play"
-                    className="w-full h-full object-cover"
-                  />
-                  <svg
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 text-white pl-1"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
+                <svg
+                  className="w-8 h-8 text-black pl-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
               </div>
             </motion.div>
-            <p className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-white font-NeueMontreal text-sm whitespace-nowrap">
-              Click to play
-            </p>
           </motion.div>
         )}
       </AnimatePresence>

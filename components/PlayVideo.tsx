@@ -1,11 +1,8 @@
 "use client";
-import { eyes } from "@/public";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function PlayVideo({ videosrc }: { videosrc: string }) {
-  const [rotate, setRotate] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -20,18 +17,6 @@ export default function PlayVideo({ videosrc }: { videosrc: string }) {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("mousemove", (e) => {
-      let mouseX = e.clientX;
-      let mouseY = e.clientY;
-
-      let deltaX = mouseX - window.innerWidth / 2;
-      let deltaY = mouseY - window.innerHeight / 2;
-
-      var angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-      setRotate(angle - 180);
-    });
-  }, []);
   const container = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -39,7 +24,8 @@ export default function PlayVideo({ videosrc }: { videosrc: string }) {
     offset: ["start end", "end start"],
   });
 
-  const mq = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const mq = useTransform(scrollYProgress, [0, 1], [0, -50]);
+
   return (
     <div
       className="w-full relative overflow-hidden cursor-pointer"
@@ -48,71 +34,50 @@ export default function PlayVideo({ videosrc }: { videosrc: string }) {
     >
       {/* Gray Monochromatic Overlay */}
       <div className="absolute inset-0 bg-gray-500/20 grayscale pointer-events-none z-10" />
-      <div
-        className="w-full h-full"
-        data-scroll
-        data-scroll-speed="-.8"
-        data-scroll-section
-      >
+      <div className="w-full h-full">
         <video
-          className="w-full h-full grayscale"
+          className="w-full h-full grayscale object-cover"
           loop
           ref={videoRef}
           src={videosrc}
         />
-        <motion.div
-          className={`w-full absolute top-[50%] transform translate-y-[-50%] gap-[30px] flex items-center justify-center ${
-            isPlaying && "hidden"
-          }`}
-          style={{ y: mq }}
-        >
-          <div
-            className="w-[200px] h-[200px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[100px] xm:h-[100px] bg-white rounded-full flex items-center justify-center cursor-pointer"
-            onClick={togglePlay}
+        {/* Play Button Overlay */}
+        {!isPlaying && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 flex items-center justify-center bg-black/30 z-20"
           >
-            <div className="relative w-full h-full">
-              <Image
-                style={{
-                  transform: `rotate(${rotate}deg)`,
-                }}
-                src={eyes}
-                alt="img"
-                className="w-full h-full object-cover"
-              />
-              <p className="absolute top-1/2 left-1/2 paragraph uppercase text-white font-NeueMontreal font-medium transform translate-x-[-50%] translate-y-[-50%]">
-                {isPlaying ? "Pause" : "Play"}
-              </p>
-            </div>
-          </div>
-          <div
-            className="w-[200px] smOnly:w-[150px] smOnly:h-[150px] xm:w-[100px] xm:h-[100px] bg-white rounded-full flex items-center justify-center cursor-pointer"
-            onClick={togglePlay}
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <div className="w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-transform shadow-xl">
+                <svg
+                  className="w-8 h-8 text-black pl-1"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+        {/* Pause Button Overlay */}
+        {isPlaying && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 flex items-center justify-center z-20"
           >
-            <div className="relative w-full h-full">
-              <Image
-                style={{
-                  transform: `rotate(${rotate}deg)`,
-                }}
-                src={eyes}
-                alt="img"
-                className="w-full h-full object-cover"
-              />
-              <p className="absolute top-1/2 left-1/2 paragraph uppercase text-white font-NeueMontreal font-medium transform translate-x-[-50%] translate-y-[-50%]">
-                {isPlaying ? "Pause" : "Play"}
-              </p>
-            </div>
-          </div>
-        </motion.div>
-        <div
-          onClick={togglePlay}
-          className={`w-full absolute top-[50%] transform translate-y-[-50%] gap-[30px] flex items-center justify-center ${
-            !isPlaying && "hidden"
-          }`}
-        >
-          <button className="text-white text-[18px] bg-black px-[10px]  leading-none font-normal py-[5px] font-NeueMontreal rounded-[20px]">
-            pause
-          </button>
-        </div>
+            <button className="text-white text-[14px] bg-black/50 px-[16px] py-[8px] leading-none font-normal font-NeueMontreal rounded-[20px] backdrop-blur-sm hover:bg-black/70 transition-colors">
+              Pause
+            </button>
+          </motion.div>
+        )}
       </div>
     </div>
   );

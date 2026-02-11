@@ -1,6 +1,6 @@
 "use client";
 
-import { MainFooter, NavbarLanding, VideoHeroLanding } from "@/components";
+import { MainFooter, NavbarLanding, PlayVideo, VideoHeroLanding } from "@/components";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
@@ -285,6 +285,54 @@ export default function VideoLanding() {
                   </motion.div>
                 ))}
               </div>
+            </div>
+          </section>
+
+          {/* FEATURED VIDEO SECTION */}
+          <section className="padding-x py-16">
+            <div className="max-w-5xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-10"
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                  Featured Video
+                </span>
+                <h2 className="font-FoundersGrotesk text-3xl lg:text-4xl font-semibold tracking-tight mt-3">
+                  Understanding the Budget
+                </h2>
+                <p className="font-NeueMontreal text-white/60 mt-4 max-w-2xl mx-auto">
+                  Watch our latest breakdown of how public funds are allocated and where your tax money really goes.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="rounded-3xl overflow-hidden bg-white/5 border border-white/10"
+              >
+                <PlayVideo videosrc="/bns001.mp4" />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-wrap justify-center gap-4 mt-8"
+              >
+                <Link
+                  href="/shorts"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 border border-white/20 rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/20 transition-colors whitespace-nowrap"
+                >
+                  <Play size={16} /> More Videos
+                </Link>
+              </motion.div>
             </div>
           </section>
 
