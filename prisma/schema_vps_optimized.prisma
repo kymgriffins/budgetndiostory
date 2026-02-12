@@ -1,0 +1,385 @@
+// Prisma Schema for Budget Ndio Story - VPS-Optimized
+// Trimmed for Cheap VPS (2-4 GB RAM, 1-2 vCPU)
+// Version: 2.0 (VPS-Optimized)
+// Date: February 2025
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUMS (mapped to PostgreSQL enums)
+// ============================================================================
+
+enum UserRole {
+  citizen
+  researcher
+  journalist
+  admin
+}
+
+enum BudgetLevel {
+  national
+  county
+}
+
+enum ContentType {
+  article
+  podcast
+  video
+  explainer
+  case_study
+}
+
+enum ContentCategory {
+  national_budget
+  county_budget
+  tax_education
+  policy_impact
+  civic_engagement
+}
+
+enum EngagementType {
+  contact_form
+  newsletter_signup
+  faq_view
+  social_share
+  content_download
+}
+
+enum AnalyticsEventType {
+  view
+  download
+  listen
+  watch
+  export
+  search
+}
+
+enum LanguageCode {
+  en
+  sw
+}
+
+enum ContentStatus {
+  draft
+  published
+  archived
+}
+
+enum EngagementStatus {
+  new
+  in_progress
+  resolved
+  closed
+}
+
+// ============================================================================
+// CORE TABLES (Essential)
+// ============================================================================
+
+model User {
+  id            Int              @id @default(autoincrement())
+  email         String           @unique
+  name          String?
+  role          UserRole         @default(citizen)
+  subscribedAt  DateTime?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  engagements    Engagement[]
+
+  @@map("users")
+  @@index([email])
+  @@index([role])
+}
+
+model Sector {
+  id          Int               @id @default(autoincrement())
+  name        String            @unique
+  description String?
+  iconUrl     String?
+  colorCode   String            @default("#3B82F6")
+  sortOrder   Int               @default(0)
+  createdAt   DateTime         @default(now())
+
+  budgetAllocations BudgetAllocation[]
+
+  @@map("sectors")
+  @@index([name])
+}
+
+model FiscalYear {
+  id          Int               @id @default(autoincrement())
+  year        Int               @unique
+  startDate   DateTime
+  endDate     DateTime
+  description String?
+  isCurrent   Boolean           @default(false)
+  createdAt   DateTime         @default(now())
+
+  budgetAllocations BudgetAllocation[]
+
+  @@map("fiscal_years")
+  @@index([year])
+  @@index([isCurrent])
+}
+
+model County {
+  id          Int               @id @default(autoincrement())
+  name        String            @unique
+  code        String            @unique
+  region      String?
+  geoData     Json?
+  population  Int?
+  createdAt   DateTime         @default(now())
+
+  budgetAllocations BudgetAllocation[]
+
+  @@map("counties")
+  @@index([name])
+  @@index([code])
+}
+
+// ============================================================================
+// BUDGET DATA TABLES (Core Value)
+// ============================================================================
+
+model BudgetAllocation {
+  id              Int              @id @default(autoincrement())
+  fiscalYearId    Int
+  sectorId        Int
+  countyId        Int?
+  level           BudgetLevel
+  budgetedAmount  Decimal         @db.Decimal(18, 2)
+  actualSpent     Decimal?        @db.Decimal(18, 2)
+  approvedAmount  Decimal?       @db.Decimal(18, 2)
+  notes           String?
+  source          String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  fiscalYear    FiscalYear   @relation(fields: [fiscalYearId], references: [id], onDelete: Cascade)
+  sector        Sector       @relation(fields: [sectorId], references: [id], onDelete: Cascade)
+  county        County?      @relation(fields: [countyId], references: [id], onDelete: Cascade)
+  lineItems     BudgetLineItem[]
+
+  @@map("budget_allocations")
+  @@index([fiscalYearId])
+  @@index([sectorId])
+  @@index([countyId])
+  @@index([level])
+}
+
+model BudgetLineItem {
+  id              Int          @id @default(autoincrement())
+  allocationId    Int
+  description     String
+  budgetedAmount  Decimal      @db.Decimal(18, 2)
+  actualAmount    Decimal?     @db.Decimal(18, 2)
+  quarter         Int?
+  createdAt       DateTime     @default(now())
+
+  allocation BudgetAllocation @relation(fields: [allocationId], references: [id], onDelete: Cascade)
+
+  @@map("budget_line_items")
+  @@index([allocationId])
+}
+
+// ============================================================================
+// CONTENT TABLES (Simplified - episode data embedded)
+// ============================================================================
+
+model Content {
+  id              Int              @id @default(autoincrement())
+  type            ContentType
+  title           String
+  slug            String           @unique
+  description     String?
+  contentBody     String?
+  
+  // Media URLs (external hosting only)
+  mediaUrl        String?
+  embedUrl        String?
+  thumbnailUrl    String?
+  
+  // Metadata
+  category        ContentCategory?
+  tags            String[]
+  publishedAt     DateTime?
+  status          ContentStatus    @default(draft)
+  views           Int              @default(0)
+  featured        Boolean         @default(false)
+  author          String?
+  
+  // Episode data (embedded instead of separate tables)
+  durationSeconds Int?
+  episodeNumber   Int?
+  seasonNumber    Int              @default(1)
+  transcript      String?
+  guests          Json             @default("{}")
+  shownotes       String?
+  
+  // Analytics & SEO
+  analytics       Json             @default("{}")
+  metadata        Json             @default("{}")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  translations    Translation[]
+  analyticsLogs   AnalyticsLog[]
+
+  @@map("contents")
+  @@index([type])
+  @@index([category])
+  @@index([status])
+  @@index([publishedAt])
+  @@index([slug])
+  @@index([featured])
+}
+
+model Translation {
+  id                  Int          @id @default(autoincrement())
+  contentId           Int
+  language            LanguageCode
+  translatedTitle     String?
+  translatedBody      String?
+  translatedDescription String?
+  translatedTags      String[]
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, language])
+  @@map("translations")
+  @@index([contentId, language])
+}
+
+// ============================================================================
+// ENGAGEMENT TABLES (Consolidated)
+// ============================================================================
+
+model Engagement {
+  id          Int              @id @default(autoincrement())
+  userId      Int?
+  type        EngagementType
+  
+  // Newsletter signup fields
+  email       String?
+  interests   String[]         @default([])
+  
+  // Contact form fields
+  subject     String?
+  message     String?
+  status      EngagementStatus? @default(En EngagementStatus.new)
+  
+  // Generic fields
+  details     Json             @default("{}")
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("engagements")
+  @@index([type])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// ============================================================================
+// FAQ TABLE
+// ============================================================================
+
+model Faq {
+  id          Int          @id @default(autoincrement())
+  question    String
+  answer      String
+  category    String?
+  sortOrder   Int          @default(0)
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("faqs")
+  @@index([category])
+  @@index([isActive])
+}
+
+// ============================================================================
+// ANALYTICS TABLES (Partitioned - managed via SQL)
+// ============================================================================
+
+// Note: AnalyticsLog uses native PostgreSQL partitioning
+// Partitions are created in schema_vps_optimized.sql
+// Prisma doesn't fully support partitioned tables, use raw queries for inserts
+
+model AnalyticsLog {
+  id          BigInt         @id @default(autoincrement())
+  userId      Int?
+  sessionId   String?
+  contentId   Int?
+  eventType   AnalyticsEventType
+  eventData   Json           @default("{}")
+  duration    Int?
+  pageUrl     String?
+  referrerUrl String?
+  country     String?
+  ipAddress   String?
+  timestamp   DateTime      @default(now())
+
+  user    User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  content Content? @relation(fields: [contentId], references: [id], onDelete: SetNull)
+
+  @@map("analytics_logs")
+  @@index([timestamp])
+  @@index([eventType])
+  @@index([contentId])
+  @@index([sessionId])
+}
+
+// ============================================================================
+// UTILITY TABLES
+// ============================================================================
+
+model DataSource {
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String?
+  url           String?
+  sourceType    String?
+  lastFetched   DateTime?
+  createdAt     DateTime     @default(now())
+
+  @@map("data_sources")
+}
+
+model SystemConfig {
+  id            Int          @id @default(autoincrement())
+  configKey     String       @unique
+  configValue   String
+  description   String?
+  updatedAt     DateTime     @updatedAt
+
+  @@map("system_config")
+}
+
+// ============================================================================
+// RAW SQL VIEWS (use $queryRaw)
+// ============================================================================
+
+// National Budget by Sector View
+// SQL: CREATE VIEW v_national_budget_by_sector AS...
+
+// County Budget Summary View
+// SQL: CREATE VIEW v_county_budget_summary AS...
+
+// Content Summary View
+// SQL: CREATE VIEW v_content_summary AS...

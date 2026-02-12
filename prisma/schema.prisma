@@ -1,0 +1,548 @@
+// Prisma Schema for Budget Ndio Story
+// Compatible with Neon Serverless and Self-Hosted PostgreSQL
+// Version: 1.0
+// Date: February 2025
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUMS (mapped to PostgreSQL enums)
+// ============================================================================
+
+enum UserRole {
+  citizen
+  researcher
+  journalist
+  admin
+}
+
+enum BudgetLevel {
+  national
+  county
+}
+
+enum ContentType {
+  article
+  podcast
+  video
+  explainer
+  case_study
+}
+
+enum ContentCategory {
+  national_budget
+  county_budget
+  tax_education
+  policy_impact
+  civic_engagement
+}
+
+enum EngagementType {
+  contact_form
+  newsletter_signup
+  faq_view
+  social_share
+  content_download
+}
+
+enum AnalyticsEventType {
+  view
+  download
+  listen
+  watch
+  export
+  search
+}
+
+enum LanguageCode {
+  en
+  sw
+}
+
+enum ContentStatus {
+  draft
+  published
+  archived
+}
+
+enum ContactStatus {
+  new
+  in_progress
+  resolved
+  closed
+}
+
+// ============================================================================
+// CORE TABLES
+// ============================================================================
+
+model User {
+  id            Int              @id @default(autoincrement())
+  email         String           @unique
+  name          String?
+  role          UserRole         @default(citizen)
+  preferences   Json             @default("{}")
+  subscribedAt  DateTime?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  engagements        Engagement[]
+  newsletterSubscriptions NewsletterSubscription[]
+  contactSubmissions ContactSubmission[]
+  searchHistory      SearchHistory[]
+  uploadedMedia      MediaLibrary[]
+
+  @@map("users")
+  @@index([email])
+  @@index([role])
+}
+
+model Sector {
+  id          Int               @id @default(autoincrement())
+  name        String            @unique
+  description String?
+  iconUrl     String?
+  colorCode   String            @default("#3B82F6")
+  sortOrder   Int               @default(0)
+  createdAt   DateTime          @default(now())
+
+  budgetAllocations BudgetAllocation[]
+
+  @@map("sectors")
+  @@index([name])
+}
+
+model FiscalYear {
+  id          Int               @id @default(autoincrement())
+  year        Int               @unique
+  startDate   DateTime
+  endDate     DateTime
+  description String?
+  isCurrent   Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+
+  budgetAllocations BudgetAllocation[]
+
+  @@map("fiscal_years")
+  @@index([year])
+  @@index([isCurrent])
+}
+
+model County {
+  id          Int               @id @default(autoincrement())
+  name        String            @unique
+  code        String            @unique
+  region      String?
+  geoData     Json?
+  population  Int?
+  createdAt   DateTime          @default(now())
+
+  budgetAllocations BudgetAllocation[]
+
+  @@map("counties")
+  @@index([name])
+  @@index([code])
+}
+
+// ============================================================================
+// BUDGET DATA TABLES
+// ============================================================================
+
+model BudgetAllocation {
+  id              Int              @id @default(autoincrement())
+  fiscalYearId    Int
+  sectorId        Int
+  countyId        Int?
+  level           BudgetLevel
+  budgetedAmount Decimal          @db.Decimal(18, 2)
+  actualSpent     Decimal?        @db.Decimal(18, 2)
+  approvedAmount  Decimal?        @db.Decimal(18, 2)
+  notes           String?
+  source          String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  fiscalYear    FiscalYear   @relation(fields: [fiscalYearId], references: [id], onDelete: Cascade)
+  sector        Sector       @relation(fields: [sectorId], references: [id], onDelete: Cascade)
+  county        County?      @relation(fields: [countyId], references: [id], onDelete: Cascade)
+  lineItems     BudgetLineItem[]
+
+  @@map("budget_allocations")
+  @@index([fiscalYearId])
+  @@index([sectorId])
+  @@index([countyId])
+  @@index([level])
+  @@index([fiscalYearId, sectorId, level])
+}
+
+model BudgetLineItem {
+  id              Int              @id @default(autoincrement())
+  allocationId    Int
+  description     String
+  budgetedAmount  Decimal          @db.Decimal(18, 2)
+  actualAmount    Decimal?         @db.Decimal(18, 2)
+  quarter         Int?
+  createdAt       DateTime        @default(now())
+
+  allocation BudgetAllocation @relation(fields: [allocationId], references: [id], onDelete: Cascade)
+
+  @@map("budget_line_items")
+  @@index([allocationId])
+}
+
+// ============================================================================
+// CONTENT TABLES
+// ============================================================================
+
+model Content {
+  id              Int              @id @default(autoincrement())
+  type            ContentType
+  title           String
+  slug            String           @unique
+  description     String?
+  contentBody     String?
+  mediaUrl        String?
+  thumbnailUrl    String?
+  category        ContentCategory?
+  tags            String[]
+  publishedAt     DateTime?
+  status          ContentStatus    @default(draft)
+  views           Int              @default(0)
+  featured        Boolean          @default(false)
+  author          String?
+  durationSeconds Int?
+  analytics       Json             @default("{}")
+  metadata        Json             @default("{}")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  translations    Translation[]
+  podcastEpisode  PodcastEpisode?
+  videoEpisode    VideoEpisode?
+  contentRelationships ContentRelationship[] @relation("PrimaryContent")
+  relatedContent  ContentRelationship[] @relation("RelatedContent")
+  analyticsLogs   AnalyticsLog[]
+  searchClicks    SearchHistory[]
+
+  @@map("contents")
+  @@index([type])
+  @@index([category])
+  @@index([status])
+  @@index([publishedAt])
+  @@index([slug])
+  @@index([featured])
+}
+
+model Translation {
+  id                  Int          @id @default(autoincrement())
+  contentId           Int
+  language            LanguageCode
+  translatedTitle     String?
+  translatedBody      String?
+  translatedDescription String?
+  translatedTags      String[]
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, language])
+  @@map("translations")
+  @@index([contentId, language])
+}
+
+model ContentCategoryRef {
+  id          Int              @id @default(autoincrement())
+  name        ContentCategory  @unique
+  description String?
+  icon        String?
+  createdAt   DateTime         @default(now())
+
+  @@map("content_categories_ref")
+}
+
+// ============================================================================
+// MEDIA TABLES
+// ============================================================================
+
+model PodcastEpisode {
+  id              Int          @id @default(autoincrement())
+  contentId       Int          @unique
+  episodeNumber   Int?
+  seasonNumber    Int          @default(1)
+  durationSeconds Int
+  audioUrl        String
+  transcript      String?
+  guests          Json         @default("{}")
+  shownotes       String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("podcast_episodes")
+}
+
+model VideoEpisode {
+  id              Int          @id @default(autoincrement())
+  contentId       Int          @unique
+  videoUrl        String
+  embedUrl        String?
+  durationSeconds Int?
+  resolution      String?
+  thumbnailTimestamps Int[]
+  subtitles       Json         @default("{}")
+  transcript      String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@map("video_episodes")
+}
+
+model MediaLibrary {
+  id              Int          @id @default(autoincrement())
+  filename        String
+  originalFilename String?
+  mimeType        String
+  sizeBytes       BigInt?
+  url             String
+  localPath       String?
+  altText         String?
+  caption         String?
+  uploadedById    Int?
+  createdAt       DateTime     @default(now())
+
+  uploadedBy User? @relation(fields: [uploadedById], references: [id])
+
+  @@map("media_library")
+}
+
+// ============================================================================
+// ENGAGEMENT TABLES
+// ============================================================================
+
+model Engagement {
+  id          Int            @id @default(autoincrement())
+  userId      Int?
+  type        EngagementType
+  details     Json           @default("{}")
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime      @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("engagements")
+  @@index([type])
+  @@index([userId])
+}
+
+model NewsletterSubscription {
+  id            Int          @id @default(autoincrement())
+  email         String       @unique
+  name          String?
+  interests     String[]     @default("{}")
+  isActive      Boolean      @default(true)
+  subscribedAt  DateTime     @default(now())
+  unsubscribedAt DateTime?
+  source        String?
+
+  @@map("newsletter_subscriptions")
+  @@index([email])
+  @@index([isActive])
+}
+
+model ContactSubmission {
+  id          Int            @id @default(autoincrement())
+  name        String
+  email       String
+  subject     String?
+  message     String
+  status      ContactStatus  @default(new)
+  assignedToId Int?
+  notes       String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  assignedTo User? @relation(fields: [assignedToId], references: [id])
+
+  @@map("contact_submissions")
+}
+
+model Faq {
+  id          Int          @id @default(autoincrement())
+  question    String
+  answer      String
+  category    String?
+  sortOrder   Int          @default(0)
+  isActive    Boolean      @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@map("faqs")
+  @@index([category])
+  @@index([isActive])
+}
+
+// ============================================================================
+// ANALYTICS TABLES
+// ============================================================================
+
+model AnalyticsLog {
+  id          BigInt          @id @default(autoincrement())
+  userId      Int?
+  sessionId   String?
+  contentId   Int?
+  eventType   AnalyticsEventType
+  eventData   Json            @default("{}")
+  duration    Int?
+  pageUrl     String?
+  referrerUrl String?
+  deviceType  String?
+  browser     String?
+  os          String?
+  country     String?
+  city        String?
+  ipAddress   String?
+  timestamp   DateTime       @default(now())
+
+  user    User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  content Content? @relation(fields: [contentId], references: [id], onDelete: SetNull)
+
+  @@map("analytics_logs")
+  @@index([timestamp])
+  @@index([eventType])
+  @@index([contentId])
+  @@index([userId])
+  @@index([sessionId])
+}
+
+// ============================================================================
+// SEARCH AND DISCOVERY
+// ============================================================================
+
+model SearchHistory {
+  id                Int          @id @default(autoincrement())
+  userId            Int?
+  sessionId         String?
+  query             String
+  resultsCount      Int?
+  clickedContentId  Int?
+  createdAt         DateTime     @default(now())
+
+  user            User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  clickedContent  Content?   @relation(fields: [clickedContentId], references: [id])
+
+  @@map("search_history")
+  @@index([query])
+  @@index([createdAt])
+}
+
+model ContentRelationship {
+  id                 Int          @id @default(autoincrement())
+  contentId          Int
+  relatedContentId   Int
+  relationshipType   String       @default("related")
+  createdAt          DateTime     @default(now())
+
+  content         Content @relation("PrimaryContent", fields: [contentId], references: [id], onDelete: Cascade)
+  relatedContent  Content @relation("RelatedContent", fields: [relatedContentId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, relatedContentId])
+  @@map("content_relationships")
+}
+
+// ============================================================================
+// UTILITY TABLES
+// ============================================================================
+
+model DataSource {
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String?
+  url           String?
+  sourceType    String?
+  lastFetched   DateTime?
+  createdAt     DateTime     @default(now())
+
+  @@map("data_sources")
+}
+
+model SystemConfig {
+  id            Int          @id @default(autoincrement())
+  configKey     String       @unique
+  configValue   String
+  description   String?
+  updatedAt     DateTime     @updatedAt
+
+  @@map("system_config")
+}
+
+// ============================================================================
+// VIEWS (Read-only access in Prisma)
+// ============================================================================
+
+// Note: Prisma doesn't support views natively, but you can use raw queries
+// Example: 
+// const nationalBudgetBySector = await prisma.$queryRaw`
+//   SELECT * FROM v_national_budget_by_sector WHERE year = 2024
+// `;
+
+// ============================================================================
+// EXAMPLE QUERIES
+// ============================================================================
+
+// Get national budget by sector for a fiscal year
+// const budgetBySector = await prisma.budgetAllocation.findMany({
+//   where: {
+//     fiscalYearId: 7,
+//     level: 'national',
+//     countyId: null
+//   },
+//   include: {
+//     sector: true
+//   },
+//   orderBy: {
+//     budgetedAmount: 'desc'
+//   }
+// });
+
+// Get featured content
+// const featuredContent = await prisma.content.findMany({
+//   where: {
+//     featured: true,
+//     status: 'published'
+//   },
+//   orderBy: {
+//     publishedAt: 'desc'
+//   },
+//   take: 5
+// });
+
+// Get content with translations
+// const contentWithTranslations = await prisma.content.findMany({
+//   include: {
+//     translations: true
+//   }
+// });
+
+// Get analytics summary
+// const analyticsSummary = await prisma.analyticsLog.groupBy({
+//   by: ['eventType'],
+//   _count: {
+//     eventType: true
+//   }
+// });
+
+// ============================================================================
+// END OF PRISMA SCHEMA
+// ============================================================================

@@ -38,6 +38,7 @@ export {
 export { default as RoundButton } from "./RoundButton";
 export { default as Rounded } from "./Rounded";
 export { FadeIn, ScrollReveal } from "./ScrollReveal";
+export { default as SelfHostedVideoPlayer } from "./SelfHostedVideoPlayer";
 export { default as SmoothScrollGsap } from "./SmoothScrollGsap";
 export {
   ArticleSchema,

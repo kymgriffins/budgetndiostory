@@ -506,7 +506,7 @@ export default function Shorts() {
                   </div>
                   <div className="flex items-center gap-[12px] flex-wrap">
                     <Link
-                      href="/stories"
+                      href="/blog"
                       className="px-[18px] py-[12px] rounded-full bg-[#212121] text-white paragraph font-NeueMontreal hover:opacity-90 transition"
                     >
                       Stories

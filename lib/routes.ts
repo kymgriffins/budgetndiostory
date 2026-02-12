@@ -28,6 +28,9 @@ export const ROUTES = {
   LEARN: "/learn",
   BLOG: "/blog",
   ADMIN_BLOG: "/admin/blog",
+  PRIVACY: "/privacy",
+  TERMS: "/terms",
+  SEARCH: "/search",
   MVP1: "/mvp1",
   FUNDS: "/funds",
   BILLING: "/billing",
@@ -43,15 +46,17 @@ export const DYNAMIC_ROUTES = {
 // Navigation Items (for Navbar and MobileNav)
 export const NAV_ITEMS = [
   { id: 1, title: "Home", href: "/" },
-  { id: 9, title: "Blog", href: "/blog" },
-  { id: 3, title: "Tracker", href: "/tracker" },
-  { id: 7, title: "Contact", href: "/contact" },
+  { id: 2, title: "Tracker", href: "/tracker" },
+  { id: 3, title: "Stories", href: "/blog" },
+  { id: 4, title: "Participate", href: "/participate" },
+  { id: 5, title: "Contact", href: "/contact" },
 ] as const;
 
 export const MOBILE_NAV_ITEMS = [
   { id: 1, title: "Home", href: "/" },
-  { id: 3, title: "Tracker", href: "/tracker" },
-  { id: 9, title: "Blog", href: "/blog" },
+  { id: 2, title: "Tracker", href: "/tracker" },
+  { id: 3, title: "Stories", href: "/blog" },
+  { id: 4, title: "Participate", href: "/participate" },
   { id: 5, title: "Contact us", href: "/contact" },
 ] as const;
 
@@ -79,6 +84,10 @@ export const FOOTER_HIDE_ROUTES = [
   ROUTES.BLOG,
   ROUTES.FUNDS,
   ROUTES.BILLING,
+  ROUTES.PARTICIPATE,
+  ROUTES.PRIVACY,
+  ROUTES.TERMS,
+  ROUTES.SEARCH,
 ] as const;
 
 // Type for route values
