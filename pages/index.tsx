@@ -380,121 +380,119 @@ export default function VideoLanding() {
           </section>
 
           {/* FEATURED IMPACT STORY - Emotional Core */}
-          <section id="featured-story" className="padding-x py-16" aria-labelledby="featured-story-heading">
-            <div className="max-w-7xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/15 via-[#0a0a0a] to-[#ff2f55]/15 border border-white/10 overflow-hidden"
+          {/* FEATURED IMPACT STORY - Positive Government Success */}
+<section id="featured-story" className="padding-x py-16" aria-labelledby="featured-story-heading">
+  <div className="max-w-7xl mx-auto">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="rounded-3xl bg-gradient-to-br from-[#00aa55]/15 via-[#0a0a0a] to-[#00aa55]/15 border border-white/10 overflow-hidden"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+        {/* Left: Story Content */}
+        <div className="p-8 lg:p-12 flex flex-col justify-center">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="px-3 py-1 bg-[#00aa55]/20 text-[#00aa55] text-xs font-medium uppercase tracking-wider rounded-full">
+              Featured Success Story
+            </span>
+            <span className="text-white/50 text-xs uppercase tracking-wider">
+              Government Digital Inclusion
+            </span>
+          </div>
+          <h2 id="featured-story-heading" className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight mt-3">
+            How the Government is Bringing Digital Education to Every Child
+          </h2>
+          <p className="font-NeueMontreal text-white/70 mt-5 leading-relaxed text-lg">
+            Through the Digital Literacy Programme (DigiSchool), the Kenyan government has delivered over **1.2 million tablets and laptops** to public primary schools nationwide — connecting more than **20,000 schools** to high-speed internet and transforming classrooms across all 47 counties.
+          </p>
+
+          {/* Trust Badges */}
+          <div className="flex flex-wrap gap-3 mt-6">
+            {[
+              { icon: <CheckCircle size={16} />, text: "Government-Led" },
+              { icon: <FileText size={16} />, text: "Ministry of ICT & Education" },
+              { icon: <MapPin size={16} />, text: "All 47 Counties" },
+            ].map((badge, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                  {/* Left: Story Content */}
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="px-3 py-1 bg-[#00aa55]/20 text-[#00aa55] text-xs font-medium uppercase tracking-wider rounded-full">
-                        Featured Story
-                      </span>
-                      <span className="text-white/50 text-xs uppercase tracking-wider">
-                        Health Budget Investigation
-                      </span>
-                    </div>
-                    
-                    <h2 id="featured-story-heading" className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight mt-3">
-                      Where did the
-                      <br />
-                      <span className="text-[#00aa55]">KSh 12 Billion</span> health budget go?
-                    </h2>
-                    
-                    <p className="font-NeueMontreal text-white/70 mt-5 leading-relaxed text-lg">
-                      We traced billions allocated for county health facilities. What we found on the ground versus what's in the records will surprise you. Three facilities in Nakuru County require immediate accountability review.
-                    </p>
+                <span className="text-[#00aa55]">{badge.icon}</span>
+                <span className="text-white/70 text-xs font-medium">{badge.text}</span>
+              </div>
+            ))}
+          </div>
 
-                    {/* Trust Badges */}
-                    <div className="flex flex-wrap gap-3 mt-6">
-                      {trustBadges.map((badge, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full"
-                        >
-                          <span className="text-[#00aa55]">{badge.icon}</span>
-                          <span className="text-white/70 text-xs font-medium">{badge.text}</span>
-                        </div>
-                      ))}
-                    </div>
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-3 mt-8">
+            <Link
+              href="/stories"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#00aa55] text-black rounded-full font-NeueMontreal font-medium text-sm uppercase tracking-wider hover:bg-[#00cc66] hover:scale-105 transition-all duration-300"
+            >
+              Read More Success Stories <ArrowRight size={16} />
+            </Link>
+            <Link
+              href="/tracker"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 rounded-full font-NeueMontreal font-medium text-sm uppercase tracking-wider hover:bg-white/20 transition-all duration-300"
+            >
+              Explore Education Data <ExternalLink size={14} />
+            </Link>
+          </div>
+        </div>
 
-                    {/* CTAs */}
-                    <div className="flex flex-wrap gap-3 mt-8">
-                      <Link
-                        href="/stories"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-[#00aa55] text-black rounded-full font-NeueMontreal font-medium text-sm uppercase tracking-wider hover:bg-[#00cc66] hover:scale-105 transition-all duration-300"
-                      >
-                        Read Full Story <ArrowRight size={16} />
-                      </Link>
-                      <Link
-                        href="https://forms.google.com/example"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 rounded-full font-NeueMontreal font-medium text-sm uppercase tracking-wider hover:bg-white/20 transition-all duration-300"
-                      >
-                        Sign the Petition <ExternalLink size={14} />
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Right: Impact Numbers */}
-                  <div className="bg-white/5 border-t lg:border-t-0 lg:border-l border-white/10 p-8 lg:p-12">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
-                      {/* Budgeted */}
-                      <div className="rounded-2xl bg-[#00aa55]/10 border border-[#00aa55]/30 p-6 flex flex-col justify-center">
-                        <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider mb-2">
-                          Budgeted
-                        </p>
-                        <p className="font-FoundersGrotesk text-4xl font-bold text-[#00aa55]">
-                          KSh 12B
-                        </p>
-                        <p className="font-NeueMontreal text-white/60 text-sm mt-2">
-                          What was promised for health facilities
-                        </p>
-                      </div>
-
-                      {/* Verified */}
-                      <div className="rounded-2xl bg-white/10 border border-white/20 p-6 flex flex-col justify-center">
-                        <p className="text-xs font-NeueMontreal text-white/60 uppercase tracking-wider mb-2">
-                          Verified on Ground
-                        </p>
-                        <p className="font-FoundersGrotesk text-4xl font-bold text-white">
-                          KSh 4.2B
-                        </p>
-                        <p className="font-NeueMontreal text-white/60 text-sm mt-2">
-                          What we actually found
-                        </p>
-                      </div>
-
-                      {/* Gap */}
-                      <div className="rounded-2xl bg-[#ff2f55]/10 border border-[#ff2f55]/30 p-6 sm:col-span-2">
-                        <div className="flex items-start gap-3">
-                          <div className="p-2 bg-[#ff2f55]/20 rounded-lg">
-                            <Target size={20} className="text-[#ff2f55]" />
-                          </div>
-                          <div>
-                            <p className="text-xs font-NeueMontreal text-[#ff2f55]/70 uppercase tracking-wider mb-1">
-                              The Gap
-                            </p>
-                            <p className="font-NeueMontreal text-white/80 leading-relaxed">
-                              <strong>KSh 7.8 Billion</strong> unaccounted for across 12 facilities. 
-                              This is your tax money. Join the call for accountability.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+        {/* Right: Impact Numbers */}
+        <div className="bg-white/5 border-t lg:border-t-0 lg:border-l border-white/10 p-8 lg:p-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+            {/* Devices Distributed */}
+            <div className="rounded-2xl bg-[#00aa55]/10 border border-[#00aa55]/30 p-6 flex flex-col justify-center">
+              <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider mb-2">
+                Delivered
+              </p>
+              <p className="font-FoundersGrotesk text-4xl font-bold text-[#00aa55]">
+                1.2M+
+              </p>
+              <p className="font-NeueMontreal text-white/60 text-sm mt-2">
+                Tablets & Laptops to Schools
+              </p>
             </div>
-          </section>
+
+            {/* Schools Connected */}
+            <div className="rounded-2xl bg-white/10 border border-white/20 p-6 flex flex-col justify-center">
+              <p className="text-xs font-NeueMontreal text-white/60 uppercase tracking-wider mb-2">
+                Connected
+              </p>
+              <p className="font-FoundersGrotesk text-4xl font-bold text-white">
+                20,000+
+              </p>
+              <p className="font-NeueMontreal text-white/60 text-sm mt-2">
+                Public Primary Schools
+              </p>
+            </div>
+
+            {/* Reach & Impact */}
+            <div className="rounded-2xl bg-[#00aa55]/10 border border-[#00aa55]/30 p-6 sm:col-span-2">
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-[#00aa55]/20 rounded-lg">
+                  <Users size={20} className="text-[#00aa55]" />
+                </div>
+                <div>
+                  <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider mb-1">
+                    Real Impact
+                  </p>
+                  <p className="font-NeueMontreal text-white/80 leading-relaxed">
+                    Millions of pupils now access digital learning, teachers use modern tools, and rural schools bridge the digital divide — building a brighter, tech-ready future for Kenya.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
 
           {/* OUR PROCESS - Timeline Style */}
           <section className="padding-x py-20" aria-labelledby="process-heading">
