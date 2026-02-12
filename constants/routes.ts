@@ -69,6 +69,15 @@ export const ADMIN_ROUTES = {
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
+// MEDIA ROUTES - For media content (combines podcasts, shorts, videos)
+// ─────────────────────────────────────────────────────────────────────────────
+export const MEDIA_ROUTES = {
+  MEDIA: "/media" as const,
+  PODCASTS: "/podcasts" as const,
+  SHORTS: "/shorts" as const,
+} as const;
+
+// ─────────────────────────────────────────────────────────────────────────────
 // DYNAMIC ROUTES - Helpers for generating dynamic paths
 // ─────────────────────────────────────────────────────────────────────────────
 export const DYNAMIC_ROUTES = {
@@ -86,6 +95,7 @@ export const ROUTES = {
   ...PUBLIC_ROUTES,
   ...FEATURE_ROUTES,
   ...ADMIN_ROUTES,
+  ...MEDIA_ROUTES,
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -112,22 +122,15 @@ export type NavItem = {
 export const MAIN_NAV_ITEMS: readonly NavItem[] = [
   { title: "Home", href: PUBLIC_ROUTES.HOME, id: 1 },
   { title: "Tracker", href: FEATURE_ROUTES.TRACKER, id: 2 },
-  { title: "Stories", href: FEATURE_ROUTES.STORIES, id: 3 },
-  { title: "Podcasts", href: FEATURE_ROUTES.PODCASTS, id: 4 },
-  { title: "Videos", href: FEATURE_ROUTES.SHORTS, id: 5 },
-  { title: "Participate", href: FEATURE_ROUTES.PARTICIPATE, id: 6 },
-  { title: "About", href: PUBLIC_ROUTES.ABOUT, id: 7 },
+  { title: "Learn", href: FEATURE_ROUTES.LEARN, id: 3 },
+  { title: "Contact", href: PUBLIC_ROUTES.CONTACT, id: 4 },
 ] as const;
 
 export const MOBILE_NAV_ITEMS: readonly NavItem[] = [
   { title: "Home", href: PUBLIC_ROUTES.HOME, id: 1 },
   { title: "Tracker", href: FEATURE_ROUTES.TRACKER, id: 2 },
-  { title: "Stories", href: FEATURE_ROUTES.STORIES, id: 3 },
-  { title: "Podcasts", href: FEATURE_ROUTES.PODCASTS, id: 4 },
-  { title: "Videos", href: FEATURE_ROUTES.SHORTS, id: 5 },
-  { title: "Participate", href: FEATURE_ROUTES.PARTICIPATE, id: 6 },
-  { title: "About", href: PUBLIC_ROUTES.ABOUT, id: 7 },
-  { title: "Contact", href: PUBLIC_ROUTES.CONTACT, id: 8 },
+  { title: "Learn", href: FEATURE_ROUTES.LEARN, id: 3 },
+  { title: "Contact", href: PUBLIC_ROUTES.CONTACT, id: 4 },
 ] as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
