@@ -29,7 +29,7 @@ export default function LandingFooter() {
                 <div className="mt-[10px] flex flex-col gap-[8px]">
                   <Link
                     className="small-text font-NeueMontreal text-[#f1f1f1]/80 hover:text-white transition-colors"
-                    href="/stories"
+                    href="/blog"
                   >
                     Stories
                   </Link>

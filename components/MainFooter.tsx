@@ -1,9 +1,4 @@
-/**
- * @deprecated This component is deprecated. Use FooterV2.tsx instead.
- * FooterV2 has better civic trust features, complete social links, and proper accessibility.
- */
 "use client";
-
 import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -31,10 +26,7 @@ const contactInfo = [
 ];
 
 const socialLinks = [
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/profile.php?id=61586898487932",
-  },
+  { name: "Facebook", href: "https://www.facebook.com/profile.php?id=61586898487932" },
   { name: "TikTok", href: "https://www.tiktok.com/@budget.ndio.story" },
   { name: "Instagram", href: "https://www.instagram.com/budgetndiostory" },
   { name: "X", href: "https://x.com/BudgetNdioStory" },
@@ -52,9 +44,9 @@ export default function MainFooter() {
     <footer
       role="contentinfo"
       aria-label="Site footer"
-      className="py-16 px-8 border-t border-white/10"
+      className="bg-[#0a0a0a] py-16 border-t border-white/10"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Info */}
           <div>
@@ -63,8 +55,8 @@ export default function MainFooter() {
             </h3>
             <div className="flex flex-col gap-4">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <div className="text-white/60">{item.icon}</div>
+                <div key={index} className="flex items-start gap-3">
+                  <div className="text-white/60 mt-0.5">{item.icon}</div>
                   <div>
                     <p className="text-xs font-NeueMontreal text-white/50 mb-0.5">
                       {item.label}
@@ -117,11 +109,36 @@ export default function MainFooter() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-white/10 text-center">
-          <p className="text-sm font-NeueMontreal text-white/50">
-            © {year} Budget Ndio Story. All rights reserved.
-          </p>
+        {/* Bottom Bar - Tagline + Copyright + Legal Links */}
+        <div className="mt-16 pt-10 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            {/* Tagline */}
+            <p className="font-NeueMontreal text-white/70 text-lg md:text-xl font-light max-w-md">
+              Your tax money. Your right to know.
+            </p>
+
+            {/* Copyright + Legal Links */}
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <p className="text-sm font-NeueMontreal text-white/50">
+                © {year} Budget Ndio Story. All rights reserved.
+              </p>
+
+              <div className="flex gap-6">
+                <Link
+                  href="/privacy"
+                  className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href="/terms"
+                  className="text-sm font-NeueMontreal text-white/60 hover:text-white transition-colors"
+                >
+                  Terms of Service
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

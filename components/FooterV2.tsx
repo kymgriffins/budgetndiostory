@@ -1,3 +1,4 @@
+
 "use client";
 import { FadeUp, LinkHover } from "@/animation";
 import { Mail, MapPin, Phone } from "lucide-react";
@@ -7,7 +8,7 @@ import { ProtectedEmailWithIcon } from "./ProtectedEmail";
 import Newsletter from "./Newsletter";
 
 export default function FooterV2() {
-  const [year, setYear] = useState(2024);
+  const [year, setYear] = useState(2026);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
@@ -57,32 +58,32 @@ export default function FooterV2() {
     <footer
       role="contentinfo"
       aria-label="Site footer"
-      className="w-full bg-background py-[80px]"
+      className="w-full bg-[#0a0a0a] py-[80px]"
     >
       <FadeUp>
-        <div className="w-full flex flex-col lgOnly:flex-row gap-[60px] padding-x">
+        <div className="w-full flex flex-col lg:flex-row gap-[60px] padding-x">
           {/* Contact Info */}
-          <div className="w-full lgOnly:w-[40%]">
-            <h2 className="sub-heading font-FoundersGrotesk text-secondry uppercase mb-[40px]">
+          <div className="w-full lg:w-[40%]">
+            <h2 className="sub-heading font-FoundersGrotesk text-white uppercase mb-[40px]">
               Contact Info
             </h2>
             <div className="flex flex-col gap-[30px]">
               {contactInfo.map((item, index) => (
                 <div key={index} className="flex items-start gap-[15px]">
-                  <div className="text-secondry mt-[2px]">{item.icon}</div>
+                  <div className="text-white mt-[2px]">{item.icon}</div>
                   <div>
-                    <p className="paragraph font-NeueMontreal text-secondry mb-[5px]">
+                    <p className="paragraph font-NeueMontreal text-white mb-[5px]">
                       {item.label}
                     </p>
                     {item.email ? (
                       <ProtectedEmailWithIcon
                         email={item.email}
                         showIcon={false}
-                        className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
+                        className="text-white before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
                       />
                     ) : (
                       <LinkHover
-                        className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
+                        className="text-white before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
                         title={item.value}
                         href={item.href}
                       />
@@ -94,15 +95,15 @@ export default function FooterV2() {
           </div>
 
           {/* Social Links */}
-          <div className="w-full lgOnly:w-[30%]">
-            <h2 className="sub-heading font-FoundersGrotesk text-secondry uppercase mb-[40px]">
+          <div className="w-full lg:w-[30%]">
+            <h2 className="sub-heading font-FoundersGrotesk text-white uppercase mb-[40px]">
               Follow Us
             </h2>
             <div className="flex flex-col gap-[15px]">
               {socialLinks.map((social, index) => (
                 <LinkHover
                   key={index}
-                  className="before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
+                  className="text-white before:h-[1px] after:h-[1px] w-fit paragraph font-medium capitalize flex flex-col before:bottom-[1px] after:bottom-[1px]"
                   title={social.name}
                   href={social.href}
                   target="_blank"
@@ -113,11 +114,11 @@ export default function FooterV2() {
           </div>
 
           {/* Newsletter / CTA */}
-          <div className="w-full lgOnly:w-[30%]">
-            <h2 className="sub-heading font-FoundersGrotesk text-secondry uppercase mb-[20px]">
+          <div className="w-full lg:w-[30%]">
+            <h2 className="sub-heading font-FoundersGrotesk text-white uppercase mb-[20px]">
               Stay Updated
             </h2>
-            <p className="paragraph font-NeueMontreal text-secondry mb-[20px]">
+            <p className="paragraph font-NeueMontreal text-white mb-[20px]">
               Subscribe to our newsletter for budget insights and updates.
             </p>
             <Newsletter
@@ -130,28 +131,28 @@ export default function FooterV2() {
       </FadeUp>
 
       {/* Bottom Bar */}
-      <div className="w-full border-t border-[#21212122] mt-[60px] pt-[30px]">
+      <div className="w-full border-t border-white/10 mt-[60px] pt-[30px]">
         {/* Tagline and Data Sources */}
-        <p className="paragraph font-NeueMontreal text-secondry opacity-70 mb-[10px] padding-x">
+        <p className="paragraph font-NeueMontreal text-white opacity-70 mb-[10px] padding-x">
           Your tax money. Your right to know.
         </p>
-        <p className="text-xs font-NeueMontreal text-secondry opacity-50 mb-[20px] padding-x">
+        <p className="text-xs font-NeueMontreal text-white opacity-50 mb-[20px] padding-x">
           Budget data sourced from National Treasury, KNBS, and field verification.
         </p>
-        <div className="flex flex-col smOnly:flex-row xm:flex-row justify-between items-center gap-[20px] padding-x">
-          <p className="paragraph font-NeueMontreal text-secondry">
+        <div className="flex flex-col sm:flex-row xm:flex-row justify-between items-center gap-[20px] padding-x">
+          <p className="paragraph font-NeueMontreal text-white">
             © {year} Budget Ndio Story. All rights reserved.
           </p>
           <div className="flex gap-[30px]">
             <Link
               href="/privacy"
-              className="paragraph font-NeueMontreal text-secondry hover:underline"
+              className="paragraph font-NeueMontreal text-white hover:underline"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="paragraph font-NeueMontreal text-secondry hover:underline"
+              className="paragraph font-NeueMontreal text-white hover:underline"
             >
               Terms of Service
             </Link>

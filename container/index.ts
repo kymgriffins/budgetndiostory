@@ -1,10 +1,3 @@
-// home page
-export { default as About } from "./home-page/About";
-export { default as Clients } from "./home-page/Clients";
-export { default as Hero } from "./home-page/Hero";
-export { default as Projects } from "./home-page/Projects";
-export { default as PlayVideo, default as VideoHome } from "./home-page/Video";
-
 // services page
 export { default as Archive } from "./services-page/Archive";
 export { default as Capibilyties } from "./services-page/Capibilyties";
