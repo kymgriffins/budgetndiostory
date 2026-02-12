@@ -44,17 +44,21 @@ export default function FooterV2() {
     { name: "Instagram", href: "https://www.instagram.com/budgetndiostory" },
     { name: "X", href: "https://x.com/BudgetNdioStory" },
     {
-      name: "LinkedIn",
-      href: "https://www.linkedin.com/company/budgetndiostory",
-    },
-    {
       name: "YouTube",
       href: "https://www.youtube.com/@BudgetNdioStory",
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/budgetndiostory",
     },
   ];
 
   return (
-    <footer className="w-full bg-background py-[80px]">
+    <footer
+      role="contentinfo"
+      aria-label="Site footer"
+      className="w-full bg-background py-[80px]"
+    >
       <FadeUp>
         <div className="w-full flex flex-col lgOnly:flex-row gap-[60px] padding-x">
           {/* Contact Info */}
@@ -127,6 +131,13 @@ export default function FooterV2() {
 
       {/* Bottom Bar */}
       <div className="w-full border-t border-[#21212122] mt-[60px] pt-[30px]">
+        {/* Tagline and Data Sources */}
+        <p className="paragraph font-NeueMontreal text-secondry opacity-70 mb-[10px] padding-x">
+          Your tax money. Your right to know.
+        </p>
+        <p className="text-xs font-NeueMontreal text-secondry opacity-50 mb-[20px] padding-x">
+          Budget data sourced from National Treasury, KNBS, and field verification.
+        </p>
         <div className="flex flex-col smOnly:flex-row xm:flex-row justify-between items-center gap-[20px] padding-x">
           <p className="paragraph font-NeueMontreal text-secondry">
             © {year} Budget Ndio Story. All rights reserved.

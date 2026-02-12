@@ -1,5 +1,6 @@
 "use client";
 
+import { NAV_ITEMS, MOBILE_NAV_ITEMS } from "@/lib/routes";
 import logo from "@/public/logo.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -48,6 +49,8 @@ export default function NavbarLanding({
     <>
       {/* Desktop Navigation */}
       <motion.nav
+        role="banner"
+        aria-label="Main navigation"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -59,18 +62,14 @@ export default function NavbarLanding({
         <Link href="/" className="flex items-center">
           <img
             src={logoSrc}
-            alt="Budget Ndio Story logo"
+            alt="Budget Ndio Story – Home"
             className="h-8 w-auto object-contain brightness-0 invert"
           />
         </Link>
 
         {/* Desktop Links */}
         <div className="hidden lg:flex items-center gap-8">
-          {[
-            { id: 1, title: "Home", href: "/" },
-            { id: 2, title: "Stories", href: "/blog" },
-            { id: 3, title: "Contact", href: "/contact" },
-          ].map((item) => (
+          {NAV_ITEMS.slice(0, 6).map((item) => (
             <Link
               key={item.id}
               className="text-sm font-NeueMontreal text-white/90 hover:text-white transition-colors duration-300"
@@ -85,12 +84,11 @@ export default function NavbarLanding({
         <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
           <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/30 hover:bg-white hover:text-black transition-all duration-300"
+            href="/participate"
+            className="px-4 py-2 bg-[#00aa55] text-white text-sm font-medium font-NeueMontreal rounded-full hover:bg-[#008844] transition-colors"
+            aria-label="Subscribe to newsletter"
           >
-            <span className="text-sm font-NeueMontreal uppercase tracking-wider text-white hover:text-black transition-colors duration-300">
-              Read Stories
-            </span>
+            Subscribe
           </Link>
         </div>
 
@@ -99,6 +97,7 @@ export default function NavbarLanding({
           <HiOutlineMenuAlt4
             onClick={() => setToggle(true)}
             className="text-3xl text-white cursor-pointer"
+            aria-label="Open menu"
           />
         </div>
       </motion.nav>
@@ -130,11 +129,7 @@ export default function NavbarLanding({
 
             {/* Navigation Items */}
             <ul className="flex-1 flex flex-col justify-center gap-8 px-8">
-              {[
-                { id: 1, title: "Home", href: "/" },
-                { id: 2, title: "Stories", href: "/blog" },
-                { id: 3, title: "Contact", href: "/contact" },
-              ].map((item) => (
+              {MOBILE_NAV_ITEMS.map((item) => (
                 <Link
                   href={item.href}
                   key={item.id}
@@ -149,12 +144,12 @@ export default function NavbarLanding({
             {/* CTA at bottom */}
             <div className="px-8 pb-12">
               <Link
-                href="/blog"
+                href="/participate"
                 onClick={() => setToggle(false)}
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#00aa55] text-white"
               >
                 <span className="text-sm font-NeueMontreal uppercase tracking-wider">
-                  Read Stories
+                  Subscribe
                 </span>
               </Link>
             </div>

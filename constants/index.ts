@@ -34,10 +34,10 @@ import {
   publication3,
 } from "@/public";
 
-import { NAV_ITEMS, MOBILE_NAV_ITEMS } from "@/lib/routes";
+import { MAIN_NAV_ITEMS, MOBILE_NAV_ITEMS } from "@/constants/routes";
 
-// Navbar - Universal Navigation (imported from @/lib/routes)
-export { NAV_ITEMS as navbarItems };
+// Navbar - Universal Navigation (imported from @/constants/routes)
+export { MAIN_NAV_ITEMS as navbarItems };
 
 // Mobile Navigation - import MOBILE_NAV_ITEMS directly from @/lib/routes
 

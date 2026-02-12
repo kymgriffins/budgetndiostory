@@ -1,3 +1,16 @@
+/**
+ * @deprecated This component is deprecated and will be removed in a future version.
+ * Use FooterV2.tsx instead for better accessibility and civic trust features.
+ * 
+ * Issues with this footer:
+ * - Full-screen height (min-h-screen) is incorrect for footers
+ * - Inconsistent email domain (budgetndiyo vs budgetndiostory)
+ * - Missing newsletter signup
+ * - Missing social icons
+ * - Missing legal links
+ * 
+ * Migration: Replace with FooterV2 component
+ */
 import { LinkHover, TextMask } from "@/animation";
 import { footerItems, footernavbarItems } from "@/constants";
 import { logo } from "@/public";
@@ -5,6 +18,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
+  console.warn(
+    "Footer.tsx is deprecated. Use FooterV2.tsx instead for better accessibility and civic trust features."
+  );
   const phrase = ["Budget Ndio", "Story"];
   const phrase1 = ["Ganji Ndio Inabonga"];
   return (

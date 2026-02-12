@@ -24,15 +24,17 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
+        role="banner"
+        aria-label="Main navigation"
         variants={navVariants}
         className="w-full h-[8vh] padding-x fixed top-0 left-0 z-50 backdrop-blur-[7px] flex items-center justify-between smOnly:hidden xm:hidden mdOnly:hidden"
         animate={hidden ? "hidden" : "vissible"}
       >
         <div className="w-[50%]">
-          <Link href={"/"}>
+          <Link href="/">
             <Image
               src={logo}
-              alt="ochi logo"
+              alt="Budget Ndio Story – Home"
               width={70}
               height={70}
               priority
@@ -50,6 +52,14 @@ export default function Navbar() {
               <TextHover titile1={item.title} titile2={item.title} />
             </Link>
           ))}
+          {/* Strong CTA Button - Subscribe */}
+          <Link
+            href="/#newsletter"
+            className="px-4 py-2 bg-[#00aa55] text-white text-sm font-medium font-NeueMontreal rounded-full hover:bg-[#008844] transition-colors"
+            aria-label="Subscribe to newsletter"
+          >
+            Subscribe
+          </Link>
         </div>
       </motion.nav>
       <MobileNav />

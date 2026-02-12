@@ -1,3 +1,7 @@
+/**
+ * @deprecated This component is deprecated. Use FooterV2.tsx instead.
+ * FooterV2 has better civic trust features, complete social links, and proper accessibility.
+ */
 "use client";
 
 import { Mail, MapPin, Phone } from "lucide-react";
@@ -34,6 +38,7 @@ const socialLinks = [
   { name: "TikTok", href: "https://www.tiktok.com/@budget.ndio.story" },
   { name: "Instagram", href: "https://www.instagram.com/budgetndiostory" },
   { name: "X", href: "https://x.com/BudgetNdioStory" },
+  { name: "YouTube", href: "https://www.youtube.com/@BudgetNdioStory" },
 ];
 
 export default function MainFooter() {
@@ -44,7 +49,11 @@ export default function MainFooter() {
   }, []);
 
   return (
-    <footer className="py-16 px-8 border-t border-white/10">
+    <footer
+      role="contentinfo"
+      aria-label="Site footer"
+      className="py-16 px-8 border-t border-white/10"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Info */}
