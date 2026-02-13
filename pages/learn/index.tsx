@@ -780,7 +780,7 @@ export default function LearnPage() {
                 transition={{ duration: 0.6 }}
                 className="text-center mb-12"
               >
-                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                <span className="text-xs font-NeueMontreal uppercase tracking-[0.2em] text-white/50">
                   Stay Informed
                 </span>
                 <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight uppercase mt-3">
@@ -828,7 +828,7 @@ export default function LearnPage() {
                         <p className="font-NeueMontreal text-sm font-medium mt-1 line-clamp-2">
                           {event.event}
                         </p>
-                        <span className={`inline-block mt-2 px-2 py-0.5 rounded text-xs capitalize ${
+                        <span className={`inline-block font-NeueMontreal mt-2 px-2 py-0.5 rounded text-xs capitalize ${
                           event.phase === 'planning' ? 'bg-blue-500/20 text-blue-400' :
                           event.phase === 'review' ? 'bg-yellow-500/20 text-yellow-400' :
                           event.phase === 'participation' ? 'bg-[#00aa55]/20 text-[#00aa55]' :
@@ -903,7 +903,7 @@ export default function LearnPage() {
                                 whileInView={{ width: `${(clinic.registered/clinic.spots)*100}%` }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
-                                className="h-full bg-gradient-to-r from-[#00aa55] to-[#3b82f6] rounded-full"
+                                className="h-full bg-gradient-to-r from-[#00aa55] to-[#00aa55] rounded-full"
                               />
                             </div>
                           </div>
