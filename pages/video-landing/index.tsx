@@ -1,113 +1,123 @@
 "use client";
 
-import { MainFooter, NavbarLanding, VideoHeroLanding } from "@/components";
+import { MainFooter, NavbarLanding, VideoHeroLanding, VideoThumbnail } from "@/components";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowRight,
-  ChevronDown,
-  ChevronUp,
-  FileText,
-  Play,
-  TrendingUp,
-  Users,
-} from "lucide-react";
+import { ArrowRight, Play, Plus, Users } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 /**
- * Video Landing Page
- * Purposeful budget storytelling landing page
- *
+ * Video Landing Page - BNSCLIENT1.md Aligned
+ * 
  * Features:
  * - Full-screen video hero
- * - Minimalist navbar (Tracker hidden)
- * - Purposeful content sections
- * - FAQ section with accordion
- * - New footer with theme toggler
+ * - Category-based navigation (Basics | Finance Bill | National | County | Sector | Tracker Stories)
+ * - Video grid with filtering
+ * - CTA Strip: Request a Topic | Join Training
+ * - Focused content on videos
  */
+
+type VideoCategory = "all" | "basics" | "finance-bill" | "national" | "county" | "sector" | "tracker-stories";
+
+interface VideoItem {
+  id: number;
+  title: string;
+  description: string;
+  duration: string;
+  thumbnail?: string;
+  videoUrl: string;
+  category: VideoCategory;
+  date: string;
+}
+
+// Sample video data - in production this would come from API/CMS
+const sampleVideos: VideoItem[] = [
+  {
+    id: 1,
+    title: "Understanding the National Budget",
+    description: "A beginner's guide to Kenya's national budget process and key terms.",
+    duration: "5:30",
+    videoUrl: "https://youtu.be/example1",
+    category: "basics",
+    date: "2026-01-15",
+  },
+  {
+    id: 2,
+    title: "Finance Bill 2026 Explained",
+    description: "What the new Finance Bill means for ordinary Kenyans.",
+    duration: "8:45",
+    videoUrl: "https://youtu.be/example2",
+    category: "finance-bill",
+    date: "2026-02-01",
+  },
+  {
+    id: 3,
+    title: "Health Budget Breakdown",
+    description: "Where the money goes in Kenya's healthcare sector.",
+    duration: "12:20",
+    videoUrl: "https://youtu.be/example3",
+    category: "national",
+    date: "2026-01-20",
+  },
+  {
+    id: 4,
+    title: "Nairobi County Budget Overview",
+    description: "Understanding how Nairobi allocates its development funds.",
+    duration: "10:15",
+    videoUrl: "https://youtu.be/example4",
+    category: "county",
+    date: "2026-01-25",
+  },
+  {
+    id: 5,
+    title: "Education Sector Analysis",
+    description: "Deep dive into education funding and what's changing.",
+    duration: "15:00",
+    videoUrl: "https://youtu.be/example5",
+    category: "sector",
+    date: "2026-02-05",
+  },
+  {
+    id: 6,
+    title: "Tracking Road Projects in Kiambu",
+    description: "Following the money from budget to completed roads.",
+    duration: "7:30",
+    videoUrl: "https://youtu.be/example6",
+    category: "tracker-stories",
+    date: "2026-02-10",
+  },
+];
+
+const categories: { id: VideoCategory; label: string }[] = [
+  { id: "all", label: "All Videos" },
+  { id: "basics", label: "Basics" },
+  { id: "finance-bill", label: "Finance Bill" },
+  { id: "national", label: "National" },
+  { id: "county", label: "County" },
+  { id: "sector", label: "Sector" },
+  { id: "tracker-stories", label: "Tracker Stories" },
+];
+
 export default function VideoLanding() {
-  const [year, setYear] = useState(2026);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState<VideoCategory>("all");
 
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
-
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
-  const quickActions = [
-    {
-      icon: <Play size={20} />,
-      title: "Latest Story",
-      desc: "Watch our newest budget breakdown",
-      href: "/blog",
-      color: "#00aa55",
-      bgColor: "bg-[#00aa55]/10",
-    },
-    {
-      icon: <TrendingUp size={20} />,
-      title: "Budget Tracker",
-      desc: "Follow the money in real-time",
-      href: "/tracker",
-      color: "#212121",
-      bgColor: "bg-white/10",
-    },
-    {
-      icon: <FileText size={20} />,
-      title: "Field Reports",
-      desc: "Stories from the ground",
-      href: "/edustories",
-      color: "#ff2f55",
-      bgColor: "bg-[#ff2f55]/10",
-    },
-    {
-      icon: <Users size={20} />,
-      title: "Community",
-      desc: "Join the conversation",
-      href: "/contact",
-      color: "#00aa55",
-      bgColor: "bg-[#00aa55]/10",
-    },
-  ];
-
-  const faqs = [
-    {
-      question: "What is Budget Ndio Story?",
-      answer:
-        "Budget Ndio Story is a civic initiative that translates complex national and county budgets into simple, engaging stories. We help citizens understand where public money goes and how they can participate in budget processes.",
-    },
-    {
-      question: "How do you verify budget information?",
-      answer:
-        "Our team analyzes official budget documents, procurement records, and spending reports. We then cross-reference this data by visiting project sites and interviewing local communities to verify what's actually happening on the ground.",
-    },
-    {
-      question: "How can I get involved?",
-      answer:
-        "There are many ways to get involved! You can subscribe to our newsletter for updates, share our stories on social media, join our community discussions, or reach out to us for partnership opportunities.",
-    },
-    {
-      question: "Is the information on your site free to use?",
-      answer:
-        "Yes! All our content is freely available for educational and civic purposes. We encourage sharing and redistribution with attribution to Budget Ndio Story.",
-    },
-  ];
+  const filteredVideos = activeCategory === "all" 
+    ? sampleVideos 
+    : sampleVideos.filter(v => v.category === activeCategory);
 
   return (
     <>
       <Head>
-        <title>Budget Ndio Story — The Kenyan Budget, Told Clearly</title>
+        <title>Videos — Budget Ndio Story</title>
         <meta
           name="description"
-          content="Budget Ndio Story translates national and county budgets into short, verifiable stories that help citizens understand where public money goes and how to act."
+          content="Short explainers made for mobile. Watch budget breakdowns, county analysis, and tracker stories."
         />
-        <meta property="og:title" content="Budget Ndio Story" />
+        <meta property="og:title" content="Videos — Budget Ndio Story" />
         <meta
           property="og:description"
-          content="Bridging the budget literacy gap for youth through storytelling."
+          content="Short explainers made for mobile. Watch budget breakdowns and tracker stories."
         />
         <meta name="theme-color" content="#0a0a0a" />
       </Head>
@@ -120,276 +130,205 @@ export default function VideoLanding() {
         <VideoHeroLanding />
 
         <main>
-          {/* QUICK ACTIONS - Responsive grid */}
-          <section className="padding-x pt-16 pb-8">
+          {/* CATEGORY NAVIGATION */}
+          <section className="padding-x pt-12 pb-6">
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {quickActions.map((action, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                  >
-                    <Link
-                      href={action.href}
-                      className="block rounded-2xl bg-white/5 border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 group h-full"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-center mb-8"
+              >
+                <h2 className="font-FoundersGrotesk text-2xl lg:text-3xl font-semibold">
+                  Browse by Category
+                </h2>
+              </motion.div>
+
+              {/* Category Tabs - Horizontal scroll on mobile */}
+              <div className="overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+                <div className="flex gap-2 min-w-max">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.id}
+                      onClick={() => setActiveCategory(cat.id)}
+                      className={`px-5 py-2.5 rounded-full text-sm font-NeueMontreal uppercase tracking-wider transition-all duration-300 whitespace-nowrap ${
+                        activeCategory === cat.id
+                          ? "bg-[#00aa55] text-black"
+                          : "bg-white/10 text-white/70 hover:bg-white/20"
+                      }`}
                     >
-                      <div
-                        className={`w-10 h-10 rounded-full ${action.bgColor} flex items-center justify-center mb-3`}
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* VIDEO GRID */}
+          <section className="padding-x py-8">
+            <div className="max-w-6xl mx-auto">
+              <AnimatePresence mode="wait">
+                {filteredVideos.length > 0 ? (
+                  <motion.div
+                    key={activeCategory}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  >
+                    {filteredVideos.map((video, index) => (
+                      <motion.div
+                        key={video.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 }}
                       >
-                        <div style={{ color: action.color }}>{action.icon}</div>
-                      </div>
-                      <p className="font-FoundersGrotesk text-lg font-medium">
-                        {action.title}
-                      </p>
-                      <p className="font-NeueMontreal text-white/60 text-sm mt-1">
-                        {action.desc}
-                      </p>
+                        <Link
+                          href={video.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block group"
+                        >
+                          <div className="relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-[#00aa55]/50 transition-all duration-300">
+                            {/* Thumbnail Placeholder */}
+                            <div className="aspect-video bg-gradient-to-br from-[#00aa55]/20 to-[#ff2f55]/20 relative group-hover:scale-[1.02] transition-transform duration-300">
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-16 h-16 rounded-full bg-[#00aa55]/90 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                  <Play size={24} className="text-black ml-1" fill="black" />
+                                </div>
+                              </div>
+                              {/* Duration Badge */}
+                              <div className="absolute bottom-3 right-3 px-2 py-1 rounded bg-black/70 text-xs font-NeueMontreal">
+                                {video.duration}
+                              </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-5">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-[10px] uppercase tracking-wider text-[#00aa55] bg-[#00aa55]/10 px-2 py-1 rounded">
+                                  {categories.find(c => c.id === video.category)?.label}
+                                </span>
+                                <span className="text-xs text-white/50">
+                                  {video.date}
+                                </span>
+                              </div>
+                              <h3 className="font-FoundersGrotesk text-lg font-medium group-hover:text-[#00aa55] transition-colors">
+                                {video.title}
+                              </h3>
+                              <p className="font-NeueMontreal text-white/60 text-sm mt-2 line-clamp-2">
+                                {video.description}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-center py-16"
+                  >
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+                      <Play size={32} className="text-white/50" />
+                    </div>
+                    <h3 className="font-FoundersGrotesk text-xl mb-3">
+                      No videos in this category yet
+                    </h3>
+                    <p className="font-NeueMontreal text-white/60 mb-6">
+                      Request a topic and help us create the content you need!
+                    </p>
+                    <Link
+                      href="#cta-strip"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00aa55] text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-[#00cc66] transition-colors"
+                    >
+                      Request a Topic <ArrowRight size={14} />
                     </Link>
                   </motion.div>
-                ))}
-              </div>
+                )}
+              </AnimatePresence>
             </div>
           </section>
 
-          {/* FEATURED STORY - Quote card style */}
-          <section className="padding-x py-12">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/20 via-white/5 to-[#ff2f55]/20 border border-white/10 p-6 lg:p-10"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <span className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      Featured Story
-                    </span>
-                    <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight mt-3">
-                      Where did the
-                      <br />
-                      <span className="text-[#00aa55]">health budget</span> go?
-                    </h2>
-                    <p className="font-NeueMontreal text-white/70 mt-4 leading-relaxed">
-                      We traced KSh 12 billion allocated for county health
-                      facilities. Here's what we found on the ground versus
-                      what's in the records.
-                    </p>
-                    <div className="flex flex-wrap gap-3 mt-6">
-                      <Link
-                        href="/blog"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00aa55] text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-[#00cc66] transition-colors whitespace-nowrap"
-                      >
-                        Read Full Story <ArrowRight size={14} />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="rounded-2xl bg-[#00aa55]/20 border border-[#00aa55]/30 p-4">
-                      <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider">
-                        Budgeted
-                      </p>
-                      <p className="font-FoundersGrotesk text-2xl font-medium mt-1">
-                        KSh 12B
-                      </p>
-                      <p className="font-NeueMontreal text-white/60 text-sm mt-1">
-                        What was promised
-                      </p>
-                    </div>
-                    <div className="rounded-2xl bg-white/10 border border-white/20 p-4">
-                      <p className="text-xs font-NeueMontreal text-white/60 uppercase tracking-wider">
-                        Verified
-                      </p>
-                      <p className="font-FoundersGrotesk text-2xl font-medium mt-1">
-                        KSh 4.2B
-                      </p>
-                      <p className="font-NeueMontreal text-white/60 text-sm mt-1">
-                        What we found
-                      </p>
-                    </div>
-                    <div className="rounded-2xl bg-[#ff2f55]/20 border border-[#ff2f55]/30 p-4 sm:col-span-2">
-                      <p className="text-xs font-NeueMontreal text-[#ff2f55]/70 uppercase tracking-wider">
-                        Action Needed
-                      </p>
-                      <p className="font-NeueMontreal text-white/80 mt-2">
-                        3 facilities in Nakuru County require immediate
-                        accountability review. Sign the petition to demand
-                        transparency.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
-          {/* HOW IT WORKS */}
-          <section className="padding-x py-16">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-12"
-              >
-                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
-                  Our Process
-                </span>
-                <h2 className="font-FoundersGrotesk text-3xl lg:text-4xl font-semibold tracking-tight mt-3">
-                  From numbers to narratives
-                </h2>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  {
-                    step: "01",
-                    title: "Research",
-                    desc: "We analyze budget documents, procurement records, and spending reports from national and county governments.",
-                  },
-                  {
-                    step: "02",
-                    title: "Verify",
-                    desc: "Our team visits project sites, interviews local communities, and cross-references data with on-ground reality.",
-                  },
-                  {
-                    step: "03",
-                    title: "Act",
-                    desc: "We transform findings into accessible videos, articles, and interactive tools that empower citizens to act.",
-                  },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="relative rounded-2xl bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors"
-                  >
-                    <span className="text-xs font-NeueMontreal text-[#00aa55] uppercase tracking-wider">
-                      {item.step}
-                    </span>
-                    <h3 className="font-FoundersGrotesk text-xl font-medium mt-3">
-                      {item.title}
-                    </h3>
-                    <p className="font-NeueMontreal text-white/60 mt-3 leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* FAQ SECTION */}
-          <section className="padding-x py-16">
-            <div className="max-w-3xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-12"
-              >
-                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
-                  FAQ
-                </span>
-                <h2 className="font-FoundersGrotesk text-3xl lg:text-4xl font-semibold tracking-tight mt-3">
-                  Frequently Asked Questions
-                </h2>
-              </motion.div>
-
-              <div className="space-y-4">
-                {faqs.map((faq, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.1 }}
-                    className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden"
-                  >
-                    <button
-                      onClick={() => toggleFaq(i)}
-                      className="w-full px-6 py-5 flex items-center justify-between text-left"
-                    >
-                      <span className="font-FoundersGrotesk text-lg font-medium">
-                        {faq.question}
-                      </span>
-                      {openFaq === i ? (
-                        <ChevronUp size={20} className="text-white/60" />
-                      ) : (
-                        <ChevronDown size={20} className="text-white/60" />
-                      )}
-                    </button>
-                    <AnimatePresence>
-                      {openFaq === i && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-6 pb-5">
-                            <p className="font-NeueMontreal text-white/70 leading-relaxed">
-                              {faq.answer}
-                            </p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Section */}
-          <section className="padding-x py-16">
+          {/* CTA STRIP - Per BNSCLIENT1.md */}
+          <section id="cta-strip" className="padding-x py-16">
             <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/20 via-white/5 to-transparent border border-white/10 p-8 lg:p-12 text-center"
+                className="text-center mb-10"
               >
-                <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight">
-                  Your tax money.
-                  <br />
-                  <span className="text-white/60">Your right to know.</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                  Get Involved
+                </span>
+                <h2 className="font-FoundersGrotesk text-2xl lg:text-3xl font-semibold mt-3">
+                  Want to see a specific topic covered?
                 </h2>
-                <p className="font-NeueMontreal text-white/70 mt-4 max-w-xl mx-auto">
-                  Join thousands of Kenyans who are demanding accountability.
-                  Learn how your money is being spent and what you can do about
-                  it.
-                </p>
-                <div className="flex flex-wrap justify-center gap-4 mt-8">
-                  <Link
-                    href="/learn"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/90 transition-colors whitespace-nowrap"
-                  >
-                    Start Learning
-                    <ArrowRight size={16} />
-                  </Link>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Request a Topic */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="rounded-2xl bg-gradient-to-br from-[#00aa55]/20 via-white/5 to-[#00aa55]/10 border border-[#00aa55]/30 p-8 text-center hover:border-[#00aa55]/50 transition-colors"
+                >
+                  <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#00aa55]/20 flex items-center justify-center">
+                    <Plus size={24} className="text-[#00aa55]" />
+                  </div>
+                  <h3 className="font-FoundersGrotesk text-xl font-medium mb-3">
+                    Request a Topic
+                  </h3>
+                  <p className="font-NeueMontreal text-white/70 mb-6">
+                    Suggest a budget topic you'd like us to explain in a video.
+                  </p>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-6 py-3 border border-white/30 rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/10 transition-colors whitespace-nowrap"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00aa55] text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-[#00cc66] transition-colors"
                   >
-                    Get Involved
+                    Submit Request <ArrowRight size={14} />
                   </Link>
-                </div>
-              </motion.div>
+                </motion.div>
+
+                {/* Join Training */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-white/10 border border-white/20 p-8 text-center hover:border-white/30 transition-colors"
+                >
+                  <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
+                    <Users size={24} className="text-white" />
+                  </div>
+                  <h3 className="font-FoundersGrotesk text-xl font-medium mb-3">
+                    Join Training
+                  </h3>
+                  <p className="font-NeueMontreal text-white/70 mb-6">
+                    Learn how to analyze budgets and create your own stories.
+                  </p>
+                  <Link
+                    href="/learn"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/90 transition-colors"
+                  >
+                    Start Learning <ArrowRight size={14} />
+                  </Link>
+                </motion.div>
+              </div>
             </div>
           </section>
         </main>
 
+        {/* Footer */}
         <MainFooter />
       </div>
     </>
