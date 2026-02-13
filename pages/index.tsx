@@ -255,18 +255,9 @@ export default function VideoLanding() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-center max-w-4xl"
             >
-              {/* Tagline */}
-              {/* <span className="inline-block px-4 py-1.5 bg-[#00aa55]/20 border border-[#00aa55]/30 rounded-full text-[#00aa55] text-xs font-NeueMontreal uppercase tracking-[0.15em] mb-6">
-                Youth-Led Civic Education
-              </span> */}
-
               {/* Main Headline - Founders Grotesk Bold */}
               <h1 className="font-FoundersGrotesk text-[clamp(36px,7vw,80px)] font-bold tracking-tight leading-[1.05] mb-5">
                 Our Taxes, Our Story.
-                <br />
-                {/* <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00aa55] to-[#00cc66]">
-                  The Kenyan Budget.
-                </span> */}
               </h1>
 
               {/* Subheadline - Neue Montreal */}
@@ -274,22 +265,6 @@ export default function VideoLanding() {
                 Youth-led storytelling that turns complex budgets into real talk — because{" "}
                 <span className="text-[#00aa55] font-medium">mwananchi</span> deserves the truth.
               </p>
-
-              {/* Primary CTA - Explore the Data */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: isVideoLoaded ? 1 : 0, y: isVideoLoaded ? 0 : 20 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex justify-center "
-              >
-                {/* <Link
-                  href="/learn"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#00aa55] text-black rounded-full font-NeueMontreal font-medium text-base uppercase tracking-wider hover:bg-[#00cc66] hover:scale-105 transition-all duration-300 shadow-lg shadow-[#00aa55]/25"
-                >
-                  Budget Ndio Story
-                  <ArrowRight size={18} />
-                </Link> */}
-              </motion.div>
 
               {/* Impact Stats */}
               <motion.div
@@ -302,11 +277,6 @@ export default function VideoLanding() {
                   <p className="font-FoundersGrotesk text-3xl font-bold text-[#00aa55]">KSh 4.3 Trillion</p>
                   <p className="font-NeueMontreal text-white/60 text-xs uppercase tracking-wider mt-1">Budget</p>
                 </div>
-                <div className="w-px h-10 bg-white/20 hidden sm:block" />
-                {/* <div className="text-center">
-                  <p className="font-FoundersGrotesk text-3xl font-bold text-[#ce1010]">~11.814 Trillion+</p>
-                  <p className="font-NeueMontreal text-[#ce1010] text-xs uppercase tracking-wider mt-1">DEBT</p>
-                </div> */}
                 <div className="w-px h-10 bg-white/20 hidden sm:block" />
                 <div className="text-center">
                   <p className="font-FoundersGrotesk text-3xl font-bold text-white">~58.6 million</p>
@@ -333,116 +303,109 @@ export default function VideoLanding() {
         </section>
 
         <main id="main-content">
-         
-          {/* FEATURED IMPACT STORY - Emotional Core */}
-          {/* FEATURED IMPACT STORY - Positive Government Success */}
-<section id="featured-story" className="padding-x py-16" aria-labelledby="featured-story-heading">
-  <div className="max-w-7xl mx-auto">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="rounded-3xl bg-gradient-to-br from-[#00aa55]/15 via-[#0a0a0a] to-[#00aa55]/15 border border-white/10 overflow-hidden"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-        {/* Left: Story Content */}
-        <div className="p-8 lg:p-12 flex flex-col justify-center">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="px-3 py-1 bg-[#00aa55]/20 text-[#00aa55] text-xs font-medium uppercase tracking-wider rounded-full">
-              Featured  Story
-            </span>
-            <span className="text-white/50 text-xs uppercase tracking-wider">
-              Government Digital Inclusion
-            </span>
-          </div>
-          <h2 id="featured-story-heading" className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight mt-3">
-            How the Government is Bringing Digital Education to Every Child
-          </h2>
-          <p className="font-NeueMontreal text-white/70 mt-5 leading-relaxed text-lg">
-            Through the Digital Literacy Programme (DigiSchool), the Kenyan government has delivered over 1.2 million tablets and laptops to public primary schools nationwide — connecting more than 20,000 schools to high-speed internet and transforming classrooms across all 47 counties.
-          </p>
-
-          {/* Trust Badges */}
-          <div className="flex flex-wrap gap-3 mt-6">
-            {[
-              { icon: <CheckCircle size={16} />, text: "Government-Led" },
-              { icon: <FileText size={16} />, text: "Ministry of ICT & Education" },
-              { icon: <MapPin size={16} />, text: "All 47 Counties" },
-            ].map((badge, i) => (
-              <div
-                key={i}
-                className="flex font-NeueMontreal items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full"
+          {/* FEATURED IMPACT STORY */}
+          <section id="featured-story" className="padding-x py-16" aria-labelledby="featured-story-heading">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/15 via-[#0a0a0a] to-[#00aa55]/15 border border-white/10 overflow-hidden"
               >
-                <span className="text-[#00aa55]">{badge.icon}</span>
-                <span className="text-white/70 text-xs font-medium">{badge.text}</span>
-              </div>
-            ))}
-          </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                  {/* Left: Story Content */}
+                  <div className="p-8 lg:p-12 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="px-3 py-1 bg-[#00aa55]/20 text-[#00aa55] text-xs font-medium uppercase tracking-wider rounded-full">
+                        Featured Story
+                      </span>
+                      <span className="text-white/50 text-xs uppercase tracking-wider">
+                        Government Digital Inclusion
+                      </span>
+                    </div>
+                    <h2 id="featured-story-heading" className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight mt-3">
+                      How the Government is Bringing Digital Education to Every Child
+                    </h2>
+                    <p className="font-NeueMontreal text-white/70 mt-5 leading-relaxed text-lg">
+                      Through the Digital Literacy Programme (DigiSchool), the Kenyan government has delivered over 1.2 million tablets and laptops to public primary schools nationwide.
+                    </p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-3 mt-8">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#00aa55] text-black rounded-full font-NeueMontreal font-medium text-sm uppercase tracking-wider hover:bg-[#00cc66] hover:scale-105 transition-all duration-300"
-            >
-               Success Stories <ArrowRight size={16} />
-            </Link>
-           
-          </div>
-        </div>
+                    {/* Trust Badges */}
+                    <div className="flex flex-wrap gap-3 mt-6">
+                      {[
+                        { icon: <CheckCircle size={16} />, text: "Government-Led" },
+                        { icon: <FileText size={16} />, text: "Ministry of ICT & Education" },
+                        { icon: <MapPin size={16} />, text: "All 47 Counties" },
+                      ].map((badge, i) => (
+                        <div
+                          key={i}
+                          className="flex font-NeueMontreal items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full"
+                        >
+                          <span className="text-[#00aa55]">{badge.icon}</span>
+                          <span className="text-white/70 text-xs font-medium">{badge.text}</span>
+                        </div>
+                      ))}
+                    </div>
 
-        {/* Right: Impact Numbers */}
-        <div className="bg-white/5 border-t lg:border-t-0 lg:border-l border-white/10 p-8 lg:p-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
-            {/* Devices Distributed */}
-            <div className="rounded-2xl bg-[#00aa55]/10 border border-[#00aa55]/30 p-6 flex flex-col justify-center">
-              <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider mb-2">
-                Delivered
-              </p>
-              <p className="font-FoundersGrotesk text-4xl font-bold text-[#00aa55]">
-                1.2M+
-              </p>
-              <p className="font-NeueMontreal text-white/60 text-sm mt-2">
-                Tablets & Laptops to Schools
-              </p>
-            </div>
+                    {/* CTAs */}
+                    <div className="flex flex-wrap gap-3 mt-8">
+                      <Link
+                        href="/blog"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-[#00aa55] text-black rounded-full font-NeueMontreal font-medium text-sm uppercase tracking-wider hover:bg-[#00cc66] hover:scale-105 transition-all duration-300"
+                      >
+                        Success Stories <ArrowRight size={16} />
+                      </Link>
+                    </div>
+                  </div>
 
-            {/* Schools Connected */}
-            <div className="rounded-2xl bg-white/10 border border-white/20 p-6 flex flex-col justify-center">
-              <p className="text-xs font-NeueMontreal text-white/60 uppercase tracking-wider mb-2">
-                Connected
-              </p>
-              <p className="font-FoundersGrotesk text-4xl font-bold text-white">
-                20,000+
-              </p>
-              <p className="font-NeueMontreal text-white/60 text-sm mt-2">
-                Public Primary Schools
-              </p>
-            </div>
+                  {/* Right: Impact Numbers */}
+                  <div className="bg-white/5 border-t lg:border-t-0 lg:border-l border-white/10 p-8 lg:p-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+                      <div className="rounded-2xl bg-[#00aa55]/10 border border-[#00aa55]/30 p-6 flex flex-col justify-center">
+                        <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider mb-2">
+                          Delivered
+                        </p>
+                        <p className="font-FoundersGrotesk text-4xl font-bold text-[#00aa55]">
+                          1.2M+
+                        </p>
+                        <p className="font-NeueMontreal text-white/60 text-sm mt-2">
+                          Tablets & Laptops to Schools
+                        </p>
+                      </div>
 
-            {/* Reach & Impact */}
-            <div className="rounded-2xl bg-[#00aa55]/10 border border-[#00aa55]/30 p-6 sm:col-span-2">
-              <div className="flex items-start gap-3">
-               
-                <div>
-                  <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider mb-1">
-                    Real Impact
-                  </p>
-                  <p className="font-NeueMontreal text-white/80 leading-relaxed">
-                    Millions of pupils now access digital learning, teachers use modern tools, and rural schools bridge the digital divide — building a brighter, tech-ready future for Kenya.
-                  </p>
+                      <div className="rounded-2xl bg-white/10 border border-white/20 p-6 flex flex-col justify-center">
+                        <p className="text-xs font-NeueMontreal text-white/60 uppercase tracking-wider mb-2">
+                          Connected
+                        </p>
+                        <p className="font-FoundersGrotesk text-4xl font-bold text-white">
+                          20,000+
+                        </p>
+                        <p className="font-NeueMontreal text-white/60 text-sm mt-2">
+                          Public Primary Schools
+                        </p>
+                      </div>
+
+                      <div className="rounded-2xl bg-[#00aa55]/10 border border-[#00aa55]/30 p-6 sm:col-span-2">
+                        <div className="flex items-start gap-3">
+                          <div>
+                            <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider mb-1">
+                              Real Impact
+                            </p>
+                            <p className="font-NeueMontreal text-white/80 leading-relaxed">
+                              Millions of pupils now access digital learning, teachers use modern tools, and rural schools bridge the digital divide.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  </div>
-</section>
+          </section>
 
-          {/* OUR PROCESS - Timeline Style */}
+          {/* OUR PROCESS */}
           <section className="padding-x py-20" aria-labelledby="process-heading">
             <div className="max-w-6xl mx-auto">
               <motion.div
@@ -465,7 +428,6 @@ export default function VideoLanding() {
 
               {/* Timeline */}
               <div className="relative">
-                {/* Connecting Line - Hidden on mobile */}
                 <div className="absolute top-32 left-1/2 -translate-x-1/2 w-px h-[calc(100%-160px)] bg-gradient-to-b from-[#00aa55]/50 via-[#00aa55]/20 to-transparent hidden lg:block" />
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -478,7 +440,6 @@ export default function VideoLanding() {
                       transition={{ duration: 0.5, delay: i * 0.15 }}
                       className="relative"
                     >
-                      {/* Timeline Node - Hidden on mobile */}
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-[#0a0a0a] border-2 border-[#00aa55] rounded-full hidden lg:flex items-center justify-center z-10">
                         <div className="w-3 h-3 bg-[#00aa55] rounded-full" />
                       </div>
@@ -494,7 +455,6 @@ export default function VideoLanding() {
                           {item.desc}
                         </p>
                         
-                        {/* Proof Badge */}
                         <div className="flex items-center gap-2 mt-5 pt-5 border-t border-white/10">
                           <Clock size={14} className="text-[#00aa55]" />
                           <span className="text-xs font-NeueMontreal text-white/70">
@@ -509,7 +469,7 @@ export default function VideoLanding() {
             </div>
           </section>
 
-          {/* FEATURED VIDEO SECTION - YouTube Embed */}
+          {/* FEATURED VIDEO SECTION */}
           <section className="padding-x py-20" aria-labelledby="video-heading">
             <div className="max-w-5xl mx-auto">
               <motion.div
@@ -540,7 +500,6 @@ export default function VideoLanding() {
                 <YouTubePlayer videoId={FEATURED_VIDEO_ID} autoplay={false} />
               </motion.div>
 
-              {/* Video Thumbnail Grid */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -566,7 +525,7 @@ export default function VideoLanding() {
             </div>
           </section>
 
-          {/* FAQ SECTION - Expanded */}
+          {/* FAQ SECTION */}
           <section className="padding-x py-20" aria-labelledby="faq-heading">
             <div className="max-w-3xl mx-auto">
               <motion.div
@@ -599,13 +558,11 @@ export default function VideoLanding() {
                       aria-expanded={openFaq === i}
                       className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[#00aa55] focus:ring-inset"
                     >
-                      <span className="font-FoundersGrotesk text-lg font-medium text-white pr-4">
-                        {faq.question}
-                      </span>
+                      <span className="font-FoundersGrotesk font-medium pr-4">{faq.question}</span>
                       {openFaq === i ? (
                         <ChevronUp size={20} className="text-[#00aa55] flex-shrink-0" />
                       ) : (
-                        <ChevronDown size={20} className="text-white/60 flex-shrink-0" />
+                        <ChevronDown size={20} className="text-white/50 flex-shrink-0" />
                       )}
                     </button>
                     <AnimatePresence>
@@ -630,76 +587,10 @@ export default function VideoLanding() {
               </div>
             </div>
           </section>
-
-          {/* FINAL CTA BAND - Gradient with Social Proof */}
-          <section id="subscribe" className="padding-x py-20" aria-labelledby="cta-heading">
-            <div className="max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/20 via-[#0a0a0a] to-[#ff2f55]/20 border border-white/10 p-10 lg:p-16 text-center relative overflow-hidden"
-              >
-                {/* Gradient Orbs */}
-                <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#00aa55]/20 rounded-full blur-3xl -translate-y-1/2" />
-                <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#ff2f55]/20 rounded-full blur-3xl translate-y-1/2" />
-
-                <div className="relative z-10">
-                  <span className=" font-NeueMontreal inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-white/70 text-xs font-medium uppercase tracking-wider mb-6">
-                    <Users size={14} /> Join 10,000+ Young Kenyans
-                  </span>
-                  
-                  <h2 id="cta-heading" className="font-FoundersGrotesk text-3xl lg:text-5xl font-semibold tracking-tight">
-                    Be Part of the <span className="text-[#00aa55]">Change</span>
-                  </h2>
-                  
-                  <p className="font-NeueMontreal text-white/70 mt-5 max-w-xl mx-auto text-lg">
-                    Demand transparency. Understand your rights. Make your voice heard. 
-                    Join a movement of young Kenyans transforming civic engagement.
-                  </p>
-
-                  {/* Trust Badges */}
-                  <div className="flex flex-wrap justify-center gap-6 mt-8">
-                    <div className="flex items-center gap-2 font-NeueMontreal text-white/60 text-sm">
-                      <CheckCircle size={16} className="text-[#00aa55]" />
-                      Free to join
-                    </div>
-                    <div className="flex font-NeueMontreal items-center gap-2 text-white/60 text-sm">
-                      <Clock size={16} className="text-[#00aa55]" />
-                      2 min to subscribe
-                    </div>
-                    <div className="flex font-NeueMontreal items-center gap-2 text-white/60 text-sm">
-                      <MapPin size={16} className="text-[#00aa55]" />
-                       Kenya
-                    </div>
-                  </div>
-
-                  {/* CTAs */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-                    <Link
-                      href="#subscribe"
-                      className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#00aa55] text-black rounded-full font-NeueMontreal font-medium text-base uppercase tracking-wider hover:bg-[#00cc66] hover:scale-105 transition-all duration-300 shadow-lg shadow-[#00aa55]/25"
-                    >
-                      Subscribe Now
-                      <ArrowRight size={18} />
-                    </Link>
-                    {/* <Link
-                      href="/tracker"
-                      className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-white/30 text-white rounded-full font-NeueMontreal font-medium text-base uppercase tracking-wider hover:bg-white/10 transition-all duration-300"
-                    >
-                      Explore the Tracker
-                    </Link> */}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </section>
         </main>
 
-        {/* FOOTER - Trust Anchor */}
-       
-        <MainFooter/>
+        {/* Footer */}
+        <MainFooter />
       </div>
     </>
   );

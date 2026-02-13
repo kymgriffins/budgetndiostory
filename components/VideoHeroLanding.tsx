@@ -73,7 +73,7 @@ export default function VideoHeroLanding() {
           }}
           className="mt-6 text-center font-NeueMontreal text-white/80 text-[clamp(14px,1.5vw,18px)] leading-[1.5] max-w-lg"
         >
-          Bridging the budget literacy gap for youth
+          Short explainers made for mobile.
         </motion.p>
 
         {/* CTA Button */}
