@@ -669,7 +669,7 @@ export default function VideoLanding() {
                       <Clock size={16} className="text-[#00aa55]" />
                       2 min to subscribe
                     </div>
-                    <div className="flex font-NeueMontrealitems-center gap-2 text-white/60 text-sm">
+                    <div className="flex font-NeueMontreal items-center gap-2 text-white/60 text-sm">
                       <MapPin size={16} className="text-[#00aa55]" />
                       Based in Nairobi, Kenya
                     </div>
