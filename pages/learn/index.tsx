@@ -800,7 +800,7 @@ export default function LearnPage() {
                   </div>
 
                   {/* Interactive Calendar Grid */}
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                     {budgetCalendarEvents.map((event, index) => (
                       <motion.button
                         key={event.month}
@@ -809,15 +809,15 @@ export default function LearnPage() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.3, delay: index * 0.02 }}
                         whileHover={{ scale: 1.05 }}
-                        className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#00aa55]/30 transition-all text-left group"
+                        className="p-2 sm:p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#00aa55]/30 transition-all text-left group"
                       >
-                        <p className="font-NeueMontreal text-xs text-white/50 group-hover:text-[#00aa55] transition-colors">
+                        <p className="font-NeueMontreal text-[10px] sm:text-xs text-white/50 group-hover:text-[#00aa55] transition-colors">
                           {event.month}
                         </p>
-                        <p className="font-NeueMontreal text-sm font-medium mt-1 line-clamp-2">
+                        <p className="font-NeueMontreal text-xs sm:text-sm font-medium mt-0.5 sm:mt-1 line-clamp-2">
                           {event.event}
                         </p>
-                        <span className={`inline-block font-NeueMontreal mt-2 px-2 py-0.5 rounded text-xs capitalize ${
+                        <span className={`inline-block font-NeueMontreal mt-1 sm:mt-2 px-1.5 py-0.5 rounded text-[9px] sm:text-xs capitalize whitespace-nowrap ${
                           event.phase === 'planning' ? 'bg-blue-500/20 text-blue-400' :
                           event.phase === 'review' ? 'bg-yellow-500/20 text-yellow-400' :
                           event.phase === 'participation' ? 'bg-[#00aa55]/20 text-[#00aa55]' :

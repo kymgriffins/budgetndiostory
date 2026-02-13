@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Newsletter from "@/components/Newsletter";
 
 export default function Socials() {
-  const [year, setYear] = useState(2024);
+  const [year, setYear] = useState(2026);
 
   useEffect(() => {
     setYear(new Date().getFullYear());

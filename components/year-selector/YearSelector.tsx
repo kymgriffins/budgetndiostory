@@ -37,7 +37,9 @@ const YEAR_LABELS: Record<number, string> = {
   2021: "FY 2021",
   2022: "FY 2022",
   2023: "FY 2023",
-  2024: "FY 2024/25",
+  2024: "FY 2024",
+  2025: "FY 2025/26",
+  
 };
 
 export default function YearSelector({

@@ -4,12 +4,12 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function SignInPage() {
+export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSignIn = async (provider: string) => {
+  const handleSignUp = async (provider: string) => {
     setIsLoading(true);
     setError("");
 
@@ -24,14 +24,14 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
+    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4">
       <div className="max-w-md w-full px-6 py-12 bg-[#161616] rounded-2xl border border-white/10">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold font-NeueMontreal text-white mb-2">
-            Welcome Back
+            Create Your Account
           </h1>
           <p className="text-white/60 paragraph font-NeueMontreal">
-            Sign in to access your account
+            Sign up to start tracking budgets and making an impact
           </p>
         </div>
 
@@ -45,7 +45,7 @@ export default function SignInPage() {
 
         <div className="space-y-4">
           <button
-            onClick={() => handleSignIn("google")}
+            onClick={() => handleSignUp("google")}
             disabled={isLoading}
             className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white text-[#0a0a0a] rounded-full font-medium font-NeueMontreal hover:bg-white/90 transition-colors disabled:opacity-50"
           >
@@ -88,7 +88,7 @@ export default function SignInPage() {
           </div>
 
           <button
-            onClick={() => handleSignIn("email")}
+            onClick={() => handleSignUp("email")}
             disabled={isLoading}
             className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-[#212121] text-white rounded-full font-medium font-NeueMontreal hover:bg-[#323232] transition-colors disabled:opacity-50"
           >
@@ -127,9 +127,9 @@ export default function SignInPage() {
         </p>
 
         <p className="mt-6 text-center text-white/60 paragraph font-NeueMontreal text-sm">
-          Don't have an account?{" "}
-          <a href="/auth/signup" className="text-[#00aa55] hover:underline font-medium">
-            Sign up
+          Already have an account?{" "}
+          <a href="/auth/signin" className="text-[#00aa55] hover:underline font-medium">
+            Sign in
           </a>
         </p>
       </div>
