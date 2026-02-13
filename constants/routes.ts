@@ -64,6 +64,11 @@ export const LEGACY_ROUTES = {
 // ─────────────────────────────────────────────────────────────────────────────
 export const ADMIN_ROUTES = {
   ADMIN: "/admin" as const,
+  ADMIN_CONTENT: "/admin/content" as const,
+  ADMIN_USERS: "/admin/users" as const,
+  ADMIN_ANALYTICS: "/admin/analytics" as const,
+  ADMIN_SUBSCRIBERS: "/admin/subscribers" as const,
+  ADMIN_CONFIG: "/admin/config" as const,
   ADMIN_BLOG: "/admin/blog" as const,
   ANALYTICS: "/analytics" as const,
 } as const;

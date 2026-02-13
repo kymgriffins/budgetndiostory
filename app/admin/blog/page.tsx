@@ -5,6 +5,30 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import AdminBlogClient from "./AdminBlogClient";
 
+// Fetch posts from API
+async function getBlogPosts() {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/blog?status=all`, {
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    if (!res.ok) {
+      throw new Error("Failed to fetch blog posts");
+    }
+    
+    const data = await res.json();
+    return data.data || [];
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    // Fallback to static data if API fails
+    return initialPosts;
+  }
+}
+
 export const dynamic = "force-dynamic";
 
 export default async function AdminBlogPage() {
@@ -21,6 +45,9 @@ export default async function AdminBlogPage() {
     // Users without proper role can't access admin
     redirect("/?error=unauthorized");
   }
+
+  // Fetch blog posts from API
+  const posts = await getBlogPosts();
 
   return (
     <>
@@ -77,7 +104,7 @@ export default async function AdminBlogPage() {
                 Total Posts
               </p>
               <p className="text-[36px] font-FoundersGrotesk font-bold text-[#111] mt-2">
-                {initialPosts.length}
+                {posts.length}
               </p>
             </div>
             <div className="bg-white rounded-[16px] p-6 border border-[#212121]/8">
@@ -85,7 +112,7 @@ export default async function AdminBlogPage() {
                 Published
               </p>
               <p className="text-[36px] font-FoundersGrotesk font-bold text-green-600 mt-2">
-                {initialPosts.filter((p) => p.status === "published").length}
+                {posts.filter((p: BlogPost) => p.status === "published").length}
               </p>
             </div>
             <div className="bg-white rounded-[16px] p-6 border border-[#212121]/8">
@@ -93,7 +120,7 @@ export default async function AdminBlogPage() {
                 Drafts
               </p>
               <p className="text-[36px] font-FoundersGrotesk font-bold text-yellow-600 mt-2">
-                {initialPosts.filter((p) => p.status === "draft").length}
+                {posts.filter((p: BlogPost) => p.status === "draft").length}
               </p>
             </div>
             <div className="bg-white rounded-[16px] p-6 border border-[#212121]/8">
@@ -101,13 +128,13 @@ export default async function AdminBlogPage() {
                 Featured
               </p>
               <p className="text-[36px] font-FoundersGrotesk font-bold text-blue-600 mt-2">
-                {initialPosts.filter((p) => p.featured).length}
+                {posts.filter((p: BlogPost) => p.featured).length}
               </p>
             </div>
           </div>
 
           {/* Pass data to client component */}
-          <AdminBlogClient posts={initialPosts} />
+          <AdminBlogClient posts={posts} />
         </main>
       </div>
     </>
