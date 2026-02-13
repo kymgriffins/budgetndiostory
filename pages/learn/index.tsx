@@ -94,15 +94,7 @@ const toolkits = [
     downloads: 1250,
     color: "#00aa55",
   },
-  {
-    id: "teacher-toolkit",
-    title: "Teacher's Budget Toolkit",
-    description: "Resources for educators to teach budget literacy in classrooms.",
-    format: "PDF",
-    size: "5.1 MB",
-    downloads: 890,
-    color: "#3b82f6",
-  },
+  
   {
     id: "community-advocacy",
     title: "Community Advocacy Manual",
@@ -664,7 +656,7 @@ export default function LearnPage() {
                 transition={{ duration: 0.6 }}
                 className="text-center mb-12"
               >
-                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                <span className="text-xs font-NeueMontreal uppercase tracking-[0.2em] text-white/50">
                   All Courses
                 </span>
                 <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight uppercase mt-3">
@@ -704,10 +696,7 @@ export default function LearnPage() {
                     className="group relative rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:transform hover:-translate-y-1"
                   >
                     {/* Category Color Stripe */}
-                    <div
-                      className="absolute left-0 top-0 bottom-0 w-1"
-                      style={{ backgroundColor: course.color }}
-                    />
+                   
 
                     <div className="p-6 pl-8">
                       {/* Icon & Category */}
@@ -1014,7 +1003,7 @@ export default function LearnPage() {
                 transition={{ duration: 0.6 }}
               >
                 <div className="text-center mb-10">
-                  <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                  <span className="text-xs font-NeueMontreal uppercase tracking-[0.2em] text-white/50">
                     Testimonials
                   </span>
                   <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight uppercase mt-3">
