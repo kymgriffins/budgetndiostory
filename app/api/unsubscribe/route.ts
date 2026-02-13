@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import prisma from "@/lib/prisma";
+import { sql } from "@/lib/db";
 
 // Rate limiting store (simple in-memory for MVP)
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
@@ -11,6 +11,17 @@ const WINDOW_MS = 60 * 1000; // 1 minute
 const unsubscribeSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });
+
+// Type for newsletter subscription from database
+type NewsletterSubscription = {
+  id: string;
+  email: string;
+  name: string | null;
+  is_active: boolean;
+  subscribed_at: Date;
+  unsubscribed_at: Date | null;
+  source: string;
+};
 
 export async function POST(request: Request) {
   try {
@@ -45,10 +56,10 @@ export async function POST(request: Request) {
 
     const { email } = result.data;
 
-    // Check for existing subscription
-    const existing = await prisma.newsletterSubscription.findUnique({
-      where: { email },
-    });
+    // Check for existing subscription using Neon SQL
+    const existingResult = await sql`SELECT * FROM newsletter_subscriptions WHERE email = ${email}`;
+    const existingRows = existingResult as unknown as NewsletterSubscription[];
+    const existing = existingRows[0];
 
     if (!existing) {
       return NextResponse.json(
@@ -57,21 +68,19 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!existing.isActive) {
+    if (!existing.is_active) {
       return NextResponse.json(
         { error: "This email is already unsubscribed." },
         { status: 400 }
       );
     }
 
-    // Update subscription to inactive
-    await prisma.newsletterSubscription.update({
-      where: { email },
-      data: {
-        isActive: false,
-        unsubscribedAt: new Date(),
-      },
-    });
+    // Update subscription to inactive using Neon SQL
+    await sql`
+      UPDATE newsletter_subscriptions
+      SET is_active = false, unsubscribed_at = ${new Date().toISOString()}
+      WHERE email = ${email}
+    `;
 
     return NextResponse.json({
       success: true,

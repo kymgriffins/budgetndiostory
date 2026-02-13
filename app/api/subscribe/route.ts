@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
-import prisma from "@/lib/prisma";
+import { sql } from "@/lib/db";
 
 // Rate limiting store (simple in-memory for MVP)
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
@@ -13,6 +13,17 @@ const subscribeSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   name: z.string().optional(),
 });
+
+// Type for newsletter subscription from database
+type NewsletterSubscription = {
+  id: string;
+  email: string;
+  name: string | null;
+  is_active: boolean;
+  subscribed_at: Date;
+  unsubscribed_at: Date | null;
+  source: string;
+};
 
 export async function POST(request: Request) {
   try {
@@ -47,33 +58,38 @@ export async function POST(request: Request) {
 
     const { email, name } = result.data;
 
-    // Check for existing subscription
-    const existing = await prisma.newsletterSubscription.findUnique({
-      where: { email },
-    });
+    // Check for existing subscription using Neon SQL
+    const existingResult = await sql`SELECT * FROM newsletter_subscriptions WHERE email = ${email}`;
+    const existingRows = existingResult as unknown as NewsletterSubscription[];
+    const existing = existingRows[0];
 
-    if (existing && existing.isActive) {
+    if (existing && existing.is_active) {
       return NextResponse.json(
         { error: "This email is already subscribed." },
         { status: 400 }
       );
     }
 
-    // Create or update subscription
-    const subscription = await prisma.newsletterSubscription.upsert({
-      where: { email },
-      update: {
-        isActive: true,
-        unsubscribedAt: null,
-        name: name || existing?.name,
-      },
-      create: {
-        email,
-        name,
-        isActive: true,
-        source: "website",
-      },
-    });
+    // Create or update subscription using Neon SQL
+    let subscription;
+    const nowISO = new Date().toISOString();
+    
+    if (existing) {
+      // Update existing subscription
+      await sql`
+        UPDATE newsletter_subscriptions
+        SET is_active = true, unsubscribed_at = NULL, name = ${name || existing.name}
+        WHERE email = ${email}
+      `;
+      subscription = { email, subscribedAt: nowISO };
+    } else {
+      // Insert new subscription
+      await sql`
+        INSERT INTO newsletter_subscriptions (email, name, is_active, source)
+        VALUES (${email}, ${name || null}, true, 'website')
+      `;
+      subscription = { email, subscribedAt: nowISO };
+    }
 
     // Send welcome email via Resend
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -104,10 +120,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: "Successfully subscribed to newsletter!",
-      data: {
-        email: subscription.email,
-        subscribedAt: subscription.subscribedAt,
-      },
+      data: subscription,
     });
   } catch (error) {
     console.error("Subscribe error:", error);
