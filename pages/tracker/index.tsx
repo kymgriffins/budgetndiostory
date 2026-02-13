@@ -123,15 +123,42 @@ export default function Tracker() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showYearSlider, setShowYearSlider] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [trackerData, setTrackerData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 
+  // Fetch tracker data from API
+  useEffect(() => {
+    const fetchTrackerData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/tracker");
+        const result = await response.json();
+        if (result.success) {
+          setTrackerData(result.data);
+        } else {
+          setError("Failed to load tracker data");
+        }
+      } catch (err) {
+        setError("Failed to connect to server");
+        // Fallback to static data
+        setTrackerData(unifiedTrackerData as unknown as UnifiedTrackerData);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrackerData();
+  }, []);
+
   // Get sectors from unified data based on tab
-  const sectors = trackerData.sectors.filter(
-    (sector) => sector.type === activeTab,
-  );
+  const sectors = trackerData?.sectors?.filter(
+    (sector: any) => sector.type === activeTab
+  ) || [];
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -500,7 +527,7 @@ export default function Tracker() {
 
               {/* Sector Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 mb-12">
-                {sectors.map((sector, i) => (
+                {sectors.map((sector: any, i: number) => (
                   <motion.div
                     key={sector.slug}
                     initial={{ opacity: 0, y: 20 }}

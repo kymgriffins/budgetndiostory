@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 /**
  * 10/10 Landing Page - Budget Ndio Story
@@ -44,9 +44,18 @@ export default function VideoLanding() {
   const [year, setYear] = useState(2026);
   const [openFaq, setOpenFaq] = useState<number | null>(0); // First FAQ open by default
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
+  }, []);
+
+  // Set video start time after video loads
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 5;
+    }
   }, []);
 
   const toggleFaq = (index: number) => {
@@ -216,6 +225,7 @@ export default function VideoLanding() {
         <section className="relative w-full h-screen overflow-hidden" role="banner">
           {/* Video Background - with fallback */}
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
@@ -224,7 +234,7 @@ export default function VideoLanding() {
             onLoadedData={() => setIsVideoLoaded(true)}
             poster="/hero-poster.jpg"
           >
-            <source src="/budgetndiostory.mp4" type="video/mp4" />
+            <source src="/bnsoo1.mp4" type="video/mp4" />
           </video>
           
           {/* Loading placeholder */}
@@ -252,11 +262,11 @@ export default function VideoLanding() {
 
               {/* Main Headline - Founders Grotesk Bold */}
               <h1 className="font-FoundersGrotesk text-[clamp(36px,7vw,80px)] font-bold tracking-tight leading-[1.05] mb-5">
-                Our Taxes. Our Story.
+                Our Taxes, Our Story.
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00aa55] to-[#00cc66]">
+                {/* <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00aa55] to-[#00cc66]">
                   The Kenyan Budget.
-                </span>
+                </span> */}
               </h1>
 
               {/* Subheadline - Neue Montreal */}
@@ -272,13 +282,13 @@ export default function VideoLanding() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex justify-center "
               >
-                <Link
-                  href="/tracker"
+                {/* <Link
+                  href="/learn"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#00aa55] text-black rounded-full font-NeueMontreal font-medium text-base uppercase tracking-wider hover:bg-[#00cc66] hover:scale-105 transition-all duration-300 shadow-lg shadow-[#00aa55]/25"
                 >
-                  Explore the Data
+                  Budget Ndio Story
                   <ArrowRight size={18} />
-                </Link>
+                </Link> */}
               </motion.div>
 
               {/* Impact Stats */}
@@ -289,18 +299,18 @@ export default function VideoLanding() {
                 className="flex flex-wrap justify-center gap-8 mt-12"
               >
                 <div className="text-center">
-                  <p className="font-FoundersGrotesk text-3xl font-bold text-[#00aa55]">KSh 12B→4.2B</p>
-                  <p className="font-NeueMontreal text-white/60 text-xs uppercase tracking-wider mt-1">Budget Traced</p>
+                  <p className="font-FoundersGrotesk text-3xl font-bold text-[#00aa55]">KSh 4.3 Trillion</p>
+                  <p className="font-NeueMontreal text-white/60 text-xs uppercase tracking-wider mt-1">Budget</p>
                 </div>
                 <div className="w-px h-10 bg-white/20 hidden sm:block" />
-                <div className="text-center">
-                  <p className="font-FoundersGrotesk text-3xl font-bold text-white">10K+</p>
-                  <p className="font-NeueMontreal text-white/60 text-xs uppercase tracking-wider mt-1">Youth Reached</p>
-                </div>
+                {/* <div className="text-center">
+                  <p className="font-FoundersGrotesk text-3xl font-bold text-[#ce1010]">~11.814 Trillion+</p>
+                  <p className="font-NeueMontreal text-[#ce1010] text-xs uppercase tracking-wider mt-1">DEBT</p>
+                </div> */}
                 <div className="w-px h-10 bg-white/20 hidden sm:block" />
                 <div className="text-center">
-                  <p className="font-FoundersGrotesk text-3xl font-bold text-white">12</p>
-                  <p className="font-NeueMontreal text-white/60 text-xs uppercase tracking-wider mt-1">Counties Covered</p>
+                  <p className="font-FoundersGrotesk text-3xl font-bold text-white">~58.6 million</p>
+                  <p className="font-NeueMontreal text-white/60 text-xs uppercase tracking-wider mt-1">KENYANS</p>
                 </div>
               </motion.div>
             </motion.div>
@@ -323,62 +333,7 @@ export default function VideoLanding() {
         </section>
 
         <main id="main-content">
-          {/* QUICK ACTIONS - Value Props with Stats */}
-          <section className="padding-x pt-20 pb-12" aria-labelledby="quick-actions-heading">
-            <div className="max-w-7xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="mb-10"
-              >
-                <h2 id="quick-actions-heading" className="sr-only">Quick Actions</h2>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  {quickActions.map((action, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.1 }}
-                      whileHover={{ y: -4 }}
-                    >
-                      <Link
-                        href={action.href}
-                        className="block rounded-2xl bg-white/5 border border-white/10 p-6 hover:bg-white/10 transition-all duration-300 group h-full relative overflow-hidden"
-                      >
-                        {/* Hover gradient effect */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00aa55]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        
-                        <div className="relative z-10">
-                          <div
-                            className={`w-14 h-14 rounded-2xl ${action.bgColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
-                            style={{ color: action.color }}
-                          >
-                            {action.icon}
-                          </div>
-                          <p className="font-FoundersGrotesk text-lg font-semibold text-white group-hover:text-[#00aa55] transition-colors">
-                            {action.title}
-                          </p>
-                          <p className="font-NeueMontreal text-white/60 text-sm mt-2 leading-relaxed">
-                            {action.desc}
-                          </p>
-                          <div className="flex items-center gap-2 mt-4">
-                            <span className="text-[#00aa55] text-xs font-medium uppercase tracking-wider">
-                              {action.stat}
-                            </span>
-                            <ArrowRight size={14} className="text-[#00aa55] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                          </div>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
+         
           {/* FEATURED IMPACT STORY - Emotional Core */}
           {/* FEATURED IMPACT STORY - Positive Government Success */}
 <section id="featured-story" className="padding-x py-16" aria-labelledby="featured-story-heading">
@@ -395,7 +350,7 @@ export default function VideoLanding() {
         <div className="p-8 lg:p-12 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-4">
             <span className="px-3 py-1 bg-[#00aa55]/20 text-[#00aa55] text-xs font-medium uppercase tracking-wider rounded-full">
-              Featured Success Story
+              Featured  Story
             </span>
             <span className="text-white/50 text-xs uppercase tracking-wider">
               Government Digital Inclusion
@@ -405,7 +360,7 @@ export default function VideoLanding() {
             How the Government is Bringing Digital Education to Every Child
           </h2>
           <p className="font-NeueMontreal text-white/70 mt-5 leading-relaxed text-lg">
-            Through the Digital Literacy Programme (DigiSchool), the Kenyan government has delivered over **1.2 million tablets and laptops** to public primary schools nationwide — connecting more than **20,000 schools** to high-speed internet and transforming classrooms across all 47 counties.
+            Through the Digital Literacy Programme (DigiSchool), the Kenyan government has delivered over 1.2 million tablets and laptops to public primary schools nationwide — connecting more than 20,000 schools to high-speed internet and transforming classrooms across all 47 counties.
           </p>
 
           {/* Trust Badges */}
@@ -417,7 +372,7 @@ export default function VideoLanding() {
             ].map((badge, i) => (
               <div
                 key={i}
-                className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full"
+                className="flex font-NeueMontreal items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full"
               >
                 <span className="text-[#00aa55]">{badge.icon}</span>
                 <span className="text-white/70 text-xs font-medium">{badge.text}</span>
@@ -428,17 +383,12 @@ export default function VideoLanding() {
           {/* CTAs */}
           <div className="flex flex-wrap gap-3 mt-8">
             <Link
-              href="/stories"
+              href="/blog"
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#00aa55] text-black rounded-full font-NeueMontreal font-medium text-sm uppercase tracking-wider hover:bg-[#00cc66] hover:scale-105 transition-all duration-300"
             >
-              Read More Success Stories <ArrowRight size={16} />
+               Success Stories <ArrowRight size={16} />
             </Link>
-            <Link
-              href="/tracker"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 rounded-full font-NeueMontreal font-medium text-sm uppercase tracking-wider hover:bg-white/20 transition-all duration-300"
-            >
-              Explore Education Data <ExternalLink size={14} />
-            </Link>
+           
           </div>
         </div>
 
@@ -474,9 +424,7 @@ export default function VideoLanding() {
             {/* Reach & Impact */}
             <div className="rounded-2xl bg-[#00aa55]/10 border border-[#00aa55]/30 p-6 sm:col-span-2">
               <div className="flex items-start gap-3">
-                <div className="p-2 bg-[#00aa55]/20 rounded-lg">
-                  <Users size={20} className="text-[#00aa55]" />
-                </div>
+               
                 <div>
                   <p className="text-xs font-NeueMontreal text-[#00aa55]/70 uppercase tracking-wider mb-1">
                     Real Impact
@@ -713,15 +661,15 @@ export default function VideoLanding() {
 
                   {/* Trust Badges */}
                   <div className="flex flex-wrap justify-center gap-6 mt-8">
-                    <div className="flex items-center gap-2 text-white/60 text-sm">
+                    <div className="flex items-center gap-2 font-NeueMontreal text-white/60 text-sm">
                       <CheckCircle size={16} className="text-[#00aa55]" />
                       Free to join
                     </div>
-                    <div className="flex items-center gap-2 text-white/60 text-sm">
+                    <div className="flex font-NeueMontreal items-center gap-2 text-white/60 text-sm">
                       <Clock size={16} className="text-[#00aa55]" />
                       2 min to subscribe
                     </div>
-                    <div className="flex items-center gap-2 text-white/60 text-sm">
+                    <div className="flex font-NeueMontrealitems-center gap-2 text-white/60 text-sm">
                       <MapPin size={16} className="text-[#00aa55]" />
                       Based in Nairobi, Kenya
                     </div>

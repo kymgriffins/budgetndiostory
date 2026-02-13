@@ -35,11 +35,21 @@ export default function Newsletter({
     setStatus("loading");
     setMessage("");
 
-    // Simulate API call - replace with actual newsletter API when ready
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
 
-      // Simulate success
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
       setStatus("success");
       setMessage("Thank you for subscribing! Check your inbox for confirmation.");
       setEmail("");
@@ -48,9 +58,11 @@ export default function Newsletter({
       if (onSubscribe) {
         onSubscribe(email);
       }
-    } catch {
+    } catch (error) {
       setStatus("error");
-      setMessage("Something went wrong. Please try again.");
+      setMessage(
+        error instanceof Error ? error.message : "Something went wrong. Please try again."
+      );
     }
   };
 
@@ -80,7 +92,10 @@ export default function Newsletter({
 
   return (
     <div className={className}>
-      <form onSubmit={handleSubmit} className={`${baseStyles} ${variantStyles[variant]}`}>
+      <form
+        onSubmit={handleSubmit}
+        className={`${baseStyles} ${variantStyles[variant]}`}
+      >
         <input
           type="email"
           value={email}
@@ -92,16 +107,26 @@ export default function Newsletter({
         <button
           type="submit"
           disabled={status === "loading" || status === "success"}
-          className={`${buttonStyles[variant]} ${status === "success" ? "text-[#00aa55]" : ""} ${status === "loading" ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`${buttonStyles[variant]} ${
+            status === "success" ? "text-[#00aa55]" : ""
+          } ${status === "loading" ? "opacity-50 cursor-not-allowed" : ""}`}
         >
-          {status === "loading" ? "..." : status === "success" ? "✓" : buttonText}
+          {status === "loading"
+            ? "..."
+            : status === "success"
+            ? "✓"
+            : buttonText}
         </button>
       </form>
 
       {message && (
         <p
           className={`mt-2 text-sm font-NeueMontreal transition-opacity duration-300 ${
-            status === "error" ? "text-red-500" : status === "success" ? "text-[#00aa55]" : "text-white/60"
+            status === "error"
+              ? "text-red-500"
+              : status === "success"
+              ? "text-[#00aa55]"
+              : "text-white/60"
           }`}
         >
           {message}
