@@ -671,7 +671,7 @@ export default function VideoLanding() {
                     </div>
                     <div className="flex font-NeueMontreal items-center gap-2 text-white/60 text-sm">
                       <MapPin size={16} className="text-[#00aa55]" />
-                      Based in Nairobi, Kenya
+                       Kenya
                     </div>
                   </div>
 
