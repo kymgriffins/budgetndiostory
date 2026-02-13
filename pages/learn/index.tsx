@@ -9,6 +9,7 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
+  Clock,
   Download,
   FileText,
   GraduationCap,
@@ -529,154 +530,395 @@ export default function LearnPage() {
 
         <main>
           {/* HERO */}
-          <section className="px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+         
+          {/* Section Divider */}
+          <div className="px-4">
             <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-sm font-NeueMontreal text-white/70 mb-6">
-                  <GraduationCap size={16} className="text-[#00aa55]" />
-                  Free Civic Education
-                </span>
-
-                <h1 className="font-FoundersGrotesk text-3xl sm:text-4xl lg:text-6xl font-semibold tracking-tight uppercase leading-tight">
-                  Master Kenya's <br />
-                  <span className="text-[#00aa55]">Public Budget</span>
-                </h1>
-
-                <p className="mt-6 text-lg font-NeueMontreal text-white/60 max-w-xl leading-relaxed">
-                  Learn to read, understand, and engage with Kenya's national
-                  and county budgets. Become an informed citizen who can hold
-                  leaders accountable.
-                </p>
-
-                <div className="mt-8 flex items-center gap-4 flex-wrap">
-                  <button
-                    onClick={() =>
-                      document
-                        .getElementById("courses")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/90 transition-colors"
-                  >
-                    Start Learning <ArrowRight size={14} />
-                  </button>
-                  <button
-                    onClick={() =>
-                      document
-                        .getElementById("calendar")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/20 transition-colors"
-                  >
-                    <Calendar size={14} /> Budget Calendar
-                  </button>
-                </div>
-
-                {/* Progress Overview */}
-                {progressPercent > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="mt-8 p-4 rounded-xl bg-gradient-to-r from-[#00aa55]/10 to-transparent border border-[#00aa55]/20"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[#00aa55]/20 flex items-center justify-center">
-                          <Check size={20} className="text-[#00aa55]" />
-                        </div>
-                        <div>
-                          <p className="text-white font-medium">
-                            {completedCount} of {totalLessons} lessons completed
-                          </p>
-                          <p className="text-sm text-white/50">
-                            {progressPercent}% complete - Keep going!
-                          </p>
-                        </div>
-                      </div>
-                      <div className="w-24 h-2 bg-white/10 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${progressPercent}%` }}
-                          transition={{ duration: 0.5 }}
-                          className="h-full bg-[#00aa55] rounded-full"
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* Stats */}
-                <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-white/10">
-                  {[
-                    { value: "7", label: "Courses" },
-                    { value: "35", label: "Lessons" },
-                    { value: "165min", label: "Total Time" },
-                    { value: "Free", label: "For Everyone" },
-                  ].map((stat) => (
-                    <div key={stat.label}>
-                      <p className="text-3xl font-FoundersGrotesk font-semibold text-white">
-                        {stat.value}
-                      </p>
-                      <p className="text-sm font-NeueMontreal text-white/50">
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+              <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             </div>
-          </section>
+          </div>
 
-          {/* GUIDED LEARNING PATH */}
-          
-
-
-          {/* FEATURES */}
-          <section className="px-4 sm:px-6 lg:px-8 py-16 bg-white/5">
+          {/* FEATURED COURSE SPOTLIGHT */}
+          <section id="featured-course" className="px-4 sm:px-6 lg:px-8 py-24">
             <div className="max-w-6xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mb-12"
               >
-                <h2 className="font-FoundersGrotesk text-2xl lg:text-3xl font-semibold uppercase">
-                  What You'll Get
+                <span className="text-xs font-NeueMontreal uppercase tracking-[0.2em] text-[#00aa55]">
+                  Featured Course
+                </span>
+                <div className="mt-6 grid lg:grid-cols-2 gap-8 items-center">
+                  {/* Content */}
+                  <div>
+                    <div className="flex font-NeueMontreal  items-center gap-3 mb-4">
+                      <span className="px-3 py-1 rounded-full bg-[#00aa55]/20 text-[#00aa55] text-sm font-medium">
+                        Most Popular
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-white/10 text-white/60 text-sm">
+                        20 min
+                      </span>
+                    </div>
+                    <h2 className="font-FoundersGrotesk text-3xl lg:text-4xl font-semibold tracking-tight uppercase">
+                      Budget Basics
+                    </h2>
+                    <p className="mt-4 text-lg font-NeueMontreal text-white/70 leading-relaxed">
+                      Start your civic education journey here. Learn what a budget is, 
+                      why it matters, and how Kenya's national and county budgets work.
+                      This foundational course will give you the knowledge you need 
+                      to understand all other budget topics.
+                    </p>
+                    <div className="mt-6 flex items-center gap-4">
+                      <div className="flex -space-x-2">
+                        {[1, 2, 3].map((i) => (
+                          <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00aa55]/30 to-[#3b82f6]/30 border-2 border-[#0a0a0a] flex items-center justify-center">
+                            <span className="text-xs font-medium">U{i}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <span className="font-NeueMontreal text-white/60">
+                        2,500+ enrolled
+                      </span>
+                    </div>
+                    <div className="mt-8 flex items-center gap-4">
+                      <button
+                        onClick={() => openLesson('budget-basics', 0)}
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/90 transition-colors"
+                      >
+                        Start Learning <Play size={14} />
+                      </button>
+                      <Link
+                        href="/learn/budget-basics"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/20 transition-colors"
+                      >
+                        View Curriculum
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Preview Card */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="relative"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00aa55]/20 to-[#3b82f6]/20 rounded-3xl blur-3xl" />
+                    <div className="relative rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+                      {/* Video Preview */}
+                      <div className="aspect-video bg-gradient-to-br from-[#00aa55]/10 to-[#3b82f6]/10 flex items-center justify-center">
+                        <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                          <Play size={32} className="text-white ml-1" />
+                        </div>
+                      </div>
+                      {/* Lesson List Preview */}
+                      <div className="p-6">
+                        <h4 className="font-FoundersGrotesk text-lg font-medium mb-4">Course Content</h4>
+                        <div className="space-y-3">
+                          {courseLessons['budget-basics']?.slice(0, 3).map((lesson, i) => (
+                            <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                                lesson.type === 'video' ? 'bg-[#3b82f6]/20 text-[#3b82f6]' :
+                                lesson.type === 'quiz' ? 'bg-[#f59e0b]/20 text-[#f59e0b]' :
+                                'bg-white/10 text-white/60'
+                              }`}>
+                                {lesson.type === 'video' ? <Play size={14} /> :
+                                 lesson.type === 'quiz' ? <HelpCircle size={14} /> :
+                                 <FileText size={14} />}
+                              </div>
+                              <div className="flex-1">
+                                <p className="font-NeueMontreal text-sm">{lesson.title}</p>
+                                <p className="font-NeueMontreal text-xs text-white/40">{lesson.duration}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <p className="mt-4 text-center font-NeueMontreal text-sm text-white/40">
+                          + 2 more lessons
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Section Divider */}
+          <div className="px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+          </div>
+
+          {/* ALL COURSES GRID */}
+          <section id="courses" className="px-4 sm:px-6 lg:px-8 py-24 bg-white/5">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                  All Courses
+                </span>
+                <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight uppercase mt-3">
+                  Explore Our Library
                 </h2>
+                <p className="mt-3 text-lg font-NeueMontreal text-white/60 max-w-xl mx-auto">
+                  From beginners to advanced - we have courses for every level of budget literacy.
+                </p>
               </motion.div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {features.map((feature, i) => (
+              {/* Category Filter */}
+              <div className="flex flex-wrap justify-center gap-2 mb-12">
+                {['All', 'Foundation', 'Skills', 'Engagement', 'Accountability'].map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`px-4 py-2 rounded-full font-NeueMontreal text-sm transition-all ${
+                      activeCategory === category
+                        ? 'bg-[#00aa55] text-black'
+                        : 'bg-white/10 text-white/60 hover:bg-white/20'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+
+              {/* Course Cards Grid */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredCourses.map((course, index) => (
                   <motion.div
-                    key={i}
+                    key={course.id}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="rounded-2xl bg-white/5 border border-white/10 p-6 hover:bg-white/10 transition-colors"
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="group relative rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:transform hover:-translate-y-1"
                   >
+                    {/* Category Color Stripe */}
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                      style={{
-                        backgroundColor: `${feature.color}20`,
-                        color: feature.color,
-                      }}
-                    >
-                      {feature.icon}
+                      className="absolute left-0 top-0 bottom-0 w-1"
+                      style={{ backgroundColor: course.color }}
+                    />
+
+                    <div className="p-6 pl-8">
+                      {/* Icon & Category */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div
+                          className="w-12 h-12 rounded-xl flex items-center justify-center"
+                          style={{ backgroundColor: `${course.color}20`, color: course.color }}
+                        >
+                          {course.icon}
+                        </div>
+                        <span className="px-3 py-1 rounded-full bg-white/5 text-xs font-NeueMontreal text-white/50">
+                          {course.category}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="font-FoundersGrotesk text-xl font-semibold group-hover:text-[#00aa55] transition-colors">
+                        {course.title}
+                      </h3>
+                      <p className="font-NeueMontreal text-sm text-white/60 mt-2 line-clamp-2">
+                        {course.description}
+                      </p>
+
+                      {/* Meta */}
+                      <div className="flex items-center gap-4 mt-4 pt-4 border-t border-white/10">
+                        <div className="flex items-center gap-1 text-white/50">
+                          <BookOpen size={14} />
+                          <span className="text-sm font-NeueMontreal">{course.lessons} lessons</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-white/50">
+                          <Clock size={14} />
+                          <span className="text-sm font-NeueMontreal">{course.duration}</span>
+                        </div>
+                      </div>
+
+                      {/* Hover: Start Learning CTA */}
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        whileHover={{ opacity: 1, height: 'auto' }}
+                        className="overflow-hidden"
+                      >
+                        <button
+                          onClick={() => openLesson(course.id, 0)}
+                          className="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-[#00aa55] to-[#00cc66] text-black font-NeueMontreal text-sm font-medium hover:shadow-lg hover:shadow-[#00aa55]/20 transition-all"
+                        >
+                          Start Learning
+                        </button>
+                      </motion.div>
                     </div>
-                    <h3 className="font-FoundersGrotesk text-lg font-medium">
-                      {feature.title}
-                    </h3>
-                    <p className="font-NeueMontreal text-white/60 mt-2 leading-relaxed">
-                      {feature.description}
-                    </p>
                   </motion.div>
                 ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Section Divider */}
+          <div className="px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+          </div>
+
+          {/* BUDGET CALENDAR + CLINICS SIDE BY SIDE */}
+          <section id="calendar" className="px-4 sm:px-6 lg:px-8 py-24">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                  Stay Informed
+                </span>
+                <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight uppercase mt-3">
+                  Calendar & Events
+                </h2>
+                <p className="mt-3 text-lg font-NeueMontreal text-white/60 max-w-xl mx-auto">
+                  Key dates in Kenya's budget cycle and upcoming opportunities to learn from experts.
+                </p>
+              </motion.div>
+
+              <div className="grid lg:grid-cols-2 gap-8">
+                {/* Budget Calendar */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="rounded-2xl bg-white/5 border border-white/10 p-6"
+                >
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-[#f59e0b]/20 flex items-center justify-center">
+                      <Calendar size={24} className="text-[#f59e0b]" />
+                    </div>
+                    <div>
+                      <h3 className="font-FoundersGrotesk text-xl font-semibold">Budget Calendar</h3>
+                      <p className="font-NeueMontreal text-sm text-white/60">2025-2026 Fiscal Year</p>
+                    </div>
+                  </div>
+
+                  {/* Interactive Calendar Grid */}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                    {budgetCalendarEvents.map((event, index) => (
+                      <motion.button
+                        key={event.month}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: index * 0.02 }}
+                        whileHover={{ scale: 1.05 }}
+                        className="p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#00aa55]/30 transition-all text-left group"
+                      >
+                        <p className="font-NeueMontreal text-xs text-white/50 group-hover:text-[#00aa55] transition-colors">
+                          {event.month}
+                        </p>
+                        <p className="font-NeueMontreal text-sm font-medium mt-1 line-clamp-2">
+                          {event.event}
+                        </p>
+                        <span className={`inline-block mt-2 px-2 py-0.5 rounded text-xs capitalize ${
+                          event.phase === 'planning' ? 'bg-blue-500/20 text-blue-400' :
+                          event.phase === 'review' ? 'bg-yellow-500/20 text-yellow-400' :
+                          event.phase === 'participation' ? 'bg-[#00aa55]/20 text-[#00aa55]' :
+                          event.phase === 'announcement' ? 'bg-purple-500/20 text-purple-400' :
+                          event.phase === 'debate' ? 'bg-orange-500/20 text-orange-400' :
+                          event.phase === 'approval' ? 'bg-green-500/20 text-green-400' :
+                          event.phase === 'implementation' ? 'bg-[#00aa55]/20 text-[#00aa55]' :
+                          event.phase === 'accountability' ? 'bg-red-500/20 text-red-400' :
+                          'bg-white/10 text-white/60'
+                        }`}>
+                          {event.phase}
+                        </span>
+                      </motion.button>
+                    ))}
+                  </div>
+
+                  <button className="mt-6 w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 font-NeueMontreal text-sm transition-colors">
+                    View Full Calendar →
+                  </button>
+                </motion.div>
+
+                {/* Budget Clinics */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="space-y-4"
+                >
+                  {budgetClinics.map((clinic, index) => (
+                    <motion.div
+                      key={clinic.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start gap-4">
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00aa55]/20 to-[#3b82f6]/20 flex items-center justify-center flex-shrink-0">
+                            <Video size={20} className="text-[#00aa55]" />
+                          </div>
+                          <div>
+                            <h4 className="font-FoundersGrotesk font-medium">{clinic.title}</h4>
+                            <p className="font-NeueMontreal text-sm text-white/60 mt-1">{clinic.topic}</p>
+                            <div className="flex items-center gap-3 mt-2 text-xs text-white/50">
+                              <span>{clinic.date}</span>
+                              <span>•</span>
+                              <span>{clinic.time}</span>
+                            </div>
+                          </div>
+                        </div>
+                        {/* Urgency Badge */}
+                        {clinic.spots - clinic.registered <= 20 && (
+                          <span className="px-2 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-medium flex-shrink-0">
+                            {clinic.spots - clinic.registered} spots left
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/10">
+                        <div className="flex items-center gap-4">
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between text-xs mb-1">
+                              <span className="text-white/50">{clinic.registered}/{clinic.spots} registered</span>
+                              <span className="text-[#00aa55]">{Math.round((clinic.registered/clinic.spots)*100)}%</span>
+                            </div>
+                            <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                              <motion.div
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${(clinic.registered/clinic.spots)*100}%` }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className="h-full bg-gradient-to-r from-[#00aa55] to-[#3b82f6] rounded-full"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <button className="px-4 py-2 rounded-lg bg-[#00aa55] text-black text-sm font-NeueMontreal font-medium hover:bg-[#00cc66] transition-colors">
+                          Register
+                        </button>
+                      </div>
+                    </motion.div>
+                  ))}
+
+                  <button className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 font-NeueMontreal text-sm transition-colors">
+                    View All Clinics →
+                  </button>
+                </motion.div>
               </div>
             </div>
           </section>
@@ -750,109 +992,107 @@ export default function LearnPage() {
             </div>
           </section>
 
-          {/* BUDGET CLINICS */}
-          <section className="px-4 sm:px-6 lg:px-8 py-16">
+          
+
+          {/* Section Divider */}
+          <div className="px-4">
             <div className="max-w-6xl mx-auto">
+              <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+          </div>
+
+          {/* IMPACT STATS + TESTIMONIALS */}
+          <section className="px-4 sm:px-6 lg:px-8 py-24 bg-gradient-to-b from-transparent via-[#3b82f6]/5 to-transparent">
+            <div className="max-w-6xl mx-auto">
+              {/* Impact Stats */}
+             
+              {/* Testimonials */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mb-8"
               >
-                <h2 className="font-FoundersGrotesk text-2xl lg:text-3xl font-semibold uppercase">
-                  Upcoming Budget Clinics
-                </h2>
-                <p className="mt-2 text-sm font-NeueMontreal text-white/60">
-                  Join live sessions with budget experts
-                </p>
-              </motion.div>
+                <div className="text-center mb-10">
+                  <span className="text-xs uppercase tracking-[0.2em] text-white/50">
+                    Testimonials
+                  </span>
+                  <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight uppercase mt-3">
+                    What Our Learners Say
+                  </h2>
+                </div>
 
-              <div className="space-y-4">
-                {budgetClinics.map((clinic, index) => (
-                  <motion.div
-                    key={clinic.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="p-6 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
-                  >
-                    <div className="flex flex-col md:flex-row md:items-center gap-4">
-                      <div className="flex items-center gap-4 flex-1">
-                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00aa55]/20 to-[#3b82f6]/20 flex items-center justify-center">
-                          <Calendar size={24} className="text-[#00aa55]" />
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[
+                    {
+                      quote: "This course helped me understand how my county allocates funds. Now I can participate in public hearings with confidence.",
+                      name: "Jane Wanjiku",
+                      role: "Community Activist, Nairobi",
+                      avatar: "JW",
+                      color: "#00aa55"
+                    },
+                    {
+                      quote: "As a teacher, the budget toolkit has been invaluable. My students now understand civic responsibility at a young age.",
+                      name: "David Ochieng",
+                      role: "High School Teacher, Kisumu",
+                      avatar: "DO",
+                      color: "#3b82f6"
+                    },
+                    {
+                      quote: "I never understood budgets before. The tracker feature showed me exactly where development projects were happening in my area.",
+                      name: "Mary Akinyi",
+                      role: "Youth Leader, Mombasa",
+                      avatar: "MA",
+                      color: "#f59e0b"
+                    },
+                  ].map((testimonial, index) => (
+                    <motion.div
+                      key={testimonial.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all hover:transform hover:-translate-y-1"
+                    >
+                      {/* Quote Icon */}
+                      <div
+                        className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+                        style={{ backgroundColor: `${testimonial.color}20`, color: testimonial.color }}
+                      >
+                        <Award size={20} />
+                      </div>
+
+                      {/* Quote */}
+                      <p className="font-NeueMontreal text-white/80 leading-relaxed mb-6">
+                        "{testimonial.quote}"
+                      </p>
+
+                      {/* Author */}
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-12 h-12 rounded-full flex items-center justify-center font-semibold"
+                          style={{ backgroundColor: `${testimonial.color}20`, color: testimonial.color }}
+                        >
+                          {testimonial.avatar}
                         </div>
                         <div>
-                          <h3 className="font-FoundersGrotesk text-lg font-medium">
-                            {clinic.title}
-                          </h3>
-                          <p className="font-NeueMontreal text-white/60 text-sm">
-                            {clinic.topic}
-                          </p>
-                          <div className="flex items-center gap-4 mt-2">
-                            <span className="text-xs font-NeueMontreal text-white/40">
-                              {clinic.date}
-                            </span>
-                            <span className="text-xs font-NeueMontreal text-white/40">
-                              {clinic.time}
-                            </span>
-                          </div>
+                          <p className="font-FoundersGrotesk font-medium">{testimonial.name}</p>
+                          <p className="font-NeueMontreal text-sm text-white/50">{testimonial.role}</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <div className="text-right">
-                          <p className="text-xs font-NeueMontreal text-white/50">
-                            {clinic.registered}/{clinic.spots} registered
-                          </p>
-                          <div className="w-24 h-1.5 bg-white/10 rounded-full mt-1">
-                            <div
-                              className="h-full bg-[#00aa55] rounded-full"
-                              style={{
-                                width: `${(clinic.registered / clinic.spots) * 100}%`,
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <button className="px-4 py-2 rounded-lg bg-[#00aa55] text-black text-sm font-NeueMontreal font-medium hover:bg-[#00cc66] transition-colors">
-                          Register
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/10">
-                      <Users size={14} className="text-white/40" />
-                      <span className="text-xs font-NeueMontreal text-white/50">
-                        Hosted by: {clinic.host}
-                      </span>
-                      {clinic.location && (
-                        <>
-                          <MapPin size={14} className="ml-4 text-white/40" />
-                          <span className="text-xs font-NeueMontreal text-white/50">
-                            {clinic.location}
-                          </span>
-                        </>
-                      )}
-                      <span className="ml-auto px-2 py-1 rounded bg-white/10 text-xs font-NeueMontreal text-white/60 capitalize">
-                        {clinic.type}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="mt-8 text-center"
-              >
-                <button className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-full font-NeueMontreal text-sm hover:bg-white/20 transition-colors">
-                  View All Clinics <ArrowRight size={14} />
-                </button>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             </div>
           </section>
+
+          {/* Section Divider */}
+          <div className="px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+          </div>
 
           {/* FAQ SECTION */}
           <section className="px-4 sm:px-6 lg:px-8 py-16 bg-white/5">
@@ -919,34 +1159,72 @@ export default function LearnPage() {
           </section>
 
           {/* CTA */}
-          <section className="px-4 sm:px-6 lg:px-8 py-16">
-            <div className="max-w-4xl mx-auto">
+          <section className="px-4 sm:px-6 lg:px-8 py-24">
+            <div className="max-w-5xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="rounded-3xl bg-gradient-to-br from-[#00aa55]/20 via-white/5 to-transparent border border-white/10 p-8 lg:p-12 text-center"
+                className="relative rounded-3xl overflow-hidden"
               >
-                <h2 className="font-FoundersGrotesk text-2xl lg:text-4xl font-semibold tracking-tight">
-                  Ready to start your journey?
-                </h2>
-                <p className="font-NeueMontreal text-white/70 mt-4 max-w-xl mx-auto">
-                  Join thousands of Kenyans who are learning about public
-                  budgets and becoming informed citizens.
-                </p>
-                <div className="flex flex-wrap justify-center gap-4 mt-8">
-                  <button
-                    onClick={() => {
-                      setActiveCategory("Foundation");
-                      document
-                        .getElementById("courses")
-                        ?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/90 transition-colors whitespace-nowrap"
+                {/* Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#03522a] via-[#000000] to-[#000000]" />
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
+                
+                {/* Content */}
+                <div className="relative p-8 lg:p-16 text-center">
+                  {/* Badge */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="inline-flex font-NeueMontreal items-center gap-2 px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm text-white text-sm font-medium mb-6"
                   >
-                    Start First Course
-                  </button>
+                    <Users size={16} />
+                    Join 10,000+ learners
+                  </motion.div>
+
+                  <h2 className="font-FoundersGrotesk text-3xl lg:text-5xl font-semibold tracking-tight text-white">
+                    Ready to Start Your Journey?
+                  </h2>
+                  <p className="font-NeueMontreal text-lg text-white/90 mt-4 max-w-xl mx-auto leading-relaxed">
+                    Join thousands of Kenyans who are taking control of their civic education. 
+                    Your first lesson is free - start now!
+                  </p>
+                  
+                  <div className="flex flex-wrap justify-center gap-4 mt-10">
+                    <button
+                      onClick={() => {
+                        setActiveCategory("Foundation");
+                        document
+                          .getElementById("courses")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-white/90 transition-all transform hover:scale-105 shadow-lg"
+                    >
+                      Start Learning Free
+                    </button>
+                    <Link
+                      href="/newsletter"
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-black/20 backdrop-blur-sm text-white rounded-full font-NeueMontreal text-sm uppercase tracking-wider hover:bg-black/30 transition-colors"
+                    >
+                      Subscribe to Updates
+                    </Link>
+                  </div>
+
+                  {/* Trust indicators */}
+                  <div className="flex font-NeueMontreal items-center justify-center gap-6 mt-8 text-white/70 text-sm">
+                    <span className="flex items-center gap-2">
+                      <Check size={16} className="text-white" />
+                      No credit card required
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <Check size={16} className="text-white" />
+                      100% Free forever
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             </div>
