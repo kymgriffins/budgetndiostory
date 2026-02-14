@@ -1,7 +1,7 @@
 "use client";
 
 import { MainFooter, NavbarLanding } from "@/components";
-import { blogPosts, getFeaturedPosts } from "@/lib/blog-data";
+import { BlogPost } from "@/lib/blog-types";
 import { CATEGORY_CONFIG } from "@/lib/blog-types";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
@@ -9,25 +9,63 @@ import Head from "next/head";
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
 
-// Get unique categories
-const categories = Array.from(
-  new Set(blogPosts.map((post) => post.category)),
-).map((category) => ({
-  id: category.toLowerCase(),
-  label: category,
-  ...CATEGORY_CONFIG[category as keyof typeof CATEGORY_CONFIG],
-}));
+// Default categories in case API doesn't return them
+const defaultCategories = [
+  { id: "infrastructure", label: "Infrastructure", emoji: "🛣️", color: "from-orange-400 to-red-500" },
+  { id: "health", label: "Health", emoji: "🏥", color: "from-green-400 to-emerald-600" },
+  { id: "education", label: "Education", emoji: "📚", color: "from-amber-400 to-orange-500" },
+  { id: "youth", label: "Youth", emoji: "👥", color: "from-purple-400 to-violet-600" },
+  { id: "water", label: "Water", emoji: "💧", color: "from-cyan-400 to-blue-500" },
+  { id: "agriculture", label: "Agriculture", emoji: "🌾", color: "from-lime-400 to-green-500" },
+  { id: "governance", label: "Governance", emoji: "🏛️", color: "from-gray-400 to-gray-600" },
+  { id: "analysis", label: "Analysis", emoji: "📊", color: "from-blue-400 to-indigo-500" },
+  { id: "opinion", label: "Opinion", emoji: "💭", color: "from-pink-400 to-rose-500" },
+];
 
 export default function BlogIndex() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [displayedPosts, setDisplayedPosts] = useState(blogPosts);
+  const [displayedPosts, setDisplayedPosts] = useState<BlogPost[]>([]);
+  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
+  const [categories, setCategories] = useState(defaultCategories);
+  const [loading, setLoading] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const featuredPosts = getFeaturedPosts();
+
+  // Fetch posts from API
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const response = await fetch("/api/blog");
+        const data = await response.json();
+        
+        if (data.success) {
+          setAllPosts(data.data || []);
+          setDisplayedPosts(data.data || []);
+          
+          // Set categories from API if available
+          if (data.categories && Array.isArray(data.categories)) {
+            const apiCategories = data.categories.map((cat: any) => ({
+              id: cat.slug,
+              label: cat.name,
+              emoji: cat.emoji || "📝",
+              color: cat.color || "from-gray-400 to-gray-600",
+            }));
+            setCategories(apiCategories);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching blog posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchPosts();
+  }, []);
 
   // Filter posts based on category and search
   useEffect(() => {
-    let filtered = blogPosts.filter((post) => post.status === "published");
+    let filtered = allPosts.filter((post) => post.status === "published");
 
     if (selectedCategory !== "all") {
       filtered = filtered.filter(
@@ -47,7 +85,7 @@ export default function BlogIndex() {
     }
 
     setDisplayedPosts(filtered);
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, allPosts]);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -172,7 +210,20 @@ export default function BlogIndex() {
           {/* BLOG POSTS GRID */}
           <section className="padding-x py-8 pb-16">
             <div className="max-w-6xl mx-auto">
-              {displayedPosts.length > 0 ? (
+              {loading ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[1, 2, 3, 4, 5, 6].map((i) => (
+                    <div key={i} className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden animate-pulse">
+                      <div className="h-40 bg-white/10" />
+                      <div className="p-5">
+                        <div className="h-4 bg-white/10 rounded w-1/3 mb-3" />
+                        <div className="h-6 bg-white/10 rounded w-full mb-2" />
+                        <div className="h-4 bg-white/10 rounded w-2/3" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : displayedPosts.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {displayedPosts.map((post, i) => (
                     <motion.div

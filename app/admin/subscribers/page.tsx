@@ -1,5 +1,3 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import AdminSubscribersClient from "./AdminSubscribersClient";
 
 // Mock subscriber data - would come from database in production
@@ -17,18 +15,5 @@ const mockSubscribers = [
 ];
 
 export default async function AdminSubscribersPage() {
-  const session = await auth();
-
-  // Check if user is authenticated
-  if (!session) {
-    redirect("/auth/signin?callbackUrl=/admin/subscribers");
-  }
-
-  // Check if user has admin or editor role
-  const userRole = (session.user as any)?.role;
-  if (userRole !== "admin" && userRole !== "editor") {
-    redirect("/?error=unauthorized");
-  }
-
   return <AdminSubscribersClient initialSubscribers={mockSubscribers as any} />;
 }

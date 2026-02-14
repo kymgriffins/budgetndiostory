@@ -1,7 +1,5 @@
 import { blogPosts as initialPosts } from "@/lib/blog-data";
 import { BlogPost, BlogCategory } from "@/lib/blog-types";
-import { auth, signOut } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import AdminBlogClient from "./AdminBlogClient";
 
@@ -32,20 +30,6 @@ async function getBlogPosts() {
 export const dynamic = "force-dynamic";
 
 export default async function AdminBlogPage() {
-  const session = await auth();
-
-  // Check if user is authenticated
-  if (!session) {
-    redirect("/auth/signin?callbackUrl=/admin/blog");
-  }
-
-  // Check if user has admin or editor role
-  const userRole = (session.user as any)?.role;
-  if (userRole !== "admin" && userRole !== "editor") {
-    // Users without proper role can't access admin
-    redirect("/?error=unauthorized");
-  }
-
   // Fetch blog posts from API
   const posts = await getBlogPosts();
 
@@ -69,28 +53,12 @@ export default async function AdminBlogPage() {
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-[14px] font-NeueMontreal text-[#212121]/50">
-                  {session.user?.email}
-                </span>
                 <Link
                   href="/blog"
                   className="px-4 py-2 text-[14px] font-NeueMontreal text-[#212121]/70 hover:text-[#212121] transition"
                 >
                   View Blog
                 </Link>
-                <form
-                  action={async () => {
-                    "use server";
-                    await signOut({ redirectTo: "/" });
-                  }}
-                >
-                  <button
-                    type="submit"
-                    className="px-4 py-2 text-[14px] font-NeueMontreal text-red-600 hover:text-red-700 transition"
-                  >
-                    Sign Out
-                  </button>
-                </form>
               </div>
             </div>
           </div>

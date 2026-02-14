@@ -135,8 +135,8 @@ export default function AdminContentClient({ initialPosts }: AdminContentClientP
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Content Management</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="text-2xl font-FoundersGrotesk font-bold text-gray-900">Content Management</h1>
+            <p className="text-gray-500 font-NeueMontreal mt-1">
               Create, edit, and manage all your articles, stories, podcasts, and videos.
             </p>
           </div>
@@ -162,8 +162,8 @@ export default function AdminContentClient({ initialPosts }: AdminContentClientP
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{posts.length}</p>
-              <p className="text-sm text-gray-500">Total Content</p>
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">{posts.length}</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Total Content</p>
             </div>
           </div>
         </div>
@@ -175,10 +175,10 @@ export default function AdminContentClient({ initialPosts }: AdminContentClientP
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">
                 {posts.filter((p) => p.status === "published").length}
               </p>
-              <p className="text-sm text-gray-500">Published</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Published</p>
             </div>
           </div>
         </div>
@@ -190,10 +190,10 @@ export default function AdminContentClient({ initialPosts }: AdminContentClientP
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">
                 {posts.filter((p) => p.status === "draft").length}
               </p>
-              <p className="text-sm text-gray-500">Drafts</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Drafts</p>
             </div>
           </div>
         </div>
@@ -205,10 +205,10 @@ export default function AdminContentClient({ initialPosts }: AdminContentClientP
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">
                 {posts.filter((p) => p.featured).length}
               </p>
-              <p className="text-sm text-gray-500">Featured</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Featured</p>
             </div>
           </div>
         </div>
@@ -380,7 +380,7 @@ export default function AdminContentClient({ initialPosts }: AdminContentClientP
           <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">Create New Content</h2>
+                <h2 className="text-xl font-FoundersGrotesk font-bold text-gray-900">Create New Content</h2>
                 <button
                   onClick={() => setShowNewForm(false)}
                   className="p-2 text-gray-400 hover:text-gray-600 transition"
@@ -493,7 +493,7 @@ export default function AdminContentClient({ initialPosts }: AdminContentClientP
           <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">Edit Content</h2>
+                <h2 className="text-xl font-FoundersGrotesk font-bold text-gray-900">Edit Content</h2>
                 <button
                   onClick={() => setEditingPost(null)}
                   className="p-2 text-gray-400 hover:text-gray-600 transition"

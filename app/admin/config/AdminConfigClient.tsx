@@ -108,8 +108,8 @@ export default function AdminConfigClient({ config: initialConfig }: AdminConfig
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Site Configuration</h1>
-        <p className="text-gray-500 mt-1">
+        <h1 className="text-2xl font-FoundersGrotesk font-bold text-gray-900">Site Configuration</h1>
+        <p className="text-gray-500 font-NeueMontreal mt-1">
           Manage your website settings and preferences. Changes are saved automatically when you click "Save Changes".
         </p>
       </div>
@@ -130,7 +130,7 @@ export default function AdminConfigClient({ config: initialConfig }: AdminConfig
               >
                 <span className="text-lg">{section.icon}</span>
                 <div>
-                  <p className="font-medium text-sm">{section.label}</p>
+                  <p className="font-FoundersGrotesk font-medium text-sm">{section.label}</p>
                   <p className={`text-xs ${activeSection === section.id ? "text-gray-300" : "text-gray-400"}`}>
                     {section.description}
                   </p>
@@ -147,7 +147,7 @@ export default function AdminConfigClient({ config: initialConfig }: AdminConfig
             {activeSection === "site" && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Site Information</h2>
+                  <h2 className="text-lg font-FoundersGrotesk font-semibold text-gray-900 mb-4">Site Information</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -218,7 +218,7 @@ export default function AdminConfigClient({ config: initialConfig }: AdminConfig
             {activeSection === "social" && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Social Media Links</h2>
+                  <h2 className="text-lg font-FoundersGrotesk font-semibold text-gray-900 mb-4">Social Media Links</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -289,7 +289,7 @@ export default function AdminConfigClient({ config: initialConfig }: AdminConfig
             {activeSection === "contact" && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h2>
+                  <h2 className="text-lg font-FoundersGrotesk font-semibold text-gray-900 mb-4">Contact Information</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -344,7 +344,7 @@ export default function AdminConfigClient({ config: initialConfig }: AdminConfig
             {activeSection === "features" && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Feature Toggles</h2>
+                  <h2 className="text-lg font-FoundersGrotesk font-semibold text-gray-900 mb-4">Feature Toggles</h2>
                   <div className="space-y-4">
                     {[
                       { key: "newsletter", label: "Newsletter", desc: "Enable newsletter subscription" },
@@ -382,7 +382,7 @@ export default function AdminConfigClient({ config: initialConfig }: AdminConfig
             {activeSection === "content" && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Content Settings</h2>
+                  <h2 className="text-lg font-FoundersGrotesk font-semibold text-gray-900 mb-4">Content Settings</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -446,7 +446,7 @@ export default function AdminConfigClient({ config: initialConfig }: AdminConfig
             {activeSection === "seo" && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">SEO Settings</h2>
+                  <h2 className="text-lg font-FoundersGrotesk font-semibold text-gray-900 mb-4">SEO Settings</h2>
                   <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">

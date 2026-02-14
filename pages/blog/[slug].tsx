@@ -1,7 +1,6 @@
 "use client";
 
 import { MainFooter, NavbarLanding } from "@/components";
-import { blogPosts, getBlogPostBySlug } from "@/lib/blog-data";
 import { BlogPost, CATEGORY_CONFIG } from "@/lib/blog-types";
 import { motion } from "framer-motion";
 import {
@@ -16,6 +15,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useMemo, useState } from "react";
+import { blogPosts } from "@/lib/blog-data-dummy";
 
 export default function BlogPostPage() {
   const pathname = usePathname();
@@ -35,12 +35,39 @@ export default function BlogPostPage() {
   const [loading, setLoading] = useState(true);
   const [showShare, setShowShare] = useState(false);
 
+  // Try to fetch from API first, fall back to dummy data
   useEffect(() => {
-    console.log("Looking for slug:", slug);
-    const foundPost = getBlogPostBySlug(slug);
-    console.log("Found post:", foundPost ? foundPost.title : "none");
-    setPost(foundPost);
-    setLoading(false);
+    async function fetchPost() {
+      try {
+        const response = await fetch(`/api/blog/${slug}`);
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+          setPost(data.data);
+        } else {
+          // Fall back to dummy data
+          const foundPost = blogPosts.find(
+            (p) => p.slug.toLowerCase() === slug.toLowerCase()
+          );
+          setPost(foundPost);
+        }
+      } catch (error) {
+        console.error("Error fetching post:", error);
+        // Fall back to dummy data
+        const foundPost = blogPosts.find(
+          (p) => p.slug.toLowerCase() === slug.toLowerCase()
+        );
+        setPost(foundPost);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    if (slug) {
+      fetchPost();
+    } else {
+      setLoading(false);
+    }
   }, [slug]);
 
   // Show loading state

@@ -94,8 +94,8 @@ export default function AdminUsersClient({ initialUsers }: AdminUsersClientProps
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
-            <p className="text-gray-500 mt- user1">
+            <h1 className="text-2xl font-FoundersGrotesk font-bold text-gray-900">User Management</h1>
+            <p className="text-gray-500 font-NeueMontreal mt-1">
               Manage accounts, roles, and permissions. Only admins can access this section.
             </p>
           </div>
@@ -121,8 +121,8 @@ export default function AdminUsersClient({ initialUsers }: AdminUsersClientProps
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{users.length}</p>
-              <p className="text-sm text-gray-500">Total Users</p>
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">{users.length}</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Total Users</p>
             </div>
           </div>
         </div>
@@ -134,10 +134,10 @@ export default function AdminUsersClient({ initialUsers }: AdminUsersClientProps
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">
                 {users.filter((u) => u.status === "active").length}
               </p>
-              <p className="text-sm text-gray-500">Active</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Active</p>
             </div>
           </div>
         </div>
@@ -149,10 +149,10 @@ export default function AdminUsersClient({ initialUsers }: AdminUsersClientProps
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">
                 {users.filter((u) => u.status === "pending").length}
               </p>
-              <p className="text-sm text-gray-500">Pending</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Pending</p>
             </div>
           </div>
         </div>
@@ -164,10 +164,10 @@ export default function AdminUsersClient({ initialUsers }: AdminUsersClientProps
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">
                 {users.filter((u) => u.role === "admin").length}
               </p>
-              <p className="text-sm text-gray-500">Admins</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Admins</p>
             </div>
           </div>
         </div>
@@ -248,7 +248,7 @@ export default function AdminUsersClient({ initialUsers }: AdminUsersClientProps
                         {user.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">{user.name}</p>
+                        <p className="font-FoundersGrotesk font-medium text-gray-900">{user.name}</p>
                         <p className="text-sm text-gray-500">{user.email}</p>
                       </div>
                     </div>
@@ -338,7 +338,7 @@ export default function AdminUsersClient({ initialUsers }: AdminUsersClientProps
           <div className="bg-white rounded-2xl w-full max-w-md">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">Invite New User</h2>
+                <h2 className="text-xl font-FoundersGrotesk font-bold text-gray-900">Invite New User</h2>
                 <button
                   onClick={() => setShowInviteModal(false)}
                   className="p-2 text-gray-400 hover:text-gray-600 transition"

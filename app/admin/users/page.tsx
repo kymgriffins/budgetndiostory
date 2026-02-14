@@ -1,5 +1,3 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import AdminUsersClient from "./AdminUsersClient";
 
 // Mock user data - would come from database in production
@@ -15,18 +13,5 @@ const mockUsers = [
 ];
 
 export default async function AdminUsersPage() {
-  const session = await auth();
-
-  // Check if user is authenticated
-  if (!session) {
-    redirect("/auth/signin?callbackUrl=/admin/users");
-  }
-
-  // Check if user has admin role only (users management is admin-only)
-  const userRole = (session.user as any)?.role;
-  if (userRole !== "admin") {
-    redirect("/admin?error=admin_only");
-  }
-
   return <AdminUsersClient initialUsers={mockUsers as any} />;
 }
