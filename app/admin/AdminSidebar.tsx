@@ -107,10 +107,10 @@ export default function AdminSidebar() {
                   <NavIcon icon={item.icon} />
                 </span>
                 <div className="flex-1">
-                  <p className={`font-medium ${isActive ? "text-white" : "text-gray-900"}`}>
+                  <p className={`font-FoundersGrotesk font-medium ${isActive ? "text-white" : "text-gray-900"}`}>
                     {item.title}
                   </p>
-                  <p className={`text-xs ${isActive ? "text-gray-300" : "text-gray-400"}`}>
+                  <p className={`text-xs font-NeueMontreal ${isActive ? "text-gray-300" : "text-gray-400"}`}>
                     {item.description}
                   </p>
                 </div>
@@ -122,10 +122,10 @@ export default function AdminSidebar() {
         {/* Help Section */}
         <div className="absolute bottom-0 w-64 p-4 border-t border-gray-200 bg-gray-50">
           <div className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
-            <h4 className="text-sm font-semibold text-blue-900 mb-1">
+            <h4 className="text-sm font-FoundersGrotesk font-semibold text-blue-900 mb-1">
               Need Help?
             </h4>
-            <p className="text-xs text-blue-700 mb-3">
+            <p className="text-xs font-NeueMontreal text-blue-700 mb-3">
               Check our documentation for guidance.
             </p>
             <Link

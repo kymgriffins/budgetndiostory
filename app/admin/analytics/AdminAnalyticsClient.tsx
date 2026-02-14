@@ -64,8 +64,8 @@ export default function AdminAnalyticsClient() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Analytics</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="text-2xl font-FoundersGrotesk font-bold text-gray-900">Analytics</h1>
+            <p className="text-gray-500 font-NeueMontreal mt-1">
               Track your website traffic, user engagement, and content performance.
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function AdminAnalyticsClient() {
               +18%
             </span>
           </div>
-          <p className="text-3xl font-bold text-gray-900">{stats.pageViews.toLocaleString()}</p>
+          <p className="text-3xl font-FoundersGrotesk font-bold text-gray-900">{stats.pageViews.toLocaleString()}</p>
         </div>
         <div className="bg-white rounded-xl p-6 border border-gray-100">
           <div className="flex items-center justify-between mb-4">
@@ -106,7 +106,7 @@ export default function AdminAnalyticsClient() {
               +12%
             </span>
           </div>
-          <p className="text-3xl font-bold text-gray-900">{stats.uniqueVisitors.toLocaleString()}</p>
+          <p className="text-3xl font-FoundersGrotesk font-bold text-gray-900">{stats.uniqueVisitors.toLocaleString()}</p>
         </div>
         <div className="bg-white rounded-xl p-6 border border-gray-100">
           <div className="flex items-center justify-between mb-4">
@@ -118,7 +118,7 @@ export default function AdminAnalyticsClient() {
               +5%
             </span>
           </div>
-          <p className="text-3xl font-bold text-gray-900">{stats.avgSessionDuration}</p>
+          <p className="text-3xl font-FoundersGrotesk font-bold text-gray-900">{stats.avgSessionDuration}</p>
         </div>
         <div className="bg-white rounded-xl p-6 border border-gray-100">
           <div className="flex items-center justify-between mb-4">
@@ -130,7 +130,7 @@ export default function AdminAnalyticsClient() {
               +3%
             </span>
           </div>
-          <p className="text-3xl font-bold text-gray-900">{stats.bounceRate}</p>
+          <p className="text-3xl font-FoundersGrotesk font-bold text-gray-900">{stats.bounceRate}</p>
         </div>
       </div>
 
@@ -138,7 +138,7 @@ export default function AdminAnalyticsClient() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Traffic Chart */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Traffic Overview</h2>
+          <h2 className="text-lg font-FoundersGrotesk font-semibold text-gray-900 mb-4">Traffic Overview</h2>
           <div className="h-64 flex items-end gap-1">
             {dailyData.map((day, index) => (
               <div key={index} className="flex-1 flex flex-col items-center">
@@ -159,7 +159,7 @@ export default function AdminAnalyticsClient() {
 
         {/* User Types */}
         <div className="bg-white rounded-xl border border-gray-100 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">User Types</h2>
+          <h2 className="text-lg font-FoundersGrotesk font-semibold text-gray-900 mb-4">User Types</h2>
           <div className="flex items-center justify-center h-64">
             <div className="relative w-48 h-48">
               <svg className="w-full h-full" viewBox="0 0 36 36">
@@ -184,7 +184,7 @@ export default function AdminAnalyticsClient() {
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-gray-900">{stats.newUsers.toLocaleString()}</p>
+                  <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">{stats.newUsers.toLocaleString()}</p>
                   <p className="text-xs text-gray-500">New Users</p>
                 </div>
               </div>
@@ -208,13 +208,13 @@ export default function AdminAnalyticsClient() {
         {/* Top Pages */}
         <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
           <div className="p-4 border-b border-gray-100">
-            <h2 className="font-semibold text-gray-900">Top Pages</h2>
+            <h2 className="font-FoundersGrotesk font-semibold text-gray-900">Top Pages</h2>
           </div>
           <div className="divide-y divide-gray-100">
             {topPages.map((page, index) => (
               <div key={index} className="p-4 flex items-center justify-between">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{page.path}</p>
+                  <p className="text-sm font-FoundersGrotesk font-medium text-gray-900 truncate">{page.path}</p>
                   <p className="text-xs text-gray-500">{page.views.toLocaleString()} views</p>
                 </div>
                 <span className="text-xs text-green-600 ml-2">{page.change}</span>
@@ -226,13 +226,13 @@ export default function AdminAnalyticsClient() {
         {/* Top Countries */}
         <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
           <div className="p-4 border-b border-gray-100">
-            <h2 className="font-semibold text-gray-900">Top Countries</h2>
+            <h2 className="font-FoundersGrotesk font-semibold text-gray-900">Top Countries</h2>
           </div>
           <div className="divide-y divide-gray-100">
             {topCountries.map((country, index) => (
               <div key={index} className="p-4">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm font-medium text-gray-900">{country.country}</span>
+                  <span className="text-sm font-FoundersGrotesk font-medium text-gray-900">{country.country}</span>
                   <span className="text-sm text-gray-500">{country.visitors.toLocaleString()}</span>
                 </div>
                 <div className="w-full bg-gray-100 rounded-full h-1.5">
@@ -249,14 +249,14 @@ export default function AdminAnalyticsClient() {
         {/* Traffic Sources */}
         <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
           <div className="p-4 border-b border-gray-100">
-            <h2 className="font-semibold text-gray-900">Traffic Sources</h2>
+            <h2 className="font-FoundersGrotesk font-semibold text-gray-900">Traffic Sources</h2>
           </div>
           <div className="divide-y divide-gray-100">
             {trafficSources.map((source, index) => (
               <div key={index} className="p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-[#1a1a2e] rounded-full"></div>
-                  <span className="text-sm font-medium text-gray-900">{source.source}</span>
+                  <span className="text-sm font-FoundersGrotesk font-medium text-gray-900">{source.source}</span>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-900">{source.percentage}</p>
@@ -277,7 +277,7 @@ export default function AdminAnalyticsClient() {
             </svg>
           </div>
           <div>
-            <h3 className="font-semibold text-blue-900">Understanding Your Analytics</h3>
+            <h3 className="font-FoundersGrotesk font-semibold text-blue-900">Understanding Your Analytics</h3>
             <p className="text-sm text-blue-700 mt-1 mb-3">
               Here's what these metrics mean for your content strategy.
             </p>

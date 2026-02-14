@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
-import { blogPosts } from "@/lib/blog-data";
-import { generateSlug, calculateReadTime, generateId, DEFAULT_AUTHOR } from "@/lib/blog-types";
-
-// In-memory storage for blog posts (simulates database)
-// In production, this would be replaced with actual database operations
-let blogPostsStore = [...blogPosts];
+import { 
+  getPublishedBlogPosts, 
+  getFeaturedBlogPosts,
+  getBlogPostsByCategory,
+  searchBlogPosts,
+  createBlogPost,
+  getBlogCategories
+} from "@/lib/blog-db";
 
 // GET all blog posts with optional filtering
 export async function GET(request: Request) {
@@ -13,43 +15,67 @@ export async function GET(request: Request) {
     const status = searchParams.get("status");
     const category = searchParams.get("category");
     const search = searchParams.get("search");
-
-    let filteredPosts = [...blogPostsStore];
-
-    // Filter by status
-    if (status && status !== "all") {
-      filteredPosts = filteredPosts.filter(
-        (post) => post.status === status
-      );
+    const featured = searchParams.get("featured");
+    const limit = searchParams.get("limit");
+    
+    let posts;
+    
+    // Get featured posts
+    if (featured === "true") {
+      posts = await getFeaturedBlogPosts(limit ? parseInt(limit) : 3);
+      return NextResponse.json({
+        success: true,
+        data: posts,
+        total: posts.length,
+        timestamp: new Date().toISOString(),
+      });
     }
-
+    
+    // Search posts
+    if (search) {
+      posts = await searchBlogPosts(search, limit ? parseInt(limit) : 20);
+      return NextResponse.json({
+        success: true,
+        data: posts,
+        total: posts.length,
+        timestamp: new Date().toISOString(),
+      });
+    }
+    
     // Filter by category
     if (category && category !== "all") {
-      filteredPosts = filteredPosts.filter(
-        (post) => post.category === category
-      );
+      posts = await getBlogPostsByCategory(category, limit ? parseInt(limit) : undefined);
+      return NextResponse.json({
+        success: true,
+        data: posts,
+        total: posts.length,
+        timestamp: new Date().toISOString(),
+      });
     }
-
-    // Filter by search query
-    if (search) {
-      const searchLower = search.toLowerCase();
-      filteredPosts = filteredPosts.filter(
-        (post) =>
-          post.title.toLowerCase().includes(searchLower) ||
-          post.excerpt.toLowerCase().includes(searchLower) ||
-          post.content.toLowerCase().includes(searchLower)
-      );
+    
+    // Filter by status (for admin)
+    if (status && status !== "all") {
+      // For now, get published posts only (admin filtering would need admin auth)
+      posts = await getPublishedBlogPosts(limit ? parseInt(limit) : undefined);
+      return NextResponse.json({
+        success: true,
+        data: posts,
+        total: posts.length,
+        timestamp: new Date().toISOString(),
+      });
     }
-
-    // Sort by creation date (newest first)
-    filteredPosts.sort((a, b) => 
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-
+    
+    // Default: get all published posts
+    posts = await getPublishedBlogPosts(limit ? parseInt(limit) : undefined);
+    
+    // Also get categories
+    const categories = await getBlogCategories();
+    
     return NextResponse.json({
       success: true,
-      data: filteredPosts,
-      total: filteredPosts.length,
+      data: posts,
+      categories,
+      total: posts.length,
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
@@ -67,47 +93,44 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     // Validate required fields
-    if (!body.title || !body.content || !body.category) {
+    if (!body.title || !body.content || !body.authorId) {
       return NextResponse.json(
-        { success: false, error: "Missing required fields: title, content, category" },
+        { success: false, error: "Missing required fields: title, content, authorId" },
         { status: 400 }
       );
     }
 
-    const now = new Date().toISOString();
-    
     // Generate slug from title
-    const slug = generateSlug(body.title);
+    const slug = body.title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
     
-    // Check if slug already exists
-    const existingPost = blogPostsStore.find(post => post.slug === slug);
-    const uniqueSlug = existingPost ? `${slug}-${Date.now()}` : slug;
+    // Check if slug already exists and make it unique
+    const existingPost = await getPublishedBlogPosts(100);
+    let uniqueSlug = slug;
+    let counter = 1;
+    while (existingPost.some(p => p.slug === uniqueSlug)) {
+      uniqueSlug = `${slug}-${counter}`;
+      counter++;
+    }
 
     // Create new blog post
-    const newPost = {
-      id: generateId(),
+    const newPost = await createBlogPost({
       title: body.title,
       slug: uniqueSlug,
       excerpt: body.excerpt || body.content.substring(0, 150) + "...",
       content: body.content,
-      category: body.category,
-      author: body.author || DEFAULT_AUTHOR,
+      categoryId: body.categoryId || null,
+      authorId: body.authorId,
+      thumbnailUrl: body.thumbnailUrl,
       tags: body.tags || [],
       status: body.status || "draft",
-      createdAt: now,
-      updatedAt: now,
-      publishedAt: body.status === "published" ? now : undefined,
-      readTime: calculateReadTime(body.content),
       featured: body.featured || false,
-      seo: body.seo || {
-        title: body.title,
-        description: body.excerpt || body.content.substring(0, 150),
-        keywords: body.tags || [],
-      },
-    };
-
-    // Add to store
-    blogPostsStore.unshift(newPost);
+      seoTitle: body.seoTitle || body.title,
+      seoDescription: body.seoDescription || body.excerpt || body.content.substring(0, 150),
+      seoKeywords: body.seoKeywords || body.tags || [],
+    });
 
     return NextResponse.json({
       success: true,

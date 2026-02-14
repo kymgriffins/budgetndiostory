@@ -101,8 +101,8 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Newsletter Subscribers</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="text-2xl font-FoundersGrotesk font-bold text-gray-900">Newsletter Subscribers</h1>
+            <p className="text-gray-500 font-NeueMontreal mt-1">
               Manage your email subscribers and send newsletters.
             </p>
           </div>
@@ -139,8 +139,8 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{subscribers.length}</p>
-              <p className="text-sm text-gray-500">Total Subscribers</p>
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">{subscribers.length}</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Total Subscribers</p>
             </div>
           </div>
         </div>
@@ -152,8 +152,8 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{activeSubscribers.length}</p>
-              <p className="text-sm text-gray-500">Active</p>
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">{activeSubscribers.length}</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Active</p>
             </div>
           </div>
         </div>
@@ -165,8 +165,8 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{inactiveSubscribers.length}</p>
-              <p className="text-sm text-gray-500">Inactive</p>
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">{inactiveSubscribers.length}</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Inactive</p>
             </div>
           </div>
         </div>
@@ -178,8 +178,8 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
               </svg>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{unsubscribedSubscribers.length}</p>
-              <p className="text-sm text-gray-500">Unsubscribed</p>
+              <p className="text-2xl font-FoundersGrotesk font-bold text-gray-900">{unsubscribedSubscribers.length}</p>
+              <p className="text-sm font-NeueMontreal text-gray-500">Unsubscribed</p>
             </div>
           </div>
         </div>
@@ -249,7 +249,7 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
                         {subscriber.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">{subscriber.name}</p>
+                        <p className="font-FoundersGrotesk font-medium text-gray-900">{subscriber.name}</p>
                         <p className="text-sm text-gray-500">{subscriber.email}</p>
                       </div>
                     </div>
@@ -320,7 +320,7 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
           <div className="bg-white rounded-2xl w-full max-w-md">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">Export Subscribers</h2>
+                <h2 className="text-xl font-FoundersGrotesk font-bold text-gray-900">Export Subscribers</h2>
                 <button
                   onClick={() => setShowExportModal(false)}
                   className="p-2 text-gray-400 hover:text-gray-600 transition"
@@ -365,7 +365,7 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
           <div className="bg-white rounded-2xl w-full max-w-lg">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-900">Send Email to Subscribers</h2>
+                <h2 className="text-xl font-FoundersGrotesk font-bold text-gray-900">Send Email to Subscribers</h2>
                 <button
                   onClick={() => setShowEmailModal(false)}
                   className="p-2 text-gray-400 hover:text-gray-600 transition"
@@ -413,7 +413,7 @@ export default function AdminSubscribersClient({ initialSubscribers }: AdminSubs
               <button
                 onClick={handleSendEmail}
                 disabled={!emailSubject || !emailBody}
-                className="px-6 py-2 bg-[#1a1a2e] text-white rounded-lg font-medium hover:bg-[#16213e] transition disabled:opacity-50"
+                className="px-6 py-2 font-NeueMontreal bg-[#1a1a2e] text-white rounded-lg font-medium hover:bg-[#16213e] transition disabled:opacity-50"
               >
                 Send Email
               </button>

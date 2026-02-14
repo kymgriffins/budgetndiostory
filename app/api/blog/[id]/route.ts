@@ -1,18 +1,26 @@
 import { NextResponse } from "next/server";
-import { blogPosts } from "@/lib/blog-data";
-import { calculateReadTime } from "@/lib/blog-types";
+import { 
+  getBlogPostById, 
+  getBlogPostBySlug,
+  updateBlogPost, 
+  deleteBlogPost 
+} from "@/lib/blog-db";
 
-// In-memory storage for blog posts (simulates database)
-let blogPostsStore = [...blogPosts];
-
-// GET single blog post by ID
+// GET single blog post by ID or slug
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params;
-    const post = blogPostsStore.find((post) => post.id === id);
+    
+    // Try to find by ID first, then by slug
+    let post = await getBlogPostById(id);
+    
+    if (!post) {
+      // Try by slug
+      post = await getBlogPostBySlug(id);
+    }
 
     if (!post) {
       return NextResponse.json(
@@ -44,42 +52,31 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
 
-    const postIndex = blogPostsStore.findIndex((post) => post.id === id);
-
-    if (postIndex === -1) {
+    // Check if post exists
+    const existingPost = await getBlogPostById(id);
+    
+    if (!existingPost) {
       return NextResponse.json(
         { success: false, error: "Blog post not found" },
         { status: 404 }
       );
     }
 
-    const existingPost = blogPostsStore[postIndex];
-    const now = new Date().toISOString();
-
     // Update the post
-    const updatedPost = {
-      ...existingPost,
-      title: body.title || existingPost.title,
-      excerpt: body.excerpt || existingPost.excerpt,
-      content: body.content || existingPost.content,
-      category: body.category || existingPost.category,
-      author: body.author || existingPost.author,
-      tags: body.tags || existingPost.tags,
-      status: body.status || existingPost.status,
-      featured: body.featured !== undefined ? body.featured : existingPost.featured,
-      seo: body.seo || existingPost.seo,
-      updatedAt: now,
-      // Set publishedAt if publishing for the first time
-      publishedAt: body.status === "published" && !existingPost.publishedAt 
-        ? now 
-        : existingPost.publishedAt,
-      // Recalculate read time if content changed
-      readTime: body.content 
-        ? calculateReadTime(body.content) 
-        : existingPost.readTime,
-    };
-
-    blogPostsStore[postIndex] = updatedPost;
+    const updatedPost = await updateBlogPost(id, {
+      title: body.title,
+      slug: body.slug,
+      excerpt: body.excerpt,
+      content: body.content,
+      categoryId: body.categoryId,
+      thumbnailUrl: body.thumbnailUrl,
+      tags: body.tags,
+      status: body.status,
+      featured: body.featured,
+      seoTitle: body.seoTitle,
+      seoDescription: body.seoDescription,
+      seoKeywords: body.seoKeywords,
+    });
 
     return NextResponse.json({
       success: true,
@@ -103,22 +100,23 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    const postIndex = blogPostsStore.findIndex((post) => post.id === id);
-
-    if (postIndex === -1) {
+    
+    // Check if post exists
+    const existingPost = await getBlogPostById(id);
+    
+    if (!existingPost) {
       return NextResponse.json(
         { success: false, error: "Blog post not found" },
         { status: 404 }
       );
     }
 
-    // Remove the post from the store
-    const deletedPost = blogPostsStore.splice(postIndex, 1)[0];
+    // Delete the post
+    await deleteBlogPost(id);
 
     return NextResponse.json({
       success: true,
       message: "Blog post deleted successfully",
-      data: deletedPost,
       timestamp: new Date().toISOString(),
     });
   } catch (error) {

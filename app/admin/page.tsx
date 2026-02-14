@@ -1,5 +1,3 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { blogPosts } from "@/lib/blog-data";
 
@@ -23,8 +21,8 @@ function StatCard({
     <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-500 mb-1">{title}</p>
-          <p className="text-3xl font-bold text-gray-900">{value}</p>
+          <p className="text-sm font-NeueMontreal text-gray-500 mb-1">{title}</p>
+          <p className="text-3xl font-FoundersGrotesk font-bold text-gray-900">{value}</p>
           {change && (
             <p
               className={`text-xs mt-2 flex items-center gap-1 ${
@@ -103,27 +101,14 @@ function QuickAction({
         {icon}
       </div>
       <div>
-        <h3 className="font-semibold text-gray-900 group-hover:text-[#1a1a2e]">{title}</h3>
-        <p className="text-sm text-gray-500 mt-1">{description}</p>
+        <h3 className="font-FoundersGrotesk font-semibold text-gray-900 group-hover:text-[#1a1a2e]">{title}</h3>
+        <p className="text-sm font-NeueMontreal text-gray-500 mt-1">{description}</p>
       </div>
     </Link>
   );
 }
 
 export default async function AdminDashboard() {
-  const session = await auth();
-
-  // Check if user is authenticated
-  if (!session) {
-    redirect("/auth/signin?callbackUrl=/admin");
-  }
-
-  // Check if user has admin or editor role
-  const userRole = (session.user as any)?.role;
-  if (userRole !== "admin" && userRole !== "editor") {
-    redirect("/?error=unauthorized");
-  }
-
   // Calculate stats from blog posts (mock data for now)
   const totalPosts = blogPosts.length;
   const publishedPosts = blogPosts.filter((p) => p.status === "published").length;
@@ -134,10 +119,10 @@ export default async function AdminDashboard() {
     <div className="space-y-8">
       {/* Welcome Header */}
       <div className="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] rounded-2xl p-8 text-white">
-        <h1 className="text-3xl font-bold mb-2">
-          Welcome back, {session.user?.name?.split(" ")[0] || "Admin"}! 👋
+        <h1 className="text-3xl font-FoundersGrotesk font-bold mb-2">
+          Welcome to Admin Panel! 👋
         </h1>
-        <p className="text-gray-300 text-lg">
+        <p className="text-gray-300 text-lg font-NeueMontreal">
           Here's what's happening with your Budget Ndio Story platform today.
         </p>
         <div className="flex gap-3 mt-6">
@@ -218,7 +203,7 @@ export default async function AdminDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Quick Actions */}
         <div className="lg:col-span-2">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+          <h2 className="text-xl font-FoundersGrotesk font-bold text-gray-900 mb-4">Quick Actions</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <QuickAction
               title="Write New Article"
@@ -286,7 +271,7 @@ export default async function AdminDashboard() {
 
         {/* Recent Activity */}
         <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Activity</h2>
+          <h2 className="text-xl font-FoundersGrotesk font-bold text-gray-900 mb-4">Recent Activity</h2>
           <div className="bg-white rounded-2xl border border-gray-100 p-4 space-y-4">
             {/* Mock recent activities */}
             <div className="flex items-start gap-3 pb-4 border-b border-gray-100">
@@ -296,7 +281,7 @@ export default async function AdminDashboard() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">New article published</p>
+                <p className="text-sm font-NeueMontreal font-medium text-gray-900">New article published</p>
                 <p className="text-xs text-gray-500">"Understanding Kenya's County Budget Process"</p>
                 <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
               </div>
@@ -308,7 +293,7 @@ export default async function AdminDashboard() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">New user registered</p>
+                <p className="text-sm font-NeueMontreal font-medium text-gray-900">New user registered</p>
                 <p className="text-xs text-gray-500">john.doe@example.com</p>
                 <p className="text-xs text-gray-400 mt-1">5 hours ago</p>
               </div>
@@ -320,7 +305,7 @@ export default async function AdminDashboard() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">New newsletter signup</p>
+                <p className="text-sm font-NeueMontreal font-medium text-gray-900">New newsletter signup</p>
                 <p className="text-xs text-gray-500">sarah@example.com</p>
                 <p className="text-xs text-gray-400 mt-1">1 day ago</p>
               </div>
@@ -329,7 +314,7 @@ export default async function AdminDashboard() {
 
           {/* System Status */}
           <div className="mt-6 bg-white rounded-2xl border border-gray-100 p-4">
-            <h3 className="font-semibold text-gray-900 mb-3">System Status</h3>
+            <h3 className="font-FoundersGrotesk font-semibold text-gray-900 mb-3">System Status</h3>
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-500">Website</span>
@@ -360,7 +345,7 @@ export default async function AdminDashboard() {
       {/* Content Overview Table */}
       <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
         <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-900">Content Overview</h2>
+          <h2 className="text-xl font-FoundersGrotesk font-bold text-gray-900">Content Overview</h2>
           <Link
             href="/admin/content"
             className="text-sm text-[#1a1a2e] hover:text-[#16213e] font-medium flex items-center gap-1"
@@ -405,7 +390,7 @@ export default async function AdminDashboard() {
                         </span>
                       )}
                       <div>
-                        <p className="font-medium text-gray-900">{post.title}</p>
+                        <p className="font-FoundersGrotesk font-medium text-gray-900">{post.title}</p>
                         <p className="text-sm text-gray-500 truncate max-w-xs">{post.excerpt}</p>
                       </div>
                     </div>
@@ -450,7 +435,7 @@ export default async function AdminDashboard() {
             </svg>
           </div>
           <div>
-            <h3 className="font-semibold text-blue-900">Need Help Getting Started?</h3>
+            <h3 className="font-FoundersGrotesk font-semibold text-blue-900">Need Help Getting Started?</h3>
             <p className="text-sm text-blue-700 mt-1 mb-3">
               Here's a quick guide to using the Admin Panel. Click any section to learn more.
             </p>

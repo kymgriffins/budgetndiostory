@@ -1,5 +1,3 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import AdminConfigClient from "./AdminConfigClient";
 
 // Site configuration data (mock - would come from database in production)
@@ -64,18 +62,5 @@ const defaultConfig = {
 };
 
 export default async function AdminConfigPage() {
-  const session = await auth();
-
-  // Check if user is authenticated
-  if (!session) {
-    redirect("/auth/signin?callbackUrl=/admin/config");
-  }
-
-  // Check if user has admin role only (config is admin-only)
-  const userRole = (session.user as any)?.role;
-  if (userRole !== "admin") {
-    redirect("/admin?error=admin_only");
-  }
-
   return <AdminConfigClient config={defaultConfig} />;
 }
