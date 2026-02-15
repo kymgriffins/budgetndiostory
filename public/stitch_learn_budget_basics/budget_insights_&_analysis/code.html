@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Insights &amp; Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#13ec92",
+                "background-light": "#f6f8f7",
+                "background-dark": "#10221a",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- iOS Status Bar Spacer -->
+<div class="h-11 w-full bg-background-light dark:bg-background-dark sticky top-0 z-50"></div>
+<!-- Top Navigation -->
+<header class="sticky top-11 z-40 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
+<button class="p-1">
+<span class="material-icons text-slate-600 dark:text-slate-400">chevron_left</span>
+</button>
+<h1 class="text-lg font-semibold tracking-tight">Budget Analysis</h1>
+<button class="p-1">
+<span class="material-icons text-slate-600 dark:text-slate-400">tune</span>
+</button>
+</header>
+<main class="pb-24">
+<!-- Summary Cards Horizontal Scroll -->
+<section class="mt-6">
+<div class="px-4 mb-3 flex justify-between items-end">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Fiscal Overview</h2>
+<span class="text-xs text-primary font-medium">FY 2024/25</span>
+</div>
+<div class="flex overflow-x-auto hide-scrollbar gap-4 px-4 pb-2">
+<!-- National Card -->
+<div class="min-w-[280px] bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-icons text-primary text-sm">account_balance</span>
+</div>
+<span class="text-xs font-semibold text-slate-500 uppercase">National Budget</span>
+</div>
+<div class="text-2xl font-bold mb-1">Ksh 3.68T</div>
+<div class="flex items-center text-xs text-emerald-500 font-medium">
+<span class="material-icons text-xs">trending_up</span>
+<span>4.2% from last year</span>
+</div>
+</div>
+<!-- County Card -->
+<div class="min-w-[280px] bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+<span class="material-icons text-blue-500 text-sm">location_city</span>
+</div>
+<span class="text-xs font-semibold text-slate-500 uppercase">County Allocation</span>
+</div>
+<div class="text-2xl font-bold mb-1">Ksh 391.1B</div>
+<div class="flex items-center text-xs text-slate-400 font-medium">
+<span class="material-icons text-xs">horizontal_rule</span>
+<span>Equitable Share focus</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Sector Grid -->
+<section class="mt-8 px-4">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Sector Analysis</h2>
+<div class="grid grid-cols-2 gap-4">
+<!-- Education -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-3">
+<span class="material-icons text-orange-500">school</span>
+</div>
+<span class="text-sm font-bold">Education</span>
+<span class="text-[10px] text-slate-500 mt-1 uppercase">Bursaries &amp; TVETs</span>
+</div>
+<!-- Health -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-3">
+<span class="material-icons text-red-500">medical_services</span>
+</div>
+<span class="text-sm font-bold">Health</span>
+<span class="text-[10px] text-slate-500 mt-1 uppercase">Universal Care</span>
+</div>
+<!-- Agriculture -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-3">
+<span class="material-icons text-green-600">agriculture</span>
+</div>
+<span class="text-sm font-bold">Agriculture</span>
+<span class="text-[10px] text-slate-500 mt-1 uppercase">Food Security</span>
+</div>
+<!-- ICT/Digital -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center ring-2 ring-primary">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-3">
+<span class="material-icons text-primary">devices</span>
+</div>
+<span class="text-sm font-bold">ICT/Digital</span>
+<span class="text-[10px] text-primary mt-1 font-bold uppercase tracking-tight">Digital Hubs</span>
+</div>
+</div>
+</section>
+<!-- Trend Chart Simulation -->
+<section class="mt-8 px-4">
+<div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h3 class="font-bold text-sm mb-4">Youth Focus Trend (3 Year View)</h3>
+<div class="flex items-end justify-between h-32 gap-2">
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-t-lg h-16 relative">
+<div class="absolute bottom-0 w-full bg-slate-300 dark:bg-slate-700 rounded-t-lg h-3/4"></div>
+</div>
+<span class="text-[10px] text-slate-500 font-bold">2022</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-t-lg h-24 relative">
+<div class="absolute bottom-0 w-full bg-slate-400 dark:bg-slate-600 rounded-t-lg h-4/5"></div>
+</div>
+<span class="text-[10px] text-slate-500 font-bold">2023</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/10 rounded-t-lg h-32 relative overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg h-full"></div>
+</div>
+<span class="text-[10px] text-primary font-bold">2024</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<span class="text-xs text-slate-500">Employment &amp; ICT allocation grew by 18%</span>
+<button class="text-xs text-primary font-bold flex items-center">
+                        Details <span class="material-icons text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Youth Survey Card -->
+<section class="mt-8 px-4">
+<div class="relative overflow-hidden bg-background-dark dark:bg-primary/10 p-6 rounded-2xl">
+<div class="relative z-10">
+<h3 class="text-white dark:text-primary text-xl font-bold mb-2">Youth Budget Perception Survey</h3>
+<p class="text-slate-300 dark:text-slate-400 text-xs mb-4 leading-relaxed">Your voice matters. Tell us how the current budget affects your daily livelihood and aspirations.</p>
+<button class="bg-primary hover:bg-emerald-400 text-background-dark px-6 py-2.5 rounded-full font-bold text-sm shadow-lg">Take the Survey</button>
+</div>
+<div class="absolute -right-6 -bottom-6 opacity-20">
+<span class="material-icons text-[120px] text-white">insights</span>
+</div>
+</div>
+</section>
+<!-- Questions to Ask (Public Participation) -->
+<section class="mt-8 px-4">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Public Participation Toolkit</h2>
+<div class="space-y-3">
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center flex-shrink-0">
+<span class="text-[10px] font-bold">?</span>
+</div>
+<div>
+<p class="text-sm font-medium leading-snug">How much of the ICT allocation is reserved for youth-led digital startups in our county?</p>
+<span class="text-[10px] text-primary font-bold mt-2 inline-block">ICT SECTOR</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center flex-shrink-0">
+<span class="text-[10px] font-bold">?</span>
+</div>
+<div>
+<p class="text-sm font-medium leading-snug">What is the specific breakdown of the Higher Education Loans Board (HELB) funding increase?</p>
+<span class="text-[10px] text-orange-500 font-bold mt-2 inline-block">EDUCATION</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center flex-shrink-0">
+<span class="text-[10px] font-bold">?</span>
+</div>
+<div>
+<p class="text-sm font-medium leading-snug">Are there dedicated funds for youth-led agricultural value addition projects at the ward level?</p>
+<span class="text-[10px] text-green-600 font-bold mt-2 inline-block">AGRICULTURE</span>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-3 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-slate-500 text-sm font-medium">
+                View All Toolkit Questions
+            </button>
+</section>
+<!-- Insights Quote -->
+<section class="mt-8 px-4 text-center">
+<div class="bg-primary/5 p-6 rounded-xl italic">
+<p class="text-sm text-slate-600 dark:text-slate-400">"Transparency is not just about showing the numbers, it's about making the numbers count for the common youth."</p>
+<p class="text-xs font-bold text-primary mt-3 not-italic">— Budget Ndio Story Team</p>
+</div>
+</section>
+</main>
+<!-- Bottom Tab Bar -->
+<nav class="fixed bottom-0 w-full bg-white/90 dark:bg-background-dark/90 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 px-6 pt-2 pb-8 flex justify-between items-center z-50">
+<div class="flex flex-col items-center gap-1">
+<span class="material-icons text-slate-400">home</span>
+<span class="text-[10px] font-medium text-slate-400">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-icons text-primary">analytics</span>
+<span class="text-[10px] font-bold text-primary">Insights</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 bg-primary rounded-full -mt-8 shadow-lg flex items-center justify-center border-4 border-background-light dark:border-background-dark">
+<span class="material-icons text-background-dark">campaign</span>
+</div>
+<span class="text-[10px] font-medium text-slate-400 mt-1">Act</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-icons text-slate-400">groups</span>
+<span class="text-[10px] font-medium text-slate-400">Community</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-icons text-slate-400">person</span>
+<span class="text-[10px] font-medium text-slate-400">Profile</span>
+</div>
+</nav>
+</body></html>

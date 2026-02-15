@@ -1,10 +1,29 @@
+import { redirect } from 'next/navigation';
+import { auth } from '@/lib/auth/server';
 import AdminSidebar from "./AdminSidebar";
+
+// Server components using auth must be rendered dynamically
+export const dynamic = 'force-dynamic';
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Check if user is authenticated
+  const { data: session } = await auth.getSession();
+
+  // If not authenticated, redirect to sign in
+  if (!session?.user) {
+    redirect('/api/auth/sign-in');
+  }
+
+  // Check if user has admin role (you may need to adjust based on your user data structure)
+  const userRole = (session.user as any)?.role || 'viewer';
+  if (userRole !== 'admin') {
+    // Redirect non-admin users to home page
+    redirect('/');
+  }
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       {/* Top Header */}

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Take Action Center - Budget Ndio Story</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light text-slate-900 min-h-screen">
+<!-- Top Navigation Bar (iOS Style) -->
+<nav class="sticky top-0 z-50 bg-white/80 ios-blur border-b border-slate-100 px-4 py-3 flex items-center justify-between">
+<button class="w-10 h-10 flex items-center justify-start text-slate-800">
+<span class="material-icons">chevron_left</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Budget Ndio Story</h1>
+<button class="w-10 h-10 flex items-center justify-end text-slate-800">
+<span class="material-icons">notifications_none</span>
+</button>
+</nav>
+<main class="pb-24">
+<!-- Header Section -->
+<header class="px-6 pt-8 pb-6 bg-white border-b border-slate-100">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-primary/20 text-emerald-700 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full">Impact Hub</span>
+</div>
+<h2 class="text-4xl font-extrabold text-slate-900 leading-tight mb-3">Take Action</h2>
+<p class="text-slate-600 text-base leading-relaxed">
+                Your voice is the most powerful tool in the budget process. Choose a path below to start making an impact in your community today.
+            </p>
+</header>
+<!-- Pathways Section (Horizontal Scroll/Cards) -->
+<section class="mt-8">
+<div class="px-6 flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Action Pathways</h3>
+<span class="text-primary font-semibold text-xs uppercase">3 Active</span>
+</div>
+<div class="flex overflow-x-auto gap-4 px-6 pb-4 hide-scrollbar">
+<!-- Card 1: Budget Calendar -->
+<div class="min-w-[280px] bg-white rounded-xl p-5 shadow-sm border border-slate-100 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
+<span class="material-icons">event_note</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 mb-2">Budget Calendar</h4>
+<p class="text-slate-500 text-sm mb-4">Never miss a deadline. Track key dates for public participation and hearings.</p>
+</div>
+<button class="w-full bg-primary hover:bg-emerald-400 text-slate-900 font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">
+                        View Schedule <span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Card 2: Submission Support -->
+<div class="min-w-[280px] bg-slate-900 rounded-xl p-5 shadow-xl flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-slate-900 mb-4">
+<span class="material-icons">edit_note</span>
+</div>
+<h4 class="text-lg font-bold text-white mb-2">Submission Support</h4>
+<p class="text-slate-400 text-sm mb-4">Write winning memoranda with our AI-guided templates tailored for county officials.</p>
+</div>
+<button class="w-full bg-primary text-slate-900 font-bold py-3 rounded-lg flex items-center justify-center gap-2">
+                        Draft Now <span class="material-icons text-sm">auto_awesome</span>
+</button>
+</div>
+<!-- Card 3: Question Bank -->
+<div class="min-w-[280px] bg-white rounded-xl p-5 shadow-sm border border-slate-100 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
+<span class="material-icons">forum</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 mb-2">Question Bank</h4>
+<p class="text-slate-500 text-sm mb-4">Know exactly what to ask at the next town hall. Access 50+ strategic questions.</p>
+</div>
+<button class="w-full bg-primary/20 text-emerald-800 font-bold py-3 rounded-lg flex items-center justify-center gap-2">
+                        Explore Questions
+                    </button>
+</div>
+</div>
+</section>
+<!-- Toolkit Section -->
+<section class="mt-8 px-6">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Your Toolkit</h3>
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-white rounded-xl p-4 flex flex-col items-center text-center border border-slate-100 shadow-sm active:scale-95 transition-transform">
+<div class="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-600 mb-2">
+<span class="material-icons">calendar_today</span>
+</div>
+<span class="text-[11px] font-semibold text-slate-700">Calendar</span>
+</div>
+<div class="bg-white rounded-xl p-4 flex flex-col items-center text-center border border-slate-100 shadow-sm active:scale-95 transition-transform">
+<div class="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-600 mb-2">
+<span class="material-icons">description</span>
+</div>
+<span class="text-[11px] font-semibold text-slate-700">Templates</span>
+</div>
+<div class="bg-white rounded-xl p-4 flex flex-col items-center text-center border border-slate-100 shadow-sm active:scale-95 transition-transform">
+<div class="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-600 mb-2">
+<span class="material-icons">menu_book</span>
+</div>
+<span class="text-[11px] font-semibold text-slate-700">Glossary</span>
+</div>
+</div>
+</section>
+<!-- Budget Champion Section -->
+<section class="mt-10 px-6">
+<div class="relative overflow-hidden bg-primary rounded-2xl p-6 shadow-lg">
+<!-- Abstract Pattern Overlays -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10"></div>
+<div class="absolute bottom-0 left-0 w-24 h-24 bg-black/5 rounded-full -ml-8 -mb-8"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-slate-900 text-primary text-[10px] font-bold px-2 py-1 rounded">GO PRO</span>
+<h3 class="text-slate-900 font-extrabold uppercase tracking-tight">Budget Champion</h3>
+</div>
+<p class="text-slate-800 font-medium text-lg leading-tight mb-6">
+                        Lead your community in budget advocacy. Get certified as a Champion.
+                    </p>
+<div class="flex flex-col gap-3">
+<button class="bg-slate-900 text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-lg active:bg-slate-800">
+                            Attend Training
+                            <span class="material-icons text-sm text-primary">school</span>
+</button>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="Portrait of a young Kenyan woman smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDZ9mHbcAkFP04DzrjDkoLfwJw3z5Jcf4B9scqpbEUlQfosXZl3OteBc8DLTJCxSpqmM8WtnDJs4e8JOV4LVT23ChxqMf-FajG05xLVO9igT1-1_3RE5XYGCoKF7-karRCXw34Kf44sc5GajagtvrvbgfKZR5RnTRsBOU9fS0-7DqGKRIC46w7W8uzMi3zBznuo5R5sE_hc50JPjR1adkxRQqcbHg-PR8cCzq__fdG4XPVdJQBoKQ3cRN8HTCEWhYHsjZXXcQRtQQ"/>
+<img class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="Portrait of a young Kenyan man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMZYJg4VsNbKCX5kKPChivQ07MDimpqZVR8mIMG9cVSzCHTBwns-DrEx2CcD0dIsbib0k2gco4kpVCYUQhWEhcA3L0njmN2Cu_AsY8Q-fTSO38A_-Ubq69d2hHOKDQBMO9Yg_F_6bfyN7QPQZCzwrX3SfiaHMXFfXiiUOXxO18mddH5K_oSLr-U3ULwIjYsP9C7lcUDghbEb-9ch8nCivAH62xlzJBt2Zi6HeEjuYYmv0ElHOgUFdmmU3PeA5XzYUgVvWrfWxmJNE"/>
+<img class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="Portrait of a Kenyan student smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw06B5U42aEQu-lI43v5Uet03rAiF-G_nraCggn3WNTYobi4kxgujTtRMwIZwF9brkM7WPxDuXgab3vJmJaG5HCjwUPfyyDrwA3XWuV7FXzf3NHNFoc4uAaqO9hn92j0lIW1sTdpUWRSqKxqGKzkLLF7vDoxTX0Dy8Fa2B8nh-rqwIw53hPvcD9uZDYaLgwZdfx7gpqLViwAyFShpXiZRkinmYiVlKJUwsnzL6jOklmDoM_8-sMNrFe_NuMTZWXglbli1bd8m_OdU"/>
+<div class="w-8 h-8 rounded-full bg-slate-900 border-2 border-primary flex items-center justify-center text-[10px] font-bold text-white">40+</div>
+</div>
+<span class="text-xs font-bold text-slate-800">Active Champions</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Resource Quick Links -->
+<section class="mt-8 px-6 mb-10">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Quick Resources</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded flex items-center justify-center">
+<span class="material-icons text-sm">file_download</span>
+</div>
+<span class="text-sm font-semibold text-slate-700">County Budget 2024 (PDF)</span>
+</div>
+<span class="material-icons text-slate-300 text-sm">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded flex items-center justify-center">
+<span class="material-icons text-sm">videocam</span>
+</div>
+<span class="text-sm font-semibold text-slate-700">How to Read a Budget Video</span>
+</div>
+<span class="material-icons text-slate-300 text-sm">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (iOS Style) -->
+<div class="fixed bottom-0 left-0 right-0 z-50 bg-white/90 ios-blur border-t border-slate-100 pt-2 pb-8 px-8 flex justify-between items-center">
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons text-2xl">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons text-2xl">insights</span>
+<span class="text-[10px] font-bold">Insights</span>
+</div>
+<div class="relative -top-4">
+<div class="bg-primary p-4 rounded-full shadow-lg shadow-primary/40 text-slate-900 border-4 border-white">
+<span class="material-icons text-2xl">add</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons text-2xl">bolt</span>
+<span class="text-[10px] font-bold">Action</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons text-2xl">person_outline</span>
+<span class="text-[10px] font-bold">Profile</span>
+</div>
+</div>
+<!-- Sticky Community CTA -->
+<div class="fixed bottom-24 left-6 right-6 z-40">
+<button class="w-full bg-slate-900 text-white rounded-full py-4 px-6 flex items-center justify-between shadow-2xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+<span class="material-icons text-slate-900 text-sm">groups</span>
+</div>
+<span class="font-bold text-sm tracking-tight">Join the Youth Community</span>
+</div>
+<span class="material-icons">arrow_forward</span>
+</button>
+</div>
+</body></html>

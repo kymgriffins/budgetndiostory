@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget 101 - Budget Ndio Story</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+<!-- Status Bar Spacer (iOS Style) -->
+<div class="h-12 w-full bg-background-light dark:bg-background-dark sticky top-0 z-50">
+<div class="flex justify-between items-center px-6 pt-4">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex space-x-1.5 items-center">
+<span class="material-icons-round text-xs">signal_cellular_alt</span>
+<span class="material-icons-round text-xs">wifi</span>
+<span class="material-icons-round text-xs">battery_full</span>
+</div>
+</div>
+</div>
+<!-- Header Section -->
+<header class="px-6 py-4">
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Budget 101</h1>
+<p class="mt-1 text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+            Practical lessons designed for Kenyan youth. Master the money trail in minutes.
+        </p>
+</header>
+<!-- Main Content -->
+<main class="px-6 pb-24">
+<!-- Daily Progress Tracker -->
+<div class="bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700/50 mb-8 flex items-center justify-between shadow-sm">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-full border-4 border-primary/20 flex items-center justify-center relative">
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle class="text-primary" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125" stroke-dashoffset="40" stroke-width="4"></circle>
+</svg>
+<span class="text-xs font-bold text-slate-700 dark:text-slate-200">68%</span>
+</div>
+<div>
+<h3 class="font-semibold text-sm">Weekly Goal</h3>
+<p class="text-xs text-slate-500">2 modules left to unlock badge</p>
+</div>
+</div>
+<span class="material-icons-round text-primary">emoji_events</span>
+</div>
+<!-- Learning Modules Grid -->
+<section class="mb-10">
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-lg font-bold">Learning Path</h2>
+<button class="text-primary text-xs font-semibold">VIEW ALL</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Module 1: Basics -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between aspect-square">
+<div>
+<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+<span class="material-icons-round text-primary">account_balance_wallet</span>
+</div>
+<h3 class="font-bold text-sm leading-tight mb-1">Basics</h3>
+<p class="text-[10px] text-slate-500 leading-tight">What is a budget and why does it matter?</p>
+</div>
+<div class="mt-4">
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-1 rounded-full mb-2">
+<div class="bg-primary h-1 rounded-full w-full"></div>
+</div>
+<span class="text-[10px] font-bold text-primary uppercase">Completed</span>
+</div>
+</div>
+<!-- Module 2: Budget Cycle -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between aspect-square">
+<div>
+<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+<span class="material-icons-round text-primary">loop</span>
+</div>
+<h3 class="font-bold text-sm leading-tight mb-1">Budget Cycle</h3>
+<p class="text-[10px] text-slate-500 leading-tight">From formulation to audit: 4 stages.</p>
+</div>
+<div class="mt-4">
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-1 rounded-full mb-2">
+<div class="bg-primary h-1 rounded-full w-[45%]"></div>
+</div>
+<button class="text-[10px] font-bold text-slate-400 uppercase">Continue</button>
+</div>
+</div>
+<!-- Module 3: Reading Tables -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between aspect-square">
+<div>
+<div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+<span class="material-icons-round text-primary">table_chart</span>
+</div>
+<h3 class="font-bold text-sm leading-tight mb-1">Reading Tables</h3>
+<p class="text-[10px] text-slate-500 leading-tight">Decoding the numbers without headaches.</p>
+</div>
+<div class="mt-4">
+<button class="w-full py-1.5 bg-primary rounded text-background-dark text-[10px] font-bold uppercase tracking-wider">Start</button>
+</div>
+</div>
+<!-- Module 4: Participation -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between aspect-square relative overflow-hidden">
+<div class="absolute top-2 right-2">
+<span class="material-icons-round text-slate-300 text-sm">lock</span>
+</div>
+<div>
+<div class="w-10 h-10 bg-slate-100 dark:bg-slate-700 rounded-lg flex items-center justify-center mb-3">
+<span class="material-icons-round text-slate-400">campaign</span>
+</div>
+<h3 class="font-bold text-sm leading-tight mb-1 text-slate-400">Participation</h3>
+<p class="text-[10px] text-slate-400 leading-tight">Voicing your views in public hearings.</p>
+</div>
+<div class="mt-4 opacity-30">
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-1 rounded-full mb-2"></div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Locked</span>
+</div>
+</div>
+</div>
+</section>
+<!-- National vs County Comparison Guide -->
+<section class="mb-10">
+<h2 class="text-lg font-bold mb-4">Comparison Guide</h2>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-2xl overflow-hidden">
+<div class="bg-primary text-background-dark px-4 py-3 flex justify-between items-center">
+<span class="font-bold text-sm">National vs. County</span>
+<span class="material-icons-round text-sm">compare_arrows</span>
+</div>
+<div class="p-4 space-y-4">
+<div class="flex gap-4">
+<div class="flex-1 space-y-2">
+<div class="flex items-center space-x-1">
+<span class="material-icons-round text-xs text-primary">apartment</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-500">National Treasury</span>
+</div>
+<p class="text-xs font-medium leading-relaxed">Manages KRA revenues, debt, and shares funds with 47 counties.</p>
+</div>
+<div class="w-[1px] bg-primary/20"></div>
+<div class="flex-1 space-y-2">
+<div class="flex items-center space-x-1">
+<span class="material-icons-round text-xs text-primary">location_city</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-500">County Treasury</span>
+</div>
+<p class="text-xs font-medium leading-relaxed">Allocates for local clinics, markets, and village roads.</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center space-x-2 py-3 bg-white dark:bg-slate-800 rounded-lg text-primary text-xs font-bold border border-primary/10 hover:bg-primary/5">
+<span>EXPLORE INTERACTIVE GUIDE</span>
+<span class="material-icons-round text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Quick Tips Carousel (Visual representation) -->
+<section class="mb-6">
+<h2 class="text-lg font-bold mb-4">Did You Know?</h2>
+<div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 to-slate-800 p-6 text-white">
+<div class="relative z-10">
+<span class="bg-primary/20 text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase mb-2 inline-block">Pro Tip</span>
+<p class="text-sm font-medium leading-normal mb-4 italic">"The Public Finance Management Act requires your Governor to publish the County Budget Review by September 30th."</p>
+<div class="flex items-center space-x-2">
+<div class="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center">
+<span class="material-icons-round text-[10px]">share</span>
+</div>
+<span class="text-[10px] text-slate-400">Share this fact with a friend</span>
+</div>
+</div>
+<!-- Abstract Pattern Background -->
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl"></div>
+</div>
+</section>
+</main>
+<!-- Navigation Bar (iOS Style) -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 ios-blur border-t border-slate-200 dark:border-slate-800 flex justify-around items-center px-6 py-3 pb-8 z-50">
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons-round text-slate-400">home</span>
+<span class="text-[10px] font-medium text-slate-400">Home</span>
+</div>
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons-round text-primary">school</span>
+<span class="text-[10px] font-bold text-primary">Learn</span>
+</div>
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons-round text-slate-400">insights</span>
+<span class="text-[10px] font-medium text-slate-400">Tracker</span>
+</div>
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons-round text-slate-400">groups</span>
+<span class="text-[10px] font-medium text-slate-400">Community</span>
+</div>
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons-round text-slate-400">person_outline</span>
+<span class="text-[10px] font-medium text-slate-400">Profile</span>
+</div>
+</nav>
+<!-- Floating Quick Help -->
+<div class="fixed bottom-24 right-6 z-40">
+<button class="w-12 h-12 bg-primary rounded-full shadow-lg shadow-primary/30 flex items-center justify-center text-background-dark">
+<span class="material-icons-round">help_outline</span>
+</button>
+</div>
+</body></html>

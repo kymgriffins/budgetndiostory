@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Ndio Story - News Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- iOS Status Bar Placeholder -->
+<div class="h-11 w-full bg-background-light dark:bg-background-dark sticky top-0 z-50 flex items-center justify-between px-6">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex items-center space-x-1.5">
+<span class="material-icons text-sm">signal_cellular_alt</span>
+<span class="material-icons text-sm">wifi</span>
+<span class="material-icons text-sm">battery_full</span>
+</div>
+</div>
+<!-- Header -->
+<header class="px-5 py-4 bg-background-light dark:bg-background-dark sticky top-11 z-40 border-b border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-center mb-4">
+<h1 class="text-2xl font-800 tracking-tight text-slate-900 dark:text-white uppercase">Budget <span class="text-primary">Ndio Story</span></h1>
+<div class="flex space-x-3">
+<button class="p-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<span class="material-icons text-xl">search</span>
+</button>
+<button class="p-2 bg-slate-100 dark:bg-slate-800 rounded-full relative">
+<span class="material-icons text-xl">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border border-white"></span>
+</button>
+</div>
+</div>
+<!-- Segmented Control Tabs -->
+<div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+<button class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white transition-all">
+                Stories
+            </button>
+<button class="flex-1 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 transition-all">
+                Videos
+            </button>
+<button class="flex-1 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 transition-all">
+                Updates
+            </button>
+</div>
+</header>
+<main class="pb-24">
+<!-- Featured Story -->
+<section class="p-5">
+<div class="relative group rounded-xl overflow-hidden shadow-lg aspect-[16/10]">
+<img alt="Financial analysis" class="w-full h-full object-cover" data-alt="Abstract visualization of financial data and Kenyan currency" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGUcw-XNpLdgVCchRGZ5ku-hDD8-naHRgv5hmT2ftuJURs-Qvf4N7h-PTW1lURl-_cfEYE4EWz205G6iCYvgkMG3h_6UBspem8uR7m0dcUkiAIAAGapNlBmL3-QpmektJmDJbSaFCpQ3nhDfO9Ly4FnbZLgn4GcHVRyh34Hvh2QMDiJ08gcgbmIHVbTKLsxH6pmdm_9JFR2L0FAdBzMF50aDrjsmwF7swAWHWsjzeCn3oSVb053R05bymATioDu2jLQ1DY3c-Rl9A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-primary text-black text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Investigative</span>
+<span class="text-white/80 text-xs font-medium">8 min read</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight mb-2">Where did the Kazi Mtaani billions actually go?</h2>
+<p class="text-white/70 text-sm line-clamp-2">An in-depth look at the discrepancy between allocated funds and ground-level implementation across 47 counties.</p>
+</div>
+</div>
+</section>
+<!-- Submit Tip CTA -->
+<section class="px-5 mb-6">
+<div class="bg-primary/10 border border-primary/30 rounded-xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg">
+<span class="material-icons text-black">campaign</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white">Heard something?</h4>
+<p class="text-xs text-slate-600 dark:text-slate-400">Securely submit a budget tip</p>
+</div>
+</div>
+<button class="bg-primary text-black font-bold px-4 py-2 rounded-lg text-xs hover:bg-opacity-90 transition-all">
+                    SUBMIT TIP
+                </button>
+</div>
+</section>
+<!-- Recent Stories Feed -->
+<section class="px-5 space-y-6">
+<div class="flex justify-between items-end">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Latest Voices</h3>
+<span class="text-primary text-xs font-bold uppercase cursor-pointer">View All</span>
+</div>
+<!-- News Card 1 -->
+<div class="flex gap-4 group">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="text-primary font-bold text-[10px] uppercase tracking-tighter">Education</span>
+<span class="text-slate-400 dark:text-slate-500 text-[10px]">• 2 hours ago</span>
+</div>
+<h4 class="text-md font-bold leading-snug group-active:text-primary transition-colors line-clamp-2">School Capitation Crisis: Why the wait continues for public schools</h4>
+<div class="flex items-center gap-3 mt-3">
+<button class="text-slate-400 dark:text-slate-500 hover:text-primary">
+<span class="material-icons text-sm">bookmark_border</span>
+</button>
+<button class="text-slate-400 dark:text-slate-500 hover:text-primary">
+<span class="material-icons text-sm">share</span>
+</button>
+</div>
+</div>
+<div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden">
+<img alt="Education scene" class="w-full h-full object-cover" data-alt="A group of students in a Kenyan public school classroom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLWde9olDCWycItr1WIOlgXfG0M5S8PlDE7dlVqekMSjRzXHzCwc5w1dn_c_KdDKCumoPhg4bcotYzxQ0wHDfHNoX4LfJf9tLSg7gwZUA4WG_pFKRv0x2q8GnpVzMgWPuHOXnvceQvvS3N2te174DF3-d3HWFbKNBAembfnfDZoXt4Kh2cSdnegPSdZ10fRVozlpcREz8D_CSCQR9LrtMssGXy2YolcMsz1s2hMpofvoRIgckUeCMLRrkToJf6mkERS6pP8nbWzM0"/>
+</div>
+</div>
+<!-- News Card 2 -->
+<div class="flex gap-4 group">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="text-primary font-bold text-[10px] uppercase tracking-tighter">Health</span>
+<span class="text-slate-400 dark:text-slate-500 text-[10px]">• 5 hours ago</span>
+</div>
+<h4 class="text-md font-bold leading-snug group-active:text-primary transition-colors line-clamp-2">The NHIF to SHA Transition: What youth need to know about the new rates</h4>
+<div class="flex items-center gap-3 mt-3">
+<button class="text-slate-400 dark:text-slate-500 hover:text-primary">
+<span class="material-icons text-sm">bookmark_border</span>
+</button>
+<button class="text-slate-400 dark:text-slate-500 hover:text-primary">
+<span class="material-icons text-sm">share</span>
+</button>
+</div>
+</div>
+<div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden">
+<img alt="Hospital building" class="w-full h-full object-cover" data-alt="Modern medical facility in an urban setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXlrN25a_RaOM17fRCt_CI0qOZqQtRbjr4mi_MkTChlqKDaRZy3MVecJM3W3MgNemiTOK6rbqGaM5eu8ywgbXB9KFLhoUAwwAirme4yYHVL-VEyegL5fT_izfPQ7g0N8OfQq8CWsgkhLiTJVIDHGmdLPV6b6s7OVlqKYzWlzrWa6mu9okunnqFZmw3Y_OAyinYBPoZUFiEx8ajgl2-fW89DUsCDl-b5xYSO2unTIzb07Yj0YCr9Ajfa5SJHe_W-19kwop0MJzt8Y4"/>
+</div>
+</div>
+<!-- News Card 3 -->
+<div class="flex gap-4 group">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="text-primary font-bold text-[10px] uppercase tracking-tighter">Opinion</span>
+<span class="text-slate-400 dark:text-slate-500 text-[10px]">• Yesterday</span>
+</div>
+<h4 class="text-md font-bold leading-snug group-active:text-primary transition-colors line-clamp-2">Wanjiku's Budget: How a 22-year-old freelancer views the Finance Bill</h4>
+<div class="flex items-center gap-3 mt-3">
+<button class="text-slate-400 dark:text-slate-500 hover:text-primary">
+<span class="material-icons text-sm">bookmark_border</span>
+</button>
+<button class="text-slate-400 dark:text-slate-500 hover:text-primary">
+<span class="material-icons text-sm">share</span>
+</button>
+</div>
+</div>
+<div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden">
+<img alt="Youth coworking" class="w-full h-full object-cover" data-alt="A young Kenyan professional working on a laptop in a modern cafe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvVYdL2F6Od6C7AF6Ov3O_XrAT42KdwarP1HUfGmUDHkW3-K4XqcRYFTyzMc_S8-6lFFlpJuvdqNeQ7XUnknOb6PCF2gyL3p-LY1FfFZb2rtEUEexQJ5V2fnZZ5FXkYmTJmzCujwh-jsXOJG9PaPIsbYkvc0FVsuPQqFN8KNCo9BKl2JKV5vVpSaNrDo4sKrgwIz7PpLFxZ8PIEgqiG5P6gqDf1loEz_zjVENyv1TtzI24ayjBvHKFXB63agPQP3iSF9rGuUsGp7w"/>
+</div>
+</div>
+</section>
+<!-- Quick Video Explainers Section -->
+<section class="mt-8 bg-slate-900 dark:bg-black py-8">
+<div class="px-5 mb-4 flex justify-between items-center">
+<h3 class="text-lg font-bold text-white">Explainer Videos</h3>
+<span class="text-primary text-xs font-bold uppercase">TikTok Hub</span>
+</div>
+<div class="flex overflow-x-auto px-5 space-x-4 no-scrollbar">
+<!-- Video Thumbnail 1 -->
+<div class="shrink-0 w-36 aspect-[9/16] rounded-xl relative overflow-hidden bg-slate-800">
+<img alt="Video 1" class="w-full h-full object-cover opacity-60" data-alt="A presenter talking to the camera with budget graphics overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAPT94-a8Iw1n0GcKa3xZzA_HbK4jnxgDMCG0jipQVFhGJi1BK7S9BORB9zNQf3e7ATNekhKh0wrc1hppKbfX70D2RiXueogIzC1uxtyPZVg9Tw_IHCKgtJ-Uej-P-xjMrDmIGBJjdXiV80Yh970wzEfyEQ4mGAXaRxY2ABXJvm1zS1faGOOZauvNQ0NTN9-sNjOAt_rLwVFD1mj-kHDCzOY2oOfZoP27Rq3gTWPR-Ru71Kdn5EelpldhtARU9uBZucVdSRDcplxY"/>
+<div class="absolute inset-0 flex flex-col justify-end p-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mb-2">
+<span class="material-icons text-black text-lg">play_arrow</span>
+</div>
+<p class="text-[10px] font-bold text-white leading-tight">Budget Cycle in 60s</p>
+</div>
+</div>
+<!-- Video Thumbnail 2 -->
+<div class="shrink-0 w-36 aspect-[9/16] rounded-xl relative overflow-hidden bg-slate-800">
+<img alt="Video 2" class="w-full h-full object-cover opacity-60" data-alt="Abstract dynamic green and black background for video" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-vFjSXBoavIM-gs5rG55xaeghsTkvjsJoPAkZB9Q3S-CkSE9FKiGAYOxbhclpkTRrL0-2hOQl6wC4jcLNCjkngCRfHiYAa8AXu5DTmJbHsKDH7QhayyiGNPuFFkR6kymUSDYeQFzJ7kNAbz9O8mh931FU-TxKqfLe-LmFt6g0vKjjCN7P8Wpe71QOUufmL7PkeS6N4rTEFb8kIbvEK_6jLs2a993U4EQbcjJ-L10HOM-p44kfknxxBMHTiGsS345Oon-iAD7nLcw"/>
+<div class="absolute inset-0 flex flex-col justify-end p-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mb-2">
+<span class="material-icons text-black text-lg">play_arrow</span>
+</div>
+<p class="text-[10px] font-bold text-white leading-tight">How to read a PBB</p>
+</div>
+</div>
+<!-- Video Thumbnail 3 -->
+<div class="shrink-0 w-36 aspect-[9/16] rounded-xl relative overflow-hidden bg-slate-800">
+<img alt="Video 3" class="w-full h-full object-cover opacity-60" data-alt="A person holding a smartphone showing a financial app" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpTrhIH7xIClZR2eGbu0bPF0e9FQkgC2Z76-7pBMbjwDUzUpa8CwA_N4-uK2e7UQo51TwiW32t5BaWKrac9ey61K2rqZETYS4MjRZvjAnwqvt4-ym8SBsn3e4vCv9OmR0hNQoWxo6aGfg8RP7AaQEdhOnAvId_OHgXXcN4pO5SYMLjFn2irbaOVQmhZJl59RyU0vyKOepczaUJzH0zq009II27R5ARlO3bba_qZuFR1jmcpJVceZ9x9CAN5cnv-ZmI7UvlatjBs1I"/>
+<div class="absolute inset-0 flex flex-col justify-end p-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mb-2">
+<span class="material-icons text-black text-lg">play_arrow</span>
+</div>
+<p class="text-[10px] font-bold text-white leading-tight">County Spending Alert</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Live Updates Feed -->
+<section class="p-5 mt-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6">Live Transparency Feed</h3>
+<div class="space-y-6">
+<!-- Timeline Item 1 -->
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary mt-1.5 shadow-[0_0_8px_rgba(19,236,146,0.6)]"></div>
+<div class="w-0.5 grow bg-slate-200 dark:bg-slate-800 mt-1.5"></div>
+</div>
+<div>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase">Just Now</span>
+<h5 class="text-sm font-bold text-slate-800 dark:text-slate-200">Treasury Releases Q3 Implementation Report</h5>
+<p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Full PDF available for download. Early analysis shows 40% under-absorption in agriculture.</p>
+<button class="mt-2 flex items-center text-primary text-[10px] font-bold gap-1">
+<span class="material-icons text-xs">picture_as_pdf</span> VIEW DOCUMENT
+                        </button>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 mt-1.5"></div>
+<div class="w-0.5 grow bg-slate-200 dark:bg-slate-800 mt-1.5"></div>
+</div>
+<div>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase">2 Hours Ago</span>
+<h5 class="text-sm font-bold text-slate-800 dark:text-slate-200">Nairobi County Public Participation: 2 Days Left</h5>
+<p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Submit your views on the City-County health budget at Charter Hall.</p>
+<button class="mt-2 flex items-center text-primary text-[10px] font-bold gap-1">
+<span class="material-icons text-xs">location_on</span> VIEW VENUE
+                        </button>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 mt-1.5"></div>
+</div>
+<div>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase">Yesterday</span>
+<h5 class="text-sm font-bold text-slate-800 dark:text-slate-200">Parliamentary Committee on Budget to meet tomorrow</h5>
+<p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Agenda: Supplementing funding for the ongoing flood recovery efforts.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Navigation Bar (iOS Tab Bar) -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 pb-8 pt-2 px-6">
+<div class="max-w-md mx-auto flex justify-between items-center">
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons text-2xl">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons text-2xl">newspaper</span>
+<span class="text-[10px] font-bold">News Hub</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons text-2xl">leaderboard</span>
+<span class="text-[10px] font-medium">Tracker</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons text-2xl">forum</span>
+<span class="text-[10px] font-medium">Community</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons text-2xl">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</div>
+</nav>
+<!-- Custom CSS for mobile feel -->
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</body></html>

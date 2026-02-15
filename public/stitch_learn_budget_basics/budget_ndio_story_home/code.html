@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Ndio Story | Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec92",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons text-background-dark text-sm">account_balance_wallet</span>
+</div>
+<h1 class="font-display font-bold text-lg tracking-tight">Budget Ndio Story</h1>
+</div>
+<button class="p-2 hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-icons">search</span>
+</button>
+</header>
+<!-- Hero Section -->
+<section class="relative overflow-hidden px-4 py-8 bg-gradient-to-br from-primary/10 via-background-light to-background-light dark:from-primary/20 dark:via-background-dark dark:to-background-dark">
+<div class="relative z-10 max-w-lg mx-auto">
+<div class="inline-block px-3 py-1 bg-primary/20 text-primary dark:text-primary rounded-full text-xs font-semibold mb-4 tracking-wide uppercase">
+                #YourTaxYourMoney
+            </div>
+<h2 class="font-display font-800 text-4xl leading-[1.1] mb-4 text-slate-900 dark:text-white">
+                Follow the Budget. <br/>
+<span class="text-primary">Find the Story.</span>
+</h2>
+<p class="text-slate-600 dark:text-slate-400 text-lg mb-8 leading-relaxed">
+                Demystifying Kenyan public spending. We turn complex budget data into insights for the youth to drive accountability.
+            </p>
+<div class="flex flex-col gap-3">
+<button class="bg-primary text-background-dark font-bold py-4 px-6 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                    View Latest Report
+                    <span class="material-icons text-sm">arrow_forward</span>
+</button>
+<button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-semibold py-4 px-6 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                    Take Action
+                </button>
+</div>
+</div>
+<!-- Decorative abstract pattern -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+<!-- Start Here Section -->
+<section class="px-4 py-8">
+<h3 class="font-display font-bold text-xl mb-4">Start Here</h3>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+<div class="min-w-[240px] bg-white dark:bg-slate-900 p-5 rounded-xl border border-primary/10 shadow-sm">
+<div class="w-12 h-12 bg-primary/20 text-primary rounded-lg flex items-center justify-center mb-4">
+<span class="material-icons">menu_book</span>
+</div>
+<h4 class="font-bold text-lg mb-1">Budget Basics</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Learn how the national cake is shared in simple terms.</p>
+</div>
+<div class="min-w-[240px] bg-white dark:bg-slate-900 p-5 rounded-xl border border-primary/10 shadow-sm">
+<div class="w-12 h-12 bg-primary/20 text-primary rounded-lg flex items-center justify-center mb-4">
+<span class="material-icons">map</span>
+</div>
+<h4 class="font-bold text-lg mb-1">National vs County</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Understand the difference between the two levels of govt.</p>
+</div>
+</div>
+</section>
+<!-- Latest Feed Section -->
+<section class="px-4 py-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-display font-bold text-xl">Latest</h3>
+<button class="text-primary font-semibold text-sm">See All</button>
+</div>
+<!-- Tabs -->
+<div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg mb-6">
+<button class="flex-1 py-2 text-sm font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white">Stories</button>
+<button class="flex-1 py-2 text-sm font-medium text-slate-500 dark:text-slate-400">Videos</button>
+<button class="flex-1 py-2 text-sm font-medium text-slate-500 dark:text-slate-400">Updates</button>
+</div>
+<!-- Feed List -->
+<div class="space-y-6">
+<div class="flex gap-4 items-start">
+<div class="w-24 h-24 rounded-lg bg-slate-200 dark:bg-slate-800 flex-shrink-0 overflow-hidden">
+<img alt="News" class="w-full h-full object-cover" data-alt="Kenyan youth group discussing at a table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtIBmRIk0vk43pij0b93OZPwO6MDsrehznma9PYfSfcZ_QAXASgPMd3P0--ClKYwBpaT4G4R8wCjAlW8LXJi4Z20-sHaUtgz-P-Qk30KFqaXTvP98WxBdZCJ_aL8ynYoGBniKePKn2egvAYl6RItTFQWUi8EtI0zgcgcnsVcY6ptMVKilcN0UjvHPGs-blZ7o2o0X0iwtErXJXzO03g5tk6CeS9U1rx4uVOFqJhHkYTUzd_AqUETRpoFKvi8SVUOXnpB9KeCEnZMo"/>
+</div>
+<div class="flex-1">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Story</span>
+<h4 class="font-bold leading-snug text-slate-900 dark:text-white mt-1">Where did the education billions go this quarter?</h4>
+<p class="text-xs text-slate-500 mt-1">2 hours ago • 5 min read</p>
+</div>
+</div>
+<div class="flex gap-4 items-start border-t border-slate-100 dark:border-slate-800 pt-6">
+<div class="w-24 h-24 rounded-lg bg-slate-200 dark:bg-slate-800 flex-shrink-0 overflow-hidden">
+<img alt="News" class="w-full h-full object-cover" data-alt="Stock market chart showing financial trends" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGtxUZgp5fzW5V8cityMewEREpl_Rbv7tfiBH71pVWMIOpb2vHr8IQyZ7CA0dOIoDcKys7t5BpIf7Q08bRuh4jbAissav4P0yuug3mMShYvkYBGYpK0r8x-qFQO5W6it3-2LvThhMS2m34ofk3HHnct_zksI2ypPqapvNhwEK6YNaaIMF5b-Q-QksSVPhKm6itjUwAE-AQw7HT8OimmnyRa0XQiH27PwPLfj-kymnGrcQU1ywosLSwY8M75oGVhOS66lmzctpauKw"/>
+</div>
+<div class="flex-1">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Analysis</span>
+<h4 class="font-bold leading-snug text-slate-900 dark:text-white mt-1">Understanding the new Finance Bill amendments.</h4>
+<p class="text-xs text-slate-500 mt-1">Yesterday • 8 min read</p>
+</div>
+</div>
+</div>
+</section>
+<!-- What you can do today -->
+<section class="px-4 py-8 bg-slate-900 text-white rounded-t-[2rem] mt-4">
+<h3 class="font-display font-bold text-xl mb-6">What you can do today</h3>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-slate-800 p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-primary text-background-dark rounded-full flex items-center justify-center">
+<span class="material-icons">description</span>
+</div>
+<div>
+<h4 class="font-bold">Simplified Reports</h4>
+<p class="text-sm text-slate-400">Download bite-sized PDFs of the 2024 budget.</p>
+</div>
+</div>
+<div class="bg-slate-800 p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-primary text-background-dark rounded-full flex items-center justify-center">
+<span class="material-icons">insights</span>
+</div>
+<div>
+<h4 class="font-bold">Visual Analysis</h4>
+<p class="text-sm text-slate-400">See the money flow with interactive charts.</p>
+</div>
+</div>
+<div class="bg-slate-800 p-4 rounded-xl flex items-center gap-4 border-2 border-primary/30">
+<div class="w-12 h-12 bg-primary text-background-dark rounded-full flex items-center justify-center">
+<span class="material-icons">track_changes</span>
+</div>
+<div>
+<h4 class="font-bold">The Tracker</h4>
+<h5 class="text-primary text-[10px] font-bold uppercase tracking-widest">Live</h5>
+<p class="text-sm text-slate-400">Track specific local projects in your ward.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Take Action This Week -->
+<section class="px-4 py-8">
+<div class="bg-primary/10 dark:bg-primary/5 border border-primary/20 p-6 rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-display font-bold text-xl mb-2">Take Action This Week</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-6">The Ministry of Health is asking for public views on the new health fund. Your voice matters!</p>
+<button class="bg-primary text-background-dark font-bold py-3 px-6 rounded-lg w-full">Submit Your Views</button>
+</div>
+<span class="material-icons absolute -bottom-4 -right-4 text-primary/10 text-[120px] rotate-12">campaign</span>
+</div>
+</section>
+<!-- Subscription Footer -->
+<footer class="px-4 py-8 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800">
+<div class="text-center mb-8">
+<h4 class="font-display font-bold text-lg mb-2">Stay in the Loop</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Join 5,000+ youth getting weekly budget stories via WhatsApp.</p>
+<div class="flex gap-2">
+<input class="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 text-sm focus:ring-primary focus:border-primary" placeholder="Phone Number" type="text"/>
+<button class="bg-primary text-background-dark px-4 py-2 rounded-lg font-bold">Join</button>
+</div>
+</div>
+<div class="flex justify-center gap-6 text-slate-400">
+<span class="material-icons">facebook</span>
+<span class="material-icons">twitter</span>
+<span class="material-icons">camera_alt</span>
+<span class="material-icons">video_library</span>
+</div>
+<p class="text-center text-[10px] text-slate-400 mt-8 uppercase tracking-widest">© 2024 Budget Ndio Story. Made in Kenya.</p>
+</footer>
+<!-- Sticky Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-[100] pb-8">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">assignment</span>
+<span class="text-[10px] font-bold">Reports</span>
+</button>
+<div class="relative -top-8">
+<button class="w-14 h-14 bg-primary text-background-dark rounded-full shadow-lg shadow-primary/40 flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-icons text-3xl">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">location_searching</span>
+<span class="text-[10px] font-bold">Tracker</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+</body></html>
